@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 
-import { userStore } from './user.store.js'
-import { boardStore } from './board.store.js'
+import { userStore } from './modules/user.store.js'
+import { boardStore } from './modules/board.store.js'
 
 export const store = Vuex.createStore({
   strict: true,
