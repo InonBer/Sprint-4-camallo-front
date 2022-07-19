@@ -1,6 +1,6 @@
-import { userService } from '../services/user.service'
-import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
-import { boardService } from '../services/board.service.js'
+import { userService } from '../../services/user.service.js'
+import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../../services/socket.service'
+import { boardService } from '../../services/board.service.js'
 
 // var localLoggedinUser = null
 // if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null)
@@ -28,7 +28,7 @@ export const boardStore = {
                 commit('setBoards', { board })
                 console.log('made it');
             } catch (e) {
-                console.log('couldnt fetch boards ', e);
+                console.log('couldn\'t fetch boards ', e);
             }
         }
 
