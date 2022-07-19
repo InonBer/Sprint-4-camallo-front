@@ -1,6 +1,6 @@
 .app-header {
     padding: 0;
-    margin: 0;
+    // margin: 0;
     width: 100%;
     background-color: #1e6584;
     min-height: 44px;
@@ -15,16 +15,19 @@
         display: flex;
         justify-self: flex-start;
         flex-direction: row;
-        gap: 10px;
     }
 
     .header-create-button {
         background-color: rgba(255, 255, 255, 0.2);
 
     }
-
-    .header-content .header-button {
-        background-color: transparent
+    .header-content .header-button{
+        background-color: transparent;
+        img{
+            width:1em;
+            height: 1em;
+            margin-inline-start: 0.2em;
+        }
     }
 
     .header-content .header-button:hover {
@@ -50,5 +53,7 @@
 
     .header-end {
         justify-self: flex-end;
+        display:flex;
+        align-items: center;
     }
 }
