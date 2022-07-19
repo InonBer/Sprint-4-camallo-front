@@ -1,0 +1,40 @@
+.task-prev-container{
+    overflow: hidden;
+    padding: 6px 8px 2px;
+    position: relative;
+    z-index: 10;
+    background-color: #ffffff;
+    width: 90%;
+    border-radius: 5px;
+    // padding-bottom: 50px;
+    min-height: 75px;
+    margin: 0 auto;
+    box-shadow: #00000012 0px 0px 1px 2px;
+    div{
+        padding: 6px 8px 2px;
+    }
+    .task-prev{
+        cursor: pointer;
+    }
+}
+.card-header{
+min-height: 20px;
+padding: 10px 8px;
+position: relative;
+cursor: pointer;
+    
+}
+
+.add-btn{
+    color: rgb(86, 76, 76);
+    background-color: inherit;
+    text-align: left;
+    width: 80%;
+    margin-left: 15px;
+}
+
+.add-btn:hover{
+    cursor: pointer;
+
+    background-color: rgba(42, 36, 36, 0.431)
+}
