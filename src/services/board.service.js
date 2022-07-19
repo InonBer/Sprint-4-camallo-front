@@ -27,8 +27,6 @@ async function query(filterBy = {}) {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
   const board = storageService.query(KEY)
-  // const board = localStorage.getItem()
-  console.log('board', board);
   if (board && board.length) {
     return board
   } else {
