@@ -24,6 +24,7 @@ export const boardStore = {
         async getBords({ commit }) {
 
             const board = await boardService.query()
+            console.log(board);
             try {
                 commit('setBoards', { board })
                 console.log('made it');
