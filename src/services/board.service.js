@@ -1,69 +1,86 @@
-import { httpService } from './http.service'
+import { httpService } from './http.service.js'
 import { storageService } from './async-storage.service'
-import { userService } from './user.service'
+// import { userService } from './user.service'
 
 import { store } from '../store/store'
-import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
+// import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 
-// const reviewChannel = new BroadcastChannel('reviewChannel')
+// import axios from 'axios'
+import { utilService } from './util.service'
+// import { storageService } from './async-storage-service'
 
-// ;(() => {
-//   // reviewChannel.addEventListener('message', (ev) => {
-//   //   console.log('msg event', ev)
-//   //   store.commit(ev.data)
-//   // })
-//   setTimeout(()=>{
-//     socketService.on(SOCKET_EVENT_REVIEW_ADDED, (review) => {
-//       console.log('GOT from socket', review)
-//       store.commit({type: 'addReview', review})
-//     })
-//     socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
-//       showSuccessMsg(`New review about me ${review.txt}`)
-//     })
-//   }, 0)
+const KEY = 'boards_db'
+const ENDPOINT = 'board'
 
-// })()
-
-
+// const BASE_URL =
+//   process.env.NODE_ENV !== 'development' ? '/api/board' : '//localhost:3030/api/board/'
 
 export const boardService = {
-  add,
   query,
-  remove
+  getById,
+  remove,
+  save,
+  getEmptyBoard,
 }
 
-
-
-function query() {
-  // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
-  // return httpService.get(`review${queryStr}`)
-
-  const board = localStorage.getItem('board')
-  if (board) {
+async function query(filterBy = {}) {
+  // return await httpService.get(ENDPOINT, filterBy)
+  // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
+  const board = storageService.query(KEY)
+  if (board && board.length) {
     return board
   } else {
     const boardToSend = _createBoard()
+    console.log('boardToSend', boardToSend)
+
     return Promise.resolve(boardToSend)
   }
-  // return storageService.query('board')
+  // return storageService.query(KEY)
 }
 
-async function remove(boardId) {
-  await storageService.delete('board', boardId)
-  // await httpService.delete(`review/${reviewId}`)
-  // reviewChannel.postMessage({ type: 'removeReview', reviewId })
-
+async function getById(id) {
+  // return await httpService.get(`${ENDPOINT}/${id}`)
+  // return axios.get(BASE_URL + id).then((res) => res.data)
+  return storageService.getById(KEY, id)
 }
-async function add(board) {
-  const addedReview = await storageService.post('board', board)
-  // const addedReview = await httpService.post(`review`, review)
 
-  // review.byUser = userService.getLoggedinUser()
-  // review.aboutUser = await userService.getById(review.aboutUserId)
-  // reviewChannel.postMessage({type: 'addReview', review: addedReview})
-
-  return addedReview
+async function remove(id) {
+  // return await httpService.delete(`${ENDPOINT}/${id}`)
+  // return axios.delete(BASE_URL + id).then((res) => res.data)
+  return storageService.remove(KEY, id)
 }
+
+async function save(board) {
+  // return board._id
+  //   ? await httpService.put(`${ENDPOINT}/${board._id}`, board)
+  //   : await httpService.post(ENDPOINT, board)
+  return board._id ? storageService.put(KEY, board) : storageService.post(KEY, board)
+}
+
+function getEmptyBoard() {
+  return Promise.resolve({
+    _id: utilService.makeId(),
+    title: '',
+    archivedAt: null,
+    createdBy: {},
+    style: {},
+    labels: [],
+    members: [],
+    groups: [],
+    activities: [],
+  })
+}
+
+// async function add(board) {
+//   const addedReview = await storageService.post('board', board)
+//   // const addedReview = await httpService.post(`review`, review)
+
+//   // review.byUser = userService.getLoggedinUser()
+//   // review.aboutUser = await userService.getById(review.aboutUserId)
+//   // reviewChannel.postMessage({type: 'addReview', review: addedReview})
+
+//   return addedReview
+// }
 
 
 function _createBoard() {
@@ -194,3 +211,40 @@ function _createBoard() {
   return board
 
 }
+
+
+
+// function query() {
+//   // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
+//   // return httpService.get(`review${queryStr}`)
+
+//   const board = localStorage.getItem()
+//   if (board) {
+//     return board
+//   } else {
+//     const boardToSend = _createBoard()
+//     return Promise.resolve(boardToSend)
+//   }
+//   // return storageService.query('board')
+// }
+
+
+
+// const reviewChannel = new BroadcastChannel('reviewChannel')
+
+// ;(() => {
+//   // reviewChannel.addEventListener('message', (ev) => {
+//   //   console.log('msg event', ev)
+//   //   store.commit(ev.data)
+//   // })
+//   setTimeout(()=>{
+//     socketService.on(SOCKET_EVENT_REVIEW_ADDED, (review) => {
+//       console.log('GOT from socket', review)
+//       store.commit({type: 'addReview', review})
+//     })
+//     socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
+//       showSuccessMsg(`New review about me ${review.txt}`)
+//     })
+//   }, 0)
+
+// })()
