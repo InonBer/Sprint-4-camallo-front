@@ -13,9 +13,9 @@ export default {
   data() {
     return {
       board:null
-    };
+    }
   },
-  created() { 
+  async created() { 
         const { id } = this.$route.params
     try {
       this.board = await boardService.getById(id)
