@@ -1,7 +1,6 @@
 <template>
-  <div v-if="boards">
-    <boardPreview :boards="boards"></boardPreview>
-
+  <div v-if="board">
+    <boardPreview :board="board"></boardPreview>
   </div>
 </template>
  <script>
@@ -13,9 +12,17 @@ export default {
   },
   data() {
     return {
+      board:null
     };
   },
-  created() { },
+  created() { 
+        const { id } = this.$route.params
+    try {
+      this.board = await boardService.getById(id)
+    } catch (err) {
+      console.error(err)
+    }
+  },
   methods: {},
   computed: {
     boards() {

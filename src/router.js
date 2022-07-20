@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import home from './views/home.vue'
 import boardApp from './views/board-app.vue'
+import taskDetails from  './views/task-details.vue'
 
 const routes = [
   {
@@ -10,10 +11,16 @@ const routes = [
     component: home
   },
   {
-    path: '/board',
+    path: '/board/:id',
     name: 'boardApp',
     component: boardApp
   },
+  {
+    path: '/board/:boardId/task/:taskId',
+    name: 'boardApp',
+    component: taskDetails
+  },
+
 
 ]
 
