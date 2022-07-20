@@ -3,7 +3,7 @@
 
         <boardTaskPrev @click="onDetails(task.id)" :task="task" :key="task.id" />
     </div>
-    <button @click="onAddTask" class="add-btn"><span class="icon-pluse"></span> Add a card</button>
+    <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
 </template>
  <script>
 import boardTaskPrev from './board-task-prev.vue';
