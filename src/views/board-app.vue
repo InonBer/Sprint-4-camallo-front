@@ -1,7 +1,6 @@
 <template>
-  <div v-if="board">
-    <boardPreview v-if="board" :board="board"></boardPreview>
-  </div>
+
+  <boardPreview v-if="board" :board="board"></boardPreview>
 
 </template>
  <script>
@@ -18,12 +17,13 @@ export default {
     }
   },
   async created() {
-    const { id } = this.$route.params
-    try {
-      this.board = await boardService.getById(id)
-    } catch (err) {
-      console.error(err)
-    }
+    // const { id } = this.$route.params
+
+    // try {
+    //   this.board = await boardService.getById(id)
+    // } catch (err) {
+    //   console.error(err)
+    // }
   },
   methods: {},
   computed: {
@@ -33,6 +33,21 @@ export default {
     }
   },
   unmounted() { },
+  watch: {
+    '$route.params': {
+      async handler({ id }) {
+        try {
+          this.board = await boardService.getById(id)
+        } catch (err) {
+          console.error(err)
+        }
+      },
+      immediate: true
+
+
+    }
+  }
+
 };
 </script>
  <style>

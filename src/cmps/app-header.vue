@@ -40,10 +40,10 @@ export default {
   created() { },
   methods: {
     changeLink(ev) {
-      this.$router.push('/')
-      setTimeout(() => {
-        this.$router.push(`/board/${ev.target.value}`);
-      }, 0)
+      // this.$router.push('/')
+      this.$router.push(`/board/${ev.target.value}`);
+      // setTimeout(() => {
+      // }, 0)
     }
   },
   computed: {},

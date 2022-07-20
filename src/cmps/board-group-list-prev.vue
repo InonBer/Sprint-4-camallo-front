@@ -5,7 +5,7 @@
 
         </div>
 
-        <div @click="onTaskAdd" class="group-add-btn-ccontainer">
+        <div @click="onGroupAdd" class="group-add-btn-ccontainer">
             <button>+ Add another list</button>
         </div>
         <!-- <pre v-if="groups">
@@ -18,6 +18,7 @@
 </template>
  <script>
 import boardGroupPrev from './board-group-prev.vue';
+import { boardService } from '../services/board.service';
 export default {
     name: 'groupPrevList',
     props: {
@@ -29,12 +30,17 @@ export default {
         boardGroupPrev
     },
     data() {
-        return {};
+        return {
+        };
     },
-    created() { },
+    created() {
+    },
     methods: {
-        onTaskAdd() {
+        onGroupAdd() {
+            const group = boardService.getEmptyGroup()
+            this.groups.push(JSON.parse(JSON.stringify(group)))
             console.log('Adding group');
+
         }
     },
     computed: {},
