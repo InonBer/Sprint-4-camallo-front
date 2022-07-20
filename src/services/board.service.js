@@ -27,8 +27,8 @@ async function query(filterBy = {}) {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
   const boards = storageService.query(KEY)
-  if (board && board.length) {
-    return board
+  if (boards && boards.length) {
+    return boards
   } else {
     // const boardToSend = _createBoard()
     const boardToSend = _createBoards()
@@ -251,7 +251,7 @@ function _createBoard() {
 // })()
 
 function _createBoards() {
-  const boards = [
+  return [
     {
       _id: "b101",
       title: "Testing Board",
