@@ -1,16 +1,20 @@
 <template>
-
-  <boardPreview v-if="board" :board="board"></boardPreview>
-  <router-view></router-view>
-
+  <div class="board-app">
+    <boardHeader />
+    <boardGroupList @onDetails="onDetails" v-if="board" :groups="groups" />
+    <router-view></router-view>
+  </div>
 </template>
  <script>
-import boardPreview from '../cmps/board-preview.vue'
 import { boardService } from '../services/board.service';
+import boardGroupList from "../cmps/board-group-list-prev.vue"
+import boardHeader from '../cmps/board-header.vue'
+
 export default {
   name: 'boardApp',
   components: {
-    boardPreview
+    boardHeader,
+    boardGroupList,
   },
   data() {
     return {
@@ -26,12 +30,24 @@ export default {
     //   console.error(err)
     // }
   },
-  methods: {},
+  methods: {
+    onDetails(ids) {
+      ids.boardId = this.board._id
+      const { boardId, groupId, taskId } = ids
+      // console.log(this.$route.fullPath)
+      this.$router.push(this.$route.fullPath + '/group/g101/task/c101')
+      // this.$router.push({ name: 'taskDetails', params: { boardId: boardId, groupId: groupId, taskId: taskId } })
+      // this.$router.push(`/board/${ids.boardId}/group/${ids.groupId}/task/${ids.taskId}`)
+    }
+  },
   computed: {
     boards() {
       // console.log(this.$store.getters.getBoards);
       // return this.$store.getters.getBoards
-    }
+    },
+    groups() {
+      return this.board.groups
+    },
   },
   unmounted() { },
   watch: {
