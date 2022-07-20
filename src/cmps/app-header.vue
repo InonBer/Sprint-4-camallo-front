@@ -7,7 +7,7 @@
       <button class="header-button">Starred<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Templates<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-create-button">Create</button>
-      <button @click="$router.push('/board/')" class="header-create-button">TEST BOARD</button>
+      <button @click="$router.push('/board/b101')" class="header-create-button">TEST BOARD</button>
 
       <select v-if="boards" id="boards" name="board-list">
         <option>{{ boards[0].title }}</option>
