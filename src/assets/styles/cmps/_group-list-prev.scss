@@ -1,9 +1,9 @@
 .group-list-container{
     background-color: aqua;
-    width: 100%;
+    // width: 100%;
     height: 85vh;
-    padding: 0;
-    margin: 0;
+    // padding: 0;
+    // margin: 0;
     display:flex;
     flex-direction: row;
     gap: 8px;
@@ -13,12 +13,11 @@
         height: 100%;
         // width: 100%;
         // padding-top: 15px;
-        margin-top: 15px;
+        margin-top: 9px;
 
     }
     .card-task:first-child{
         padding-left: 10px;
-
     }
     .group-add-btn-ccontainer{
         width: 200px;

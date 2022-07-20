@@ -1,13 +1,10 @@
 .app-header {
-    width: 100%;
     background-color: #1e6584;
-    min-height: 44px;
-    max-height: 44px;
-    overflow: hidden;
+    height:  rem(44px);
     display: flex;
-    width: 100%;
     justify-content: space-between;
-    flex-direction: row;
+    line-height: 20px;
+    padding-left:4px;
 
     .header-content {
         display: flex;
@@ -41,12 +38,6 @@
     .header-create-button:hover {
         background-color: rgba(255, 255, 255, 0.2);
         cursor: pointer;
-    }
-
-    .header-svg {
-        height: 16px;
-        width: 16px;
-        line-height: 16px;
     }
 
     .header-end {
