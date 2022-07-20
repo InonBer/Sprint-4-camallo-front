@@ -26,8 +26,8 @@ export default {
   methods: {},
   computed: {
     boards() {
-      console.log(this.$store.getters.getBoards);
-      return this.$store.getters.getBoards
+      // console.log(this.$store.getters.getBoards);
+      // return this.$store.getters.getBoards
     }
   },
   unmounted() { },

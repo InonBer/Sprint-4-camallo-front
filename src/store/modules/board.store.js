@@ -8,7 +8,7 @@ import { boardService } from '../../services/board.service.js'
 export const boardStore = {
     state: {
         boards: null,
-        filterBy:null
+        filterBy: null
     },
     getters: {
         getBoards(state) {
@@ -22,22 +22,22 @@ export const boardStore = {
         removeBoard(state, { id }) {
             const idx = state.boards.findIndex((board) => board._id === id)
             state.boards.splice(idx, 1)
-          },
-          saveBoard(state, { board }) {
+        },
+        saveBoard(state, { board }) {
             const idx = state.boards.findIndex((currToy) => currToy._id === board._id)
             if (idx !== -1) state.boards.splice(idx, 1, board)
             else {
-              console.log('entered else')
-              state.boards.push(board)
+                console.log('entered else')
+                state.boards.push(board)
             }
-          },
+        },
         //   setFilter(state, { filterBy }) {
         //     state.filterBy = { ...filterBy }
         //   }
     },
     actions: {
-        async getBoards({ commit }) {
-
+        async loadBoards({ commit }) {
+            console.log('in actions ');
             const board = await boardService.query()
             console.log(board);
             try {

@@ -1,7 +1,7 @@
 <template>
   <section>
     <user-msg />
-    <app-header />
+    <app-header :boards="boards" />
     <router-view />
   </section>
 </template>
@@ -17,10 +17,18 @@ import userMsg from './cmps/user-msg.vue'
 export default {
 
   created() {
-    this.$store.dispatch('getBords')
+    this.$store.dispatch({ type: 'loadBoards' })
     // console.log('Vue App created')
     // const user = userService.getLoggedinUser()
     // if (user)  store.commit({type: 'setLoggedinUser', user})
+  },
+  methods: {
+
+  },
+  computed: {
+    boards() {
+      return this.$store.getters.getBoards
+    },
   },
   components: {
     appHeader,
