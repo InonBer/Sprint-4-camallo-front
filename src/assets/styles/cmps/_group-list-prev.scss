@@ -1,5 +1,5 @@
 .group-list-container{
-    height: 85vh;
+    height: 86.5vh;
     display:flex;
     flex-direction: row;
     gap: 8px;
@@ -7,7 +7,7 @@
     .card-task {
         display: block;
         height: 100%;
-        margin-top: 9px;
+        // margin-top: 9px;
 
     }
 
@@ -15,22 +15,9 @@
         padding-left: 10px;
     }
 
-    .group-add-btn-ccontainer {
-        width: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffffd2;
-        cursor: pointer;
-        // margin-top: 15px;
-        height: 45px;
-
-        button {
-            cursor: pointer;
-
-            color: black;
-            background-color: transparent;
-        }
-
+    .grp-add-btn {
+        width: rem(272px);
+        height: rem(40px);
+        text-align: start;
     }
 }

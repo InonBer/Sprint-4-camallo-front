@@ -1,20 +1,23 @@
-
-.board-header-container{
+.board-header-container {
     min-height: rem(44px);
-// background-color: #0000003d;
-    .board-header{
+    // background-color: #0000003d;
+    margin-bottom: 0.595em;
+
+    .board-header {
         padding: 8px 4px 4px 12px;
-        padding-left:rem(29px)
+        padding-left: rem(29px)
     }
-    & button{
-        margin:0;
-        padding:0.6em;
-        border-radius:3px;
-        margin:0 rem(8px);
-        background-color:#ffffff3d;
-        cursor:pointer;
-        &:hover{
-            background-color: #ffffff52;
-        }
+
+    & button {
+    //     margin: 0;
+        padding: 0.6em;
+    //     border-radius: 3px;
+        margin: 0 rem(8px);
+    //     background-color: #ffffff3d;
+    //     cursor: pointer;
+
+    //     &:hover {
+    //         background-color: #ffffff52;
+    //     }
     }
 }

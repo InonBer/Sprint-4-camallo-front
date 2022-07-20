@@ -4,10 +4,7 @@
             <boardGroupPrev @onDetails="onDetails" :group="group" :key="group.id" />
 
         </div>
-
-        <div @click="onGroupAdd" class="group-add-btn-ccontainer">
-            <button>+ Add another list</button>
-        </div>
+            <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another list</span></button>
         <!-- <pre v-if="groups">
         {{ groups }}
         </pre> -->

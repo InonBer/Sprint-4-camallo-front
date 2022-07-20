@@ -1,10 +1,10 @@
 <template>
     <header class="board-header-container">
         <section class="board-header">
-            <button>Boards</button>|
-            <button>Boards</button>|
-            <button>Boards</button>|
-            <button>Boards</button>
+            <button class="opacity-button">Boards</button>|
+            <button class="opacity-button">Boards</button>|
+            <button class="opacity-button">Boards</button>|
+            <button class="opacity-button">Boards</button>
         </section>
     </header>
 </template>
