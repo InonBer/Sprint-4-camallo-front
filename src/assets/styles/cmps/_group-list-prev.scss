@@ -1,33 +1,46 @@
+<<<<<<< HEAD
 .group-list-container{
     height: 85vh;
     display:flex;
+=======
+.group-list-container {
+    background-color: aqua;
+    // width: 100%;
+    height: 85vh;
+    // padding: 0;
+    // margin: 0;
+    display: flex;
+>>>>>>> 42a1921823e226e8dc04b9c1658c20f1ad612e15
     flex-direction: row;
     gap: 8px;
 
-    .card-task{
+    .card-task {
         display: block;
         height: 100%;
         margin-top: 9px;
 
     }
-    .card-task:first-child{
+
+    .card-task:first-child {
         padding-left: 10px;
     }
-    .group-add-btn-ccontainer{
+
+    .group-add-btn-ccontainer {
         width: 200px;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #ffffffd2;
         cursor: pointer;
-        margin-top: 15px;
+        // margin-top: 15px;
         height: 45px;
-        button{
+
+        button {
             cursor: pointer;
 
-            color:black;
+            color: black;
             background-color: transparent;
         }
-    
+
     }
 }
