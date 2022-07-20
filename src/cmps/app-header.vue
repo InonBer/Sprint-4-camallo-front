@@ -2,10 +2,10 @@
   <header class="app-header">
     <div class="header-content">
       <h2 class="header-logo">Camallo</h2>
-      <button class="header-button">Workspaces<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
+      <button class="header-button">Workspaces <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Recent <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button class="header-button">Starred<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button class="header-button">Templates<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
+      <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
+      <button class="header-button">Templates <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-create-button">Create</button>
 
       <select @change="changeLink" v-if="boards" id="boards" name="board-list">
