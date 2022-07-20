@@ -6,7 +6,7 @@
                 {{ task }}
             </pre>
             <!-- <button @click="$router.go(-1)">X</button> -->
-            <button @click="$router.push('/board/' + boardId)">X</button>
+            <button @click="$router.push('/board/' + route.params.boardId)">X</button>
         </section>
     </div>
 </template>
@@ -22,19 +22,13 @@ export default {
     components: {},
     data() {
         return {
-            taskId: null,
-            groupId: null,
-            boardId: null,
             task: null,
         };
     },
     async created() {
         const { boardId, groupId, taskId } = this.$route.params
-        this.taskId = taskId;
-        this.boardId = boardId;
-        this.groupId = groupId;
-        const task = await boardService.getTaskById(boardId, groupId, taskId)
         try {
+            const task = await boardService.getTaskById(boardId, groupId, taskId)
             this.task = task
         } catch (e) {
             console.log(e);

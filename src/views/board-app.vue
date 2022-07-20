@@ -36,9 +36,9 @@ export default {
   unmounted() { },
   watch: {
     '$route.params': {
-      async handler({ id }) {
+      async handler({ boardId }) {
         try {
-          this.board = await boardService.getById(id)
+          this.board = await boardService.getById(boardId)
         } catch (err) {
           console.error(err)
         }
