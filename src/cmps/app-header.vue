@@ -7,10 +7,11 @@
       <button class="header-button">Starred<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Templates<img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-create-button">Create</button>
-      <button @click="$router.push('/board/b101')" class="header-create-button">TEST BOARD</button>
 
-      <select v-if="boards" id="boards" name="board-list">
-        <option>{{ boards[0].title }}</option>
+      <select @change="changeLink" v-if="boards" id="boards" name="board-list">
+        <option :value="boards[0]._id">{{ boards[0].title }}</option>
+        <option :value="boards[1]._id">{{ boards[1].title }}</option>
+
         <!-- <option v-for="board in bards" value=""></option> -->
       </select>
 
@@ -37,7 +38,14 @@ export default {
     return {};
   },
   created() { },
-  methods: {},
+  methods: {
+    changeLink(ev) {
+      this.$router.push('/')
+      setTimeout(() => {
+        this.$router.push(`/board/${ev.target.value}`);
+      }, 0)
+    }
+  },
   computed: {},
   unmounted() { },
 }

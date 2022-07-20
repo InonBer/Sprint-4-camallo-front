@@ -1,10 +1,12 @@
 <template>
   <div v-if="board">
-    <boardPreview :board="board"></boardPreview>
+    <boardPreview v-if="board" :board="board"></boardPreview>
   </div>
+
 </template>
  <script>
 import boardPreview from '../cmps/board-preview.vue'
+import { boardService } from '../services/board.service';
 export default {
   name: 'boardApp',
   components: {
@@ -12,11 +14,11 @@ export default {
   },
   data() {
     return {
-      board:null
+      board: null
     }
   },
-  async created() { 
-        const { id } = this.$route.params
+  async created() {
+    const { id } = this.$route.params
     try {
       this.board = await boardService.getById(id)
     } catch (err) {

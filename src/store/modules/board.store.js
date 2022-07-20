@@ -16,8 +16,8 @@ export const boardStore = {
         }
     },
     mutations: {
-        setBoards(state, { board }) {
-            state.boards = board
+        setBoards(state, { boards }) {
+            state.boards = boards
         },
         removeBoard(state, { id }) {
             const idx = state.boards.findIndex((board) => board._id === id)
@@ -38,10 +38,10 @@ export const boardStore = {
     actions: {
         async loadBoards({ commit }) {
             console.log('in actions ');
-            const board = await boardService.query()
-            console.log(board);
+            const boards = await boardService.query()
+            console.log(boards);
             try {
-                commit('setBoards', { board })
+                commit('setBoards', { boards })
                 console.log('made it');
             } catch (err) {
                 console.log('couldn\'t fetch boards ', err);

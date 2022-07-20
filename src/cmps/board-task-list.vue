@@ -1,7 +1,7 @@
 <template>
     <div v-for="task in tasks">
 
-        <boardTaskPrev :task="task" :key="task.id" />
+        <boardTaskPrev @click="$router.push(`/task/${task.id}`)" :task="task" :key="task.id" />
     </div>
     <button class="add-btn">+ Add Cast</button>
 </template>
@@ -21,7 +21,9 @@ export default {
         return {};
     },
     created() { },
-    methods: {},
+    methods: {
+
+    },
     computed: {},
     unmounted() { },
 };

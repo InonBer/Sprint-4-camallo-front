@@ -2,7 +2,9 @@
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
             <boardGroupPrev :group="group" :key="group.id" />
+
         </div>
+
         <div @click="onTaskAdd" class="group-add-btn-ccontainer">
             <button>+ Add another list</button>
         </div>

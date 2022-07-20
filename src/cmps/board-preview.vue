@@ -1,8 +1,11 @@
 <template>
 
     <boardHeader />
-    <boardGroupList v-if="boards" :groups="groups" />
+    <boardGroupList v-if="board" :groups="groups" />
+
+
     <!-- <pre v-if="boards">
+        
     {{ boards }}
   </pre> -->
 </template>
@@ -12,24 +15,28 @@ import boardHeader from '../cmps/board-header.vue'
 export default {
     name: 'boardPrev',
     props: {
-        boards: {
-            type: Object
-        }
+        board: {
+            type: Object,
+        },
+        // boards: {
+        //     type: Object
+        // }
     },
     components: {
         boardHeader,
         boardGroupList,
     },
     data() {
-        return {};
+        return {
+        };
     },
     created() {
-
+        console.log(this.board);
     },
     methods: {},
     computed: {
         groups() {
-            return this.boards.groups
+            return this.board.groups
         }
     },
     unmounted() { },
