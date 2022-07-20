@@ -2,8 +2,6 @@
 
     <boardHeader />
     <boardGroupList v-if="board" :groups="groups" />
-
-
     <!-- <pre v-if="boards">
         
     {{ boards }}

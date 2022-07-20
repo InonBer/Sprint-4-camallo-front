@@ -3,10 +3,11 @@
 
         <boardTaskPrev @click="$router.push(`/task/${task.id}`)" :task="task" :key="task.id" />
     </div>
-    <button class="add-btn">+ Add Cast</button>
+    <button @click="onAddTask" class="add-btn">+ Add a card</button>
 </template>
  <script>
 import boardTaskPrev from './board-task-prev.vue';
+import { boardService } from '../services/board.service';
 export default {
     props: {
         tasks: {
@@ -22,6 +23,11 @@ export default {
     },
     created() { },
     methods: {
+        onAddTask() {
+            const task = boardService.getEmptyTask()
+            this.tasks.push(JSON.parse(JSON.stringify(task)))
+
+        }
 
     },
     computed: {},
@@ -30,3 +36,5 @@ export default {
 </script>
  <style>
  </style>
+
+

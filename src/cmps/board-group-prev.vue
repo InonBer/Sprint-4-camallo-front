@@ -1,6 +1,10 @@
 <template>
   <section class="group-card-container">
-    <header class="card-header">{{ group.title }}</header>
+    <form @submit="onTitleChange" v-if="group.titleEdit">
+      <input style="margin-left:10px" class="card-header" type="text" v-model="group.title">
+    </form>
+    <header @click="group.titleEdit = !group.titleEdit" v-if="!group.titleEdit" class="card-header">{{ group.title }}
+    </header>
     <boardTaskList :tasks="group.tasks" />
     <router-view :group="group"></router-view>
 
@@ -19,11 +23,19 @@ export default {
     boardTaskList
   },
   data() {
-    return {};
+    return {
+
+    };
   },
   created() {
   },
-  methods: {},
+  methods: {
+    onTitleChange() {
+      const copy = JSON.parse(JSON.stringify(this.group.title))
+      this.group.title = JSON.parse(JSON.stringify(copy))
+      this.group.titleEdit = !this.group.titleEdit
+    }
+  },
   computed: {},
   unmounted() { },
 };

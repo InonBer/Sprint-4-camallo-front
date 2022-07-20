@@ -1,7 +1,10 @@
 <template>
     <section class="task-prev-container">
         <div v-if="task.labelIds">{{ task.labelIds.length }}</div>
-        <div class="task-prev">{{ task.title }}</div>
+        <div @click.stop.prevent v-if="!task.isEdited" class="task-prev">{{ task.title }}</div>
+        <form @click.stop.prevent @submit="onTitleChange" v-if="task.isEdited" action="">
+            <input type="text" v-model="task.title" placeholder="Task name">
+        </form>
         <div class="task-prev-details">
             <div class="task-prev-checklist" v-if="task.checklists">{{ checkListDone }}/{{ task.checklists.length }}
             </div>
@@ -22,10 +25,15 @@ export default {
     name: 'TaskPrev',
     components: {},
     data() {
-        return {};
+        return {
+        };
     },
     created() { },
-    methods: {},
+    methods: {
+        onTitleChange() {
+            this.task.isEdited = !this.task.isEdited;
+        }
+    },
     computed: {
         checkListDone() {
             return this.task.checklists.reduce((acc, task) => {
