@@ -17,7 +17,9 @@ function get(entityType, entityId) {
         .then(entities => entities.find(entity => entity._id === entityId))
 }
 function post(entityType, newEntity) {
-    newEntity = JSON.parse(JSON.stringify(newEntity))
+    const deepCopy = JSON.parse(JSON.stringify(newEntity))
+    newEntity = deepCopy
+    console.log(newEntity);
     newEntity._id = _makeId()
     return query(entityType)
         .then(entities => {
@@ -29,7 +31,7 @@ function post(entityType, newEntity) {
 function postMany(entityType, newEntities) {
     return query(entityType)
         .then(entities => {
-            newEntities = newEntities.map(entity => ({...entity, _id: _makeId()}))
+            newEntities = newEntities.map(entity => ({ ...entity, _id: _makeId() }))
             entities.push(...newEntities)
             _save(entityType, entities)
             return entities
@@ -72,4 +74,3 @@ function _makeId(length = 5) {
 }
 
 
-  

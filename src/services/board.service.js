@@ -29,9 +29,12 @@ export const boardService = {
 async function query() {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
-  const boards = storageService.query(KEY)
-  if (boards && boards.length) {
-    return JSON.parse(boards)
+  const boards = JSON.parse(localStorage.getItem(KEY))
+
+  console.log(boards, 'quert');
+  if (boards) {
+    console.log(boards);
+    return Promise.resolve(boards)
   } else {
     // const boardToSend = _createBoard()
     const boardToSend = _createBoards()
@@ -61,9 +64,27 @@ async function remove(id) {
 }
 
 async function save(board) {
+  // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
+  if (board._id) {
+    const boards = localStorage.getItem(KEY)
+    const idx = boards.findIndex((board) => {
+      return board._id === board._id
+    })
+    boards[idx] = board
+    return Promise.resolve(board)
+  } else {
+    board._id = utilService.makeId()
+    const boards = JSON.parse(localStorage.getItem(KEY))
+    boards.push(board)
+    localStorage.setItem(KEY, JSON.stringify(boards))
+    return Promise.resolve(board)
+    // return storageService.post(KEY, board)
+  }
+
+
   // return board._id
-  //   ? await httpService.put(`${ENDPOINT}/${board._id}`, board)
-  //   : await httpService.post(ENDPOINT, board)
+  //    await httpService.put(`${ENDPOINT}/${board._id}`, board)
+  //    await httpService.post(ENDPOINT, board)
   return board._id ? storageService.put(KEY, board) : storageService.post(KEY, board)
 }
 function getEmptyGroup() {
@@ -102,19 +123,38 @@ function getEmptyTask() {
 }
 
 function getEmptyBoard() {
-  return Promise.resolve({
-    //TODO: remove _id before switching to httpService
-    //! IMPORTANT
-    _id: utilService.makeId(),
+  const board = {
     title: '',
-    archivedAt: null,
-    createdBy: {},
+    createdat: new Date(),
+    createdBy: {
+      _id: "u101",
+      fullname: "Abi Abambi",
+      imgUrl: "http://some-img"
+    },
     style: {},
-    labels: [],
-    members: [],
+    labels: [
+      {
+        id: "l101",
+        title: "Done",
+        color: "#61bd4f"
+      },
+      {
+        id: "l102",
+        title: "Progress",
+        color: "#61bd33"
+      }
+    ],
+    members: [
+      {
+        _id: "u101",
+        fullname: "Abi Abambi",
+        imgUrl: "http://some-img"
+      }
+    ],
     groups: [],
     activities: [],
-  })
+  }
+  return board
 }
 
 // async function add(board) {
