@@ -10,11 +10,18 @@
     min-height: 75px;
     margin: 0 auto;
     box-shadow: #00000012 0px 0px 1px 2px;
+    display: flex;
+    justify-content: space-between;
+    .task-pen-icon:hover{
+        opacity: 1;
+    }
+
     div{
         padding: 6px 8px 2px;
     }
     .task-prev{
         cursor: pointer;
+        
     }
 }
 .card-header{
@@ -24,6 +31,11 @@ position: relative;
 cursor: pointer;
     
 }
+.task-pen-icon{
+    opacity: 0;
+  
+}
+
 
 .add-btn{
     color: rgb(86, 76, 76);
