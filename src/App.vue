@@ -1,7 +1,7 @@
 <template>
   <section>
     <user-msg />
-    <app-header :boards="boards" />
+    <app-header />
     <router-view />
   </section>
 </template>

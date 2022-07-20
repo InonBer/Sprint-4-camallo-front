@@ -24,11 +24,15 @@ export const boardStore = {
             state.boards.splice(idx, 1)
         },
         saveBoard(state, { board }) {
-            const idx = state.boards.findIndex((currToy) => currToy._id === board._id)
+
+            const idx = state.boards.findIndex((currBoard) => currBoard._id === board._id)
+            console.log(idx);
             if (idx !== -1) state.boards.splice(idx, 1, board)
             else {
                 console.log('entered else')
+                console.log(board);
                 state.boards.push(board)
+                console.log(state.boards);
             }
         },
         //   setFilter(state, { filterBy }) {
@@ -57,12 +61,13 @@ export const boardStore = {
         },
         async saveBoard({ commit }, { board }) {
             try {
-                const resBoard = await boardService.save(board)
-                commit({ type: 'saveBoard', board: resBoard })
+                board = await boardService.save(board)
+                commit({ type: 'saveBoard', board })
             } catch (err) {
                 console.error(err)
             }
         },
+
         // async setFilter({ commit }, { filterBy }) {
         //     try {
         //         const boards = await boardService.query(filterBy)

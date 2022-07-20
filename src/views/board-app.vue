@@ -18,6 +18,7 @@ export default {
     }
   },
   async created() {
+    console.log('created');
     // const { id } = this.$route.params
 
     // try {

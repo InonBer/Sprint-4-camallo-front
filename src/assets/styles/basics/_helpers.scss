@@ -42,13 +42,3 @@
     @include aspect-ratio(9, 16);
 }
 
-span.icons{
-    font-family: trellicons;
-    height: 20px;
-        width: 20px;
-    &::before{
-        content:"\e951";
-        height: 20px;
-        width: 20px;
-    }
-}
