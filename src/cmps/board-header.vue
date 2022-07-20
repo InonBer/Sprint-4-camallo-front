@@ -1,6 +1,11 @@
 <template>
     <header class="board-header-container">
-        <h1>HELLO</h1>
+        <section class="board-header">
+            <button>Boards</button>|
+            <button>Boards</button>|
+            <button>Boards</button>|
+            <button>Boards</button>
+        </section>
     </header>
 </template>
  <script>
