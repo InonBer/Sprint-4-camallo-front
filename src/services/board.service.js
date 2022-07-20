@@ -9,7 +9,7 @@ import { store } from '../store/store'
 import { utilService } from './util.service'
 // import { storageService } from './async-storage-service'
 
-const KEY = 'boards_db'
+const KEY = 'board_db'
 const ENDPOINT = 'board'
 
 // const BASE_URL =
@@ -60,6 +60,8 @@ async function save(board) {
 
 function getEmptyBoard() {
   return Promise.resolve({
+    //TODO: remove _id before switching to httpService
+    //! IMPORTANT
     _id: utilService.makeId(),
     title: '',
     archivedAt: null,
