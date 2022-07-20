@@ -2,6 +2,8 @@
   <section class="group-card-container">
     <header class="card-header">{{ group.title }}</header>
     <boardTaskList :tasks="group.tasks" />
+    <router-view :group="group"></router-view>
+
   </section>
 </template>
  <script>

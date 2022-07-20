@@ -23,15 +23,17 @@ export const boardService = {
   getEmptyBoard,
 }
 
-async function query(filterBy = {}) {
+async function query() {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
   const boards = storageService.query(KEY)
+  console.log(boards);
   if (boards && boards.length) {
-    return boards
+    return JSON.parse(boards)
   } else {
     // const boardToSend = _createBoard()
     const boardToSend = _createBoards()
+
     console.log('boardToSend', boardToSend)
 
     return Promise.resolve(boardToSend)
@@ -40,9 +42,16 @@ async function query(filterBy = {}) {
 }
 
 async function getById(id) {
+
+  const boards = JSON.parse(localStorage.getItem(KEY))
+  const idx = boards.findIndex((board) => {
+    console.log('get idx', board._id);
+    return id === board._id
+  })
+  return Promise.resolve(boards[idx])
   // return await httpService.get(`${ENDPOINT}/${id}`)
   // return axios.get(BASE_URL + id).then((res) => res.data)
-  return storageService.getById(KEY, id)
+  // return storageService.getById(KEY, id)
 }
 
 async function remove(id) {
@@ -87,7 +96,7 @@ function getEmptyBoard() {
 
 
 function _createBoard() {
-  const board = {
+  const boards = {
     "_id": "b101",
     "title": "Testing Board",
     "archivedAt": 1589983468418,
@@ -125,7 +134,7 @@ function _createBoard() {
         "tasks": [
           {
             "id": "c101",
-            "title": "Replace logo"
+            "title": "TEST 1 logo"
           },
           {
             "id": "c102",
@@ -208,8 +217,8 @@ function _createBoard() {
       }
     ],
   }
-
-  return board
+  localStorage.setItem(KEY, boards)
+  return boards
 
 }
 
@@ -251,7 +260,9 @@ function _createBoard() {
 // })()
 
 function _createBoards() {
-  return [
+
+
+  const boards = [
     {
       _id: "b101",
       title: "Testing Board",
@@ -290,7 +301,7 @@ function _createBoards() {
           tasks: [
             {
               id: "c101",
-              title: "Replace logo"
+              title: "TEST!!! logo"
             },
             {
               id: "c102",
@@ -494,4 +505,6 @@ function _createBoards() {
       ],
     }
   ]
+  localStorage.setItem(KEY, JSON.stringify(boards))
+  return boards
 }
