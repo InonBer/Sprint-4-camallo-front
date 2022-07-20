@@ -1,7 +1,7 @@
 <template>
     <div v-for="task in tasks">
 
-        <boardTaskPrev @click="$router.push(`/task/${task.id}`)" :task="task" :key="task.id" />
+        <boardTaskPrev @click="onDetails(task.id)" :task="task" :key="task.id" />
     </div>
     <button @click="onAddTask" class="add-btn">+ Add a card</button>
 </template>
@@ -9,6 +9,7 @@
 import boardTaskPrev from './board-task-prev.vue';
 import { boardService } from '../services/board.service';
 export default {
+    emits: ['onDetails'],
     props: {
         tasks: {
             type: Array
@@ -27,6 +28,9 @@ export default {
             const task = boardService.getEmptyTask()
             this.tasks.push(JSON.parse(JSON.stringify(task)))
 
+        },
+        onDetails(id) {
+            this.$emit('onDetails', id)
         }
 
     },

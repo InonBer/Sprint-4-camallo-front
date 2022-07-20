@@ -22,7 +22,8 @@ export const boardService = {
   save,
   getEmptyBoard,
   getEmptyGroup,
-  getEmptyTask
+  getEmptyTask,
+  getTaskById
 }
 
 async function query() {
@@ -75,6 +76,20 @@ function getEmptyGroup() {
     style: {}
   }
   return group
+}
+
+function getTaskById(boardId, groupId, taskId) {
+  const boards = JSON.parse(localStorage.getItem(KEY))
+  const boardIdx = boards.findIndex((board) => {
+    return board._id === boardId
+  })
+  const groupIdx = boards[boardIdx].groups.findIndex((group) => {
+    return group.id === groupId
+  })
+  const task = boards[boardIdx].groups[groupIdx].tasks.find(task => {
+    return task.id === taskId
+  })
+  return Promise.resolve(task)
 }
 
 function getEmptyTask() {

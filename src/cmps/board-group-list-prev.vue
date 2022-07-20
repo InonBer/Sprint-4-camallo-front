@@ -1,7 +1,7 @@
 <template>
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
-            <boardGroupPrev :group="group" :key="group.id" />
+            <boardGroupPrev @onDetails="onDetails" :group="group" :key="group.id" />
 
         </div>
 
@@ -41,6 +41,9 @@ export default {
             this.groups.push(JSON.parse(JSON.stringify(group)))
             console.log('Adding group');
 
+        },
+        onDetails(ids) {
+            this.$emit('onDetails', ids)
         }
     },
     computed: {},

@@ -1,6 +1,7 @@
 <template>
 
   <boardPreview v-if="board" :board="board"></boardPreview>
+  <router-view></router-view>
 
 </template>
  <script>

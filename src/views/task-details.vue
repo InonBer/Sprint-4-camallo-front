@@ -2,30 +2,55 @@
     <div class="window-overlay">
         <section class="task-details">
             <h1>hello</h1>
-            <button @click="$router.go(-1)">X</button>
+            <pre v-if="task">
+                {{ task }}
+            </pre>
+            <!-- <button @click="$router.go(-1)">X</button> -->
+            <button @click="$router.push('/board/' + boardId)">X</button>
         </section>
     </div>
 </template>
  <script>
+import { handleError } from 'vue';
+import { boardService } from '../services/board.service';
+
 export default {
     props: {
-        group: {
-            type: Object
-        }
+
     },
     name: 'taskDetails',
     components: {},
     data() {
-        return {};
+        return {
+            taskId: null,
+            groupId: null,
+            boardId: null,
+            task: null,
+        };
     },
-    created() {
-        const { id } = this.$route.params
-        console.log('Group', this.group);
+    async created() {
+        const { boardId, groupId, taskId } = this.$route.params
+        this.taskId = taskId;
+        this.boardId = boardId;
+        this.groupId = groupId;
+        const task = await boardService.getTaskById(boardId, groupId, taskId)
+        try {
+            this.task = task
+        } catch (e) {
+            console.log(e);
+        }
 
     },
     methods: {},
     computed: {},
     unmounted() { },
+    watch: {
+        '$route.params.id': {
+            handler(id) {
+                console.log(id);
+            }
+        }
+    }
 };
 </script>
  <style>
