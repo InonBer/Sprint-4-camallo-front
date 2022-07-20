@@ -5,14 +5,14 @@
     </form>
     <header @click="group.titleEdit = !group.titleEdit" v-if="!group.titleEdit" class="card-header">{{ group.title }}
     </header>
-    <boardTaskList :tasks="group.tasks" />
-    <router-view :group="group"></router-view>
+    <boardTaskList @onDetails="onDetails" :tasks="group.tasks" />
 
   </section>
 </template>
  <script>
 import boardTaskList from './board-task-list.vue';
 export default {
+  emits: ['onDetails'],
   props: {
     group: {
       type: Object
@@ -34,6 +34,13 @@ export default {
       const copy = JSON.parse(JSON.stringify(this.group.title))
       this.group.title = JSON.parse(JSON.stringify(copy))
       this.group.titleEdit = !this.group.titleEdit
+    },
+    onDetails(id) {
+      const ids = {
+        taskId: id,
+        groupId: this.group.id
+      }
+      this.$emit('onDetails', ids)
     }
   },
   computed: {},

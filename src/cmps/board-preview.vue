@@ -1,7 +1,8 @@
 <template>
 
     <boardHeader />
-    <boardGroupList v-if="board" :groups="groups" />
+    <boardGroupList @onDetails="onDetails" v-if="board" :groups="groups" />
+
     <!-- <pre v-if="boards">
         
     {{ boards }}
@@ -31,11 +32,21 @@ export default {
     created() {
         console.log(this.board);
     },
-    methods: {},
+    methods: {
+        onDetails(ids) {
+            ids.boardId = this.board._id
+            const { boardId, groupId, taskId } = ids
+            // console.log(this.$route.fullPath)
+            this.$router.push(this.$route.fullPath + '/group/g101/task/c101')
+            // this.$router.push({ name: 'taskDetails', params: { boardId: boardId, groupId: groupId, taskId: taskId } })
+            // this.$router.push(`/board/${ids.boardId}/group/${ids.groupId}/task/${ids.taskId}`)
+        }
+    },
     computed: {
         groups() {
             return this.board.groups
-        }
+        },
+
     },
     unmounted() { },
 };

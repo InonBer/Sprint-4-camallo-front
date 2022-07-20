@@ -11,13 +11,14 @@ const routes = [
     component: home
   },
   {
-    path: '/board/:id?',
+    path: '/board/:boardId?/',
     name: 'boardApp',
     component: boardApp,
     children: [
       {
-        path: '/group/:id/task:id',
+        path: 'group/:groupId/task/:taskId?',
         component: taskDetails,
+        name: "taskDetails"
       }
     ]
   },

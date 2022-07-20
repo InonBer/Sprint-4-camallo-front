@@ -1,6 +1,7 @@
 <template>
 
   <boardPreview v-if="board" :board="board"></boardPreview>
+  <router-view></router-view>
 
 </template>
  <script>
@@ -35,9 +36,9 @@ export default {
   unmounted() { },
   watch: {
     '$route.params': {
-      async handler({ id }) {
+      async handler({ boardId }) {
         try {
-          this.board = await boardService.getById(id)
+          this.board = await boardService.getById(boardId)
         } catch (err) {
           console.error(err)
         }
