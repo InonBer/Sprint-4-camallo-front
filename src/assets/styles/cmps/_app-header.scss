@@ -1,11 +1,9 @@
 .app-header {
     background-color: #1e6584;
-<<<<<<< HEAD
+
     height: rem(44px);
-=======
     // height:  rem(44px);
-    height:4.736275565123789vh;
->>>>>>> 50adb55fb22aef5a57af3f603118033e240d6871
+    height: 4.736275565123789vh;
     display: flex;
     justify-content: space-between;
     line-height: 20px;
@@ -44,7 +42,8 @@
         user-select: none;
 
     }
-    .header-logo:hover{
+
+    .header-logo:hover {
         background-color: rgba(255, 255, 255, 0.2);
         cursor: pointer;
     }
