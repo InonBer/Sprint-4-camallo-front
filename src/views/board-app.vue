@@ -1,5 +1,5 @@
 <template>
-  <div class="board-app">
+  <div class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
     <boardHeader />
     <boardGroupList @groupAdded="groupAdded" @onDetails="onDetails" v-if="board" :groups="groups" />
     <router-view></router-view>
@@ -45,13 +45,19 @@ export default {
     }
   },
   computed: {
-    boards() {
-      // console.log(this.$store.getters.getBoards);
-      // return this.$store.getters.getBoards
-    },
+    // boards() {
+    //   console.log(this.$store.getters.getBoards);
+    //   return this.$store.getters.getBoards
+    // },
     groups() {
       return this.board.groups
     },
+    boardBGI() {
+      return this.board.style.bgi
+    },
+    // currBoard() {
+    //   return this.$store.getters.currBoard
+    // }
   },
   unmounted() { },
   watch: {
