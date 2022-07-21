@@ -1,12 +1,12 @@
 <template>
     <div v-for="task in tasks">
 
-        <boardTaskPrev @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" :key="task.id" />
+        <task-prev @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" :key="task.id" />
     </div>
     <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
 </template>
  <script>
-import boardTaskPrev from './task-prev.vue';
+import taskPrev from './task-prev.vue';
 import { boardService } from '../services/board.service';
 export default {
     emits: ['onDetails', 'taskAdded'],
@@ -17,7 +17,7 @@ export default {
     },
     name: 'TaskList',
     components: {
-        boardTaskPrev
+        taskPrev
     },
     data() {
         return {};

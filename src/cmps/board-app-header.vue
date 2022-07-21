@@ -46,8 +46,8 @@
 </template>
 <script>
 import { Search } from '@element-plus/icons-vue'
-
 import { boardService } from '../services/board.service';
+
 export default {
   props: {
 

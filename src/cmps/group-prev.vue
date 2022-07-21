@@ -5,12 +5,12 @@
     </form>
     <header @click="group.titleEdit = !group.titleEdit" v-if="!group.titleEdit" class="card-header">{{ group.title }}
     </header>
-    <boardTaskList @taskAdded="taskAdded" @onDetails="onDetails" :tasks="group.tasks" />
+    <task-list @taskAdded="taskAdded" @onDetails="onDetails" :tasks="group.tasks" />
 
   </section>
 </template>
  <script>
-import boardTaskList from './task-list.vue';
+import taskList from './task-list.vue';
 export default {
   props: {
     group: {
@@ -19,7 +19,7 @@ export default {
   },
   name: 'GroupPrev',
   components: {
-    boardTaskList
+    taskList
   },
   data() {
     return {
