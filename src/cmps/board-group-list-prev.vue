@@ -11,8 +11,6 @@
         </pre> -->
 
     </section>
-
-
 </template>
  <script>
 import boardGroupPrev from './board-group-prev.vue';

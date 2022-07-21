@@ -1,12 +1,16 @@
 .app-header {
     background-color: #1e6584;
+<<<<<<< HEAD
+    height: rem(44px);
+=======
     // height:  rem(44px);
     height:4.736275565123789vh;
+>>>>>>> 50adb55fb22aef5a57af3f603118033e240d6871
     display: flex;
     justify-content: space-between;
     position: relative;
     line-height: 20px;
-    padding-left:4px;
+    padding-left: 4px;
 
     .header-content {
         display: flex;
@@ -18,10 +22,12 @@
         background-color: rgba(255, 255, 255, 0.2);
 
     }
-    .header-content .header-button{
+
+    .header-content .header-button {
         background-color: transparent;
-        img{
-            width:1em;
+
+        img {
+            width: 1em;
             height: 1em;
             margin-inline-start: 0.2em;
         }
@@ -51,9 +57,10 @@
 
     .header-end {
         justify-self: flex-end;
-        display:flex;
+        display: flex;
         align-items: center;
     }
+<<<<<<< HEAD
 }
 
 .header-creating-container{
@@ -85,3 +92,7 @@
     height: 50px;
     padding-bottom: 10px;
   }
+=======
+
+}
+>>>>>>> 0f94350c31b2b8b3ca4065a21cb33af39d30e6a5
