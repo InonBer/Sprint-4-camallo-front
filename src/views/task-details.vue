@@ -42,7 +42,10 @@
                         <div class="window-modal-title">
                             <h3>Description</h3>
                         </div>
-                        <p class="window-modal-warn">You have unsaved edits on this field. </p>
+                        <p class="task-description" v-if="task.description">{{ task.description }}</p>
+                        <textarea class="task-description-textarea" name="description" id="" v-model="task.description"
+                            cols="30" rows="10"></textarea>
+                        <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p>
                     </div>
                     <div class="window-modal-content">
                         <div class="window-modal-title">
@@ -154,6 +157,10 @@ export default {
      background-color: #091e4214;
  }
  
+ .task-description {
+     padding-left: 60px
+ }
+ 
  .task-prev {
      justify-self: flex-start;
      align-self: flex-start;
@@ -165,6 +172,10 @@ export default {
      justify-self: flex-start;
      align-self: center;
  
+ }
+ 
+ .task-description-textarea {
+     margin-left: 60px;
  }
  
  .task-label-container {
