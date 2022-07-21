@@ -12,7 +12,7 @@
 .task-details {
     background-color: #f4f5f7;
     border-radius: 2px;
-    margin:48px 0 80px;
+    margin: 48px 0 80px;
     overflow: hidden;
     width: 768px;
     height: 100%;
@@ -20,10 +20,25 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    // padding-left: 10px;
+    padding: 0 8px 8px 16px;
+
+    .icon-card-detail {
+        @include trelloIconM("\e912")
+    }
+
+    .icon-description {
+        @include trelloIconM("\e922")
+    }
+
+    .icon-activity {
+        @include trelloIconM("\e900")
+    }
+
 }
 
-.details-exit-btn{
-background-color:transparent;
+.details-exit-btn {
+    background-color: transparent;
     border-radius: 50%;
     color: #42526e;
     height: 32px;
@@ -33,29 +48,33 @@ background-color:transparent;
     position: absolute;
     right: 0;
     top: 0;
-    transition: background-color 85ms,color 85ms;
+    transition: background-color 85ms, color 85ms;
     width: 32px;
     z-index: 2;
 
 }
-.details-exit-btn:hover{
+
+.details-exit-btn:hover {
     cursor: pointer;
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-span.icons{
+span.icons {
     font-family: trellicons;
-   
+
     font-size: 20px;
-    &::before{
+
+    &::before {
         content: "\e91c";
         height: 20px;
         width: 20px;
     }
 }
- .icons .card-details-exit-btn{
+
+.icons .card-details-exit-btn {
     font-family: trellicons;
-    &::before{
+
+    &::before {
         width: 1rem;
         height: 1rem;
         color: #42526e;
@@ -64,7 +83,7 @@ span.icons{
     }
 }
 
-.task-details-header{
+.task-details-header {
     margin-bottom: 0;
     padding-bottom: 0;
     margin: 0 0 8px;
@@ -72,32 +91,34 @@ span.icons{
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    .task-details-title{
+
+    .task-details-title {
         overflow: hidden;
         overflow-wrap: break-word;
         height: 33px;
         background: #0000;
-    border-radius: 3px;
-    box-shadow: none;
-    font-size: 20px;
-    font-weight: 600;
-    height: 32px;
-    line-height: 24px;
-    margin: -4px -8px;
-    min-height: 24px;
-    color: #172b4d;
-    padding: 4px 8px;
-    resize: none;
-    width: 100%;
+        border-radius: 3px;
+        box-shadow: none;
+        font-size: 20px;
+        font-weight: 600;
+        height: 32px;
+        line-height: 24px;
+        margin: -4px -8px;
+        min-height: 24px;
+        color: #172b4d;
+        padding: 4px 8px;
+        resize: none;
+        width: 100%;
     }
-    .task-details-ingroup{
-        .grouptitle{
+
+    .task-details-ingroup {
+        .grouptitle {
             text-decoration: underline
         }
     }
 }
 
-.details-window-main{
+.details-window-main {
     float: left;
     margin: 0;
     min-height: 24px;
@@ -106,13 +127,14 @@ span.icons{
     width: 552px;
     z-index: 1;
 
-    .details-mem{
+    .details-mem {
         color: #172b4d;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
-        ::after{
+
+        ::after {
             clear: both;
             content: "";
             display: table;
@@ -121,10 +143,11 @@ span.icons{
 
 }
 
-.details-labels-container{
+.details-labels-container {
     display: flex;
     align-items: center;
-    .details-label-header{
+
+    .details-label-header {
         color: #5e6c84;
         display: block;
         font-size: 12px;
@@ -137,70 +160,72 @@ span.icons{
         white-space: nowrap;
     }
 
-    .details-lebel-list{
+    .details-lebel-list {
         border-radius: 3px;
-    box-sizing: border-box;
-    display: block;
-    float: left;
-    font-weight: 600;
-    height: 32px;
-    line-height: 32px;
-    margin: 0 4px 4px 0;
-    min-width: 40px;
-    padding: 0 12px;
-    width: auto;
+        box-sizing: border-box;
+        display: block;
+        float: left;
+        font-weight: 600;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 4px 4px 0;
+        min-width: 40px;
+        padding: 0 12px;
+        width: auto;
     }
 
-    .details-lebel-add-btn{
+    .details-lebel-add-btn {
         background-color: #091e420a;
         height: 30px;
         width: 30px;
         text-align: center;
         color: #00000077;
         font-size: 30px;
-    border: none;
-    border-radius: 3px;
-    box-shadow: none;
-    cursor: pointer;
-    display: block;
-    float: left;
-    margin: 0 8px 8px 0;
-    transition-duration: 85ms;
-    transition-property: background-color,border-color,box-shadow;
-    transition-timing-function: ease;
+        border: none;
+        border-radius: 3px;
+        box-shadow: none;
+        cursor: pointer;
+        display: block;
+        float: left;
+        margin: 0 8px 8px 0;
+        transition-duration: 85ms;
+        transition-property: background-color, border-color, box-shadow;
+        transition-timing-function: ease;
 
     }
 }
 
-.window-modal-content{
+.window-modal-content {
     clear: both;
     margin-bottom: 24px;
     position: relative;
 
-    .window-modal-title{
+    .window-modal-title {
         align-items: center;
         display: flex;
         min-height: 32px;
         color: black;
         margin: 0 0 4px 40px;
-    padding: 8px 0;
-    position: relative;
-    padding-left: 10px;
+        padding: 8px 0;
+        position: relative;
+        padding-left: 10px;
 
     }
-    .window-modal-warn{
+
+    .window-modal-warn {
         color: #5e6c84;
         clear: both;
         padding-left: 50px;
     }
 }
 
-.text-container-details{
+.text-container-details {
     display: flex;
     flex-direction: row;
     gap: 8px;
-    .details-textarea{
-        background: #fff!important;
+
+    .details-textarea {
+        background: #fff !important;
         box-shadow: none;
         box-sizing: initial;
         border: rgba(128, 128, 128, 0.573) solid 0.5px;
@@ -213,55 +238,93 @@ span.icons{
     }
 }
 
-.details-activity-title{
+.details-activity-title {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    h3{
+
+    h3 {
         padding-left: 10px;
-        
+
     }
-    button{
+
+    button {
         cursor: pointer;
         margin: 0 0 0 8px;
         -webkit-appearance: none;
-    border: none;
-    border-radius: 3px;
-    box-sizing: border-box;
-    display: inline-block;
-    line-height: 20px;
-    margin-bottom: 8px;
-    padding: 6px 12px;
-    position: relative;
-    background-color: #091e420a;
-    color: #172b4d;
-    text-decoration: none;
+        border: none;
+        border-radius: 3px;
+        box-sizing: border-box;
+        display: inline-block;
+        line-height: 20px;
+        margin-bottom: 8px;
+        padding: 6px 12px;
+        position: relative;
+        background-color: #091e420a;
+        color: #172b4d;
+        text-decoration: none;
     }
 }
 
-.side-bar-details{
-   width: 100%;
-    .details-btn-container{
+.side-bar-details {
+    width: 100%;
+
+    .details-btn-container {
         display: flex;
         flex-direction: column;
-        button{
+        justify-content: flex-start;
+
+
+        button {
+            text-align: start;
             background-color: #091e4219;
-    border: none;
-    border-radius: 3px;
-    box-shadow: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    height: 32px;
-    margin-top: 8px;
-    max-width: 300px;
-    color: #172b4d;
-    overflow: hidden;
-    padding: 6px 12px;
-    transition-duration: 85ms;
-    user-select: none;
-    white-space: nowrap;
+            border: none;
+            border-radius: 3px;
+            box-shadow: none;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            height: 32px;
+            margin-top: 8px;
+            max-width: 300px;
+            color: #172b4d;
+            overflow: hidden;
+            padding: 6px 12px;
+            transition-duration: 85ms;
+            user-select: none;
+            white-space: nowrap;
         }
+
+        .icon-member {
+            @include trelloIconM("\e946")
+        }
+
+        .icon-label {
+            @include trelloIconM("\e93f")
+        }
+
+        .icon-checklist {
+            @include trelloIconM("\e91a")
+        }
+
+        .icon-date {
+            // todo fin watch like 
+        }
+
+        .icon-attachment {
+            @include trelloIconM("\e908")
+        }
+
+        .icon-card-cover {
+            @include trelloIconM("\e914")
+        }
+
+        .icon-custom-field {
+            @include trelloIconM("\e920")
+        }
+
+
+
     }
 }
