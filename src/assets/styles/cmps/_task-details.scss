@@ -1,87 +1,425 @@
-.task-prev-container:hover {
-    background-color: #091e4214;
-}
-
-.task-description {
-    padding-left: 60px
-}
-
-.task-prev {
-    justify-self: flex-start;
-    align-self: flex-start;
-}
-
-.task-prev-details {
-    display: flex;
-    flex-direction: row;
-    justify-self: flex-start;
-    align-self: center;
-
-}
-
-.task-description-textarea {
-    margin-left: 60px;
-}
-
-.task-label-container {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-}
-
-.task-label-label {
-    border-radius: 4px;
-    width: 64px;
-    height: 32px;
-}
-
-.details-label-to-add-container {
-    /* left: 693.188px; */
-    left: 160px;
-    top: 160px;
-    background: #fff;
-    border-radius: 3px;
-    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
-    overflow: hidden;
-    position: absolute;
-    height: 350px;
-    /* -webkit-transform: translateZ(0); */
-    width: 304px;
-    z-index: 70;
-}
-
-.details-labels-adding-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.window-overlay {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
+    height: 100%;
+    background-color: #000000a3;
+    z-index: 20;
 }
 
-.details-label-header {
-    padding-top: 6px;
-    text-align: center;
-}
+.task-details {
+    background-color: #f4f5f7;
+    // border-radius: 2px;
+    margin: 48px 0 80px;
+    overflow: hidden;
+    height: 990px;
+    width: 768px;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // padding-left: 10px;
+    padding: 0 8px 8px 16px;
 
-.label-modal-label {
-    width: 90%;
-    border-radius: 5px;
-    margin: 0 auto;
-    height: 30px;
-}
 
-.nd-label-header {
-    padding-left: 10px;
-    padding-bottom: 5px
-}
+    .details-window-main {
+        float: left;
+        margin: 0;
+        min-height: 24px;
+        padding: 0 8px 8px 16px;
+        position: relative;
+        width: 552px;
+        z-index: 1;
 
-.label-modal-label span {
-    padding-left: 16px;
-    line-height: 25px;
-    font-weight: bold;
-    color: white
-}
+        .task-details-header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            margin: 0 0 8px;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
 
-.label-modal-label:hover {
-    cursor: pointer;
+            .task-details-title {
+                overflow: hidden;
+                overflow-wrap: break-word;
+                height: 33px;
+                background: #0000;
+                border-radius: 3px;
+                box-shadow: none;
+                font-size: 20px;
+                font-weight: 600;
+                height: 32px;
+                line-height: 24px;
+                margin: -4px -8px;
+                min-height: 24px;
+                color: #172b4d;
+                padding: 4px 8px;
+                resize: none;
+                width: 100%;
+
+                .icon-card-detail {
+                    @include trelloIconM("\e912")
+                }
+            }
+
+            .task-details-ingroup {
+                .group-title {
+                    text-decoration: underline
+                }
+            }
+        }
+
+        .details-mem {
+            color: #172b4d;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+
+            ::after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+        }
+
+        .details-labels-container {
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            justify-content: start;
+
+            .details-lebel-add-btn {
+                background-color: #091e420a;
+                height: 30px;
+                width: 30px;
+                text-align: center;
+                color: #00000077;
+                font-size: 30px;
+                border: none;
+                border-radius: 3px;
+                box-shadow: none;
+                cursor: pointer;
+                display: block;
+                float: left;
+                margin: 0 8px 8px 0;
+                transition-duration: 85ms;
+                transition-property: background-color, border-color, box-shadow;
+                transition-timing-function: ease;
+
+            }
+        }
+    }
+
+
+
+
+
+    /////////////////////////////////////////////////////
+
+
+    .task-prev {
+        justify-self: flex-start;
+        align-self: flex-start;
+    }
+
+    .task-prev-details {
+        display: flex;
+        flex-direction: row;
+        justify-self: flex-start;
+        align-self: center;
+
+    }
+
+
+    .task-label-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+
+        .task-label-label {
+            border-radius: 4px;
+            width: 64px;
+            height: 32px;
+        }
+    }
+
+
+
+    .details-label-to-add-container {
+        /* left: 693.188px; */
+        left: 160px;
+        top: 160px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+        overflow: hidden;
+        position: absolute;
+        height: 350px;
+        /* -webkit-transform: translateZ(0); */
+        width: 304px;
+        z-index: 70;
+
+        .details-label-header {
+            color: #5e6c84;
+            // display: block;
+            font-size: 12px;
+            font-weight: 600;
+            // line-height: 16px;
+            line-height: 20px;
+            margin: 0 8px 4px 0;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
+
+            // .details-label-header {
+            // padding-top: 6px;
+            // text-align: center;
+            // }
+
+        }
+
+        .nd-label-header {
+            padding-left: 10px;
+            padding-bottom: 5px
+        }
+
+        .details-labels-adding-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+
+            .label-modal-label {
+                width: 90%;
+                border-radius: 5px;
+                margin: 0 auto;
+                height: 30px;
+
+                span {
+                    padding-left: 16px;
+                    line-height: 25px;
+                    font-weight: bold;
+                    color: white
+                }
+            }
+
+            .label-modal-label:hover {
+                cursor: pointer;
+
+            }
+        }
+    }
+
+
+
+
+    .window-modal-content {
+        clear: both;
+        margin-bottom: 24px;
+        position: relative;
+
+        .window-modal-title {
+            align-items: center;
+            display: flex;
+            min-height: 32px;
+            color: black;
+            margin: 0 0 4px 40px;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 10px;
+
+            .icon-description {
+                @include trelloIconM("\e922")
+            }
+
+            .task-prev-container:hover {
+                background-color: #091e4214;
+            }
+
+            .task-description {
+                padding-left: 60px
+            }
+
+            .task-description-textarea {
+                margin-left: 60px;
+            }
+
+            .details-activity-title {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                h3 {
+                    padding-left: 10px;
+
+                }
+
+                button {
+                    cursor: pointer;
+                    margin: 0 0 0 8px;
+                    -webkit-appearance: none;
+                    border: none;
+                    border-radius: 3px;
+                    box-sizing: border-box;
+                    display: inline-block;
+                    line-height: 20px;
+                    margin-bottom: 8px;
+                    padding: 6px 12px;
+                    position: relative;
+                    background-color: #091e420a;
+                    color: #172b4d;
+                    text-decoration: none;
+                }
+
+                .icon-activity {
+                    @include trelloIconM("\e900")
+                }
+
+            }
+
+
+            .text-container-details {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                .details-textarea {
+                    background: #fff !important;
+                    box-shadow: none;
+                    box-sizing: initial;
+                    border: rgba(128, 128, 128, 0.573) solid 0.5px;
+                    border-radius: 3px;
+                    height: 35px;
+                    margin: 0;
+                    padding: 0;
+                    resize: none;
+                    width: 100%;
+                }
+            }
+
+        }
+
+        .window-modal-warn {
+            color: #5e6c84;
+            clear: both;
+            padding-left: 50px;
+        }
+
+
+
+    }
+
+    .side-bar-details {
+        width: 100%;
+
+        .details-btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+
+            .sidebar-heading {
+                margin-top: 30px;
+                color: #5e6c84;
+                font-size: 12px;
+                font-weight: 600;
+                // line-height: 16px;
+                line-height: 20px;
+                margin-bottom: -4px;
+            }
+
+            button {
+                text-align: start;
+                // background-color: #091e4219;
+                background-color: rgba(9, 30, 66, 0.04);
+                border: none;
+                border-radius: 3px;
+                box-shadow: none;
+                box-sizing: border-box;
+                cursor: pointer;
+                display: block;
+                height: 32px;
+                margin-top: 8px;
+                max-width: 300px;
+                color: #172b4d;
+                overflow: hidden;
+                padding: 6px 12px;
+                transition-duration: 85ms;
+                user-select: none;
+                white-space: nowrap;
+
+                .icon-member {
+                    @include trelloIconM("\e946")
+                }
+
+                .icon-label {
+                    @include trelloIconM("\e93f")
+                }
+
+                .icon-checklist {
+                    @include trelloIconM("\e91a")
+                }
+
+                .icon-date {
+                    // todo fin watch like 
+                }
+
+                .icon-attachment {
+                    @include trelloIconM("\e908")
+                }
+
+                .icon-card-cover {
+                    @include trelloIconM("\e914")
+                }
+
+                .icon-custom-field {
+                    @include trelloIconM("\e920")
+                }
+            }
+
+
+        }
+    }
+
+    .details-exit-btn {
+        background-color: transparent;
+        border-radius: 50%;
+        color: #42526e;
+        height: 32px;
+        margin: 4px;
+        overflow: hidden;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: background-color 85ms, color 85ms;
+        width: 32px;
+        z-index: 2;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .card-details-exit-btn {
+            font-family: trellicons;
+
+            font-size: 20px;
+
+            &::before {
+                content: "\e91c";
+                color: #42526e;
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+    }
+
 
 }
