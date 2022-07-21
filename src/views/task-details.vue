@@ -1,5 +1,5 @@
 <template>
-    <div v-if="task" class="window-overlay">
+    <div v-if="board" class="window-overlay">
         <section class="task-details">
             <div class="task-details-header">
                 <div class="task-details-title">{{ task.title }}</div>
@@ -29,7 +29,7 @@
                                 <hr>
                                 <div class="details-labels-adding-container">
 
-                                    <div class="label-modal-label" v-for="label in currBoard.labels"
+                                    <div class="label-modal-label" v-for="label in board.labels"
                                         @click="addLabel(label.color)" :style="{ background: label.color }"> <span> {{
                                                 label.title
                                         }}</span></div>
@@ -42,7 +42,10 @@
                         <div class="window-modal-title">
                             <h3>Description</h3>
                         </div>
-                        <p class="window-modal-warn">You have unsaved edits on this field. </p>
+                        <p class="task-description" v-if="task.description">{{ task.description }}</p>
+                        <textarea class="task-description-textarea" name="description" id="" v-model="task.description"
+                            cols="30" rows="10"></textarea>
+                        <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p>
                     </div>
                     <div class="window-modal-content">
                         <div class="window-modal-title">
@@ -57,7 +60,6 @@
                                 rows="2"></textarea>
                         </div>
                     </div>
-
                 </div>
                 <div class="side-bar-details">
                     <div class="details-btn-container">
@@ -98,46 +100,38 @@ export default {
             labelModel: false,
             task: null,
             board: null,
-            group: null
-        };
+            group: null,
+        }
     },
     async created() {
         const { boardId, groupId, taskId } = this.$route.params
         try {
-            const task = await boardService.getTaskById(boardId, groupId, taskId)
-            this.task = task
-            // this.board = JSON.parse(JSON.stringify(this.$store.getters.getCurrBoard))
-            // const idx = this.board.groups.findIndex(group => group.id === groupId)
-            // this.group = this.board.groups[idx]
+            this.board = await boardService.getById(boardId)
+            const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
+            this.group = this.board.groups[groupIdx]
+            const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
+            this.task = this.group.tasks[taskIdx]
         } catch (e) {
             console.log(e);
         }
-
     },
     methods: {
-        async saveBoard(task) {
-
-
+        saveBoard(){
+            this.$store.dispatch({type:'saveBoard',board:this.board})
         },
         addLabel(color) {
+            console.log('task', this.task)
+            if(!this.task.labelIds) this.task.labelIds = []
             if (this.task.labelIds.includes(color)) return
             this.task.labelIds.push(color)
-            const copy = JSON.parse(JSON.stringify(this.task))
-            const { boardId, groupId } = this.$route.params
+        this.saveBoard()
         },
         removeLabel(idx) {
             this.task.labelIds.splice(idx, 1)
-            // console.log(idx);
-        },
-        onSendToSave(task) {
-            const { boardId, groupId } = this.$route.params
-        }
+            this.saveBoard()
+},
     },
     computed: {
-        currBoard() {
-            return this.$store.getters.currBoard
-        },
-
     },
     unmounted() { },
     watch: {
@@ -154,6 +148,10 @@ export default {
      background-color: #091e4214;
  }
  
+ .task-description {
+     padding-left: 60px
+ }
+ 
  .task-prev {
      justify-self: flex-start;
      align-self: flex-start;
@@ -165,6 +163,10 @@ export default {
      justify-self: flex-start;
      align-self: center;
  
+ }
+ 
+ .task-description-textarea {
+     margin-left: 60px;
  }
  
  .task-label-container {
