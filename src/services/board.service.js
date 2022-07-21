@@ -23,7 +23,8 @@ export const boardService = {
   getEmptyBoard,
   getEmptyGroup,
   getEmptyTask,
-  getTaskById
+  getTaskById,
+  getBoardById
 }
 
 async function query() {
@@ -31,9 +32,7 @@ async function query() {
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
   const boards = JSON.parse(localStorage.getItem(KEY))
 
-  console.log(boards, 'quert');
   if (boards) {
-    console.log(boards);
     return Promise.resolve(boards)
   } else {
     // const boardToSend = _createBoard()
@@ -64,13 +63,15 @@ async function remove(id) {
 }
 
 async function save(board) {
+  console.log(board);
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
   if (board._id) {
-    const boards = localStorage.getItem(KEY)
-    const idx = boards.findIndex((board) => {
-      return board._id === board._id
+    const boards = JSON.parse(localStorage.getItem(KEY))
+    const idx = boards.findIndex((currBoard) => {
+      return currBoard._id === board._id
     })
     boards[idx] = board
+    localStorage.setItem(KEY, JSON.stringify(boards))
     return Promise.resolve(board)
   } else {
     board._id = utilService.makeId()
@@ -97,6 +98,13 @@ function getEmptyGroup() {
     style: {}
   }
   return group
+}
+function getBoardById(boardId) {
+  const boards = JSON.parse(localStorage.getItem(KEY))
+  const idx = boards.findIndex((board) => {
+    return board._id === boardId
+  })
+  return Promise.resolve(boards[idx])
 }
 
 function getTaskById(boardId, groupId, taskId) {
@@ -218,7 +226,9 @@ function _createBoards() {
         fullname: "Abi Abambi",
         imgUrl: "http://some-img"
       },
-      style: {},
+      style: {
+        bgi: 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/3c139dc0109ed363aec31ed157086458/photo-1658054926223-9816e297d4f9.jpg',
+      },
       labels: [
         {
           id: "l101",
@@ -340,7 +350,10 @@ function _createBoards() {
         fullname: "dani dodo",
         imgUrl: "http://some-img"
       },
-      style: {},
+      style: {
+        bgi: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixid=MnwzNDc5NDh8MHwxfHNlYXJjaHwxfHxsb25kb258ZW58MHx8fHwxNjU4MzIzODQ1&ixlib=rb-1.2.1',
+
+      },
       labels: [
         {
           id: "l10",

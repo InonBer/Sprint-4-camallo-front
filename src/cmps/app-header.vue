@@ -1,12 +1,16 @@
 <template>
   <header class="app-header">
     <div class="header-content">
-      <h2 class="header-logo">Camallo</h2>
+      <h2 class=" header-logo">Camallo</h2>
       <button class="header-button">Workspaces <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Recent <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Templates <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button @click="onBoardCreate" class="header-create-button">Create</button>
+      <button @click="onCreate" class="header-create-button">Create</button>
+      <form v-if="isCreating" @submit.prevent="onBoardCreate">
+        <input type="text" v-model="boardTitle" placeholder="Board name?">
+      </form>
+
 
       <select @change="changeLink" v-if="boards" id="boards" name="board-list">
         <option v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</option>
@@ -35,11 +39,15 @@ export default {
   name: 'app-header',
   components: {},
   data() {
-    return {};
+    return {
+      boardTitle: '',
+      isCreating: false
+    };
   },
   created() { },
   methods: {
     changeLink(ev) {
+      this.$store.dispatch('setCurrBoard', { id: ev.target.value })
       // this.$router.push('/')
       this.$router.push(`/board/${ev.target.value}`);
       // setTimeout(() => {
@@ -48,10 +56,17 @@ export default {
     onBoardCreate() {
       try {
         const board = boardService.getEmptyBoard()
+        board.title = JSON.parse(JSON.stringify(this.boardTitle))
         this.$store.dispatch('saveBoard', { board })
+        this.isCreating = false
+        this.boardTitle = ''
       } catch (error) {
         console.log(error);
       }
+    },
+    onCreate() {
+      this.boardTitle = ''
+      this.isCreating = !this.isCreating
     }
   },
   computed: {

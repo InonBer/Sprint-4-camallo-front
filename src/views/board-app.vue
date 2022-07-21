@@ -1,7 +1,7 @@
 <template>
   <div class="board-app">
     <boardHeader />
-    <boardGroupList @onDetails="onDetails" v-if="board" :groups="groups" />
+    <boardGroupList @groupAdded="groupAdded" @onDetails="onDetails" v-if="board" :groups="groups" />
     <router-view></router-view>
   </div>
 </template>
@@ -39,6 +39,9 @@ export default {
       this.$router.push(this.$route.fullPath + '/group/g101/task/c101')
       // this.$router.push({ name: 'taskDetails', params: { boardId: boardId, groupId: groupId, taskId: taskId } })
       // this.$router.push(`/board/${ids.boardId}/group/${ids.groupId}/task/${ids.taskId}`)
+    },
+    groupAdded() {
+      this.$store.dispatch('saveBoard', { board: this.board })
     }
   },
   computed: {
