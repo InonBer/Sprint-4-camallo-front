@@ -113,5 +113,3 @@ export default {
   unmounted() { },
 }
 </script>
-<style>
-</style>

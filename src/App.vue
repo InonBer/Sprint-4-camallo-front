@@ -37,10 +37,4 @@ export default {
 }
 </script>
 <style>
-.bgc-img {
-  height: 100%;
-  background-attachment: fixed;
-  background-position: right bottom;
-  background-size: cover;
-}
 </style>
