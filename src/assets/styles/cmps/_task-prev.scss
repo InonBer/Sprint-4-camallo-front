@@ -14,7 +14,8 @@
     line-height: 20px;
     user-select: none;
     flex-direction: column;
-    .task-pen-icon{
+
+    .task-pen-icon {
         position: absolute;
         right: 10px;
     }
@@ -34,18 +35,33 @@
         margin: 0, 0, 8px;
         cursor: pointer;
         user-select: none;
+    }
 
+    .icon-list {
+        @include trelloIconM("\e91a")
+    }
 
+    .icon-comment {
+        @include trelloIconM("\e91e")
+    }
+
+    .icon-description {
+        @include trelloIconM("\e922")
+    }
+
+    .icon-subscribe {
+        @include trelloIconM("\e969")
     }
 }
 
 .card-header {
+    font-weight: bold;
     min-height: 20px;
-    padding: 10px 8px;
+    padding: 10px 14px;
     position: relative;
     cursor: pointer;
     user-select: none;
-
+    // margin: 0 auto;
 }
 
 .task-pen-icon {
@@ -66,5 +82,4 @@
 .add-btn:hover {
     cursor: pointer;
     background-color: rgba(42, 36, 36, 0.431)
-
 }
