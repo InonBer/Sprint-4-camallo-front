@@ -36,6 +36,7 @@ export default {
       // const bgi = this
     },
     currBoard() {
+      console.log(this.$store.getters.currBoard);
       return this.$store.getters.currBoard
     }
   },
