@@ -16,14 +16,25 @@
                             <h3 class="details-label-header">Labels</h3>
                             <div v-if="task.labelIds" class="task-label-container">
 
-                                <div v-for="label in task.labelIds" :key="label" class="task-label-label"
-                                    :style="{ background: label }">
+                                <div @click="removeLabel(idx)" v-for="(label, idx) in task.labelIds" :key="label"
+                                    class="task-label-label" :style="{ background: label }">
                                 </div>
                             </div>
 
                             <div @click="labelModel = !labelModel" class="details-lebel-add-btn">+</div>
-                            <div v-if="labelModel">
-                                {{ currBoard.labels.length }}
+                            <div class="details-label-to-add-container" v-if="labelModel">
+                                <h2 class="details-label-header">Labels</h2>
+                                <hr>
+                                <h2 class="nd-label-header" style="">labels</h2>
+                                <hr>
+                                <div class="details-labels-adding-container">
+
+                                    <div class="label-modal-label" v-for="label in currBoard.labels"
+                                        @click="addLabel(label.color)" :style="{ background: label.color }"> <span> {{
+                                                label.title
+                                        }}</span></div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -86,6 +97,8 @@ export default {
         return {
             labelModel: false,
             task: null,
+            board: null,
+            group: null
         };
     },
     async created() {
@@ -93,16 +106,38 @@ export default {
         try {
             const task = await boardService.getTaskById(boardId, groupId, taskId)
             this.task = task
+            // this.board = JSON.parse(JSON.stringify(this.$store.getters.getCurrBoard))
+            // const idx = this.board.groups.findIndex(group => group.id === groupId)
+            // this.group = this.board.groups[idx]
         } catch (e) {
             console.log(e);
         }
 
     },
-    methods: {},
+    methods: {
+        async saveBoard(task) {
+
+
+        },
+        addLabel(color) {
+            if (this.task.labelIds.includes(color)) return
+            this.task.labelIds.push(color)
+            const copy = JSON.parse(JSON.stringify(this.task))
+            const { boardId, groupId } = this.$route.params
+        },
+        removeLabel(idx) {
+            this.task.labelIds.splice(idx, 1)
+            // console.log(idx);
+        },
+        onSendToSave(task) {
+            const { boardId, groupId } = this.$route.params
+        }
+    },
     computed: {
         currBoard() {
             return this.$store.getters.currBoard
-        }
+        },
+
     },
     unmounted() { },
     watch: {
@@ -142,5 +177,56 @@ export default {
      border-radius: 4px;
      width: 64px;
      height: 32px;
+ }
+ 
+ .details-label-to-add-container {
+     /* left: 693.188px; */
+     left: 160px;
+     top: 160px;
+     background: #fff;
+     border-radius: 3px;
+     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+     overflow: hidden;
+     position: absolute;
+     height: 350px;
+     /* -webkit-transform: translateZ(0); */
+     width: 304px;
+     z-index: 70;
+ }
+ 
+ .details-labels-adding-container {
+     display: flex;
+     flex-direction: column;
+     gap: 4px;
+     width: 100%;
+ }
+ 
+ .details-label-header {
+     padding-top: 6px;
+     text-align: center;
+ }
+ 
+ .label-modal-label {
+     width: 90%;
+     border-radius: 5px;
+     margin: 0 auto;
+     height: 30px;
+ }
+ 
+ .nd-label-header {
+     padding-left: 10px;
+     padding-bottom: 5px
+ }
+ 
+ .label-modal-label span {
+     padding-left: 16px;
+     line-height: 25px;
+     font-weight: bold;
+     color: white
+ }
+ 
+ .label-modal-label:hover {
+     cursor: pointer;
+ 
  }
  </style>
