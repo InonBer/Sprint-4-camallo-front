@@ -8,11 +8,18 @@ import { boardService } from '../../services/board.service.js'
 export const boardStore = {
     state: {
         boards: null,
-        filterBy: null
+        filterBy: null,
+        currBoard: null,
     },
     getters: {
         getBoards(state) {
             return state.boards
+        },
+        getBoardBGI(state) {
+            return state.currBoard.style.bgi
+        },
+        currBoard(state) {
+            return state.currBoard
         }
     },
     mutations: {
@@ -20,33 +27,45 @@ export const boardStore = {
             state.boards = boards
         },
         removeBoard(state, { id }) {
+
+
             const idx = state.boards.findIndex((board) => board._id === id)
             state.boards.splice(idx, 1)
         },
         saveBoard(state, { board }) {
+            const idx = state.boards.findIndex((currBoard) => {
+                return currBoard._id === board._id
+            })
+            console.log('idx', idx);
+            console.log('state.boards', state.boards)
 
-            const idx = state.boards.findIndex((currBoard) => currBoard._id === board._id)
-            console.log(idx);
-            if (idx !== -1) state.boards.splice(idx, 1, board)
+
+            //const idx = state.boards.findIndex((currBoard) => currBoard._id === board._id)
+            // console.log(idx);
+            if (idx !== -1) {
+                state.boards[idx] = JSON.parse(JSON.stringify(board))
+                // state.boards.splice(idx, 1, board)
+            }
             else {
                 console.log('entered else')
                 console.log(board);
-                state.boards.push(board)
+                state.boards.push(JSON.parse(JSON.stringify(board)))
                 console.log(state.boards);
             }
         },
+        setCurrBoard(state, { board }) {
+            state.currBoard = board
+            console.log(state.currBoard);
+        }
         //   setFilter(state, { filterBy }) {
         //     state.filterBy = { ...filterBy }
         //   }
     },
     actions: {
         async loadBoards({ commit }) {
-            console.log('in actions ');
             const boards = await boardService.query()
-            console.log(boards);
             try {
                 commit('setBoards', { boards })
-                console.log('made it');
             } catch (err) {
                 console.log('couldn\'t fetch boards ', err);
             }
@@ -67,6 +86,24 @@ export const boardStore = {
                 console.error(err)
             }
         },
+        async setCurrBoard({ commit }, { id }) {
+            console.log(id);
+            try {
+                const board = await boardService.getBoardById(id)
+                commit('setCurrBoard', { board })
+            } catch (err) {
+                console.log(err);
+            }
+        },
+        async updateBoard({ commit }, { board }) {
+            try {
+                const updatedBoard = await boardService.update(board)
+                commit('saveBoard', { board: updatedBoard })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
 
         // async setFilter({ commit }, { filterBy }) {
         //     try {

@@ -1,6 +1,7 @@
 .app-header {
     background-color: #1e6584;
-    height:  rem(44px);
+    // height:  rem(44px);
+    height:4.736275565123789vh;
     display: flex;
     justify-content: space-between;
     line-height: 20px;
@@ -33,6 +34,13 @@
 
     .header-logo {
         color: white;
+        margin: auto 0;
+        user-select: none;
+
+    }
+    .header-logo:hover{
+        background-color: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
     }
 
     .header-create-button:hover {

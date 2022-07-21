@@ -12,9 +12,12 @@
     display: flex;
     justify-content: space-between;
     line-height: 20px;
+    user-select: none;
 
     .task-pen-icon:hover {
         opacity: 1;
+        user-select: none;
+
     }
 
     div {
@@ -24,6 +27,8 @@
     .task-prev {
         margin: 0, 0, 8px;
         cursor: pointer;
+        user-select: none;
+
 
     }
 }
@@ -33,6 +38,8 @@
     padding: 10px 8px;
     position: relative;
     cursor: pointer;
+    user-select: none;
+
 }
 
 .task-pen-icon {
@@ -46,9 +53,12 @@
     text-align: left;
     width: 80%;
     margin-left: 15px;
+    user-select: none;
+
 }
 
 .add-btn:hover {
     cursor: pointer;
     background-color: rgba(42, 36, 36, 0.431)
+
 }
