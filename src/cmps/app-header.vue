@@ -34,7 +34,8 @@
     </div>
     <div class="header-end">
 
-      <input type="text">
+      <!-- <input type="text" placeholder=" Search"> -->
+      <el-input size="small" placeholder=" Search" :prefix-icon="Search" />
       <button class="header-create-button">Bell</button>
       <button class="header-create-button">icon</button>
     </div>
@@ -42,6 +43,8 @@
 
 </template>
 <script>
+import { Search } from '@element-plus/icons-vue'
+
 import { boardService } from '../services/board.service';
 export default {
   props: {
@@ -96,6 +99,10 @@ export default {
     }
   },
   computed: {
+    Search() {
+      console.log(Search);
+      return Search
+    },
     boards() {
       return this.$store.getters.getBoards
     }

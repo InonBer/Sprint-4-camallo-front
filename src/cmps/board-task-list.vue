@@ -9,7 +9,7 @@
 import boardTaskPrev from './board-task-prev.vue';
 import { boardService } from '../services/board.service';
 export default {
-    emits: ['onDetails','taskAdded'],
+    emits: ['onDetails', 'taskAdded'],
     props: {
         tasks: {
             type: Array

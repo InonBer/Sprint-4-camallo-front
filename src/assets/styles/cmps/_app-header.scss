@@ -57,6 +57,19 @@
         display: flex;
         align-items: center;
     }
+
+    .el-input__wrapper {
+        background-color: rgba(255, 255, 255, 0.2);
+
+        ::placeholder,
+        span {
+            color: white;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
 }
 
 .header-creating-container {
@@ -66,9 +79,11 @@
 .conss {
     position: relative;
     align-self: center;
-}
+  }
+  
+  .header-creating-container {
+    z-index: 100;
 
-.header-creating-container {
     width: 250px;
     height: auto;
     background-color: rgb(186, 181, 181);
