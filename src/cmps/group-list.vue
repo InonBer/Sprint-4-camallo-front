@@ -9,7 +9,7 @@
     </section>
 </template>
  <script>
-import boardGroupPrev from './board-group-prev.vue';
+import boardGroupPrev from './group-prev.vue';
 import { boardService } from '../services/board.service';
 export default {
     name: 'groupPrevList',

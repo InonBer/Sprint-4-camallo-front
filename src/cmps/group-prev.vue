@@ -10,7 +10,7 @@
   </section>
 </template>
  <script>
-import boardTaskList from './board-task-list.vue';
+import boardTaskList from './task-list.vue';
 export default {
   props: {
     group: {

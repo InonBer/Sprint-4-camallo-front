@@ -10,11 +10,12 @@
         <button @click="onCreate" class="header-create-button">Create</button>
         <div v-if="isCreating" class="header-creating-container">
           <h2>Create</h2>
-          <hr>
-          <form @submit.prevent="onBoardCreate">
-            <input type="text" v-model="boardTitle" placeholder="Board name?">
-          </form>
-          <hr>
+          <div class="create-input-div">
+
+            <form @submit.prevent="onBoardCreate">
+              <input type="text" v-model="boardTitle" placeholder="Board name?">
+            </form>
+          </div>
           <div class="header-imgs-container">
             <img @click="setBoardImg(img)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img" alt="">
 

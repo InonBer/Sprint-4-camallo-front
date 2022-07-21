@@ -3,13 +3,13 @@
     <boardHeader :board="board" />
     <boardGroupList @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
       :groups="groups" />
-    <router-view ></router-view>
+    <router-view></router-view>
   </div>
 </template>
  <script>
 import { boardService } from '../services/board.service';
-import boardGroupList from "../cmps/board-group-list-prev.vue"
-import boardHeader from '../cmps/board-header.vue'
+import boardGroupList from "../cmps/group-list.vue"
+import boardHeader from '../cmps/header.vue'
 
 export default {
   name: 'boardApp',
@@ -69,7 +69,7 @@ export default {
       async handler({ boardId }) {
         try {
           this.board = await boardService.getById(boardId)
-          this.$store.dispatch({type:'setCurrBoard',id:boardId})
+          this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
         } catch (err) {
           console.error(err)
         }
@@ -83,4 +83,8 @@ export default {
 };
 </script>
  <style>
+ .board-app {
+   overflow-x: scroll;
+   overflow: auto
+ }
  </style>

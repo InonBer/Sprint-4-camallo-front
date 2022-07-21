@@ -44,7 +44,12 @@ export default {
     },
     created() { },
     methods: {
-        onTitleChange() {
+        onTitleChange(ev) {
+            console.log(ev);
+            if (this.task.title.length === 0) {
+                console.log('im here')
+                this.$emit('emptyTitle')
+            }
             this.task.isEdited = !this.task.isEdited;
         }
     },
