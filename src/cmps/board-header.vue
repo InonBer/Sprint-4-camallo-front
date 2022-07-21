@@ -1,7 +1,7 @@
 <template>
     <header class="board-header-container">
         <section class="board-header">
-            <button class="opacity-button">Boards</button>|
+            <span>{{board}}</span>
             <button class="opacity-button">Boards</button>|
             <button class="opacity-button">Boards</button>|
             <button class="opacity-button">Boards</button>
