@@ -1,6 +1,6 @@
 <template>
   <div v-if="board" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
-    <boardHeader />
+    <boardHeader :board="board" />
     <boardGroupList @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
       :groups="groups" />
     <router-view ></router-view>

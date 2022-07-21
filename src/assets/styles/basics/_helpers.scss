@@ -85,9 +85,15 @@
 
 .icon-star{
     @include trelloIconM("\e966");
-    &:hover{
+    &.starred{
+        @include trelloIconM("\e967");
         color:#f2d600;
     }
+    &:hover{
+        @include trelloIconM("\e966");
+        color:#f2d600;
+    }
+   
 }
 
 // span.icons{

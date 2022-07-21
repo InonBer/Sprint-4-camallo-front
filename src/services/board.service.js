@@ -239,6 +239,7 @@ function _createBoards() {
       title: "Testing Board",
       archivedAt: 1589983468418,
       createdAt: 1589983468418,
+      isStarred:false,
       createdBy: {
         _id: "u101",
         fullname: "Abi Abambi",
@@ -363,6 +364,7 @@ function _createBoards() {
       title: "Testing Board2",
       archivedAt: 1589983468418,
       createdAt: 1589983468418,
+      isStarred:true,
       createdBy: {
         _id: "b102",
         fullname: "dani dodo",
