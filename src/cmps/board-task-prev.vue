@@ -1,6 +1,11 @@
 <template>
     <section class="task-prev-container">
-        <div v-if="task.labelIds">{{ task.labelIds.length }}</div>
+        <div v-if="task.labelIds" class="task-label-container">
+
+            <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
+                <span></span>
+            </div>
+        </div>
         <div @click.stop.prevent v-if="!task.isEdited" class="task-prev">{{ task.title }}</div>
         <form @click.stop.prevent @submit="onTitleChange" v-if="task.isEdited" action="">
             <input type="text" v-model="task.title" placeholder="Task name">
@@ -40,6 +45,11 @@ export default {
                 if (task.isDone) acc++
                 return acc;
             }, 0)
+        },
+        bgc() {
+            console.log(this.task.labelIds[0]);
+            return "#61bd4f"
+            return this.task.labelIds[0]
         }
     },
     unmounted() { },
@@ -61,5 +71,17 @@ export default {
      justify-self: flex-start;
      align-self: center;
  
+ }
+ 
+ .task-label-container {
+     display: flex;
+     flex-direction: row;
+     gap: 4px;
+ }
+ 
+ .task-label {
+     border-radius: 4px;
+     width: 40px;
+     height: 8px;
  }
  </style>
