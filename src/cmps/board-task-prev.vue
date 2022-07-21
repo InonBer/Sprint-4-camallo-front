@@ -11,10 +11,19 @@
             <input type="text" v-model="task.title" placeholder="Task name">
         </form>
         <div class="task-prev-details">
-            <div class="task-prev-checklist" v-if="task.checklists">{{ checkListDone }}/{{ task.checklists.length }}
+
+            <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
+
+            <div v-if="task.description" class="task-prev-description"><span class="icon-description"></span></div>
+
+            <div v-if="task.comments" class="task-prev-comments"><span class="icon-comment"></span>{{
+                    task.comments.length
+            }}</div>
+
+            <div class="task-prev-checklist" v-if="task.checklists"><span class="icon-list"></span>{{ checkListDone
+            }}/{{ task.checklists.length }}
             </div>
-            <div v-if="task.comments" class="task-prev-comments">{{ task.comments.length }}</div>
-            <div v-if="task.description" class="task-prev-description">D</div>
+
         </div>
         <h2 class="task-pen-icon">pen</h2>
     </section>
