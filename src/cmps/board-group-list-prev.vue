@@ -3,9 +3,12 @@
         <div class="card-task" v-if="groups" v-for="group in groups">
             <boardGroupPrev @onDetails="onDetails" :group="group" :key="group.id" />
         </div>
-        <button @click="onGroupAdd" class="opacity-button grp-add-btn">
-            <span class="icon-plus">Add another list</span>
-        </button>
+        <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
+                list</span></button>
+        <!-- <pre v-if="groups">
+        {{ groups }}
+        </pre> -->
+
     </section>
 </template>
  <script>
@@ -31,6 +34,7 @@ export default {
         onGroupAdd() {
             const group = boardService.getEmptyGroup()
             this.groups.push(JSON.parse(JSON.stringify(group)))
+            this.$emit('groupAdded')
             console.log('Adding group');
 
         },

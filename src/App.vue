@@ -2,7 +2,9 @@
   <section>
     <user-msg />
     <app-header />
-    <router-view />
+    <!-- <div v-if="currBoard" :style="{ backgroundImage: 'url(' + boardBGI + ')' }" class="bgc-img"> -->
+    <router-view class="bgc-img" v-if="currBoard" :style="{ backgroundImage: 'url(' + boardBGI + ')' }" />
+    <!-- </div> -->
   </section>
 </template>
 
@@ -29,6 +31,13 @@ export default {
     boards() {
       return this.$store.getters.getBoards
     },
+    boardBGI() {
+      return this.$store.getters.getBoardBGI
+      // const bgi = this
+    },
+    currBoard() {
+      return this.$store.getters.currBoard
+    }
   },
   components: {
     appHeader,
@@ -36,3 +45,11 @@ export default {
   },
 }
 </script>
+<style>
+.bgc-img {
+  height: 100%;
+  background-attachment: fixed;
+  background-position: right bottom;
+  background-size: cover;
+}
+</style>
