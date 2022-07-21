@@ -2,10 +2,8 @@
   <header class="app-header">
     <div class="header-content">
       <h2 @click="$router.push('/')" class=" header-logo">Camallo</h2>
-      <button class="header-button">Workspaces <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Recent <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button class="header-button">Templates <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <div class="conss">
         <button @click="onCreate" class="header-create-button">Create</button>
         <div v-if="isCreating" class="header-creating-container">
