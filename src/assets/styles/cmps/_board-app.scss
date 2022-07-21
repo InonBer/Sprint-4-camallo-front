@@ -1,6 +1,49 @@
 .board-app {
     background-color: rgb(125, 168, 168);
-    height: calc(100vh - 44px);
+    // height: calc(100vh - 44px);
+    // height: 1500px;
     overflow-x: scroll;
     overflow: auto
+ 
 }
+
+.board-app::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    // position: absolute;
+    // margin-bottom: 10px;
+  }
+
+
+  ::-webkit-scrollbar-track {
+    background: #ffffff00;
+
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    height: 195px;
+
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background:#888;
+  }
+  ::-webkit-scrollbar-thumb {
+    outline: 1px solid slategrey;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+        
+
+  }
+
+//   ::-webkit-scrollbar-button{
+//     // margin-bottom: 10px;
+//     // margin-right: 10px;
+//     // margin-top: 10px;
+//   }
+  
