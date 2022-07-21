@@ -72,32 +72,5 @@ export default {
 };
 </script>
  <style>
- .task-prev-container:hover {
-     background-color: #091e4214;
- }
  
- .task-prev {
-     justify-self: flex-start;
-     align-self: flex-start;
- }
- 
- .task-prev-details {
-     display: flex;
-     flex-direction: row;
-     justify-self: flex-start;
-     align-self: center;
- 
- }
- 
- .task-label-container {
-     display: flex;
-     flex-direction: row;
-     gap: 4px;
- }
- 
- .task-label {
-     border-radius: 4px;
-     width: 40px;
-     height: 8px;
- }
  </style>

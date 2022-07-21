@@ -9,7 +9,7 @@
  <script>
 import { boardService } from '../services/board.service';
 import boardGroupList from "../cmps/group-list.vue"
-import boardHeader from '../cmps/header.vue'
+import boardHeader from '../cmps/board-header.vue'
 
 export default {
   name: 'boardApp',
@@ -83,8 +83,4 @@ export default {
 };
 </script>
  <style>
- .board-app {
-   overflow-x: scroll;
-   overflow: auto
- }
  </style>
