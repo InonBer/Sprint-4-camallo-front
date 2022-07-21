@@ -1,8 +1,9 @@
 <template>
     <header class="board-header-container">
-        <section class="board-header">
-            <!-- <span>{{board}}</span> -->
-            <button class="opacity-button">Boards</button>|
+        <section class="board-header" v-if="board">
+            <span class="board-header-title">{{board?board.title:'bye'}}</span>
+            <!-- <span class="board-header-title">sprint 4</span> -->
+            <button class="opacity-button"><span class="star-icon"></span></button>|
             <button class="opacity-button">Boards</button>|
             <button class="opacity-button">Boards</button>
         </section>
@@ -17,7 +18,11 @@ export default {
     },
     created() { },
     methods: {},
-    computed: {},
+    computed: {
+        board(){
+            return this.$store.getters.currBoard
+        }
+    },
     unmounted() { },
 };
 </script>

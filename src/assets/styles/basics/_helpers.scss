@@ -74,21 +74,19 @@
     background-color: #ffffff3d;
     font-weight: 400;
     cursor: pointer;
-
     &:hover {
         background-color: #ffffff52;
     }
 }
 
 .icon-plus {
-    font-family: trellicons;
-    height: 20px;
-    width: 20px;
+    @include trelloIconM("\e901");
+}
 
-    &::before {
-        content: "\e901";
-        height: 20px;
-        width: 20px;
+.icon-star{
+    @include trelloIconM("\e966");
+    &:hover{
+        color:#f2d600;
     }
 }
 

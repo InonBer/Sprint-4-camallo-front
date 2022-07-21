@@ -24,6 +24,17 @@
     }
 }
 
+@mixin trelloIconM($iconCode){
+        font-family: trellicons;
+        height: 20px;
+        width: 20px;
+        &::before {
+            content: $iconCode;
+            height: 20px;
+            width: 20px;
+        }
+}
+
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
     position: relative;
