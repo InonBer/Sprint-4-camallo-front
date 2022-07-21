@@ -6,25 +6,31 @@
     position: relative;
     line-height: 20px;
     padding-left: 4px;
+    font-size:14px;
 
     .header-content {
         display: flex;
-        justify-self: flex-start;
-        flex-direction: row;
     }
 
     .header-create-button {
         background-color: rgba(255, 255, 255, 0.2);
-
+        letter-spacing: -0.6px;
+        margin-inline-start: 0.7em;
+        margin-top: 0.7em;
+        padding: 6.6px 0.8em;
+        border-radius: 3px;
     }
 
     .header-content .header-button {
         background-color: transparent;
         min-width: fit-content;
+        letter-spacing: -0.6px;
+        padding: 5px 8px;
         img {
             width: 1em;
             height: 1em;
-            margin-inline-start: 0.2em;
+            margin-inline-start: 0.35em;
+            margin-top: 0.5em;
         }
     }
 
@@ -118,4 +124,23 @@
     width: 55px;
     height: 55px;
     padding-bottom: 10px;
+}
+
+.el-input__wrapper{
+    width: 250px;
+background-color: rgba(255, 255, 255, 0.25);;
+    height: 32px;
+    box-shadow: none;
+}
+.el-input__wrapper {
+    .el-input__prefix:hover{
+        background-color: transparent;
+
+    }
+ 
+    input:focus{
+        
+        background-color: #ffffff;
+    }
+  
 }

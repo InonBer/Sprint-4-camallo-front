@@ -1,14 +1,14 @@
 .board-header-container {
     color:$clr6;
     min-height: rem(44px);
-    // background-color: #0000003d;
-    margin-bottom: 0.595em;
+    background: #0000003d;
+    padding-bottom: 0.595em;
 
     .board-header {
-        padding: 8px 4px 4px 12px;
+        padding: 2.6px 4px 4px 12px;
         padding-left: rem(29px);
         & button {
-            padding: 0.6em;
+            padding: 0.5em;
             margin: 0 rem(8px);
         }
         .board-header-title{

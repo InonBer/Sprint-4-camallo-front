@@ -1,7 +1,7 @@
 <template>
   <section>
     <user-msg />
-    <router-view class="main-app-height"/>
+    <router-view />
   </section>
 </template>
 

@@ -1,10 +1,10 @@
 <template>
-    <board-app-header />
+  <board-app-header />
   <div v-if="board" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
     <board-header :board="board" />
-    <group-list @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
+    <group-list @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails" v-if="board"
       :groups="groups" />
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
  <script>
@@ -44,7 +44,7 @@ export default {
     groupAdded() {
       this.$store.dispatch('saveBoard', { board: this.board })
     },
-    taskAdded() {
+    onBoardChange() {
       this.$store.dispatch('saveBoard', { board: this.board })
     }
   },
