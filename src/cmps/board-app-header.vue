@@ -101,7 +101,6 @@ export default {
   },
   computed: {
     Search() {
-      console.log(Search);
       return Search
     },
     boards() {

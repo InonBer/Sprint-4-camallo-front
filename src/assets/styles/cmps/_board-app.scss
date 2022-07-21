@@ -14,31 +14,40 @@
     // margin-bottom: 10px;
   }
 
+.board-app{
 
+<<<<<<< HEAD
   ::-webkit-scrollbar-track {
         background: #0000003d;
+=======
+
+  &::-webkit-scrollbar-track {
+    background: #ffffff00;
+
+>>>>>>> 57bb65f2fe9671132bb28623ad460a98b1be6451
   }
   
   /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
+  &::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.574);
     height: 195px;
 
   }
   
   /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+  &::-webkit-scrollbar-thumb:hover {
     background:#888;
   }
-  ::-webkit-scrollbar-thumb {
-    outline: 1px solid slategrey;
+  &::-webkit-scrollbar-thumb {
+    // outline: 1px solid slategrey;
   }
 
-  ::-webkit-scrollbar-thumb{
+  &::-webkit-scrollbar-thumb{
     border-radius: 10px;
         
 
   }
+}
 
 //   ::-webkit-scrollbar-button{
 //     // margin-bottom: 10px;

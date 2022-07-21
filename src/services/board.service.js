@@ -52,7 +52,6 @@ async function query() {
 async function getBgcImgs() {
   try {
     const res = await axios.get('https://api.unsplash.com/search/photos?page=1&query=mountains&client_id=2wV121X0Ot4ARXG44lcENmjEvAkccm1BugKXKX1yuck')
-    console.log(res.data.results);
     const imgs = res.data.results.map((data) => {
       return data.urls.full
     })
