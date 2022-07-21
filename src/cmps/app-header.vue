@@ -35,7 +35,8 @@
     <div class="header-end">
 
       <!-- <input type="text" placeholder=" Search"> -->
-      <el-input size="small" placeholder=" Search" :prefix-icon="Search" />
+
+      <el-input v-model="searchtxt" size="small" placeholder="Search" :prefix-icon="Search" />
       <button class="header-create-button">Bell</button>
       <button class="header-create-button">icon</button>
     </div>
@@ -57,7 +58,8 @@ export default {
       boardTitle: '',
       isCreating: false,
       imgsToDisplay: [],
-      emptyBoard: null
+      emptyBoard: null,
+      searchtxt: ''
     };
   },
   async created() {
