@@ -257,6 +257,21 @@ function _createBoards() {
           id: "l102",
           title: "Progress",
           color: "#c83131"
+        },
+        {
+          id: "l103",
+          title: "ASAP",
+          color: "#bd4f9d"
+        },
+        {
+          id: "l104",
+          title: "Waiting",
+          color: "#b6bd4f"
+        },
+        {
+          id: "l105",
+          title: "On Hold",
+          color: "#4f6dbd"
         }
       ],
       members: [
@@ -382,6 +397,21 @@ function _createBoards() {
           id: "l102",
           title: "Progress",
           color: "#c83131"
+        },
+        {
+          id: "l103",
+          title: "ASAP",
+          color: "#bd4f9d"
+        },
+        {
+          id: "l104",
+          title: "Waiting",
+          color: "#b6bd4f"
+        },
+        {
+          id: "l105",
+          title: "On Hold",
+          color: "#4f6dbd"
         }
       ],
       members: [
