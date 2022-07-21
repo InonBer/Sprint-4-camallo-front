@@ -1,22 +1,24 @@
 <template>
     <div v-if="board" class="window-overlay">
         <section class="task-details">
-            <div class="task-details-header">
-                <div class="task-details-title"><span class="icon-card-detail"></span>{{ task.title }}</div>
-            </div>
-            <div class="task-details-ingroup">in list <span class="grouptitle">group.title</span>
-            </div>
             <div class="details-window-main">
+                <div class="task-details-header">
+                    <div class="task-details-title">
+                        <span class="icon-card-detail"></span>{{ task.title }}
+                    </div>
+                </div>
+                <div class="task-details-ingroup">in list
+                    <span class="group-title">{{ group.title }}</span>
+                </div>
                 <div class="details-mem">
-                    <div class="details-member-list">
+                    <!-- <div class="details-member-list">
                         <p>nember 1</p>
                         <p>member 2</p>
                         <p>member 2</p>
-                    </div>
+                    </div> -->
                     <div class="details-labels-container">
                         <h3 class="details-label-header">Labels</h3>
                         <div v-if="task.labelIds" class="task-label-container">
-
                             <div @click="removeLabel(idx)" v-for="(label, idx) in task.labelIds" :key="label"
                                 class="task-label-label" :style="{ background: label }">
                             </div>
@@ -29,13 +31,11 @@
                             <h2 class="nd-label-header" style="">labels</h2>
                             <hr>
                             <div class="details-labels-adding-container">
-
                                 <div class="label-modal-label" v-for="label in board.labels"
                                     @click="addLabel(label.color)" :style="{ background: label.color }"> <span> {{
                                             label.title
                                     }}</span></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -63,9 +63,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="side-bar-details">
                 <div class="details-btn-container">
-                    <p>Add to card</p>
+                    <h3 class="sidebar-heading">Add to card</h3>
                     <button><span class="icon-member"></span> Members</button>
                     <button><span class="icon-label"></span> Labels</button>
                     <button><span class="icon-checklist"></span> Checklist</button>
@@ -75,15 +76,10 @@
                     <button><span class="icon-custom-field"></span> Custom Fields</button>
                 </div>
             </div>
-
-
-            <!-- 
-            <pre v-if="task">
-                {{ task }}
-            </pre> -->
-            <!-- <button @click="$router.go(-1)">X</button> -->
-            <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)"><span
-                    class=" card-details-exit-btn icons"></span></button>
+            <button @click="$router.go(-1)">X</button>
+            <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)">
+                <span class="card-details-exit-btn"></span>
+            </button>
         </section>
     </div>
 </template>
