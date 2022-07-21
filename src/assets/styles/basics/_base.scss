@@ -10,11 +10,9 @@
 // }
 
 html {
-    font-family: montserrat;
     line-height: 1.6;
     color: $clr2;
     // overflow-y: hidden;
-    overflow-y: hidden;
 }
 
 body {
@@ -30,14 +28,13 @@ h3,
 h4,
 h5,
 h6 {
-    // font-family: caveat;
     margin: 0;
     // line-height: 0;
 }
 
-// img {
-//     width: 100%;
-// }
+img {
+    width: 100%;
+}
 
 // p {
 //     margin: 0 0 1em;

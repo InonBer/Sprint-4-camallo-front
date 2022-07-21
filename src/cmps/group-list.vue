@@ -1,7 +1,7 @@
 <template>
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
-            <boardGroupPrev @taskAdded="taskAdded" @onDetails="onDetails" :group="group" :key="group.id" />
+            <group-prev @taskAdded="taskAdded" @onDetails="onDetails" :group="group" :key="group.id" />
 
         </div>
         <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
@@ -9,7 +9,7 @@
     </section>
 </template>
  <script>
-import boardGroupPrev from './group-prev.vue';
+import groupPrev from './group-prev.vue';
 import { boardService } from '../services/board.service';
 export default {
     name: 'groupPrevList',
@@ -19,7 +19,7 @@ export default {
         }
     },
     components: {
-        boardGroupPrev
+        groupPrev
     },
     data() {
         return {

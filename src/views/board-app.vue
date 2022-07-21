@@ -1,21 +1,24 @@
 <template>
+    <board-app-header />
   <div v-if="board" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
-    <boardHeader :board="board" />
-    <boardGroupList @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
+    <board-header :board="board" />
+    <group-list @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
       :groups="groups" />
     <router-view></router-view>
   </div>
 </template>
  <script>
 import { boardService } from '../services/board.service';
-import boardGroupList from "../cmps/group-list.vue"
+import groupList from "../cmps/group-list.vue"
 import boardHeader from '../cmps/board-header.vue'
+import boardAppHeader from '../cmps/board-app-header.vue';
 
 export default {
   name: 'boardApp',
   components: {
     boardHeader,
-    boardGroupList,
+    groupList,
+    boardAppHeader
   },
   data() {
     return {
@@ -36,10 +39,7 @@ export default {
     onDetails(ids) {
       ids.boardId = this.board._id
       const { boardId, groupId, taskId } = ids
-      // console.log(this.$route.fullPath)
       this.$router.push(this.$route.fullPath + `/group/${groupId}/task/${taskId}`)
-      // this.$router.push({ name: 'taskDetails', params: { boardId: boardId, groupId: groupId, taskId: taskId } })
-      // this.$router.push(`/board/${ids.boardId}/group/${ids.groupId}/task/${ids.taskId}`)
     },
     groupAdded() {
       this.$store.dispatch('saveBoard', { board: this.board })
@@ -59,9 +59,6 @@ export default {
     boardBGI() {
       return this.board.style.bgi
     },
-    // currBoard() {
-    //   return this.$store.getters.currBoard
-    // }
   },
   unmounted() { },
   watch: {

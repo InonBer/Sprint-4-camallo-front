@@ -1,5 +1,6 @@
 .board-app {
     background-color: rgb(125, 168, 168);
+    height: calc(100vh - 44px);
     overflow-x: scroll;
     overflow: auto
 }
