@@ -5,7 +5,7 @@
     </form>
     <header @click="group.titleEdit = !group.titleEdit" v-if="!group.titleEdit" class="card-header">{{ group.title }}
     </header>
-    <boardTaskList @onDetails="onDetails" :tasks="group.tasks" />
+    <boardTaskList @taskAdded="taskAdded" @onDetails="onDetails" :tasks="group.tasks" />
 
   </section>
 </template>
@@ -41,6 +41,9 @@ export default {
         groupId: this.group.id
       }
       this.$emit('onDetails', ids)
+    },
+    taskAdded() {
+      this.$emit('taskAdded')
     }
   },
   computed: {},

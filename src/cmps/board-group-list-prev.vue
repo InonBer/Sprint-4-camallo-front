@@ -1,7 +1,8 @@
 <template>
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
-            <boardGroupPrev @onDetails="onDetails" :group="group" :key="group.id" />
+            <boardGroupPrev @taskAdded="taskAdded" @onDetails="onDetails" :group="group" :key="group.id" />
+
         </div>
         <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
                 list</span></button>
@@ -40,6 +41,9 @@ export default {
         },
         onDetails(ids) {
             this.$emit('onDetails', ids)
+        },
+        taskAdded() {
+            this.$emit('taskAdded')
         }
     },
     computed: {},
