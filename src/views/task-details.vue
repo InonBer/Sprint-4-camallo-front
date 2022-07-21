@@ -78,7 +78,7 @@
                 {{ task }}
             </pre> -->
             <!-- <button @click="$router.go(-1)">X</button> -->
-            <button class="details-exit-btn" @click="$router.push('/board/' + route.params.boardId)"><span
+            <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)"><span
                     class=" card-details-exit-btn icons"></span></button>
         </section>
     </div>
