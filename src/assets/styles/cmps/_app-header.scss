@@ -1,10 +1,10 @@
 .app-header {
     background-color: #1e6584;
-    height:  rem(44px);
+    height: rem(44px);
     display: flex;
     justify-content: space-between;
     line-height: 20px;
-    padding-left:4px;
+    padding-left: 4px;
 
     .header-content {
         display: flex;
@@ -16,10 +16,12 @@
         background-color: rgba(255, 255, 255, 0.2);
 
     }
-    .header-content .header-button{
+
+    .header-content .header-button {
         background-color: transparent;
-        img{
-            width:1em;
+
+        img {
+            width: 1em;
             height: 1em;
             margin-inline-start: 0.2em;
         }
@@ -42,7 +44,8 @@
 
     .header-end {
         justify-self: flex-end;
-        display:flex;
+        display: flex;
         align-items: center;
     }
+
 }
