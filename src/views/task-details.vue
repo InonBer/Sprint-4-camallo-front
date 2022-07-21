@@ -116,20 +116,20 @@ export default {
         }
     },
     methods: {
-        saveBoard(){
-            this.$store.dispatch({type:'saveBoard',board:this.board})
+        saveBoard() {
+            this.$store.dispatch({ type: 'saveBoard', board: this.board })
         },
         addLabel(color) {
             console.log('task', this.task)
-            if(!this.task.labelIds) this.task.labelIds = []
+            if (!this.task.labelIds) this.task.labelIds = []
             if (this.task.labelIds.includes(color)) return
             this.task.labelIds.push(color)
-        this.saveBoard()
+            this.saveBoard()
         },
         removeLabel(idx) {
             this.task.labelIds.splice(idx, 1)
             this.saveBoard()
-},
+        },
     },
     computed: {
     },
