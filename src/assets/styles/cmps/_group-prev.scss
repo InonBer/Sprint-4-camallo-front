@@ -9,4 +9,43 @@
     justify-content: space-between;
     padding-bottom: 8px;
     box-shadow: #00000080 0px 1px 4px 2px;
+    max-height: 87vh;
 }
+
+.group-card-scroll{
+    overflow-y: auto;
+    // padding-bottom:;
+    &::-webkit-scrollbar{
+        width: 6px;
+        // padding-left: 10px;
+        // margin-left:10px
+    }
+    &::-webkit-scrollbar-track {
+        background: #ffffff00;
+    
+      }
+      
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: rgb(136, 136, 136);
+        height: 195px;
+    
+      }
+      
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background:#888;
+        
+      }
+      &::-webkit-scrollbar-thumb {
+        outline: 1px solid slategrey;
+
+      }
+    
+      &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+            
+    
+      }
+}
+

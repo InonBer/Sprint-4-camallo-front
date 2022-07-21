@@ -119,3 +119,22 @@
     height: 55px;
     padding-bottom: 10px;
 }
+
+.el-input__wrapper{
+    width: 250px;
+background-color: rgba(255, 255, 255, 0.25);;
+    height: 32px;
+    box-shadow: none;
+}
+.el-input__wrapper {
+    .el-input__prefix:hover{
+        background-color: transparent;
+
+    }
+ 
+    input:focus{
+        
+        background-color: #ffffff;
+    }
+  
+}
