@@ -1,7 +1,11 @@
 import { httpService } from './http.service.js'
 import { storageService } from './async-storage.service'
 // import { userService } from './user.service'
+import Axios from 'axios'
 
+const axios = Axios.create({
+  // withCredentials: true
+})
 import { store } from '../store/store'
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 
@@ -24,7 +28,8 @@ export const boardService = {
   getEmptyGroup,
   getEmptyTask,
   getTaskById,
-  getBoardById
+  getBoardById,
+  getBgcImgs
 }
 
 async function query() {
@@ -42,6 +47,19 @@ async function query() {
     return Promise.resolve(boardToSend)
   }
   // return storageService.query(KEY)
+}
+
+async function getBgcImgs() {
+  try {
+    const res = await axios.get('https://api.unsplash.com/search/photos?page=1&query=mountains&client_id=2wV121X0Ot4ARXG44lcENmjEvAkccm1BugKXKX1yuck')
+    console.log(res.data.results);
+    const imgs = res.data.results.map((data) => {
+      return data.urls.full
+    })
+    return imgs
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function getById(id) {

@@ -27,6 +27,7 @@ export default {
         onAddTask() {
             const task = boardService.getEmptyTask()
             this.tasks.push(JSON.parse(JSON.stringify(task)))
+            this.$emit('taskAdded')
 
         },
         onDetails(id) {

@@ -6,10 +6,21 @@
       <button class="header-button">Recent <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <button class="header-button">Templates <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button @click="onCreate" class="header-create-button">Create</button>
-      <form v-if="isCreating" @submit.prevent="onBoardCreate">
-        <input type="text" v-model="boardTitle" placeholder="Board name?">
-      </form>
+      <div class="conss">
+        <button @click="onCreate" class="header-create-button">Create</button>
+        <div v-if="isCreating" class="header-creating-container">
+          <h2>Create</h2>
+          <hr>
+          <form @submit.prevent="onBoardCreate">
+            <input type="text" v-model="boardTitle" placeholder="Board name?">
+          </form>
+          <hr>
+          <div class="header-imgs-container">
+            <img @click="setBoardImg(img)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img" alt="">
+
+          </div>
+        </div>
+      </div>
 
 
       <select @change="changeLink" v-if="boards" id="boards" name="board-list">
@@ -41,10 +52,21 @@ export default {
   data() {
     return {
       boardTitle: '',
-      isCreating: false
+      isCreating: false,
+      imgsToDisplay: [],
+      emptyBoard: null
     };
   },
-  created() { },
+  async created() {
+    try {
+      const imgs = await boardService.getBgcImgs()
+      this.imgsToDisplay = imgs
+    } catch (e) {
+      console.log(e);
+    }
+    this.emptyBoard = boardService.getEmptyBoard()
+
+  },
   methods: {
     changeLink(ev) {
       this.$store.dispatch('setCurrBoard', { id: ev.target.value })
@@ -55,9 +77,8 @@ export default {
     },
     onBoardCreate() {
       try {
-        const board = boardService.getEmptyBoard()
-        board.title = JSON.parse(JSON.stringify(this.boardTitle))
-        this.$store.dispatch('saveBoard', { board })
+        this.emptyBoard.title = JSON.parse(JSON.stringify(this.boardTitle))
+        this.$store.dispatch('saveBoard', { board: this.emptyBoard })
         this.isCreating = false
         this.boardTitle = ''
       } catch (error) {
@@ -67,6 +88,11 @@ export default {
     onCreate() {
       this.boardTitle = ''
       this.isCreating = !this.isCreating
+    },
+    setBoardImg(img) {
+      this.emptyBoard.style.bgi = 'img'
+      this.emptyBoard.style.bgi = img
+      console.log(this.emptyBoard);
     }
   },
   computed: {
@@ -77,3 +103,5 @@ export default {
   unmounted() { },
 }
 </script>
+<style>
+</style>

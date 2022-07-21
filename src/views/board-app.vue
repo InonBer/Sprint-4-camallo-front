@@ -1,7 +1,8 @@
 <template>
   <div class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
     <boardHeader />
-    <boardGroupList @groupAdded="groupAdded" @onDetails="onDetails" v-if="board" :groups="groups" />
+    <boardGroupList @groupAdded="groupAdded" @taskAdded="taskAdded" @onDetails="onDetails" v-if="board"
+      :groups="groups" />
     <router-view></router-view>
   </div>
 </template>
@@ -41,6 +42,9 @@ export default {
       // this.$router.push(`/board/${ids.boardId}/group/${ids.groupId}/task/${ids.taskId}`)
     },
     groupAdded() {
+      this.$store.dispatch('saveBoard', { board: this.board })
+    },
+    taskAdded() {
       this.$store.dispatch('saveBoard', { board: this.board })
     }
   },

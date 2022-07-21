@@ -1,11 +1,12 @@
 .app-header {
     background-color: #1e6584;
     // height:  rem(44px);
-    height:4.736275565123789vh;
+    height: 4.736275565123789vh;
     display: flex;
     justify-content: space-between;
+    position: relative;
     line-height: 20px;
-    padding-left:4px;
+    padding-left: 4px;
 
     .header-content {
         display: flex;
@@ -17,10 +18,12 @@
         background-color: rgba(255, 255, 255, 0.2);
 
     }
-    .header-content .header-button{
+
+    .header-content .header-button {
         background-color: transparent;
-        img{
-            width:1em;
+
+        img {
+            width: 1em;
             height: 1em;
             margin-inline-start: 0.2em;
         }
@@ -38,7 +41,8 @@
         user-select: none;
 
     }
-    .header-logo:hover{
+
+    .header-logo:hover {
         background-color: rgba(255, 255, 255, 0.2);
         cursor: pointer;
     }
@@ -50,7 +54,37 @@
 
     .header-end {
         justify-self: flex-end;
-        display:flex;
+        display: flex;
         align-items: center;
     }
+}
+
+.header-creating-container {
+    position: absolute;
+}
+
+.conss {
+    position: relative;
+    align-self: center;
+}
+
+.header-creating-container {
+    width: 250px;
+    height: auto;
+    background-color: rgb(186, 181, 181);
+    text-align: center;
+}
+
+.header-imgs-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+}
+
+.header-imgs-container img {
+    width: 50px;
+    height: 50px;
+    padding-bottom: 10px;
 }
