@@ -36,6 +36,7 @@ export default {
   },
   created() {
   },
+  emits:['onDetails'],
   methods: {
     onTitleChange() {
       const copy = JSON.parse(JSON.stringify(this.group.title))

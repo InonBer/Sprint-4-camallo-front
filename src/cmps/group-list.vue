@@ -27,6 +27,7 @@ export default {
     },
     created() {
     },
+    emits:['onBoardChange'],
     methods: {
         onGroupAdd() {
             const group = boardService.getEmptyGroup()
