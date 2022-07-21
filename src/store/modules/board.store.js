@@ -15,9 +15,9 @@ export const boardStore = {
         getBoards(state) {
             return state.boards
         },
-        getBoardBGI(state) {
-            return state.currBoard.style.bgi
-        },
+        // getBoardBGI(state) {
+        //     return state.currBoard.style.bgi
+        // },
         currBoard(state) {
             return state.currBoard
         }
@@ -103,8 +103,7 @@ export const boardStore = {
             catch (err) {
                 console.log(err);
             }
-        }
-
+        },
         // async setFilter({ commit }, { filterBy }) {
         //     try {
         //         const boards = await boardService.query(filterBy)
