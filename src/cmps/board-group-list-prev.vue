@@ -2,16 +2,11 @@
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
             <boardGroupPrev @onDetails="onDetails" :group="group" :key="group.id" />
-
         </div>
-            <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another list</span></button>
-        <!-- <pre v-if="groups">
-        {{ groups }}
-        </pre> -->
-
+        <button @click="onGroupAdd" class="opacity-button grp-add-btn">
+            <span class="icon-plus">Add another list</span>
+        </button>
     </section>
-
-
 </template>
  <script>
 import boardGroupPrev from './board-group-prev.vue';
