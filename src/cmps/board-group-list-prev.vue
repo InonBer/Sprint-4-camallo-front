@@ -6,10 +6,6 @@
         </div>
         <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
                 list</span></button>
-        <!-- <pre v-if="groups">
-        {{ groups }}
-        </pre> -->
-
     </section>
 </template>
  <script>

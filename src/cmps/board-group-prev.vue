@@ -12,7 +12,6 @@
  <script>
 import boardTaskList from './board-task-list.vue';
 export default {
-  emits: ['onDetails'],
   props: {
     group: {
       type: Object
