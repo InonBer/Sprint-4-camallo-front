@@ -8,7 +8,9 @@
         </div>
         <div @click.stop.prevent v-if="!task.isEdited" class="task-prev">{{ task.title }}</div>
         <form @click.stop.prevent @submit="onTitleChange" v-if="task.isEdited" action="">
-            <input type="text" v-model="task.title" placeholder="Task name">
+            <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->
+            <textarea type="text" v-model="task.title" dir="auto" placeholder="Enter a title for this card…"
+                style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
         <div class="task-prev-details">
 

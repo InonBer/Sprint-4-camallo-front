@@ -56,9 +56,17 @@
 }
 
 .card-header {
-    font-weight: bold;
+    // bottom: 0;
+    // cursor: pointer;
+    // left: 0;
+    // position: absolute;
+    // right: 0;
+    // top: 0;
+
+
+    font-weight: 500;
     min-height: 20px;
-    padding: 10px 14px;
+    padding: 5px 14px;
     position: relative;
     cursor: pointer;
     user-select: none;
