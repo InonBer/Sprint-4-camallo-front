@@ -256,7 +256,7 @@ function _createBoards() {
         {
           id: "l102",
           title: "Progress",
-          color: "#61bd33"
+          color: "#c83131"
         }
       ],
       members: [
@@ -325,7 +325,7 @@ function _createBoards() {
                 }
               ],
               memberIds: ["u101"],
-              labelIds: ["l101", "l102"],
+              labelIds: ["#61bd4f", "#c83131"],
               createdAt: 1590999730348,
               dueDate: 16156215211,
               byMember: {
@@ -381,7 +381,7 @@ function _createBoards() {
         {
           id: "l102",
           title: "Progress",
-          color: "#61bd33"
+          color: "#c83131"
         }
       ],
       members: [
@@ -450,7 +450,7 @@ function _createBoards() {
                 }
               ],
               memberIds: ["u101"],
-              labelIds: ["l101", "l102"],
+              labelIds: ["#61bd4f", "#c83131"],
               createdAt: 1590999730348,
               dueDate: 16156215211,
               byMember: {

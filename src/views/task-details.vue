@@ -14,8 +14,17 @@
                         </div>
                         <div class="details-labels-container">
                             <h3 class="details-label-header">Labels</h3>
-                            <div class="details-lebel-list">Labelrender</div>
-                            <div class="details-lebel-add-btn">+</div>
+                            <div v-if="task.labelIds" class="task-label-container">
+
+                                <div v-for="label in task.labelIds" :key="label" class="task-label-label"
+                                    :style="{ background: label }">
+                                </div>
+                            </div>
+
+                            <div @click="labelModel = !labelModel" class="details-lebel-add-btn">+</div>
+                            <div v-if="labelModel">
+                                {{ currBoard.labels.length }}
+                            </div>
                         </div>
                     </div>
                     <div class="window-modal-content">
@@ -75,6 +84,7 @@ export default {
     components: {},
     data() {
         return {
+            labelModel: false,
             task: null,
         };
     },
@@ -89,7 +99,11 @@ export default {
 
     },
     methods: {},
-    computed: {},
+    computed: {
+        currBoard() {
+            return this.$store.getters.currBoard
+        }
+    },
     unmounted() { },
     watch: {
         '$route.params.id': {
@@ -101,4 +115,32 @@ export default {
 };
 </script>
  <style>
+ .task-prev-container:hover {
+     background-color: #091e4214;
+ }
+ 
+ .task-prev {
+     justify-self: flex-start;
+     align-self: flex-start;
+ }
+ 
+ .task-prev-details {
+     display: flex;
+     flex-direction: row;
+     justify-self: flex-start;
+     align-self: center;
+ 
+ }
+ 
+ .task-label-container {
+     display: flex;
+     flex-direction: row;
+     gap: 4px;
+ }
+ 
+ .task-label-label {
+     border-radius: 4px;
+     width: 64px;
+     height: 32px;
+ }
  </style>
