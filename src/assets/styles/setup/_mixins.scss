@@ -24,14 +24,12 @@
     }
 }
 
-@mixin trelloIconM($iconCode){
+@mixin trelloIconM($iconCode,$size:'20px'){
         font-family: trellicons;
-        height: 20px;
-        width: 20px;
+        height: $size;
+        width: $size;
         &::before {
             content: $iconCode;
-            height: 20px;
-            width: 20px;
         }
 }
 
