@@ -7,8 +7,8 @@
     }}</span>
     </header>
     <div class="group-card-scroll">
-      <task-list @taskAdded="onBoardChange" @onBoardChange="onBoardChange" @onDetails="onDetails"
-        :tasks="group.tasks" />
+      <task-list @onTaskMode="onTaskMode" @taskAdded="onBoardChange" @onBoardChange="onBoardChange"
+        @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
     </div>
     <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
 
@@ -19,11 +19,12 @@
 import taskList from './task-list.vue';
 import { boardService } from '../services/board.service';
 export default {
-  emits: ['onBoardChange'],
+  emits: ['onBoardChange', 'onTaskMode'],
   props: {
     group: {
       type: Object
-    }
+    },
+    idx: Number
   },
   name: 'GroupPrev',
   components: {
@@ -31,13 +32,21 @@ export default {
   },
   data() {
     return {
-
     };
   },
   created() {
   },
-  emits:['onDetails'],
+  emits: ['onDetails'],
   methods: {
+    onTaskMode(tasks) {
+
+      const copy = JSON.parse(JSON.stringify(tasks))
+      this.$emit('onTaskMode', copy, this.group.id)
+      // this.items.tasks = JSON.parse(JSON.stringify(tasks))
+      // let groupCopy = JSON.parse(JSON.stringify(this.group))
+      // groupCopy = tasks
+      // this.$emit('onTaskMove', groupCopy)
+    },
     onTitleChange() {
       const copy = JSON.parse(JSON.stringify(this.group.title))
       this.group.title = JSON.parse(JSON.stringify(copy))
@@ -53,17 +62,22 @@ export default {
       this.$emit('onDetails', ids)
     },
     onAddTask() {
+      let copy = JSON.parse(JSON.stringify(this.group))
       const task = boardService.getEmptyTask()
-      this.group.tasks.push(JSON.parse(JSON.stringify(task)))
+      copy.tasks.push(task)
       this.$emit('onBoardChange')
     },
     onBoardChange() {
-      console.log('group prev');
       this.$emit('onBoardChange')
-    }
+    },
+
   },
   computed: {},
-  unmounted() { },
+  unmounted() {
+    clearInterval(this.interval)
+  },
+
+
 };
 </script>
  <style>

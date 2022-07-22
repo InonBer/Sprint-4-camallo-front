@@ -29,7 +29,10 @@ export const boardService = {
   getEmptyTask,
   getTaskById,
   getBoardById,
-  getBgcImgs
+  getBgcImgs,
+  addTask,
+  saveGroup,
+
 }
 
 async function query() {
@@ -49,6 +52,14 @@ async function query() {
   // return storageService.query(KEY)
 }
 
+async function saveGroup(group, board) {
+  const idx = board.groups.findIndex((currGroup) => {
+    return currGroup.id == group.id
+  })
+  board.groups[idx] = group
+  return save(board)
+
+}
 async function getBgcImgs() {
   try {
     const res = await axios.get('https://api.unsplash.com/search/photos?page=1&query=mountains&client_id=2wV121X0Ot4ARXG44lcENmjEvAkccm1BugKXKX1yuck')
@@ -60,7 +71,14 @@ async function getBgcImgs() {
     console.log(err);
   }
 }
+async function addTask(board, groupId, task) {
+  const idx = board.groups.findIndex((group) => {
+    return group.id === groupId
+  })
+  board.groups[idx].tasks.push(task)
 
+  return save(board)
+}
 async function getById(id) {
 
   const boards = JSON.parse(localStorage.getItem(KEY))
@@ -80,7 +98,6 @@ async function remove(id) {
 }
 
 async function save(board) {
-  console.log(board);
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
   if (board._id) {
     const boards = JSON.parse(localStorage.getItem(KEY))

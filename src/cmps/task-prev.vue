@@ -9,8 +9,8 @@
         <div @click.stop.prevent v-if="!task.isEdited" class="task-prev">{{ task.title }}</div>
         <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event)" v-if="task.isEdited" action="">
             <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->
-            <textarea type="text" v-model="titleName" :placeholder="task.title" dir="auto"
-                placeholder="Enter a title for this card…"
+            <textarea ref="taskTitle" @click="focusOnTitle" type="text" v-model="titleName" :placeholder="task.title"
+                dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
         <div class="task-prev-details" v-if="task.description || task.comments || task.checklists">
@@ -56,15 +56,16 @@ export default {
             const copy = JSON.parse(JSON.stringify(this.titleName))
             this.task.title = copy
             this.task.isEdited = !this.task.isEdited;
-            console.log(this.task.title.length);
             if (this.task.title.length <= 1) {
-                console.log('im here')
                 this.$emit('emptyTitle')
             } else {
-                this.$emit('onBoardChange')
+                this.$emit('onTitleChange', this.task)
 
             }
 
+        },
+        focusOnTitle() {
+            this.$refs.taskTitle.focus()
         }
     },
     computed: {

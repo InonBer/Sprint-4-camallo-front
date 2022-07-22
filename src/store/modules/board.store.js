@@ -36,12 +36,9 @@ export const boardStore = {
             const idx = state.boards.findIndex((currBoard) => {
                 return currBoard._id === board._id
             })
-
-
-            //const idx = state.boards.findIndex((currBoard) => currBoard._id === board._id)
-            // console.log(idx);
             if (idx !== -1) {
                 state.boards[idx] = JSON.parse(JSON.stringify(board))
+
                 // state.boards.splice(idx, 1, board)
             }
             else {
@@ -50,6 +47,10 @@ export const boardStore = {
         },
         setCurrBoard(state, { board }) {
             state.currBoard = board
+        },
+        saveTaskMove(state, { group }) {
+            const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
+            state.currBoard.groups.splice(idx, 1, group)
         }
         //   setFilter(state, { filterBy }) {
         //     state.filterBy = { ...filterBy }
@@ -76,6 +77,7 @@ export const boardStore = {
             try {
                 const boardToSave = await boardService.save(board)
                 commit({ type: 'saveBoard', board: boardToSave })
+                commit({ type: 'setCurrBoard', board: boardToSave })
             } catch (err) {
                 console.error(err)
             }
@@ -97,6 +99,18 @@ export const boardStore = {
                 console.log(err);
             }
         },
+        async saveTaskMove({ commit, state }, { group }) {
+            try {
+                commit('saveTaskMove', { group })
+                // console.log(board)
+                // commit('setCurrBoard', { board })
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+
+
         // async setFilter({ commit }, { filterBy }) {
         //     try {
         //         const boards = await boardService.query(filterBy)
