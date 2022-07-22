@@ -1,32 +1,49 @@
 <template>
     <header class="board-header-container">
         <section class="board-header" v-if="board">
-            <span class="board-header-title">{{board?board.title:'Board title'}}</span>
+            <span class="board-header-title">{{ board ? board.title : 'Board title' }}</span>
             <button @click="starBoard" class="opacity-button star-btn">
-            <span class="icon-star" :class="board.isStarred?'starred':''"></span></button>
+                <span class="icon-star" :class="board.isStarred ? 'starred' : ''"></span></button>
             <span class="btn-divider"></span>
             <button class="opacity-button">Boards</button>
-            <span class="btn-divider"></span>            
+            <span class="btn-divider"></span>
             <button class="opacity-button">Boards</button>
         </section>
+        <section class="board-header">
+            <button class="opacity-button open-btn" id="main" @click="sidebarOpen = !sidebarOpen">
+                <span class="icon-overflow"></span>
+                Show menu
+            </button>
+        </section>
     </header>
+
+    <sidebar v-if="sidebarOpen" />
+
+
+
 </template>
  <script>
-export default {
-    props:{
-        board:Object
-    },
-    name: 'boardHeader',
-    components: {},
-    data() {
-        return {};
-    },
-    created() { },
-    methods: {
-        starBoard(){
-            this.board.isStarred = !this.board.isStarred
-            this.$store.dispatch({type:'saveBoard',board:this.board})
-        }
-    },
-};
-</script>
+ import sidebar from './board-sidebar.vue';
+ export default {
+     props: {
+         board: Object
+     },
+     name: 'boardHeader',
+     components: {
+         sidebar
+     },
+     data() {
+         return {
+             sidebarOpen: false
+         };
+     },
+     created() { },
+     methods: {
+ 
+         starBoard() {
+             this.board.isStarred = !this.board.isStarred
+             this.$store.dispatch({ type: 'saveBoard', board: this.board })
+         }
+     },
+ };
+ </script>
