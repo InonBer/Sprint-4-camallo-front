@@ -1,37 +1,54 @@
 <template>
-    <div v-for="task in tasks">
-
-        <task-prev @onBoardChange="onBoardChange" @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task"
-            :key="task.id" />
-    </div>
+    <!-- <div v-for="task in tasks"> -->
+    <Container class="tasks-container" orientation="vertical" v-if="tasks" :get-child-payload="getChildPayload"
+        group-name="col-items" @drop="onDrop($event)">
+        <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
+            :groupId="groupId">
+            <task-prev @onBoardChange="onBoardChange" @saveTask="saveTask" @emptyTitle="emptyTitle"
+                @click="onDetails(task.id)" :task="task" />
+        </Draggable>
+    </Container>
+    <!-- </div> -->
     <!-- <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button> -->
 </template>
  <script>
 import taskPrev from './task-prev.vue';
+import { Container, Draggable } from 'vue3-smooth-dnd'
+import { applyDrag } from '../services/dnd-service';
 import { boardService } from '../services/board.service';
 export default {
-    emits: ['onDetails', 'taskAdded', 'onBoardChange'],
+    emits: ['onDetails', 'taskAdded', 'onBoardChange', 'onTaskMode'],
     props: {
         tasks: {
             type: Array
-        }
+        },
+        groupId: String
     },
     name: 'TaskList',
     components: {
-        taskPrev
+        taskPrev,
+        Container,
+        Draggable,
     },
     data() {
-        return {};
+        return {
+        };
     },
-    created() { },
+    created() {
+    },
     methods: {
-        // onAddTask(ev) {
-        //     console.log(ev);
-        //     const task = boardService.getEmptyTask()
-        //     this.tasks.push(JSON.parse(JSON.stringify(task)))
-        //     this.$emit('taskAdded')
+        onDrop(dropRes) {
+            let items = JSON.parse(JSON.stringify(this.tasks))
+            items = applyDrag(items, dropRes)
+            this.$emit('onTaskMode', items)
+        },
+        saveTask(task) {
+            this.$emit('saveTask', task)
+        },
+        getChildPayload(idx) {
+            return this.tasks[idx]
+        },
 
-        // },
         onDetails(id) {
             this.$emit('onDetails', id)
         },
@@ -48,9 +65,17 @@ export default {
     },
     computed: {},
     unmounted() { },
+
+
 };
 </script>
  <style>
+ .smooth-dnd-container {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+     min-height: 2px;
+ }
  </style>
 
 

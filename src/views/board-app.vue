@@ -1,9 +1,9 @@
 <template>
   <board-app-header />
-  <div v-if="board" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
-    <board-header :board="board" />
-    <group-list @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails" v-if="board"
-      :groups="groups" />
+  <div v-if="currBoard" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
+    <board-header :board="currBoard" />
+    <group-list @onTaskMode="onTaskMode" @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails"
+      v-if="currBoard" :groups="currBoard.groups" />
     <router-view />
   </div>
 </template>
@@ -14,6 +14,7 @@ import boardHeader from '../cmps/board-header.vue'
 import boardAppHeader from '../cmps/board-app-header.vue';
 
 export default {
+  emits: ['onTaskMode'],
   name: 'boardApp',
   components: {
     boardHeader,
@@ -22,23 +23,28 @@ export default {
   },
   data() {
     return {
-      board: null
+      board: null,
     }
   },
-  async created() {
+  created() {
     console.log('created');
     // const { id } = this.$route.params
-
     // try {
     //   this.board = await boardService.getById(id)
     // } catch (err) {
     //   console.error(err)
     // }
   },
-  emits:['onBoardChange'],
+  emits: ['onBoardChange'],
   methods: {
+    onTaskMode(groups) {
+      let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
+      boardCopy.groups = JSON.parse(JSON.stringify(groups))
+      console.log(boardCopy.groups);
+      this.$store.dispatch('saveBoard', { board: boardCopy })
+    },
     onDetails(ids) {
-      ids.boardId = this.board._id
+      ids.boardId = this.currBoard._id
       const { boardId, groupId, taskId } = ids
       this.$router.push(this.$route.fullPath + `/group/${groupId}/task/${taskId}`)
     },
@@ -50,15 +56,15 @@ export default {
     }
   },
   computed: {
-    // boards() {
-    //   console.log(this.$store.getters.getBoards);
-    //   return this.$store.getters.getBoards
-    // },
-    groups() {
-      return this.board.groups
+    currBoard() {
+      return this.$store.getters.currBoard
     },
+
+    // groups() {
+    //   return this.currBoard.groups
+    // },
     boardBGI() {
-      return this.board.style.bgi
+      return this.currBoard.style.bgi
     },
   },
   unmounted() { },
@@ -66,13 +72,15 @@ export default {
     '$route.params': {
       async handler({ boardId }) {
         try {
-          this.board = await boardService.getById(boardId)
+          // this.board = await boardService.getById(boardId)
+          // console.log(board);
           this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
         } catch (err) {
           console.error(err)
         }
       },
-      immediate: true
+      immediate: true,
+      deep: true
 
 
     }
