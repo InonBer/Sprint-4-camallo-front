@@ -3,8 +3,9 @@
         <section class="task-details">
             <div class="details-window-main">
                 <div class="task-details-header">
-                    <div class="task-details-title">
-                        <span class="icon-card-detail"></span>{{ task.title }}
+                    <div class="task-details-header">
+                        <span class="icon-card-detail"></span>
+                        {{ task.title }}
                     </div>
                 </div>
                 <div class="task-details-ingroup">in list
@@ -22,9 +23,8 @@
                             <div @click="removeLabel(idx)" v-for="(label, idx) in task.labelIds" :key="label"
                                 class="task-label-label" :style="{ background: label }">
                             </div>
+                            <div @click="labelModel = !labelModel" class="details-lebel-add-btn">+</div>
                         </div>
-
-                        <div @click="labelModel = !labelModel" class="details-lebel-add-btn">+</div>
                         <div class="details-label-to-add-container" v-if="labelModel">
                             <h2 class="details-label-header">Labels</h2>
                             <hr>
@@ -32,9 +32,9 @@
                             <hr>
                             <div class="details-labels-adding-container">
                                 <div class="label-modal-label" v-for="label in board.labels"
-                                    @click="addLabel(label.color)" :style="{ background: label.color }"> <span> {{
-                                            label.title
-                                    }}</span></div>
+                                    @click="addLabel(label.color)" :style="{ background: label.color }">
+                                    <span> {{ label.title }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

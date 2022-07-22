@@ -26,9 +26,11 @@
         user-select: none;
 
     }
-    .task-members-container{
+
+    .task-members-container {
         align-self: flex-end;
     }
+
     div {
         // padding: 6px 5px 2px;
         color: #172b4d;
@@ -37,12 +39,12 @@
     .task-prev-container:hover {
         background-color: #091e4214;
     }
-    
+
     .task-prev {
         justify-self: flex-start;
         align-self: flex-start;
     }
-    
+
     .task-prev-details {
         padding-bottom: 8px;
         display: flex;
@@ -53,25 +55,25 @@
         opacity: 0.75;
         font-size: 16.5px;
         padding-left: 2px;
-    // margin-top: 6px;
-    margin-top: 8px;
+        // margin-top: 6px;
+        margin-top: 8px;
     }
-    
+
     .task-label-container {
         display: flex;
         flex-direction: row;
         gap: 4px;
         margin-top: -0.8000000000000014px;
         margin-bottom: 5px;
-    
+
     }
-    
+
     .task-label {
         border-radius: 4px;
         width: 40px;
         height: 8px;
     }
-    
+
     .task-prev {
         // padding-bottom: 8px;
         margin: 0, 0, 8px;
@@ -111,8 +113,9 @@
     position: relative;
     cursor: pointer;
     user-select: none;
+
     // margin: 0 auto;
-    span{
+    span {
         position: relative;
         top: 5.2px;
         margin-left: 2px;
@@ -122,7 +125,6 @@
 .task-pen-icon {
     opacity: 0;
 }
-
 
 .add-btn {
     color: rgb(86, 76, 76);
@@ -137,4 +139,20 @@
 .add-btn:hover {
     cursor: pointer;
     background-color: rgba(42, 36, 36, 0.431)
+}
+
+.task-prev-container:hover {
+    background-color: #091e4214;
+}
+
+.task-prev {
+    justify-self: flex-start;
+    align-self: flex-start;
+}
+
+.task-prev-details {
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-start;
+    align-self: center;
 }
