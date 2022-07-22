@@ -66,7 +66,7 @@ export default {
       async handler({ boardId }) {
         try {
           this.board = await boardService.getById(boardId)
-          this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
+          // this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
         } catch (err) {
           console.error(err)
         }
