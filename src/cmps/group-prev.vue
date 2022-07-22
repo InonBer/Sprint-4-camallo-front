@@ -1,13 +1,14 @@
 <template>
   <section class="group-card-container">
-    <form @submit="onTitleChange" v-if="group.titleEdit">
-      <input style="margin-left:10px" class="card-header" type="text" v-model="group.title">
+    <form @submit="onTitleChange" v-if="isEdited">
+      <input style="margin-left:10px" class="card-header" type="text" :placeholder="group.title" v-model="groupTitle">
     </form>
-    <header @click="group.titleEdit = !group.titleEdit" v-if="!group.titleEdit" class="card-header"><span>{{ group.title
+    <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
+        groupTitle
     }}</span>
     </header>
     <div class="group-card-scroll">
-      <task-list @onTaskMode="onTaskMode" @taskAdded="onBoardChange" @onBoardChange="onBoardChange"
+      <task-list @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange" @onBoardChange="onBoardChange"
         @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
     </div>
     <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
@@ -32,12 +33,25 @@ export default {
   },
   data() {
     return {
+      isEdited: null,
+      groupTitle: null
+
     };
   },
   created() {
+    this.isEdited = this.group.titleEdit
+    this.groupTitle = JSON.parse(JSON.stringify(this.group.title))
   },
   emits: ['onDetails'],
   methods: {
+    saveTask(task) {
+      let group = JSON.parse(JSON.stringify(this.group))
+      const idx = this.group.tasks.findIndex((currTask) => {
+        return currTask.id === task.id;
+      })
+      group.tasks[idx] = task
+      this.$store.dispatch('addTask', { group, id: group.id })
+    },
     onTaskMode(tasks) {
 
       const copy = JSON.parse(JSON.stringify(tasks))
@@ -48,11 +62,11 @@ export default {
       // this.$emit('onTaskMove', groupCopy)
     },
     onTitleChange() {
-      const copy = JSON.parse(JSON.stringify(this.group.title))
-      this.group.title = JSON.parse(JSON.stringify(copy))
-      this.group.titleEdit = !this.group.titleEdit
-      this.$emit('onBoardChange')
-
+      this.isEdited = false
+      let group = JSON.parse(JSON.stringify(this.group))
+      group.titleEdit = false
+      group.title = this.groupTitle
+      this.$emit('saveGroup', group)
     },
     onDetails(id) {
       const ids = {
@@ -65,7 +79,8 @@ export default {
       let copy = JSON.parse(JSON.stringify(this.group))
       const task = boardService.getEmptyTask()
       copy.tasks.push(task)
-      this.$emit('onBoardChange')
+      this.$store.dispatch('addTask', { group: copy, id: this.group.id })
+      // this.$emit('onBoardChange')
     },
     onBoardChange() {
       this.$emit('onBoardChange')

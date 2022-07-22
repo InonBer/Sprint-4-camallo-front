@@ -44,7 +44,7 @@ export default {
       this.$store.dispatch('saveBoard', { board: boardCopy })
     },
     onDetails(ids) {
-      ids.boardId = this.board._id
+      ids.boardId = this.currBoard._id
       const { boardId, groupId, taskId } = ids
       this.$router.push(this.$route.fullPath + `/group/${groupId}/task/${taskId}`)
     },

@@ -4,7 +4,7 @@
         group-name="col-items" @drop="onDrop($event)">
         <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
             :groupId="groupId">
-            <task-prev @onBoardChange="onBoardChange" @onTitleChange="onTitleChange" @emptyTitle="emptyTitle"
+            <task-prev @onBoardChange="onBoardChange" @saveTask="saveTask" @emptyTitle="emptyTitle"
                 @click="onDetails(task.id)" :task="task" />
         </Draggable>
     </Container>
@@ -42,15 +42,8 @@ export default {
             items = applyDrag(items, dropRes)
             this.$emit('onTaskMode', items)
         },
-        onTitleChange(task) {
-            const copy = JSON.parse(JSON.stringify(this.items))
-            const itemsCopy = copy.map(item => {
-                if (item.id === task.id) item = task
-                return item
-            })
-            this.$emit('onTaskMode', itemsCopy)
-
-
+        saveTask(task) {
+            this.$emit('saveTask', task)
         },
         getChildPayload(idx) {
             return this.tasks[idx]

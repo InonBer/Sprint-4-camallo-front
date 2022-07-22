@@ -32,6 +32,7 @@ export const boardService = {
   getBgcImgs,
   addTask,
   saveGroup,
+  addGroup,
 
 }
 
@@ -51,8 +52,14 @@ async function query() {
   }
   // return storageService.query(KEY)
 }
-
-async function saveGroup(group, board) {
+async function addGroup(board, groups) {
+  let boardCopy = JSON.parse(JSON.stringify(board))
+  boardCopy.groups = groups
+  return save(boardCopy)
+}
+async function saveGroup(board, group) {
+  console.log(board);
+  console.log(group);
   const idx = board.groups.findIndex((currGroup) => {
     return currGroup.id == group.id
   })
@@ -71,6 +78,10 @@ async function getBgcImgs() {
     console.log(err);
   }
 }
+
+
+
+
 async function addTask(board, groupId, task) {
   const idx = board.groups.findIndex((group) => {
     return group.id === groupId

@@ -107,6 +107,29 @@ export const boardStore = {
             } catch (err) {
                 console.log(err);
             }
+        },
+        async addTask({ commit, state }, { group, id }) {
+            console.log('store group', group);
+            try {
+                let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
+                const board = await boardService.saveGroup(boardCopy, group)
+                // commit('saveGroup', { board: boardCopy, group, id })
+                commit({ type: 'saveBoard', board: boardCopy })
+                commit({ type: 'setCurrBoard', board: boardCopy })
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async addGroup({ commit, state }, { groups }) {
+            console.log('doing shit');
+            try {
+                let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
+                const board = await boardService.addGroup(boardCopy, groups)
+                commit({ type: 'saveBoard', board: boardCopy })
+                commit({ type: 'setCurrBoard', board: boardCopy })
+            } catch (error) {
+                console.log(error);
+            }
         }
 
 

@@ -1,8 +1,8 @@
 <template>
     <section class="group-list-container">
         <div class="card-task" v-if="groups" v-for="group in groups">
-            <group-prev @onTaskMode="onTaskMode" @onBoardChange="onBoardChange" @onDetails="onDetails" :group="group"
-                :key="group.id" />
+            <group-prev @saveGroup="saveGroup" @onTaskMode="onTaskMode" @onBoardChange="onBoardChange"
+                @onDetails="onDetails" :group="group" :key="group.id" />
 
         </div>
         <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
@@ -56,11 +56,22 @@ export default {
             }
 
         },
+        saveGroup(group) {
+            console.log('here');
+            console.log(group);
+            let groups = JSON.parse(JSON.stringify(this.groups))
+            const idx = groups.findIndex(currGroup => {
+                return currGroup.id === group.id
+            })
+            groups[idx] = group
+            this.$store.dispatch('addGroup', { groups })
+
+        },
         onGroupAdd() {
             const group = boardService.getEmptyGroup()
-            this.groups.push(JSON.parse(JSON.stringify(group)))
-            this.$emit('groupAdded')
-            console.log('Adding group');
+            let groups = JSON.parse(JSON.stringify(this.groups))
+            groups.push(group)
+            this.$store.dispatch('addGroup', { groups })
 
         },
         onDetails(ids) {
