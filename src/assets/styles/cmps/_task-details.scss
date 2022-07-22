@@ -43,7 +43,7 @@
             margin-inline-start: 0px;
             margin-inline-end: 0px;
 
-            .task-details-title {
+            .task-details-header {
                 overflow: hidden;
                 overflow-wrap: break-word;
                 height: 33px;
@@ -62,7 +62,10 @@
                 width: 100%;
 
                 .icon-card-detail {
-                    @include trelloIconM("\e912")
+                    @include trelloIconM("\e912");
+                    // left: -40px;
+                    // position: absolute;
+                    // top: 4px;
                 }
             }
 
@@ -84,6 +87,19 @@
                 clear: both;
                 content: "";
                 display: table;
+            }
+
+            .task-label-container {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+
+                .task-label-label {
+                    border-radius: 4px;
+                    // width: 64px;
+                    height: 32px;
+                    min-width: 40px;
+                }
             }
         }
 
@@ -114,41 +130,6 @@
             }
         }
     }
-
-
-
-
-
-    /////////////////////////////////////////////////////
-
-
-    .task-prev {
-        justify-self: flex-start;
-        align-self: flex-start;
-    }
-
-    .task-prev-details {
-        display: flex;
-        flex-direction: row;
-        justify-self: flex-start;
-        align-self: center;
-
-    }
-
-
-    .task-label-container {
-        display: flex;
-        flex-direction: row;
-        gap: 4px;
-
-        .task-label-label {
-            border-radius: 4px;
-            width: 64px;
-            height: 32px;
-        }
-    }
-
-
 
     .details-label-to-add-container {
         /* left: 693.188px; */
@@ -235,10 +216,6 @@
 
             .icon-description {
                 @include trelloIconM("\e922")
-            }
-
-            .task-prev-container:hover {
-                background-color: #091e4214;
             }
 
             .task-description {
@@ -365,9 +342,9 @@
                     @include trelloIconM("\e91a")
                 }
 
-                .icon-date {
-                    // todo fin watch like 
-                }
+                // .icon-date {
+                //     // todo fin watch like 
+                // }
 
                 .icon-attachment {
                     @include trelloIconM("\e908")

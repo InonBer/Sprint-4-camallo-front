@@ -1,12 +1,12 @@
 .app-header {
     background-color: #1e6584;
-    height:  rem(44px);
+    height: rem(44px);
     display: flex;
     justify-content: space-between;
     position: relative;
     line-height: 20px;
     padding-left: 4px;
-    font-size:14px;
+    font-size: 14px;
 
     .header-content {
         display: flex;
@@ -26,6 +26,7 @@
         min-width: fit-content;
         letter-spacing: -0.6px;
         padding: 5px 8px;
+
         img {
             width: 1em;
             height: 1em;
@@ -44,12 +45,12 @@
         color: white;
         margin: auto 0;
         user-select: none;
-
-    }
-
-    .header-logo:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        margin-inline-end: 0.3em;
         cursor: pointer;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
     }
 
     .header-create-button:hover {
@@ -84,9 +85,9 @@
 .conss {
     position: relative;
     align-self: center;
-  }
-  
-  .header-creating-container {
+}
+
+.header-creating-container {
     z-index: 100;
     color: #172b4d;
     width: 250px;
@@ -99,12 +100,14 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    h2{
+
+    h2 {
         width: 80%;
         height: 40px;
         border-bottom: 0.5px rgba(151, 151, 151, 0.585) solid;
     }
-    .create-input-div{
+
+    .create-input-div {
         width: 80%;
         height: 40px;
         border-bottom: 0.5px rgba(151, 151, 151, 0.585) solid;
@@ -126,21 +129,21 @@
     padding-bottom: 10px;
 }
 
-.el-input__wrapper{
+.el-input__wrapper {
     width: 250px;
-background-color: rgba(255, 255, 255, 0.25);;
+    background-color: rgba(255, 255, 255, 0.25);
+    ;
     height: 32px;
     box-shadow: none;
 }
-.el-input__wrapper {
-    .el-input__prefix:hover{
-        background-color: transparent;
 
+.el-input__wrapper {
+    .el-input__prefix:hover {
+        background-color: transparent;
     }
- 
-    input:focus{
-        
+
+    input:focus {
         background-color: #ffffff;
     }
-  
+
 }

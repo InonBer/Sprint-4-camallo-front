@@ -35,6 +35,7 @@ export default {
     //   console.error(err)
     // }
   },
+  emits:['onBoardChange'],
   methods: {
     onDetails(ids) {
       ids.boardId = this.board._id
