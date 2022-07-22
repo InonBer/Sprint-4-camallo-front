@@ -5,18 +5,27 @@
     padding-bottom: 0.595em;
 
     .board-header {
-        padding: 2.6px 4px 4px 12px;
+        padding: 8px 4px 4px 12px;
         padding-left: rem(29px);
         display:flex;
+        flex-wrap: wrap;
+        >{
+            height:fit-content;
+            width:fit-content;
+        }
         & button {
-            padding: 0.5em;
-            margin: 0 rem(8px);
+            margin-inline-end: 0.3em;
         }
         .board-header-title{
             font-size: rem(18px);
             font-weight: 700;
             padding: 0 12px;
             line-height: 32px;
+        }
+        .btn-divider{
+            border-left: 1px solid #ffffff3d;
+            height: 18px;
+            margin: 8px 8px 6px 4px
         }
     }
 }

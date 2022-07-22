@@ -29,8 +29,9 @@
             </div>
 
         </div>
-        <div class="task-members-container" v-if="task.memberIds"><img class="task-member-img"
-                :src="task.byMember.imgUrl" alt=""></div>
+        <div class="task-members-container" v-if="task.memberIds">
+            <img class="task-member-img" :src="task.byMember.imgUrl" alt="">
+        </div>
         <h2 class="task-pen-icon">pen</h2>
     </section>
 

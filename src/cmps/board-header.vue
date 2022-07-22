@@ -2,9 +2,11 @@
     <header class="board-header-container">
         <section class="board-header" v-if="board">
             <span class="board-header-title">{{board?board.title:'Board title'}}</span>
-            <!-- <span class="board-header-title">sprint 4</span> -->
-            <button @click="starBoard" class="opacity-button star-btn"><span class="icon-star" :class="board.isStarred?'starred':''"></span></button>|
-            <button class="opacity-button">Boards</button>|
+            <button @click="starBoard" class="opacity-button star-btn">
+            <span class="icon-star" :class="board.isStarred?'starred':''"></span></button>
+            <span class="btn-divider"></span>
+            <button class="opacity-button">Boards</button>
+            <span class="btn-divider"></span>            
             <button class="opacity-button">Boards</button>
         </section>
     </header>

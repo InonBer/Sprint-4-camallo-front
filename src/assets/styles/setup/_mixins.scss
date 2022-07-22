@@ -24,7 +24,7 @@
     }
 }
 
-@mixin trelloIconM($iconCode,$size:'20px'){
+@mixin trelloIconM($iconCode,$size:20px){
         font-family: trellicons;
         height: $size;
         width: $size;
