@@ -14,6 +14,7 @@
             your team works is unique accomplish it all with Camallo.
           </p>
         </div>
+        <router-link class="home-start-link" to="/board/b102">Start here</router-link>
       </article>
       <div class="image-container">
         <img
