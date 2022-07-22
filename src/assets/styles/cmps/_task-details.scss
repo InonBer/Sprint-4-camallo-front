@@ -11,7 +11,7 @@
 
 .task-details {
     background-color: #f4f5f7;
-    // border-radius: 2px;
+    border-radius: 2px;
     margin: 48px 0 80px;
     overflow: hidden;
     height: 990px;
@@ -21,9 +21,44 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    // padding-left: 10px;
     padding: 0 8px 8px 16px;
+    z-index: 21;
 
+
+
+    .task-details-header {
+        margin: 15.2px 34.7px 0.7px 39.3px;
+        min-height: 32px;
+        position: relative;
+        font-size: 20px;
+        font-weight: 600;
+        color: #172b4d;
+
+        .icon-card-detail {
+            font-family: trellicons;
+            height: 20px;
+            width: 20px;
+            font-size: 24.2px;
+            left: -37.5px;
+            position: absolute;
+            top: -3px;
+
+            &::before {
+                content: "\e912";
+            }
+        }
+
+        .task-details-ingroup {
+            margin-inline-start: 0.1em;
+            color: #5e6c84;
+            font-size: 14px;
+            font-weight: 400;
+
+            .group-title {
+                // text-decoration: underline;
+            }
+        }
+    }
 
     .details-window-main {
         float: left;
@@ -34,47 +69,7 @@
         width: 552px;
         z-index: 1;
 
-        .task-details-header {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            margin: 0 0 8px;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
 
-            .task-details-header {
-                overflow: hidden;
-                overflow-wrap: break-word;
-                height: 33px;
-                background: #0000;
-                border-radius: 3px;
-                box-shadow: none;
-                font-size: 20px;
-                font-weight: 600;
-                height: 32px;
-                line-height: 24px;
-                margin: -4px -8px;
-                min-height: 24px;
-                color: #172b4d;
-                padding: 4px 8px;
-                resize: none;
-                width: 100%;
-
-                .icon-card-detail {
-                    @include trelloIconM("\e912");
-                    // left: -40px;
-                    // position: absolute;
-                    // top: 4px;
-                }
-            }
-
-            .task-details-ingroup {
-                .group-title {
-                    text-decoration: underline
-                }
-            }
-        }
 
         .details-mem {
             color: #172b4d;
@@ -94,6 +89,7 @@
                 flex-direction: row;
                 gap: 4px;
 
+
                 .task-label-label {
                     border-radius: 4px;
                     // width: 64px;
@@ -106,10 +102,20 @@
         .details-labels-container {
             display: flex;
             flex-direction: column;
-            // align-items: center;
             justify-content: start;
+            margin-top: 16.8px;
+            padding-inline-start: 22.8px;
+            margin-bottom: -8.9px;
 
-            .details-lebel-add-btn {
+            .details-labels-title {
+                color: #5e6c84;
+                font-size: 12px;
+                font-weight: 600;
+                margin-bottom: 5.5px;
+                margin-inline-start: 0.6px;
+            }
+
+            .details-label-add-btn {
                 background-color: #091e420a;
                 height: 30px;
                 width: 30px;
@@ -147,21 +153,10 @@
 
         .details-label-header {
             color: #5e6c84;
-            // display: block;
             font-size: 12px;
             font-weight: 600;
-            // line-height: 16px;
             line-height: 20px;
             margin: 0 8px 4px 0;
-            // overflow: hidden;
-            // text-overflow: ellipsis;
-            // white-space: nowrap;
-
-            // .details-label-header {
-            // padding-top: 6px;
-            // text-align: center;
-            // }
-
         }
 
         .nd-label-header {
@@ -204,26 +199,96 @@
         margin-bottom: 24px;
         position: relative;
 
+        .text-container-details {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+
+            .chat-input-container {
+                margin-inline-start: -4.1px;
+
+                img.chat-user-img {
+                    width: 30px;
+                    border-radius: 50%;
+                    margin-inline-start: -10.1px;
+                    margin-bottom: 9.1px;
+                    margin-inline-end: 7.1px;
+                }
+            }
+
+            .details-textarea {
+                background: #fff !important;
+                box-shadow: none;
+                box-sizing: initial;
+                border: rgb(23 43 77 / 16%) solid 0.5px;
+                border-radius: 3px;
+                height: 20px;
+                margin: 0;
+                padding: 0;
+                padding: 8px 0;
+                padding-inline-start: 11.2px;
+                resize: none;
+                width: 491.5px;
+                line-height: 20px;
+                min-height: 19.8px;
+                transition: box-shadow 85ms ease;
+                cursor: pointer;
+
+                &:hover {
+                    box-shadow: 0 1px 1px #091e4240, 0 0 0 1px #091e4214;
+                }
+            }
+        }
+
+        textarea {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+            margin-left: 24.9px;
+            min-height: 40px;
+            max-height: 56px;
+            width: 511px;
+            padding: 8px 12px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            border: none;
+        }
+
         .window-modal-title {
+            color: #172b4d;
             align-items: center;
             display: flex;
             min-height: 32px;
-            color: black;
-            margin: 0 0 4px 40px;
+            margin: 21.2px 0px 7px 12.5px;
             padding: 8px 0;
             position: relative;
             padding-left: 10px;
 
+            .description-title {
+                font-weight: 600;
+            }
+
             .icon-description {
-                @include trelloIconM("\e922")
+                @include trelloIconM("\e922");
+                position: absolute;
+                left: -24.7px;
+                top: 3.1px;
+                font-size: 24.2px;
+            }
+
+            .activity-title {
+                font-weight: 600;
+            }
+
+            .icon-activity {
+                @include trelloIconM("\e900");
+                position: absolute;
+                left: -24.7px;
+                top: 3.1px;
+                font-size: 24.2px;
             }
 
             .task-description {
                 padding-left: 60px
-            }
-
-            .task-description-textarea {
-                margin-left: 60px;
             }
 
             .details-activity-title {
@@ -231,11 +296,6 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-
-                h3 {
-                    padding-left: 10px;
-
-                }
 
                 button {
                     cursor: pointer;
@@ -254,32 +314,24 @@
                     text-decoration: none;
                 }
 
-                .icon-activity {
-                    @include trelloIconM("\e900")
-                }
-
-            }
-
-
-            .text-container-details {
-                display: flex;
-                flex-direction: row;
-                gap: 8px;
-
-                .details-textarea {
-                    background: #fff !important;
-                    box-shadow: none;
-                    box-sizing: initial;
-                    border: rgba(128, 128, 128, 0.573) solid 0.5px;
-                    border-radius: 3px;
-                    height: 35px;
-                    margin: 0;
-                    padding: 0;
-                    resize: none;
-                    width: 100%;
+                .description-toggle-btn {
+                    position: relative;
+                    left: 4.8px;
+                    bottom: 4px;
+                    background-color: rgba(9, 30, 66, 0.04);
+                    cursor: pointer;
+            
+                    &:hover {
+                        background-color: rgba(9, 30, 66, 0.0784313725);
+                    }
                 }
             }
 
+
+        }
+
+        .activity-container {
+            margin-bottom: -7.8px
         }
 
         .window-modal-warn {
@@ -287,9 +339,6 @@
             clear: both;
             padding-left: 50px;
         }
-
-
-
     }
 
     .side-bar-details {
@@ -299,15 +348,14 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            padding-inline-start: 10.5px;
 
             .sidebar-heading {
-                margin-top: 30px;
+                margin: 25.8px 0 -2.1px 4px;
                 color: #5e6c84;
                 font-size: 12px;
                 font-weight: 600;
-                // line-height: 16px;
                 line-height: 20px;
-                margin-bottom: -4px;
             }
 
             button {
@@ -321,25 +369,34 @@
                 cursor: pointer;
                 display: block;
                 height: 32px;
-                margin-top: 8px;
-                max-width: 300px;
+                margin-top: 5px;
+                max-width: 167px;
                 color: #172b4d;
                 overflow: hidden;
-                padding: 6px 12px;
+                padding: 6px 4.6px;
                 transition-duration: 85ms;
                 user-select: none;
                 white-space: nowrap;
 
+                &:hover {
+                    background-color: #091e4214;
+                }
+
+                .icn {
+                    margin-inline-end: 0.5em;
+                    font-size: 17px;
+                }
+
                 .icon-member {
-                    @include trelloIconM("\e946")
+                    @include trelloIconM("\e946");
                 }
 
                 .icon-label {
-                    @include trelloIconM("\e93f")
+                    @include trelloIconM("\e93f");
                 }
 
                 .icon-checklist {
-                    @include trelloIconM("\e91a")
+                    @include trelloIconM("\e91a");
                 }
 
                 // .icon-date {
@@ -347,15 +404,15 @@
                 // }
 
                 .icon-attachment {
-                    @include trelloIconM("\e908")
+                    @include trelloIconM("\e908");
                 }
 
                 .icon-card-cover {
-                    @include trelloIconM("\e914")
+                    @include trelloIconM("\e914");
                 }
 
                 .icon-custom-field {
-                    @include trelloIconM("\e920")
+                    @include trelloIconM("\e920");
                 }
             }
 
@@ -368,7 +425,7 @@
         border-radius: 50%;
         color: #42526e;
         height: 32px;
-        margin: 4px;
+        margin: 8px;
         overflow: hidden;
         padding: 4px;
         position: absolute;
@@ -385,18 +442,23 @@
 
         .card-details-exit-btn {
             font-family: trellicons;
-
             font-size: 20px;
 
             &::before {
                 content: "\e91c";
                 color: #42526e;
-                height: 20px;
-                width: 20px;
             }
         }
 
     }
 
+    .details-clr-reg-hvr {
+        background-color: rgba(9, 30, 66, 0.04);
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(9, 30, 66, 0.0784313725);
+        }
+    }
 
 }
