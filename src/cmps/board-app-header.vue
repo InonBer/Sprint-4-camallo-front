@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     changeLink(ev) {
-      this.$store.dispatch('setCurrBoard', { id: ev.target.value })
+      // this.$store.dispatch('setCurrBoard', { id: ev.target.value })
       // this.$router.push('/')
       this.$router.push(`/board/${ev.target.value}`);
       // setTimeout(() => {
