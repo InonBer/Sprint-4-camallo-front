@@ -1,0 +1,57 @@
+.top-header {
+    background-color: rgb(255, 255, 255);
+    // box-shadow: inset 0px -6px 0px #000;
+
+    .header-container {
+        //main-layout
+        padding-inline-start: 2.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background-color 0.5s ease 0s, box-shadow 0.5s ease 0s;
+        height: 50px;
+
+        &:hover {
+            box-shadow: rgb(9 30 66 / 15%) 0px 0.5rem 1rem 0px;
+        }
+
+        * {
+            display: flex;
+            align-items: center;
+            color: rgb(23, 43, 77);
+            text-decoration: none;
+            height: 100%;
+            // font-family: trello;
+        }
+
+        .logo {
+            color: rgb(41 56 86);
+            font-size: 20px;
+            font-weight: 400px;
+            cursor: default;
+        }
+
+        .buttons-styles-ButtonGroup {
+
+            display: flex;
+            justify-content: space-around;
+
+            // width: 200px;
+            font-size: 15px;
+
+
+            div:last-child {
+                background-color: rgb(0, 101, 255);
+                margin-left: 20px;
+                padding-inline-start: 1.1rem;
+                padding-inline-end: 0.6rem;
+
+
+                a {
+                    color: white;
+                    line-height: 28.8px;
+                }
+            }
+        }
+    }
+}
