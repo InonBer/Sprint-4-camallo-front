@@ -152,7 +152,6 @@
          const { boardId, groupId, taskId } = this.$route.params
          try {
              this.board = await boardService.getById(boardId)
-             console.log(this.board);
              const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
              this.group = this.board.groups[groupIdx]
              const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
