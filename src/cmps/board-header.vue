@@ -50,8 +50,9 @@
          },
  
          starBoard() {
-             this.board.isStarred = !this.board.isStarred
-             this.$store.dispatch({ type: 'saveBoard', board: this.board })
+            const board = {...this.board}
+             board.isStarred = !this.board.isStarred
+             this.$store.dispatch({ type: 'saveBoard', board})
          },
  
      },
