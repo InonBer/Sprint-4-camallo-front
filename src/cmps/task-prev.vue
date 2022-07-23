@@ -9,7 +9,8 @@
         <div @click.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited" class="task-prev">{{
                 currTask.title
         }}</div>
-        <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event)" v-if="currTask.isEdited" action="">
+        <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event), enterForTask($event)"
+            v-if="currTask.isEdited" action="">
             <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->
             <textarea ref="taskTitle" @click="focusOnTitle" type="text" v-model="currTask.title"
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
@@ -53,7 +54,8 @@ export default {
         return {
             titleName: '',
             isEdited: true,
-            currTask: null
+            currTask: null,
+
         };
     },
     created() {
@@ -61,13 +63,16 @@ export default {
     },
     methods: {
         onTitleChange(ev) {
-            console.log(ev);
             this.currTask.isEdited = !this.currTask.isEdited;
             this.$emit('saveTask', this.currTask)
 
         },
         focusOnTitle() {
             this.$refs.taskTitle.focus()
+        },
+        enterForTask() {
+            if (this.isEdited) return
+            this.$emit('enterClicked')
         }
     },
     computed: {
@@ -107,5 +112,9 @@ export default {
      /* padding-bottom: 10px; */
      margin-bottom: 5.2px;
      border-radius: 50%;
+ }
+ 
+ .task-prev-container textarea {
+     border: none
  }
  </style>

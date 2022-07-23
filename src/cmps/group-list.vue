@@ -1,16 +1,21 @@
 <template>
     <section class="group-list-container">
-        <div class="card-task" v-if="groups" v-for="group in groups">
-            <group-prev @saveGroup="saveGroup" @onTaskMode="onTaskMode" @onBoardChange="onBoardChange"
-                @onDetails="onDetails" :group="group" :key="group.id" />
-
-        </div>
+        <!-- <div class="card-task" v-if="groups" v-for="group in groups"> -->
+        <Container class="card-task" orientation="horizontal" v-if="groups" group-name="cols" @drop="onDrop($event)">
+            <Draggable @mousedown.prevent v-if="groups" v-for="group in groups" :key="group.id">
+                <group-prev @saveGroup="saveGroup" @onTaskMode="onTaskMode" @onBoardChange="onBoardChange"
+                    @onDetails="onDetails" :group="group" :key="group.id" />
+            </Draggable>
+        </Container>
+        <!-- </div> -->
         <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
                 list</span></button>
     </section>
 </template>
  <script>
 import groupPrev from './group-prev.vue';
+import { Container, Draggable } from "vue3-smooth-dnd"
+import { applyDrag } from '../services/dnd-service';
 import { boardService } from '../services/board.service';
 export default {
     emits: ['onTaskMode'],
@@ -21,7 +26,9 @@ export default {
         }
     },
     components: {
-        groupPrev
+        groupPrev,
+        Container,
+        Draggable
     },
     data() {
         return {
@@ -37,6 +44,18 @@ export default {
     },
     emits: ['onBoardChange', 'onDetails'],
     methods: {
+        onDrop(dropRes) {
+            let cols = JSON.parse(JSON.stringify(this.groups))
+            cols = applyDrag(cols, dropRes)
+            let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
+            boardCopy.groups = cols
+            this.$store.dispatch('saveBoard', { board: boardCopy })
+            // this.$store.dispatch({ type: "saveGroups", groups: this.cols })
+        },
+        getChildPayload(idx) {
+            let cols = JSON.parse(JSON.stringify(this.groups))
+            return cols[idx]
+        },
         onTaskMode(data, id) {
             const obj = {
                 data,
@@ -84,9 +103,17 @@ export default {
             this.$emit('onBoardChange')
         }
     },
-    computed: {},
+    computed: {
+        currBoard() {
+            return this.$store.getters.currBoard
+        }
+    },
     unmounted() { },
 };
 </script>
  <style>
+ .horizontal {
+     display: flex !important;
+     flex-direction: row;
+ }
  </style>
