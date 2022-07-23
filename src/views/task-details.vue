@@ -114,7 +114,7 @@
             </div>
         </div>
         <!-- <button @click="$router.go(-1)">X</button> -->
-        <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)">
+        <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
             <span class="card-details-exit-btn"></span>
         </button>
     </section>
@@ -201,6 +201,9 @@
          },
      },
      computed: {
+         currBoard() {
+             return this.$store.getters.currBoard
+         }
      },
      unmounted() { },
      watch: {

@@ -1,3 +1,11 @@
+.x-icon {
+    color: #6b778c;
+    @include trelloIconM("\e91c");
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+
 .task-prev-container {
     // overflow: hidden;
     padding: 6px 8px 2px;
@@ -38,7 +46,13 @@
         // padding: 6px 5px 2px;
         color: #172b4d;
     }
-
+.task-prev-checklist{
+    letter-spacing: 2.4px;
+    font-size: 12px;
+    span{
+        font-size:16px
+    }
+}
     .task-prev-container:hover {
         background-color: #091e4214;
     }

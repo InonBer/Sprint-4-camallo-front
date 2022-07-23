@@ -51,8 +51,8 @@ export default {
  }
  
  .prev-cont {
-     background-attachment: fixed;
-     background-position: right bottom;
+     /* background-attachment: fixed; */
+     /* background-position: right bottom; */
      background-size: cover;
      height: 96px;
      width: 194px;

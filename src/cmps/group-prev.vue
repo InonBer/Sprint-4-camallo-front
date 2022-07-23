@@ -12,7 +12,19 @@
       <task-list @enterClicked="onAddTask" @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange"
         @onBoardChange="onBoardChange" @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
     </div>
-    <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
+    <button v-if="!isTaskCreating" @click="onTaskAdding" class="add-btn"><span class="icon-plus"></span> Add a
+      card</button>
+    <div v-if="isTaskCreating" class="text-area-create-container">
+      <div class="text-area-cont">
+        <textarea @keydown.enter.stop.prevent="onAddTask" @click.prevent.stop="$refs.taskTitleCreate.focus()"
+          ref="taskTitleCreate" class="task-create-text" name="" id="" placeholder="Enter a title for this card..."
+          cols="30" rows="10"></textarea>
+      </div>
+      <div class="create-btn-container">
+        <button class="add-crd-btn">Add card</button>
+        <div @click.stop.prevent="isTaskCreating = false" class="x-icon-container"> <span class="x-icon"></span></div>
+      </div>
+    </div>
 
 
   </section>
@@ -35,7 +47,8 @@ export default {
   data() {
     return {
       isEdited: null,
-      groupTitle: null
+      groupTitle: null,
+      isTaskCreating: false,
 
     };
   },
@@ -45,8 +58,13 @@ export default {
   },
   emits: ['onDetails'],
   methods: {
+    onTaskAdding() {
+      this.isTaskCreating = true
+      // this.$refs.taskTitleCreate.focus()
+    },
     focusOnTitle() {
       this.$refs.groupTitle.focus()
+
     },
     saveTask(task) {
       let group = JSON.parse(JSON.stringify(this.group))
@@ -65,6 +83,7 @@ export default {
       // groupCopy = tasks
       // this.$emit('onTaskMove', groupCopy)
     },
+
     onTitleChange() {
       this.isEdited = false
       let group = JSON.parse(JSON.stringify(this.group))
@@ -81,10 +100,14 @@ export default {
     },
     onAddTask() {
       let copy = JSON.parse(JSON.stringify(this.group))
-      const task = boardService.getEmptyTask()
+      let task = boardService.getEmptyTask()
+      let title = JSON.parse(JSON.stringify(this.$refs.taskTitleCreate.value))
+      task.title = title
+      task.isEdited = false
       copy.tasks.push(task)
       this.$store.dispatch('addTask', { group: copy, id: this.group.id })
-      // this.$emit('onBoardChange')
+      this.isTaskCreating = false
+
     },
     onBoardChange() {
       this.$emit('onBoardChange')
@@ -104,5 +127,78 @@ export default {
    display: flex;
    flex-direction: column;
    gap: 8px;
+ }
+ 
+ .text-area-cont textarea:focus {
+   border: none;
+   outline: none;
+ }
+ 
+ .task-create-text {
+   margin-bottom: 4px;
+   max-height: 162px;
+   min-height: 54px;
+   height: 66px;
+   border-radius: 3px;
+   box-shadow: #00000017 0px 1px 5px 2px;
+   border: none;
+   width: 256px;
+   color: #172b4d;
+   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+   font-size: 14px;
+   font-weight: 400;
+   padding: 6px 8px 2px;
+ 
+ }
+ 
+ .x-icon-container {
+   width: 32px;
+   height: 32px;
+   text-align: center;
+   padding-top: 1.9000000000000004px;
+   cursor: pointer;
+ }
+ 
+ 
+ 
+ .text-area-create-container {
+   display: flex;
+   flex-direction: column;
+ 
+ 
+ }
+ 
+ .text-area-create-container .add-crd-btn {
+   width: 80px;
+   height: 32px;
+   color: white;
+   background-color: #0079bf;
+   border: none;
+   border-radius: 3px;
+   margin-top: 8px;
+   cursor: pointer;
+ }
+ 
+ .text-area-create-container .add-crd-btn:hover {
+   background-color: #026aa7;
+ 
+ }
+ 
+ .create-btn-container {
+   padding-left: 5px;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+ 
+ }
+ 
+ .text-area-cont {
+   height: 66px;
+   width: 100%;
+   display: flex;
+ 
+   justify-content: center;
+   /* background-color: white; */
+   /* padding: 6px 8px 2px; */
  }
  </style>
