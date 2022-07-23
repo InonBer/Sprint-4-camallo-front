@@ -74,6 +74,7 @@ export const boardStore = {
             }
         },
         async saveBoard({ commit }, { board }) {
+            console.log(board);
             try {
                 const boardToSave = await boardService.save(board)
                 commit({ type: 'saveBoard', board: boardToSave })
@@ -125,8 +126,8 @@ export const boardStore = {
             try {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 const board = await boardService.addGroup(boardCopy, groups)
-                commit({ type: 'saveBoard', board: boardCopy })
-                commit({ type: 'setCurrBoard', board: boardCopy })
+                commit({ type: 'saveBoard', board: board })
+                commit({ type: 'setCurrBoard', board: board })
             } catch (error) {
                 console.log(error);
             }
