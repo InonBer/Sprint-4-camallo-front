@@ -316,7 +316,8 @@ function _createBoards() {
           _id: "u101",
           fullname: "Tal Tarablus",
           imgUrl: "https://www.google.com"
-        }
+        },
+        
       ],
       groups: [
         {
@@ -456,8 +457,44 @@ function _createBoards() {
         {
           _id: "u101",
           fullname: "Tal Tarablus",
-          imgUrl: "https://www.google.com"
-        }
+          imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
+        {
+          _id: "u111",
+          email: "michael.lawson@reqres.in",
+          fullname: "Michael Lawson",
+          imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+      },
+      {
+          _id: "u112",
+          email: "lindsay.ferguson@reqres.in",
+          fullname: "Lindsay Ferguson",
+          imgUrl: "https://reqres.in/img/faces/8-image.jpg"
+      },
+      {
+        _id: "u113",
+          email: "tobias.funke@reqres.in",
+          fullname: "Tobias Funke",
+          imgUrl: "https://reqres.in/img/faces/9-image.jpg"
+      },
+      {
+          _id:"u114",
+          email: "byron.fields@reqres.in",
+          fullname: "Byron Fields",
+          imgUrl: "https://reqres.in/img/faces/10-image.jpg"
+      },
+      {
+          _id:"u115",
+          email: "george.edwards@reqres.in",
+          fullname: "George Edwards",
+          imgUrl: "https://reqres.in/img/faces/11-image.jpg"
+      },
+      {
+          _id:"u116",
+          email: "rachel.howell@reqres.in",
+          fullname: "Rachel Howell",
+          imgUrl: "https://reqres.in/img/faces/12-image.jpg"
+      }
       ],
       groups: [
         {

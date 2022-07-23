@@ -37,5 +37,9 @@
         .icon-overflow {
             @include trelloIconM("\e952")
         }
+        .userImg{
+            margin-bottom: -7px;
+            margin-inline-end: -3.5px;
+        }
     }
 }
