@@ -51,7 +51,7 @@ export const boardStore = {
         saveTaskMove(state, { group }) {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
             state.currBoard.groups.splice(idx, 1, group)
-        }
+        },
         //   setFilter(state, { filterBy }) {
         //     state.filterBy = { ...filterBy }
         //   }
@@ -131,7 +131,7 @@ export const boardStore = {
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
 
 
 

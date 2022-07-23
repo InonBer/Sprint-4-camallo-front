@@ -147,82 +147,119 @@
             }
         }
 
-        .board-background-photos {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            left: 0;
-            overflow: hidden;
-            position: absolute;
-            text-align: center;
-            top: 0;
-            width: 100%;
 
-            .search-photos {
-                margin: 1px;
-                position: relative;
-
-                input {
-                    padding-left: 32px;
-                }
-
-                .icon-search {
-                    @include trelloIconM("\e960");
-                    left: 8px;
-                    position: absolute;
-                    top: 8px;
-
-                    font-size: 16px;
-                    height: 20px;
-                    line-height: 20px;
-                    width: 20px;
-                }
-
-
-
-                .board-background-photos {
-                    font-size: 0;
-                    margin: 0 -4px;
-
-                    .board-backgrounds-list {
-                        flex: 1;
-                        overflow-x: hidden;
-                        overflow-y: auto;
-                        position: relative;
-
-                        ul {
-                            list-style-type: none;
-
-                        }
-
-                        .photo {
-                            width: 148px;
-                            height: 96px;
-                        }
-
-                    }
-
-                    .board-backgrounds-photos-footer {
-                        color: #5e6c84;
-                        padding-top: 8px;
-
-                        .unsplash-disclaimer {
-                            font-size: 12px;
-                            line-height: 16px;
-                            text-align: left;
-                        }
-                    }
-                }
-            }
-
-        }
 
 
     }
 
 }
 
+.board-background-photos {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    // position: absolute;
+    // text-align: center;
+    top: 0;
+    width: 100%;
 
+    .search-photos {
+        justify-content: center;
+        display: flex;
+        margin: 0 auto;
+        position: relative;
+        padding-bottom: 8px;
+        width: 100%;
+        height: 38px;
+        margin-top: 8px;
+        // border-bottom: #6966663b solid 0.4px;
+
+        input {
+            padding-left: 32px;
+            width: 285px;
+            height: 36px;
+
+        }
+
+        .icon-search {
+            @include trelloIconM("\e960");
+            left: 17px;
+            position: absolute;
+            top: 8px;
+            font-size: 16px;
+            line-height: 20px;
+            margin-left: 10px;
+        }
+
+
+    }
+
+    .board-backgrounds-list {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        margin-top: 20px;
+
+        // display: grid;
+        // grid-template-columns: 1fr 1fr;
+        // justify-items: center;
+        display: inline-flex;
+        flex-wrap: wrap;
+
+        justify-content: center;
+        // text-align: left;
+        gap: 8px;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            // margin-bottom: 20px;
+
+
+            li {
+                margin: 0;
+                padding: 0;
+            }
+
+            .photo {
+                width: 131px;
+                height: 96px;
+                background-size: cover;
+                border-radius: 8px;
+                display: block;
+                overflow: hidden;
+
+                &:hover {
+                    cursor: pointer;
+                    opacity: .8;
+                }
+            }
+
+        }
+
+
+
+    }
+
+    .board-backgrounds-photos-footer {
+        color: #5e6c84;
+        padding-top: 8px;
+
+        .unsplash-disclaimer {
+            font-size: 12px;
+            line-height: 16px;
+            text-align: left;
+        }
+    }
+
+    // }
+
+
+}
 
 
 

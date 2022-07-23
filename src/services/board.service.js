@@ -38,7 +38,7 @@ export const boardService = {
 }
 function getColorsToDisplay() {
   let colors = []
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 11; i++) {
     const color = utilService.getRandomColor()
     colors.push(color)
 

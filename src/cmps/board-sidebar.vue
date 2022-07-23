@@ -37,14 +37,13 @@
             <section v-else-if="headerTitle === 'Photos'">
                 <div class="board-background-photos">
                     <div class="search-photos">
-                        <input type="text" @input.prevent="getPhotos" v-model="photosFilterBy" placeholder="Photos">
-                        <!-- <input type="text" placeholder="Photos" @input="getPhotos"> -->
+                        <input type="text" @input.prevent="searchImgs" v-model="photosFilterBy" placeholder="Photos">
                         <span class="icon-search"></span>
                     </div>
                     <div v-if="photos" class="board-backgrounds-list">
                         <ul v-for="photo in photos" key="photo">
-                            <pre>{{ photo }}</pre>
-                            <!-- <li class="photo" :style="{ backgroundImage: `url${photo}` }"></li> -->
+                            <li class="photo" @click="changeBoardBackground(photo)"
+                                :style="{ backgroundImage: `url(${photo})` }"></li>
                         </ul>
                     </div>
                     <div class="board-backgrounds-photos-footer"></div>
@@ -56,8 +55,16 @@
                     </div>
                 </div>
             </section>
-            <section v-else-if="headerTitle === 'Color'" class="change-background">
+            <section v-else-if="headerTitle === 'Colors'">
+                <div class="board-background-photos">
 
+                    <div v-if="colors" class="board-backgrounds-list">
+                        <ul v-for="color in colors" key="color">
+                            <li class="photo" @click="changeBoardBackgroundColor(color)"
+                                :style="{ backgroundColor: `rgb(${color})` }"></li>
+                        </ul>
+                    </div>
+                </div>
 
             </section>
         </div>
@@ -66,6 +73,7 @@
 </template>
  <script>
 import { unsplashService } from '../services/unsplash.service'
+import { debounce } from '../services/util.service';
 export default {
     name: 'board-sidebar',
 
@@ -75,11 +83,24 @@ export default {
             boardMenuTitle: 'Menu',
             headerTitle: '',
             headerIndex: 0,
-            photosFilterBy: 'london',
+            photosFilterBy: '',
             photos: null,
+            colors: [
+                '0, 121, 191',
+                '210, 144, 52',
+                '81, 152, 57',
+                '76, 70, 50',
+                '137, 96, 158',
+                '205, 90, 145',
+                '75, 191, 107',
+                '0, 174, 204',
+                '131, 140, 145',
+                '255,255,255'
+            ]
         };
     },
     created() {
+        this.bounce = debounce(this.getPhotos)
     },
     methods: {
         onCloseNav() {
@@ -93,6 +114,9 @@ export default {
             this.headerTitle = option
             this.boardMenuTitle = (option === 'Photos') ? `${option} by Unsplash` : option
         },
+        searchImgs() {
+            this.bounce()
+        },
         async getPhotos() {
             console.log('this.photosFilterBy', this.photosFilterBy)
 
@@ -100,17 +124,30 @@ export default {
                 const photos = await unsplashService.query(this.photosFilterBy)
                 this.photos = photos.map(photo => photo.urls.regular)
             } catch (error) {
-
+                console.log(error);
             }
+
+        },
+        changeBoardBackground(photoUrl) {
+            let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
+            boardCopy.style.bgc = null
+            boardCopy.style.bgi = photoUrl
+            this.$store.dispatch('saveBoard', { board: boardCopy })
+        },
+        changeBoardBackgroundColor(color) {
+            let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
+            boardCopy.style.bgi = null
+            boardCopy.style.bgc = color
+            this.$store.dispatch('saveBoard', { board: boardCopy })
+
 
         }
     },
     computed: {
-        photosFilterBy(d) {
-
-            console.log('d', d)
-
+        currBoard() {
+            return this.$store.getters.currBoard
         }
+
     },
     unmounted() { },
 };
