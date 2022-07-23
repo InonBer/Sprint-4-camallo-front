@@ -171,7 +171,6 @@
                  this.task.memberIds.push(member)
              }
              this.saveBoard()
-             console.log(isMember);
          },
          saveBoard() {
              const copy = JSON.parse(JSON.stringify(this.board))

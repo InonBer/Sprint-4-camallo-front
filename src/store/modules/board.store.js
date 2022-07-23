@@ -115,8 +115,8 @@ export const boardStore = {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 const board = await boardService.saveGroup(boardCopy, group)
                 // commit('saveGroup', { board: boardCopy, group, id })
-                commit({ type: 'saveBoard', board: boardCopy })
-                commit({ type: 'setCurrBoard', board: boardCopy })
+                commit({ type: 'saveBoard', board: board })
+                commit({ type: 'setCurrBoard', board: board })
             } catch (error) {
                 console.log(error);
             }
