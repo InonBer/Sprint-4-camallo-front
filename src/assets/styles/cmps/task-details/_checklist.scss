@@ -1,0 +1,54 @@
+.checklist-container {
+    margin-inline-start: -12.2px;
+
+    .checklist-header {
+        position: relative;
+
+        .icon-checklist {
+            font-size: 22px;
+            font-weight: 400;
+            padding-inline-end: 13.9px;
+        }
+
+        font-weight: 600;
+        font-size:16px;
+
+        .checklist-btn {
+            position: absolute;
+            right: -10px;
+            top: -1.7px;
+            cursor: pointer;
+            border-radius: 3px;
+            line-height: 20px;
+            padding: 6px 12px;
+            color: #172b4d;
+            background-color: rgba(9, 30, 66, 0.04);
+
+            &:hover {
+                background-color: rgba(9, 30, 66, 0.0784313725);
+            }
+
+        }
+    }
+
+    .checklist-checkbox-container {
+        display: flex;
+        flex-direction: column;
+
+        .done {
+            text-decoration: line-through;
+        }
+    }
+
+    .checklist-prg-bar {
+        margin-top: 6.7px;
+        margin-bottom: 9.5px;
+    }
+    .checklist-chkbx{
+        margin-bottom: 16.5px;
+    }
+}
+
+.el-progress-bar__inner {
+    background-color: #5ba4cf;
+}

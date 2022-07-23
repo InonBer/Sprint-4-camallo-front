@@ -5,8 +5,8 @@
                 @onDetails="onDetails" :group="group" :key="group.id" />
 
         </div>
-        <button @click="onGroupAdd" class="opacity-button grp-add-btn"><span class="icon-plus">Add another
-                list</span></button>
+        <button @click="onGroupAdd" class="opacity-button grp-add-btn">
+        <span class="icon-plus"></span>Add another list</button>
     </section>
 </template>
  <script>

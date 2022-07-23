@@ -62,6 +62,10 @@
                     rows="10"></textarea>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
+            <section>
+                <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
+                    @onDeleteChecklist="onDeleteChecklist" />
+            </section>
             <div class="window-modal-content">
                 <div class="window-modal-title activity-container">
                     <div class="details-activity-title">
@@ -115,7 +119,6 @@
                 </section>
             </div>
         </div>
-        <!-- <button @click="$router.go(-1)">X</button> -->
         <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)">
             <span class="card-details-exit-btn"></span>
         </button>
@@ -123,95 +126,110 @@
 
 </template>
  <script>
-import { handleError } from 'vue';
-import { boardService } from '../services/board.service';
-
-export default {
-    props: {
-
-    },
-    name: 'taskDetails',
-    components: {},
-    data() {
-        return {
-            labelModel: false,
-            task: null,
-            board: null,
-            group: null,
-            memebersModal: false,
-            isDescEdited: false
-        }
-    },
-    async created() {
-        const { boardId, groupId, taskId } = this.$route.params
-        try {
-            this.board = await boardService.getById(boardId)
-            console.log(this.board);
-            const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
-            this.group = this.board.groups[groupIdx]
-            const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
-            this.task = this.group.tasks[taskIdx]
-        } catch (e) {
-            console.log(e);
-        }
-    },
-    methods: {
-        saveDescription() {
-            console.log('yhere');
-            this.isDescEdited = false
-            this.saveBoard()
-        },
-        addMemberToTask(member) {
-            this.task.memberIds = this.task.memberIds || []
-            const isMember = this.task.memberIds.find((currMem) => currMem._id === member._id)
-            if (isMember) {
-                const idx = this.task.memberIds.findIndex((curr) => {
-                    return curr._id === member._id
-                })
-                this.task.memberIds.splice(idx, 1)
-            } else {
-                this.task.memberIds.push(member)
-            }
-            this.saveBoard()
-            console.log(isMember);
-        },
-        saveBoard() {
-            const copy = JSON.parse(JSON.stringify(this.board))
-            this.$store.dispatch({ type: 'saveBoard', board: copy })
-        },
-        addLabel(color) {
-            console.log('task', this.task)
-            if (!this.task.labelIds) this.task.labelIds = []
-            if (this.task.labelIds.includes(color)) return
-            this.task.labelIds.push(color)
-            this.saveBoard()
-        },
-        openMembersModal() {
-            if (this.memebersModal) {
-                this.memebersModal = false
-            } else {
-                this.closeAll()
-                this.memebersModal = true
-            }
-        },
-        removeLabel(idx) {
-            this.task.labelIds.splice(idx, 1)
-            this.saveBoard()
-        },
-        closeAll() {
-            this.labelModel = false
-            this.memebersModal = false
-        },
-    },
-    computed: {
-    },
-    unmounted() { },
-    watch: {
-        '$route.params.id': {
-            handler(id) {
-                console.log(id);
-            }
-        }
-    }
-};
-</script>
+ import { handleError } from 'vue';
+ import { boardService } from '../services/board.service';
+ import checklist from '../cmps/checklist.vue';
+ 
+ export default {
+     props: {
+ 
+     },
+     name: 'taskDetails',
+     components: {
+         checklist
+     },
+     data() {
+         return {
+             labelModel: false,
+             task: null,
+             board: null,
+             group: null,
+             memebersModal: false,
+             isDescEdited: false
+         }
+     },
+     async created() {
+         const { boardId, groupId, taskId } = this.$route.params
+         try {
+             this.board = await boardService.getById(boardId)
+             console.log(this.board);
+             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
+             this.group = this.board.groups[groupIdx]
+             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
+             this.task = this.group.tasks[taskIdx]
+         } catch (e) {
+             console.log(e);
+         }
+     },
+     methods: {
+         onCheck(checklist) {
+             const idx = this.task.checklists.findIndex(currCheck => {
+                 return currCheck.id === checklist.id
+             })
+             this.task.checklists[idx] = checklist
+             this.saveBoard()
+         },
+         onDeleteChecklist(checklistId){
+              const idx = this.task.checklists.findIndex(currCheck => {
+                 return currCheck.id === checklistId
+             })
+             this.task.checklists.splice(idx,1)
+             this.saveBoard()
+         },
+         saveDescription() {
+             this.isDescEdited = false
+             this.saveBoard()
+         },
+         addMemberToTask(member) {
+             this.task.memberIds = this.task.memberIds || []
+             const isMember = this.task.memberIds.find((currMem) => currMem._id === member._id)
+             if (isMember) {
+                 const idx = this.task.memberIds.findIndex((curr) => {
+                     return curr._id === member._id
+                 })
+                 this.task.memberIds.splice(idx, 1)
+             } else {
+                 this.task.memberIds.push(member)
+             }
+             this.saveBoard()
+             console.log(isMember);
+         },
+         saveBoard() {
+             const copy = JSON.parse(JSON.stringify(this.board))
+             this.$store.dispatch({ type: 'saveBoard', board: copy })
+         },
+         addLabel(color) {
+             if (!this.task.labelIds) this.task.labelIds = []
+             if (this.task.labelIds.includes(color)) return
+             this.task.labelIds.push(color)
+             this.saveBoard()
+         },
+         openMembersModal() {
+             if (this.memebersModal) {
+                 this.memebersModal = false
+             } else {
+                 this.closeAll()
+                 this.memebersModal = true
+             }
+         },
+         removeLabel(idx) {
+             this.task.labelIds.splice(idx, 1)
+             this.saveBoard()
+         },
+         closeAll() {
+             this.labelModel = false
+             this.memebersModal = false
+         },
+     },
+     computed: {
+     },
+     unmounted() { },
+     watch: {
+         '$route.params.id': {
+             handler(id) {
+                 console.log(id);
+             }
+         }
+     }
+ };
+ </script>
