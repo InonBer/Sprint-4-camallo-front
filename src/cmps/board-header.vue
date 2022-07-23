@@ -8,6 +8,7 @@
             <button class="opacity-button">Boards</button>
             <span class="btn-divider"></span>
             <button class="opacity-button">Boards</button>
+            <span class="btn-divider"></span>
         <section class="members">
             <img class="userImg" v-for="(user,idx) in board.members.slice(0,4)" :key="user._id" :src=board.members[idx].imgUrl />
         </section>

@@ -47,7 +47,6 @@
         </div>
       </div>
 
-
       <select @change="changeLink" v-if="boards" id="boards" name="board-list">
         <option v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</option>
         <!-- <option :value="boards[0]._id">{{ boards[0].title }}</option>
@@ -156,105 +155,4 @@ export default {
 }
 </script>
 <style>
-.create-screen-button {
-  width: 100%;
-  background-color: #0079bf;
-  box-shadow: none;
-  border: none;
-  color: #ffffff;
-  height: 25px;
-  border-radius: 3px;
-}
-
-
-.create-screen-button:hover {
-  cursor: pointer;
-  background-color: #026aa7;
-}
-
-.create-title-req {
-  color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-.create-screen-container {
-  position: fixed;
-  display: flex;
-  z-index: 100;
-  flex-direction: column;
-  width: 304px;
-  height: auto;
-  will-change: top, left;
-  padding-left: 12px;
-  padding-right: 12px;
-  left: 150px;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  background-color: #ffffff;
-  justify-content: center;
-  border-radius: 3px;
-  box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
-  box-sizing: border-box;
-  gap: 5px;
-
-}
-
-.create-img-background {
-  margin: 0 auto;
-  width: 200px;
-  height: 120px;
-  background: none;
-  background-position: center center;
-  background-size: cover;
-  border-radius: 3px;
-  box-shadow: 0 7px 15px rgb(0 0 0 / 15%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.create-img-background img {
-  width: 186px;
-  height: 103px
-}
-
-.create-screen-container div:not(.create-img-background) {
-  width: 100%;
-}
-
-.create-screen-imgs-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 8px;
-  padding-top: 10px;
-  border-top: rgba(158, 158, 158, 0.329) solid 1px;
-
-}
-
-.create-screen-imgs-container img {
-  width: 64px;
-  height: 40px;
-  border-radius: 3px;
-}
-
-.board-create-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 1px
-}
-
-.create-screen-header {
-  padding-top: 8px;
-  color: #5e6c84;
-  height: 40px;
-  margin: 0 auto;
-  width: 80%;
-  border-bottom: #5e6c8442 solid 0.3px;
-}
 </style>

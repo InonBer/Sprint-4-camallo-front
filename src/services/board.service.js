@@ -279,7 +279,7 @@ function _createBoards() {
       createdBy: {
         _id: "u101",
         fullname: "Abi Abambi",
-        imgUrl: "http://some-img"
+        imgUrl: "https://reqres.in/img/faces/12-image.jpg"
       },
       style: {
         bgi: 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/3c139dc0109ed363aec31ed157086458/photo-1658054926223-9816e297d4f9.jpg',
