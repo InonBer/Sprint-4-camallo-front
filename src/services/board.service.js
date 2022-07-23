@@ -24,6 +24,7 @@ export const boardService = {
   getById,
   remove,
   save,
+  getColorsToDisplay,
   getEmptyBoard,
   getEmptyGroup,
   getEmptyTask,
@@ -35,7 +36,15 @@ export const boardService = {
   addGroup,
 
 }
+function getColorsToDisplay() {
+  let colors = []
+  for (var i = 0; i < 10; i++) {
+    const color = utilService.getRandomColor()
+    colors.push(color)
 
+  }
+  return colors
+}
 async function query() {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)

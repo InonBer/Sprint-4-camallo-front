@@ -10,17 +10,13 @@
             <button class="opacity-button">Boards</button>
         </section>
         <section class="board-header">
-            <button class="opacity-button open-btn" id="main" @click="sidebarOpen = !sidebarOpen">
+            <button class="opacity-button open-btn" id="main" @click="isSidebarOpen = true">
                 <span class="icon-overflow"></span>
                 Show menu
             </button>
         </section>
     </header>
-
-    <sidebar v-if="sidebarOpen" />
-
-
-
+    <sidebar v-if="isSidebarOpen" :class="{ open: isSideBarOpen }" @onCloseNav="closeSidebar" />
 </template>
  <script>
  import sidebar from './board-sidebar.vue';
@@ -34,11 +30,17 @@
      },
      data() {
          return {
-             sidebarOpen: false
+             isSidebarOpen: false
          };
+     },
+     computed: {
+ 
      },
      created() { },
      methods: {
+         closeSidebar() {
+             this.isSidebarOpen = false
+         },
  
          starBoard() {
              this.board.isStarred = !this.board.isStarred
