@@ -2,7 +2,7 @@
     <section class="task-prev-container">
         <div v-if="currTask.labelIds" class="task-label-container">
 
-            <div v-for="label in currTask.labelIds" :key="label" class="task-label" :style="{ background: label }">
+            <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
                 <span></span>
             </div>
         </div>
@@ -32,9 +32,10 @@
 
         </div>
         <div class="task-members-container" v-if="currTask.memberIds">
-            <img class="task-member-img" :src="currTask.byMember.imgUrl" alt="">
+            <img v-for="member in task.memberIds" class="task-member-img" :key="member._id" :title="member.fullname"
+                :src="member.imgUrl" alt="">
         </div>
-        <h2 class="task-pen-icon">pen</h2>
+        <h2 @click.stop.prevent="removeTask" class="task-pen-icon">X</h2>
     </section>
 
 </template>
@@ -80,6 +81,9 @@ export default {
             console.log(this.currTask.labelIds[0]);
             return "#61bd4f"
             return this.task.labelIds[0]
+        },
+        removeTask() {
+            console.log('wasda');
         }
     },
     unmounted() { },
@@ -87,7 +91,7 @@ export default {
 </script>
  <style>
  .task-members-container {
-     position: absolute;
+     position: relative;
      bottom: 0;
      /* height: 100%; */
      display: flex;

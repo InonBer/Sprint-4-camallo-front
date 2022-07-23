@@ -1,6 +1,6 @@
 <template>
   <board-app-header />
-  <div v-if="currBoard" class="board-app bgc-img" :style="{ backgroundImage: 'url(' + boardBGI + ')' }">
+  <div v-if="currBoard" class="board-app bgc-img" :style="boardBGI">
     <board-header :board="currBoard" />
     <group-list @onTaskMode="onTaskMode" @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails"
       v-if="currBoard" :groups="currBoard.groups" />
@@ -64,7 +64,10 @@ export default {
     //   return this.currBoard.groups
     // },
     boardBGI() {
-      return this.currBoard.style.bgi
+      if (this.currBoard.style.bgi) {
+        return { backgroundImage: `url('  ${this.currBoard.style.bgi}  ')` }
+      }
+      else return { backgroundColor: 'rgb(' + this.currBoard.style.bgc + ')' }
     },
   },
   unmounted() { },

@@ -13,11 +13,15 @@
 
 
             <div class="details-mem">
-                <!-- <div class="details-member-list">
-                        <p>nember 1</p>
-                        <p>member 2</p>
-                        <p>member 2</p>
-                    </div> -->
+                <div class="details-mem-img-cont">
+                    <h2 class="details-member-header">Members</h2>
+                    <div class="img-cont-mm">
+
+                        <img class="userImg" v-for="member in task.memberIds" :key="member._id" :title="member.fullname"
+                            :src="member.imgUrl" alt="">
+                    </div>
+                </div>
+
                 <div class="details-labels-container">
                     <template v-if="task.labelIds?.length">
                         <span class="details-labels-title">Labels</span>
@@ -48,8 +52,12 @@
                     <span class="icon-description"></span>
                     <h3 class="description-title">Description</h3>
                 </div>
-                <p class="task-description" v-if="task.description">{{ task.description }}</p>
-                <textarea class="task-description-textarea details-clr-reg-hvr" name="description" id=""
+                <p @click="isDescEdited = !isDescEdited" class="task-description"
+                    v-if="task.description && isDescEdited">{{
+                            task.description
+                    }}</p>
+                <textarea @keydown.enter.prevent="saveDescription" v-if="!isDescEdited"
+                    class="task-description-textarea details-clr-reg-hvr" name="description" id=""
                     v-model="task.description" placeholder="Add a more detailed description..." cols="30"
                     rows="10"></textarea>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
@@ -77,13 +85,34 @@
         <div class="side-bar-details">
             <div class="details-btn-container">
                 <h3 class="sidebar-heading">Add to card</h3>
-                <button><span class="icon-member icn"></span> Members</button>
+                <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
+                    Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
                 <button><span class="icon-checklist icn"></span> Checklist</button>
                 <button><span class="icon-date icn"></span> Dates</button>
                 <button><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
+                <section v-if="memebersModal" class="member-modal">
+                    <div class="member-modal-header">
+                        <header>Members</header>
+                    </div>
+                    <div class="member-modal-input">
+                        <input placeholder="Search embers" type="text">
+
+                    </div>
+                    <h4>Board Members</h4>
+                    <div class="board-members-details">
+                        <div @click.stop.prevent="addMemberToTask(member)" v-for="member in board.members"
+                            :key="member._id" class="inner-container-details">
+
+
+                            <img :src="member.imgUrl" alt="">
+                            <span>{{ member.fullname }} </span>
+                        </div>
+
+                    </div>
+                </section>
             </div>
         </div>
         <!-- <button @click="$router.go(-1)">X</button> -->
@@ -109,12 +138,15 @@ export default {
             task: null,
             board: null,
             group: null,
+            memebersModal: false,
+            isDescEdited: false
         }
     },
     async created() {
         const { boardId, groupId, taskId } = this.$route.params
         try {
             this.board = await boardService.getById(boardId)
+            console.log(this.board);
             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
@@ -124,8 +156,28 @@ export default {
         }
     },
     methods: {
+        saveDescription() {
+            console.log('yhere');
+            this.isDescEdited = false
+            this.saveBoard()
+        },
+        addMemberToTask(member) {
+            this.task.memberIds = this.task.memberIds || []
+            const isMember = this.task.memberIds.find((currMem) => currMem._id === member._id)
+            if (isMember) {
+                const idx = this.task.memberIds.findIndex((curr) => {
+                    return curr._id === member._id
+                })
+                this.task.memberIds.splice(idx, 1)
+            } else {
+                this.task.memberIds.push(member)
+            }
+            this.saveBoard()
+            console.log(isMember);
+        },
         saveBoard() {
-            this.$store.dispatch({ type: 'saveBoard', board: this.board })
+            const copy = JSON.parse(JSON.stringify(this.board))
+            this.$store.dispatch({ type: 'saveBoard', board: copy })
         },
         addLabel(color) {
             console.log('task', this.task)
@@ -134,9 +186,21 @@ export default {
             this.task.labelIds.push(color)
             this.saveBoard()
         },
+        openMembersModal() {
+            if (this.memebersModal) {
+                this.memebersModal = false
+            } else {
+                this.closeAll()
+                this.memebersModal = true
+            }
+        },
         removeLabel(idx) {
             this.task.labelIds.splice(idx, 1)
             this.saveBoard()
+        },
+        closeAll() {
+            this.labelModel = false
+            this.memebersModal = false
         },
     },
     computed: {
@@ -152,4 +216,125 @@ export default {
 };
 </script>
  <style>
+ .details-mem-img-cont {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .details-member-header {
+     color: #5e6c84;
+     display: block;
+     font-size: 12px;
+     font-weight: 600;
+     line-height: 16px;
+     line-height: 20px;
+     margin: 0 8px 4px 0;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
+ 
+ .member-modal {
+     position: absolute;
+     display: flex;
+     flex-direction: column;
+     height: auto;
+     background-color: #fff;
+     padding-left: 12px;
+     padding-right: 12px;
+     width: 304px;
+     z-index: 100;
+     border-radius: 3px;
+     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+     /* right: 30px; */
+     top: 87px;
+     right: -5px;
+     padding-bottom: 8px;
+ }
+ 
+ .board-members-details span {
+     color: #172b4d;
+     font-size: 14px;
+     font-weight: 400;
+ }
+ 
+ .member-modal h4 {
+     color: #5e6c84;
+     font-size: 12px;
+     font-weight: 600;
+     line-height: 16px;
+     margin-top: 16px;
+     padding-bottom: 8px;
+ }
+ 
+ .member-modal header {
+     height: 41px;
+     width: 100%;
+     text-align: center;
+     padding-top: 8px;
+     border-bottom: rgba(128, 128, 128, 0.259) solid 0.4px;
+ }
+ 
+ .member-modal input {
+     margin-top: 4px;
+     margin-bottom: 12px;
+     padding-top: 8px;
+     padding-bottom: 8px;
+ }
+ 
+ .member-modal-input {
+     display: flex;
+     justify-content: center;
+     margin-top: 4px;
+     width: 100%;
+     padding-top: 8px;
+     padding-bottom: 8px;
+ }
+ 
+ .member-modal-input input {
+     -webkit-appearance: none;
+     background-color: #fafbfc;
+     border: none;
+     border-radius: 3px;
+     box-shadow: inset 0 0 0 2px #dfe1e6;
+     box-sizing: border-box;
+     display: block;
+     line-height: 20px;
+     margin-bottom: 12px;
+     outline: none;
+     width: 280px;
+     padding: 8px 12px;
+     transition-duration: 85ms;
+     transition-property: background-color, border-color, box-shadow;
+     transition-timing-function: ease;
+ 
+ }
+ 
+ .board-members-details {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+ 
+ }
+ 
+ .inner-container-details {
+     display: flex;
+     flex-direction: row;
+     gap: 10px;
+     height: 40px;
+ }
+ 
+ .details-mem-img-cont h2 {
+     margin: 0;
+ }
+ 
+ .inner-container-details:hover {
+     background-color: #e4f0f6;
+ }
+ 
+ .inner-container-details img {
+     width: 32px;
+     height: 32px;
+     border-radius: 50%;
+ }
  </style>

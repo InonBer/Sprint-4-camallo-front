@@ -21,7 +21,7 @@
             </button>
         </section>
     </header>
-    <sidebar v-if="isSidebarOpen" :class="{ open: isSideBarOpen }" @onCloseNav="closeSidebar" />
+    <sidebar v-if="isSidebarOpen" :class="{ open: isOpen }" @onCloseNav="closeSidebar" />
 </template>
  <script>
  import sidebar from './board-sidebar.vue';
@@ -39,7 +39,9 @@
          };
      },
      computed: {
- 
+         isOpen() {
+             return (this.isSidebarOpen) ? true : false
+         }
      },
      created() { },
      methods: {
@@ -50,7 +52,8 @@
          starBoard() {
              this.board.isStarred = !this.board.isStarred
              this.$store.dispatch({ type: 'saveBoard', board: this.board })
-         }
+         },
+ 
      },
  };
  </script>

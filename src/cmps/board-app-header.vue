@@ -26,7 +26,7 @@
           <header class="create-screen-header">Create board</header>
           <hr>
           <div :style="{ backgroundImage: 'url(' + BGImage + ')' }" class="create-img-background">
-            <img src="../assets/prevImg.png" alt="">
+            <img @load="show" src="../assets/prevImg.png" alt="">
           </div>
           <div class="create-screen-imgs-container">
             <img @click="setBgi(img)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img" alt="">
