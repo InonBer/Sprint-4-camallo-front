@@ -4,8 +4,8 @@
         group-name="col-items" @drop="onDrop($event)">
         <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
             :groupId="groupId">
-            <task-prev @onBoardChange="onBoardChange" @saveTask="saveTask" @emptyTitle="emptyTitle"
-                @click="onDetails(task.id)" :task="task" />
+            <task-prev @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask"
+                @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" />
         </Draggable>
     </Container>
     <!-- </div> -->
@@ -60,6 +60,9 @@ export default {
         },
         onBoardChange() {
             this.$emit('onBoardChange')
+        },
+        enterClicked() {
+            this.$emit('enterClicked')
         }
 
     },

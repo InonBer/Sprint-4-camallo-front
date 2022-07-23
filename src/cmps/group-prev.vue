@@ -1,15 +1,16 @@
 <template>
   <section class="group-card-container">
     <form @submit="onTitleChange" v-if="isEdited">
-      <input style="margin-left:10px" class="card-header" type="text" :placeholder="group.title" v-model="groupTitle">
+      <input ref="groupTitle" @click.stop.prevent="focusOnTitle" style="margin-left:10px" class="card-header"
+        type="text" :placeholder="group.title" v-model="groupTitle">
     </form>
     <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
         groupTitle
     }}</span>
     </header>
     <div class="group-card-scroll">
-      <task-list @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange" @onBoardChange="onBoardChange"
-        @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
+      <task-list @enterClicked="onAddTask" @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange"
+        @onBoardChange="onBoardChange" @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
     </div>
     <button @click="onAddTask" class="add-btn"><span class="icon-plus"></span> Add a card</button>
 
@@ -44,6 +45,9 @@ export default {
   },
   emits: ['onDetails'],
   methods: {
+    focusOnTitle() {
+      this.$refs.groupTitle.focus()
+    },
     saveTask(task) {
       let group = JSON.parse(JSON.stringify(this.group))
       const idx = this.group.tasks.findIndex((currTask) => {

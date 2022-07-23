@@ -109,8 +109,6 @@
                     <div class="board-members-details">
                         <div @click.stop.prevent="addMemberToTask(member)" v-for="member in board.members"
                             :key="member._id" class="inner-container-details">
-
-
                             <img :src="member.imgUrl" alt="">
                             <span>{{ member.fullname }} </span>
                         </div>
@@ -191,13 +189,13 @@
                  this.task.memberIds.push(member)
              }
              this.saveBoard()
-             console.log(isMember);
          },
          saveBoard() {
              const copy = JSON.parse(JSON.stringify(this.board))
              this.$store.dispatch({ type: 'saveBoard', board: copy })
          },
          addLabel(color) {
+             console.log('task', this.task)
              if (!this.task.labelIds) this.task.labelIds = []
              if (this.task.labelIds.includes(color)) return
              this.task.labelIds.push(color)
