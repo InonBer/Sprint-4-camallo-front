@@ -34,6 +34,8 @@ export const boardService = {
   addTask,
   saveGroup,
   addGroup,
+  getEmptyTodo,
+
 
 }
 function getColorsToDisplay() {
@@ -75,6 +77,14 @@ async function saveGroup(board, group) {
   board.groups[idx] = group
   return save(board)
 
+}
+function getEmptyTodo(title){
+  const todo =  {
+    id: utilService.makeId(),
+    title,
+    isDone: false
+  }
+  return todo
 }
 async function getBgcImgs() {
   try {
@@ -367,11 +377,22 @@ function _createBoards() {
               checklists: [
                 {
                   id: "YEhmF",
-                  title: "Checklist",
+                  title: "Checklist1",
                   todos: [
                     {
                       id: "212jX",
                       title: "To Do 1",
+                      isDone: false
+                    }
+                  ]
+                },
+                {
+                  id: "Lkjei",
+                  title: "Checklist2",
+                  todos: [
+                    {
+                      id: "223jX",
+                      title: "To Do 11",
                       isDone: false
                     }
                   ]
@@ -544,11 +565,32 @@ function _createBoards() {
               checklists: [
                 {
                   id: "YEhmF",
-                  title: "Checklist",
+                  title: "Checklist1",
                   todos: [
                     {
                       id: "212jX",
                       title: "To Do 1",
+                      isDone: true
+                    },
+                    {
+                      id: "213jX",
+                      title: "To Do 2",
+                      isDone: true
+                    },
+                    {
+                      id: "214jX",
+                      title: "To Do 3",
+                      isDone: true
+                    }
+                  ]
+                },
+                {
+                  id: "Lkjei",
+                  title: "Checklist2",
+                  todos: [
+                    {
+                      id: "223jX",
+                      title: "To Do 11",
                       isDone: false
                     }
                   ]

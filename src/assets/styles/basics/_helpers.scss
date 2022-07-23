@@ -111,3 +111,7 @@
     border-radius: 50%;
     width:30px;
 }
+
+.icon-checklist{
+    @include trelloIconM("\e91a");
+}
