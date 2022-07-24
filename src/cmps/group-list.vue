@@ -3,7 +3,7 @@
         <!-- <div class="card-task" v-if="groups" v-for="group in groups"> -->
         <Container class="card-task" orientation="horizontal" v-if="groups" group-name="cols" @drop="onDrop($event)">
             <Draggable @mousedown.prevent v-if="groups" v-for="group in groups" :key="group.id">
-                <group-prev @saveGroup="saveGroup" @onTaskMode="onTaskMode" @onBoardChange="onBoardChange"
+                <group-prev @saveGroup="saveGroup" @onTaskMove="onTaskMove" @onBoardChange="onBoardChange"
                     @onDetails="onDetails" :group="group" :key="group.id" />
             </Draggable>
             <button @click="onGroupAdd" class="opacity-button grp-add-btn">
@@ -18,7 +18,7 @@ import { Container, Draggable } from "vue3-smooth-dnd"
 import { applyDrag } from '../services/dnd-service';
 import { boardService } from '../services/board.service';
 export default {
-    emits: ['onTaskMode'],
+    emits: ['onTaskMove'],
     name: 'groupPrevList',
     props: {
         groups: {
@@ -45,11 +45,7 @@ export default {
     emits: ['onBoardChange', 'onDetails'],
     methods: {
         onDrop(dropRes) {
-            let activity = {
-                id: 'wasd',
-                txt: "Added a Group",
-                byMember: this.currUser
-            }
+
             let cols = JSON.parse(JSON.stringify(this.groups))
             cols = applyDrag(cols, dropRes)
             let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
@@ -61,24 +57,27 @@ export default {
             let cols = JSON.parse(JSON.stringify(this.groups))
             return cols[idx]
         },
-        onTaskMode(data, id) {
+        onTaskMove(data, id) {
+            // debugger
             const obj = {
                 data,
                 id,
             }
             this.dataToTranfer.push(obj)
+            console.log('this.group', this.groups)
+
             if (this.dataToTranfer.length === this.groups.length) {
-                console.log(this.dataToTranfer.length === this.groups.length);
                 let items = JSON.parse(JSON.stringify(this.groups))
                 let groups = this.dataToTranfer.map(item => {
                     const group = items.find((data) =>
                         data.id === item.id
                     )
                     group.tasks = item.data
+
                     return group
                 })
-
-                this.$emit('onTaskMode', groups)
+                // console.log(groups);
+                this.$emit('onTaskMove', groups)
                 this.dataToTranfer = []
             }
 

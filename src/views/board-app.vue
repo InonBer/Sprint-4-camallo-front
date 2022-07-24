@@ -2,7 +2,7 @@
   <board-app-header />
   <div v-if="currBoard" class="board-app bgc-img" :style="boardBGI">
     <board-header :board="currBoard" />
-    <group-list @onTaskMode="onTaskMode" @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails"
+    <group-list @onTaskMove="onTaskMove" @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails"
       v-if="currBoard" :groups="currBoard.groups" />
     <router-view />
   </div>
@@ -14,7 +14,7 @@ import boardHeader from '../cmps/board-header.vue'
 import boardAppHeader from '../cmps/board-app-header.vue';
 
 export default {
-  emits: ['onTaskMode'],
+  emits: ['onTaskMove'],
   name: 'boardApp',
   components: {
     boardHeader,
@@ -37,7 +37,8 @@ export default {
   },
   emits: ['onBoardChange'],
   methods: {
-    onTaskMode(groups) {
+    onTaskMove(groups) {
+      console.log(groups);
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
       this.$store.dispatch('saveBoard', { board: boardCopy })
