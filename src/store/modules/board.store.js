@@ -10,6 +10,11 @@ export const boardStore = {
         boards: null,
         filterBy: null,
         currBoard: null,
+        currUser: {
+            id: "I101",
+            fullname: "Inon Bereshit",
+            imgUrl: "	https://trello-members.s3.amazonaws.com/62d03408f2…cf6a3ee86/53b4fffdf23f7ae5407de6d7dc77bffb/50.png"
+        }
     },
     getters: {
         getBoards(state) {
@@ -20,6 +25,9 @@ export const boardStore = {
         // },
         currBoard(state) {
             return state.currBoard
+        },
+        currUser(state) {
+            return state.currUser
         }
     },
     mutations: {
