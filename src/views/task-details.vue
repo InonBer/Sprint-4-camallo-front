@@ -133,7 +133,10 @@
                         <span class="a-m-header-close-btn icon-close"></span>
                         <div class="a-m-header">
                             <div class="a-m-content">
-                                <div class="uploader">Computer</div>
+
+                                <label for="files" class="uploader">Computer</label>
+                                <input id="files" style="visibility:hidden;position: absolute;" type="file">
+
                                 <hr>
                                 <div>
                                     <label for="addLink">Attach a link</label>
@@ -173,7 +176,9 @@ export default {
             group: null,
             memebersModal: false,
             isDescEdited: false,
-            placeholder: 'Add a more detailed description...'
+            placeholder: 'Add a more detailed description...',
+            attachmentModal: false
+
         }
     },
     async created() {
@@ -248,7 +253,16 @@ export default {
         closeAll() {
             this.labelModel = false
             this.memebersModal = false
+            this.attachmentModal = false
         },
+        openAttachmentModal() {
+            if (this.attachmentModal) {
+                this.attachmentModal = false
+            } else {
+                this.closeAll()
+                this.attachmentModal = true
+            }
+        }
     },
     computed: {
         currBoard() {
