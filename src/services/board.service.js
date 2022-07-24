@@ -34,6 +34,8 @@ export const boardService = {
   addTask,
   saveGroup,
   addGroup,
+  getEmptyTodo,
+
 
 }
 
@@ -80,7 +82,18 @@ async function saveGroup(board, group) {
   return save(board)
 
 }
+<<<<<<< HEAD
 
+=======
+function getEmptyTodo(title) {
+  const todo = {
+    id: utilService.makeId(),
+    title,
+    isDone: false
+  }
+  return todo
+}
+>>>>>>> 622467de234990ff4f75f37bb690f1a9f6d26105
 async function getBgcImgs() {
   try {
     const res = await axios.get('https://api.unsplash.com/search/photos?page=1&query=mountains&client_id=2wV121X0Ot4ARXG44lcENmjEvAkccm1BugKXKX1yuck')
@@ -119,6 +132,7 @@ async function remove(id) {
   // return axios.delete(BASE_URL + id).then((res) => res.data)
   return storageService.remove(KEY, id)
 }
+
 
 async function save(board) {
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
@@ -406,13 +420,30 @@ function _createBoards() {
               ],
               "checklists": [
                 {
+<<<<<<< HEAD
                   "id": "YEhmF",
                   "title": "Checklist",
                   "todos": [
+=======
+                  id: "YEhmF",
+                  title: "Checklist1",
+                  todos: [
+>>>>>>> 622467de234990ff4f75f37bb690f1a9f6d26105
                     {
                       "id": "212jX",
                       "title": "To Do 1",
                       "isDone": false
+                    }
+                  ]
+                },
+                {
+                  id: "Lkjei",
+                  title: "Checklist2",
+                  todos: [
+                    {
+                      id: "223jX",
+                      title: "To Do 11",
+                      isDone: false
                     }
                   ]
                 }
@@ -589,6 +620,7 @@ function _createBoards() {
               ],
               "checklists": [
                 {
+<<<<<<< HEAD
                   "id": "YEhmF",
                   "title": "Checklist",
                   "todos": [
@@ -596,6 +628,36 @@ function _createBoards() {
                       "id": "212jX",
                       "title": "To Do 1",
                       "isDone": false
+=======
+                  id: "YEhmF",
+                  title: "Checklist1",
+                  todos: [
+                    {
+                      id: "212jX",
+                      title: "To Do 1",
+                      isDone: true
+                    },
+                    {
+                      id: "213jX",
+                      title: "To Do 2",
+                      isDone: true
+                    },
+                    {
+                      id: "214jX",
+                      title: "To Do 3",
+                      isDone: true
+                    }
+                  ]
+                },
+                {
+                  id: "Lkjei",
+                  title: "Checklist2",
+                  todos: [
+                    {
+                      id: "223jX",
+                      title: "To Do 11",
+                      isDone: false
+>>>>>>> 622467de234990ff4f75f37bb690f1a9f6d26105
                     }
                   ]
                 }

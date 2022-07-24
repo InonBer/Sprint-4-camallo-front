@@ -79,6 +79,11 @@ export default {
      gap: 8px;
      min-height: 2px;
  }
+ 
+ .tilted {
+     background-color: black;
+     transform: rotate(90deg);
+ }
  </style>
 
 

@@ -96,7 +96,7 @@ export default {
 </script>
  <style>
  .task-members-container {
-     position: relative;
+     position: absolute;
      bottom: 0;
      /* height: 100%; */
      display: flex;

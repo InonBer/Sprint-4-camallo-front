@@ -62,6 +62,10 @@
                     rows="10"></textarea>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
+            <section>
+                <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
+                    @onDeleteChecklist="onDeleteChecklist" />
+            </section>
             <div class="window-modal-content">
                 <div class="window-modal-title activity-container">
                     <div class="details-activity-title">
@@ -114,7 +118,7 @@
             </div>
         </div>
         <!-- <button @click="$router.go(-1)">X</button> -->
-        <button class="details-exit-btn" @click="$router.push('/board/' + $route.params.boardId)">
+        <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
             <span class="card-details-exit-btn"></span>
         </button>
     </section>
@@ -123,13 +127,16 @@
  <script>
  import { handleError } from 'vue';
  import { boardService } from '../services/board.service';
+ import checklist from '../cmps/checklist.vue';
  
  export default {
      props: {
  
      },
      name: 'taskDetails',
-     components: {},
+     components: {
+         checklist
+     },
      data() {
          return {
              labelModel: false,
@@ -144,7 +151,6 @@
          const { boardId, groupId, taskId } = this.$route.params
          try {
              this.board = await boardService.getById(boardId)
-             console.log(this.board);
              const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
              this.group = this.board.groups[groupIdx]
              const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
@@ -154,8 +160,21 @@
          }
      },
      methods: {
+         onCheck(checklist) {
+             const idx = this.task.checklists.findIndex(currCheck => {
+                 return currCheck.id === checklist.id
+             })
+             this.task.checklists[idx] = checklist
+             this.saveBoard()
+         },
+         onDeleteChecklist(checklistId) {
+             const idx = this.task.checklists.findIndex(currCheck => {
+                 return currCheck.id === checklistId
+             })
+             this.task.checklists.splice(idx, 1)
+             this.saveBoard()
+         },
          saveDescription() {
-             console.log('yhere');
              this.isDescEdited = false
              this.saveBoard()
          },
@@ -201,6 +220,9 @@
          },
      },
      computed: {
+         currBoard() {
+             return this.$store.getters.currBoard
+         }
      },
      unmounted() { },
      watch: {

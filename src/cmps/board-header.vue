@@ -13,7 +13,6 @@
             <img class="userImg" v-for="(user,idx) in board.members.slice(0,4)" :key="user._id" :src=board.members[idx].imgUrl />
         </section>
         </section>
-        
         <section class="board-header">
             <button class="opacity-button open-btn" id="main" @click="isSidebarOpen = true">
                 <span class="icon-overflow"></span>
