@@ -40,7 +40,6 @@ export default {
     onTaskMode(groups) {
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
-      console.log(boardCopy.groups);
       this.$store.dispatch('saveBoard', { board: boardCopy })
     },
     onDetails(ids) {

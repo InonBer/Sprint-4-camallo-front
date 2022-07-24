@@ -96,12 +96,13 @@ export default {
 </script>
  <style>
  .task-members-container {
-     position: absolute;
+     position: relative;
      bottom: 0;
      /* height: 100%; */
      display: flex;
      flex-direction: row;
      align-items: flex-end;
+     padding-top: 2px;
      /* padding-top: 10px; */
      /* margin-bottom: 10px; */
  }

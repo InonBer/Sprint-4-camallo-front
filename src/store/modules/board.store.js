@@ -109,7 +109,6 @@ export const boardStore = {
             }
         },
         async addTask({ commit, state }, { group, id }) {
-            console.log('store group', group);
             try {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 const board = await boardService.saveGroup(boardCopy, group)

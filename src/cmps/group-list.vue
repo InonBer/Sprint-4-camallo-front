@@ -9,7 +9,7 @@
         </Container>
         <!-- </div> -->
         <button @click="onGroupAdd" class="opacity-button grp-add-btn">
-        <span class="icon-plus"></span>Add another list</button>
+            <span class="icon-plus"></span>Add another list</button>
     </section>
 </template>
  <script>
@@ -63,7 +63,6 @@ export default {
             }
             this.dataToTranfer.push(obj)
             if (this.dataToTranfer.length === this.groups.length) {
-                console.log(this.dataToTranfer);
                 let items = JSON.parse(JSON.stringify(this.groups))
                 let groups = this.dataToTranfer.map(item => {
                     const group = items.find((data) =>
