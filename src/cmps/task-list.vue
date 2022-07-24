@@ -84,13 +84,17 @@ export default {
  .smooth-dnd-container {
      display: flex;
      flex-direction: column;
-     gap: 6px;
+     gap: 8px;
      min-height: 2px;
  }
  
  .tilted {
      background-color: black;
      transform: rotate(90deg);
+ }
+
+ .tasks-container{
+    gap:6px;
  }
  </style>
 

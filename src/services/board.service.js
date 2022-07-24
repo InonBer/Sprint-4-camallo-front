@@ -365,17 +365,17 @@ function _createBoards() {
         {
           "id": "l103",
           "title": "ASAP",
-          "color": "#bd4f9d"
+          "color": "#C377E0"
         },
         {
           "id": "l104",
           "title": "Waiting",
-          "color": "#b6bd4f"
+          "color": "#F2D600"
         },
         {
           "id": "l105",
           "title": "On Hold",
-          "color": "#4f6dbd"
+          "color": "#0079BF"
         }
       ],
       "members": [
@@ -516,17 +516,17 @@ function _createBoards() {
         {
           "id": "l103",
           "title": "ASAP",
-          "color": "#bd4f9d"
+          "color": "#C377E0"
         },
         {
           "id": "l104",
           "title": "Waiting",
-          "color": "#b6bd4f"
+          "color": "#F2D600"
         },
         {
           "id": "l105",
           "title": "On Hold",
-          "color": "#4f6dbd"
+          "color": "#0079BF"
         }
       ],
       "members": [
@@ -634,7 +634,7 @@ function _createBoards() {
               "title": "Notifications Not Sending #4\n\n",
               "isEdited": false,
               "labelIds": [
-                "#bd4f9d"
+                "#C377E0"
               ]
             },
             {
@@ -642,7 +642,7 @@ function _createBoards() {
               "title": "Multiple select broken\n",
               "isEdited": false,
               "labelIds": [
-                "#bd4f9d"
+                "#C377E0"
               ]
             },
             {
@@ -650,7 +650,7 @@ function _createBoards() {
               "title": "Drag and drop issues in Chrome\n",
               "isEdited": false,
               "labelIds": [
-                "#4f6dbd"
+                "#0079BF"
               ]
             },
             {
@@ -658,7 +658,7 @@ function _createBoards() {
               "title": "Download icon redering issue\n\n",
               "isEdited": false,
               "labelIds": [
-                "#b6bd4f",
+                "#F2D600",
                 "#EB5A46"
               ]
             },
@@ -667,8 +667,8 @@ function _createBoards() {
               "title": "Tab to comment goes to wrong field\n\n\n",
               "isEdited": false,
               "labelIds": [
-                "#bd4f9d",
-                "#4f6dbd"
+                "#C377E0",
+                "#0079BF"
               ]
             },
             {
@@ -746,7 +746,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#61bd4f",
-                "#b6bd4f"
+                "#F2D600"
               ]
             },
             {
@@ -762,7 +762,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#b6bd4f"
+                "#F2D600"
               ]
             }
           ],
@@ -812,7 +812,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#EB5A46",
-                "#b6bd4f"
+                "#F2D600"
               ]
             },
             {
@@ -828,8 +828,8 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#b6bd4f",
-                "#4f6dbd"
+                "#F2D600",
+                "#0079BF"
               ]
             }
           ],
@@ -856,7 +856,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#4f6dbd"
+                "#0079BF"
               ]
             },
             {
@@ -878,7 +878,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#4f6dbd",
+                "#0079BF",
                 "#EB5A46"
               ]
             },
@@ -895,8 +895,8 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#4f6dbd",
-                "#b6bd4f"
+                "#0079BF",
+                "#F2D600"
               ]
             },
             {
@@ -912,7 +912,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#bd4f9d"
+                "#C377E0"
               ]
             }
           ],
@@ -952,7 +952,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#EB5A46",
-                "#bd4f9d"
+                "#C377E0"
               ]
             },
             {
@@ -1024,9 +1024,9 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#EB5A46",
-                "#bd4f9d",
-                "#4f6dbd",
-                "#b6bd4f"
+                "#C377E0",
+                "#0079BF",
+                "#F2D600"
               ]
             }
           ],
@@ -1079,17 +1079,17 @@ function _createBoards() {
         {
           "id": "l103",
           "title": "ASAP",
-          "color": "#bd4f9d"
+          "color": "#C377E0"
         },
         {
           "id": "l104",
           "title": "Waiting",
-          "color": "#b6bd4f"
+          "color": "#F2D600"
         },
         {
           "id": "l105",
           "title": "On Hold",
-          "color": "#4f6dbd"
+          "color": "#0079BF"
         }
       ],
       "members": [
