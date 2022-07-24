@@ -360,7 +360,7 @@ function _createBoards() {
         {
           "id": "l102",
           "title": "Progress",
-          "color": "#c83131"
+          "color": "#EB5A46"
         },
         {
           "id": "l103",
@@ -431,7 +431,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#61bd4f",
-                "#c83131"
+                "#EB5A46"
               ],
               "createdAt": 1590999730348,
               "dueDate": 16156215211,
@@ -511,7 +511,7 @@ function _createBoards() {
         {
           "id": "l102",
           "title": "Progress",
-          "color": "#c83131"
+          "color": "#EB5A46"
         },
         {
           "id": "l103",
@@ -614,7 +614,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#61bd4f",
-                "#c83131"
+                "#EB5A46"
               ],
               "createdAt": 1590999730348,
               "dueDate": 16156215211,
@@ -659,7 +659,7 @@ function _createBoards() {
               "isEdited": false,
               "labelIds": [
                 "#b6bd4f",
-                "#c83131"
+                "#EB5A46"
               ]
             },
             {
@@ -676,7 +676,7 @@ function _createBoards() {
               "title": "Video load issues\n\n",
               "isEdited": false,
               "labelIds": [
-                "#c83131"
+                "#EB5A46"
               ]
             }
           ],
@@ -707,7 +707,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#c83131"
+                "#EB5A46"
               ]
             },
             {
@@ -729,7 +729,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#c83131"
+                "#EB5A46"
               ]
             },
             {
@@ -811,7 +811,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#c83131",
+                "#EB5A46",
                 "#b6bd4f"
               ]
             },
@@ -879,7 +879,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#4f6dbd",
-                "#c83131"
+                "#EB5A46"
               ]
             },
             {
@@ -951,7 +951,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#c83131",
+                "#EB5A46",
                 "#bd4f9d"
               ]
             },
@@ -1023,7 +1023,7 @@ function _createBoards() {
                 }
               ],
               "labelIds": [
-                "#c83131",
+                "#EB5A46",
                 "#bd4f9d",
                 "#4f6dbd",
                 "#b6bd4f"
@@ -1074,7 +1074,7 @@ function _createBoards() {
         {
           "id": "l102",
           "title": "Progress",
-          "color": "#c83131"
+          "color": "#EB5A46"
         },
         {
           "id": "l103",
@@ -1211,7 +1211,7 @@ function _createBoards() {
               ],
               "labelIds": [
                 "#61bd4f",
-                "#c83131"
+                "#EB5A46"
               ],
               "createdAt": 1590999730348,
               "dueDate": 16156215211,
