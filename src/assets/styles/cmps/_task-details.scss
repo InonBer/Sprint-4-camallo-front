@@ -16,7 +16,7 @@
     background-color: #f4f5f7;
     border-radius: 2px;
     margin: 48px 0 80px;
-    overflow: hidden;
+    // overflow: hidden;
     height: 990px;
     width: 768px;
     height: 100%;
@@ -139,8 +139,8 @@
 
     .details-label-to-add-container {
         /* left: 693.188px; */
-        left: 160px;
-        top: 160px;
+        left: 570px;
+        top: 125px;
         background: #fff;
         border-radius: 3px;
         box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
@@ -468,4 +468,54 @@
         }
     }
 
+}
+
+.attachment-modal {
+    background-color: white;
+    // z-index: 50;
+    position: fixed;
+    width: 304px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+
+    height: 200px;
+    left: 585px;
+    top: 325px;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+
+    .a-m-header-title {
+        padding-top: 6px;
+        height: 41px;
+        border-bottom: rgba(128, 128, 128, 0.219) solid 0.5px;
+    }
+
+    .a-m-header {
+        width: 95%;
+        // display: flex;
+        // justify-content: space-between;
+
+        .a-m-content {
+            padding-top: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 6px;
+
+            .uploader {
+
+                height: 32px;
+            }
+
+        }
+
+
+        .icon-close {
+            @include trelloIconM("\e91c")
+        }
+
+    }
 }

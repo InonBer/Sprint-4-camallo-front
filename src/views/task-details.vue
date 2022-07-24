@@ -104,7 +104,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </span> Dates</button>
-                <button><span class="icon-attachment icn"></span> Attachment</button>
+                <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <section v-if="memebersModal" class="member-modal">
@@ -123,6 +123,24 @@
                             <span>{{ member.fullname }} </span>
                         </div>
 
+                    </div>
+                </section>
+                <section v-if="attachmentModal" class="attachment-modal">
+                    <div class="attachment-modal">
+                        <span class="a-m-header-title">Attach from…</span>
+                        <span class="a-m-header-close-btn icon-close"></span>
+                        <div class="a-m-header">
+                            <div class="a-m-content">
+                                <div class="uploader">Computer</div>
+                                <hr>
+                                <div>
+                                    <label for="addLink">Attach a link</label>
+                                    <input id="addLink" class="attachment-add-link-input js-attachment-url js-autofocus"
+                                        type="text" placeholder="Paste any link here…" />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </section>
             </div>
@@ -154,7 +172,8 @@
              board: null,
              group: null,
              memebersModal: false,
-             isDescEdited: false
+             isDescEdited: false,
+             attachmentModal: false
          }
      },
      async created() {
@@ -227,7 +246,16 @@
          closeAll() {
              this.labelModel = false
              this.memebersModal = false
+             this.attachmentModal = false
          },
+         openAttachmentModal() {
+             if (this.attachmentModal) {
+                 this.attachmentModal = false
+             } else {
+                 this.closeAll()
+                 this.attachmentModal = true
+             }
+         }
      },
      computed: {
          currBoard() {
