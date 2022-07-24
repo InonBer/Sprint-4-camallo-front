@@ -21,6 +21,12 @@
                     <div class="activities-title">
                         <p><span class="icon-activity"></span> Activities</p>
                     </div>
+                    <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
+                        <div class="sb-act">
+                            <img class="act-memImg" :src="activity.byMember.imgUrl" alt="">
+                            <div>{{ activity.byMember.fullname }} <span>{{ activity.txt }}</span></div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section v-else-if="headerTitle === 'change background'" class="change-background">
@@ -160,4 +166,40 @@ export default {
 };
 </script>
  <style>
+ .act-memImg {
+     width: 32px;
+     height: 32px;
+     border-radius: 50%;
+ }
+ 
+ .sidebar-act-cnt {
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+ }
+ 
+ .sb-act {
+     height: 76px;
+     display: flex;
+     flex-direction: row;
+     gap: 8px;
+ 
+ }
+ 
+ .sb-act img {
+ 
+     align-self: center
+ }
+ 
+ .sb-act div {
+     justify-self: center;
+     align-self: center;
+     font-size: 14px;
+     font-weight: 700;
+ }
+ 
+ .sb-act span {
+     font-size: 14px;
+     font-weight: 400;
+ }
  </style>
