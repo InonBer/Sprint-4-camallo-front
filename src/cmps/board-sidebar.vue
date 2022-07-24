@@ -1,5 +1,5 @@
 <template>
-    <section class="sidebar">
+    <section v-click-outside="onCloseNav" class="sidebar">
         <header>
             <span class="close-btn" @click="onCloseNav">×</span>
             <h3 class="board-menu-header-title js-board-menu-title-text">{{ boardMenuTitle }}</h3>
@@ -66,10 +66,8 @@
                         </ul>
                     </div>
                 </div>
-
             </section>
         </div>
-
     </section>
 </template>
  <script>

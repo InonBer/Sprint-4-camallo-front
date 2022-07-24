@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
     </div>
-    <section v-if="board" class="task-details">
+    <section v-click-outside="()=>{this.$router.push('/board/' + currBoard._id)}" v-if="board" class="task-details">
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -30,7 +30,7 @@
                             <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                         </div>
                     </template>
-                    <div class="details-label-to-add-container" v-if="labelModel">
+                    <div v-click-outside="()=>{labelModel = !labelModel}" class="details-label-to-add-container" v-if="labelModel">
                         <h2 class="details-label-header">Labels</h2>
                         <hr>
                         <h2 class="nd-label-header" style="">labels</h2>
@@ -109,7 +109,7 @@
                 <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
-                <section v-if="memebersModal" class="member-modal">
+                <section v-click-outside="openMembersModal" v-if="memebersModal" class="member-modal">
                     <div class="member-modal-header">
                         <header>Members</header>
                     </div>
@@ -155,127 +155,6 @@
 
 </template>
  <script>
-<<<<<<< HEAD
- import { handleError } from 'vue';
- import { boardService } from '../services/board.service';
- import checklist from '../cmps/checklist.vue';
- 
- export default {
-     props: {
- 
-     },
-     name: 'taskDetails',
-     components: {
-         checklist
-     },
-     data() {
-         return {
-             labelModel: false,
-             task: null,
-             board: null,
-             group: null,
-             memebersModal: false,
-             isDescEdited: false,
-             attachmentModal: false
-         }
-     },
-     async created() {
-         const { boardId, groupId, taskId } = this.$route.params
-         try {
-             this.board = await boardService.getById(boardId)
-             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
-             this.group = this.board.groups[groupIdx]
-             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
-             this.task = this.group.tasks[taskIdx]
-         } catch (e) {
-             console.log(e);
-         }
-     },
-     methods: {
-         onCheck(checklist) {
-             const idx = this.task.checklists.findIndex(currCheck => {
-                 return currCheck.id === checklist.id
-             })
-             this.task.checklists[idx] = checklist
-             this.saveBoard()
-         },
-         onDeleteChecklist(checklistId) {
-             const idx = this.task.checklists.findIndex(currCheck => {
-                 return currCheck.id === checklistId
-             })
-             this.task.checklists.splice(idx, 1)
-             this.saveBoard()
-         },
-         saveDescription() {
-             this.isDescEdited = false
-             this.saveBoard()
-         },
-         addMemberToTask(member) {
-             this.task.memberIds = this.task.memberIds || []
-             const isMember = this.task.memberIds.find((currMem) => currMem._id === member._id)
-             if (isMember) {
-                 const idx = this.task.memberIds.findIndex((curr) => {
-                     return curr._id === member._id
-                 })
-                 this.task.memberIds.splice(idx, 1)
-             } else {
-                 this.task.memberIds.push(member)
-             }
-             this.saveBoard()
-         },
-         saveBoard() {
-             const copy = JSON.parse(JSON.stringify(this.board))
-             this.$store.dispatch({ type: 'saveBoard', board: copy })
-         },
-         addLabel(color) {
-             console.log('task', this.task)
-             if (!this.task.labelIds) this.task.labelIds = []
-             if (this.task.labelIds.includes(color)) return
-             this.task.labelIds.push(color)
-             this.saveBoard()
-         },
-         openMembersModal() {
-             if (this.memebersModal) {
-                 this.memebersModal = false
-             } else {
-                 this.closeAll()
-                 this.memebersModal = true
-             }
-         },
-         removeLabel(idx) {
-             this.task.labelIds.splice(idx, 1)
-             this.saveBoard()
-         },
-         closeAll() {
-             this.labelModel = false
-             this.memebersModal = false
-             this.attachmentModal = false
-         },
-         openAttachmentModal() {
-             if (this.attachmentModal) {
-                 this.attachmentModal = false
-             } else {
-                 this.closeAll()
-                 this.attachmentModal = true
-             }
-         }
-     },
-     computed: {
-         currBoard() {
-             return this.$store.getters.currBoard
-         }
-     },
-     unmounted() { },
-     watch: {
-         '$route.params.id': {
-             handler(id) {
-                 console.log(id);
-             }
-         }
-     }
- };
- </script>
-=======
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import checklist from '../cmps/checklist.vue';
@@ -438,4 +317,3 @@ export default {
     background-color: #091e4214;
 }
 </style>
->>>>>>> 4e812cbf9df4ec430f274af7f017b32ba6698a09

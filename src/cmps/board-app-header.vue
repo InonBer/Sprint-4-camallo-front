@@ -6,7 +6,7 @@
       <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <div class="conss">
         <button @click="onCreate" class="header-create-button">Create</button>
-        <div v-if="isCreating" class="header-creating-container">
+        <div v-click-outside="()=>{isCreating = false}" v-if="isCreating" class="header-creating-container">
           <header class="header-header">Create</header>
           <div @click="isChoosingBoard = true ; isCreating = false" class="header-create-button">
 
@@ -19,9 +19,8 @@
             <p>A board is made up of cards ordered on lists. Use it to manage projects,track information,or organize
               anything.</p>
           </div>
-
         </div>
-        <div class="create-screen-container" v-if="isChoosingBoard">
+        <div class="create-screen-container" v-click-outside="()=>{isChoosingBoard = false}" v-if="isChoosingBoard">
           <button @click="closeAllCreate" class="super-exit-buttin">X</button>
           <header class="create-screen-header">Create board</header>
           <hr>
