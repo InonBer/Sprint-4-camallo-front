@@ -73,7 +73,7 @@
                     <div class="details-activity-title">
                         <span class="icon-activity"></span>
                         <h3 class="activity-title">Activity</h3>
-                        <button class="description-toggle-btn">Show Details</button>
+                        <button class="description-toggle-btn">Show details</button>
                     </div>
                 </div>
                 <div class="text-container-details">
