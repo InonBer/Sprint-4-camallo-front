@@ -36,6 +36,7 @@ export const boardService = {
   addGroup,
 
 }
+
 function getColorsToDisplay() {
   let colors = []
   for (var i = 0; i < 11; i++) {
@@ -45,6 +46,7 @@ function getColorsToDisplay() {
   }
   return colors
 }
+
 async function query() {
   // return await httpService.get(ENDPOINT, filterBy)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
@@ -61,11 +63,13 @@ async function query() {
   }
   // return storageService.query(KEY)
 }
+
 async function addGroup(board, groups) {
   let boardCopy = JSON.parse(JSON.stringify(board))
   boardCopy.groups = groups
   return save(boardCopy)
 }
+
 async function saveGroup(board, group) {
   console.log(board);
   console.log(group);
@@ -76,6 +80,7 @@ async function saveGroup(board, group) {
   return save(board)
 
 }
+
 async function getBgcImgs() {
   try {
     const res = await axios.get('https://api.unsplash.com/search/photos?page=1&query=mountains&client_id=2wV121X0Ot4ARXG44lcENmjEvAkccm1BugKXKX1yuck')
@@ -88,9 +93,6 @@ async function getBgcImgs() {
   }
 }
 
-
-
-
 async function addTask(board, groupId, task) {
   const idx = board.groups.findIndex((group) => {
     return group.id === groupId
@@ -99,6 +101,7 @@ async function addTask(board, groupId, task) {
 
   return save(board)
 }
+
 async function getById(id) {
 
   const boards = JSON.parse(localStorage.getItem(KEY))
@@ -142,6 +145,7 @@ async function save(board) {
   //    await httpService.post(ENDPOINT, board)
   return board._id ? storageService.put(KEY, board) : storageService.post(KEY, board)
 }
+
 function getEmptyGroup() {
   const group = {
     id: utilService.makeId(),
@@ -153,6 +157,7 @@ function getEmptyGroup() {
   }
   return group
 }
+
 function getBoardById(boardId) {
   const boards = JSON.parse(localStorage.getItem(KEY))
   const idx = boards.findIndex((board) => {
@@ -187,30 +192,83 @@ function getEmptyTask() {
 function getEmptyBoard() {
   const board = {
     title: '',
-    createdat: new Date(),
+    archivedAt: '',
+    createdAt: new Date(),
+    isStarred: true,
     createdBy: {
       _id: "u101",
-      fullname: "Abi Abambi",
-      imgUrl: "http://some-img"
+      fullname: "Tal Tarablus",
+      imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
     },
     style: {},
     labels: [
       {
-        id: "l101",
+        id: "l10",
         title: "Done",
         color: "#61bd4f"
       },
       {
         id: "l102",
         title: "Progress",
-        color: "#61bd33"
+        color: "#c83131"
+      },
+      {
+        id: "l103",
+        title: "ASAP",
+        color: "#bd4f9d"
+      },
+      {
+        id: "l104",
+        title: "Waiting",
+        color: "#b6bd4f"
+      },
+      {
+        id: "l105",
+        title: "On Hold",
+        color: "#4f6dbd"
       }
     ],
     members: [
       {
         _id: "u101",
-        fullname: "Abi Abambi",
-        imgUrl: "http://some-img"
+        fullname: "Tal Tarablus",
+        imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+      },
+      {
+        _id: "u111",
+        email: "michael.lawson@reqres.in",
+        fullname: "Michael Lawson",
+        imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+      },
+      {
+        _id: "u112",
+        email: "lindsay.ferguson@reqres.in",
+        fullname: "Lindsay Ferguson",
+        imgUrl: "https://reqres.in/img/faces/8-image.jpg"
+      },
+      {
+        _id: "u113",
+        email: "tobias.funke@reqres.in",
+        fullname: "Tobias Funke",
+        imgUrl: "https://reqres.in/img/faces/9-image.jpg"
+      },
+      {
+        _id: "u114",
+        email: "byron.fields@reqres.in",
+        fullname: "Byron Fields",
+        imgUrl: "https://reqres.in/img/faces/10-image.jpg"
+      },
+      {
+        _id: "u115",
+        email: "george.edwards@reqres.in",
+        fullname: "George Edwards",
+        imgUrl: "https://reqres.in/img/faces/11-image.jpg"
+      },
+      {
+        _id: "u116",
+        email: "rachel.howell@reqres.in",
+        fullname: "Rachel Howell",
+        imgUrl: "https://reqres.in/img/faces/12-image.jpg"
       }
     ],
     groups: [],
@@ -271,334 +329,1034 @@ function _createBoards() {
 
   const boards = [
     {
-      _id: "b101",
-      title: "Testing Board",
-      archivedAt: 1589983468418,
-      createdAt: 1589983468418,
-      isStarred: false,
-      createdBy: {
-        _id: "u101",
-        fullname: "Abi Abambi",
-        imgUrl: "https://reqres.in/img/faces/12-image.jpg"
+      "_id": "b101",
+      "title": "Testing Board",
+      "archivedAt": 1589983468418,
+      "createdAt": 1589983468418,
+      "isStarred": false,
+      "createdBy": {
+        "_id": "u101",
+        "fullname": "Abi Abambi",
+        "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
       },
-      style: {
-        bgi: 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/3c139dc0109ed363aec31ed157086458/photo-1658054926223-9816e297d4f9.jpg',
+      "style": {
+        "bgi": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/3c139dc0109ed363aec31ed157086458/photo-1658054926223-9816e297d4f9.jpg"
       },
-      labels: [
+      "labels": [
         {
-          id: "l101",
-          title: "Done",
-          color: "#61bd4f"
+          "id": "l101",
+          "title": "Done",
+          "color": "#61bd4f"
         },
         {
-          id: "l102",
-          title: "Progress",
-          color: "#c83131"
+          "id": "l102",
+          "title": "Progress",
+          "color": "#c83131"
         },
         {
-          id: "l103",
-          title: "ASAP",
-          color: "#bd4f9d"
+          "id": "l103",
+          "title": "ASAP",
+          "color": "#bd4f9d"
         },
         {
-          id: "l104",
-          title: "Waiting",
-          color: "#b6bd4f"
+          "id": "l104",
+          "title": "Waiting",
+          "color": "#b6bd4f"
         },
         {
-          id: "l105",
-          title: "On Hold",
-          color: "#4f6dbd"
+          "id": "l105",
+          "title": "On Hold",
+          "color": "#4f6dbd"
         }
       ],
-      members: [
+      "members": [
         {
-          _id: "u101",
-          fullname: "Tal Tarablus",
-          imgUrl: "https://www.google.com"
-        },
-
+          "_id": "u101",
+          "fullname": "Tal Tarablus",
+          "imgUrl": "https://www.google.com"
+        }
       ],
-      groups: [
+      "groups": [
         {
-          id: "g101",
-          title: "Group 1",
-          titleEdit: false,
-          archivedAt: 1589983468418,
-          tasks: [
+          "id": "g102",
+          "title": "Group 2",
+          "titleEdit": false,
+          "tasks": [
             {
-              id: "c101",
-              title: "TEST!!! logo"
+              "id": "c103",
+              "title": "Do that",
+              "archivedAt": 1589983468418
             },
             {
-              id: "c102",
-              title: "Add Samples"
-            }
-          ],
-          style: {}
-        },
-        {
-          id: "g102",
-          title: "Group 2",
-          titleEdit: false,
-          tasks: [
-            {
-              id: "c103",
-              title: "Do that",
-              archivedAt: 1589983468418,
-            },
-            {
-              id: "c104",
-              title: "Help me",
-              status: "in-progress",
-              description: "description",
-              comments: [
+              "id": "c104",
+              "title": "Help me",
+              "status": "in-progress",
+              "description": "description",
+              "comments": [
                 {
-                  id: "ZdPnm",
-                  txt: "also @yaronb please CR this",
-                  createdAt: 1590999817436.0,
-                  byMember: {
-                    _id: "u101",
-                    fullname: "Tal Tarablus",
-                    imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                  "id": "ZdPnm",
+                  "txt": "also @yaronb please CR this",
+                  "createdAt": 1590999817436,
+                  "byMember": {
+                    "_id": "u101",
+                    "fullname": "Tal Tarablus",
+                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
-              checklists: [
+              "checklists": [
                 {
-                  id: "YEhmF",
-                  title: "Checklist",
-                  todos: [
+                  "id": "YEhmF",
+                  "title": "Checklist",
+                  "todos": [
                     {
-                      id: "212jX",
-                      title: "To Do 1",
-                      isDone: false
+                      "id": "212jX",
+                      "title": "To Do 1",
+                      "isDone": false
                     }
                   ]
                 }
               ],
-              memberIds: ["u101"],
-              labelIds: ["#61bd4f", "#c83131"],
-              createdAt: 1590999730348,
-              dueDate: 16156215211,
-              byMember: {
-                _id: "u101",
-                username: "Tal",
-                fullname: "Tal Tarablus",
-                imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              "memberIds": [
+                "u101"
+              ],
+              "labelIds": [
+                "#61bd4f",
+                "#c83131"
+              ],
+              "createdAt": 1590999730348,
+              "dueDate": 16156215211,
+              "byMember": {
+                "_id": "u101",
+                "username": "Tal",
+                "fullname": "Tal Tarablus",
+                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
-              style: {
-                bgColor: "#26de81"
+              "style": {
+                "bgColor": "#26de81"
               }
             }
           ],
-          style: {}
-        }
-      ],
-      activities: [
+          "style": {
+
+          }
+        },
         {
-          id: "a101",
-          txt: "Changed Color",
-          createdAt: 154514,
-          byMember: {
-            _id: "u101",
-            fullname: "Abi Abambi",
-            imgUrl: "http://some-img"
-          },
-          task: {
-            id: "c101",
-            title: "Replace Logo"
+          "id": "g101",
+          "title": "Group 1",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "c101",
+              "title": "TEST!!! logo"
+            },
+            {
+              "id": "c102",
+              "title": "Add Samples"
+            }
+          ],
+          "style": {
+
           }
         }
       ],
-    }, {
-      _id: "b102",
-      title: "Testing Board2",
-      archivedAt: 1589983468418,
-      createdAt: 1589983468418,
-      isStarred: true,
-      createdBy: {
-        _id: "b102",
-        fullname: "dani dodo",
-        imgUrl: "http://some-img"
+      "activities": [
+        {
+          "id": "a101",
+          "txt": "Changed Color",
+          "createdAt": 154514,
+          "byMember": {
+            "_id": "u101",
+            "fullname": "Abi Abambi",
+            "imgUrl": "http://some-img"
+          },
+          "task": {
+            "id": "c101",
+            "title": "Replace Logo"
+          }
+        }
+      ]
+    },
+    {
+      "_id": "b102",
+      "title": "Testing Board2",
+      "archivedAt": 1589983468418,
+      "createdAt": 1589983468418,
+      "isStarred": true,
+      "createdBy": {
+        "_id": "b102",
+        "fullname": "dani dodo",
+        "imgUrl": "http://some-img"
       },
-      style: {
-        bgi: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixid=MnwzNDc5NDh8MHwxfHNlYXJjaHwxfHxsb25kb258ZW58MHx8fHwxNjU4MzIzODQ1&ixlib=rb-1.2.1',
-
+      "style": {
+        "bgi": "https://images.unsplash.com/photo-1635752597702-65e7b9a44207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDc5NDh8MHwxfHNlYXJjaHwzfHxhbHBha2F8ZW58MHwwfHx8MTY1ODU4MTg5OQ&ixlib=rb-1.2.1&q=80&w=1080",
+        "bgc": null
       },
-      labels: [
+      "labels": [
         {
-          id: "l10",
-          title: "Done",
-          color: "#61bd4f"
+          "id": "l10",
+          "title": "Done",
+          "color": "#61bd4f"
         },
         {
-          id: "l102",
-          title: "Progress",
-          color: "#c83131"
+          "id": "l102",
+          "title": "Progress",
+          "color": "#c83131"
         },
         {
-          id: "l103",
-          title: "ASAP",
-          color: "#bd4f9d"
+          "id": "l103",
+          "title": "ASAP",
+          "color": "#bd4f9d"
         },
         {
-          id: "l104",
-          title: "Waiting",
-          color: "#b6bd4f"
+          "id": "l104",
+          "title": "Waiting",
+          "color": "#b6bd4f"
         },
         {
-          id: "l105",
-          title: "On Hold",
-          color: "#4f6dbd"
+          "id": "l105",
+          "title": "On Hold",
+          "color": "#4f6dbd"
         }
       ],
-      members: [
+      "members": [
         {
-          _id: "u101",
-          fullname: "Tal Tarablus",
-          imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+          "_id": "u101",
+          "fullname": "Tal Tarablus",
+          "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         },
         {
-          _id: "u111",
-          email: "michael.lawson@reqres.in",
-          fullname: "Michael Lawson",
-          imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+          "_id": "u111",
+          "email": "michael.lawson@reqres.in",
+          "fullname": "Michael Lawson",
+          "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
         },
         {
-          _id: "u112",
-          email: "lindsay.ferguson@reqres.in",
-          fullname: "Lindsay Ferguson",
-          imgUrl: "https://reqres.in/img/faces/8-image.jpg"
+          "_id": "u112",
+          "email": "lindsay.ferguson@reqres.in",
+          "fullname": "Lindsay Ferguson",
+          "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
         },
         {
-          _id: "u113",
-          email: "tobias.funke@reqres.in",
-          fullname: "Tobias Funke",
-          imgUrl: "https://reqres.in/img/faces/9-image.jpg"
+          "_id": "u113",
+          "email": "tobias.funke@reqres.in",
+          "fullname": "Tobias Funke",
+          "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
         },
         {
-          _id: "u114",
-          email: "byron.fields@reqres.in",
-          fullname: "Byron Fields",
-          imgUrl: "https://reqres.in/img/faces/10-image.jpg"
+          "_id": "u114",
+          "email": "byron.fields@reqres.in",
+          "fullname": "Byron Fields",
+          "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
         },
         {
-          _id: "u115",
-          email: "george.edwards@reqres.in",
-          fullname: "George Edwards",
-          imgUrl: "https://reqres.in/img/faces/11-image.jpg"
+          "_id": "u115",
+          "email": "george.edwards@reqres.in",
+          "fullname": "George Edwards",
+          "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
         },
         {
-          _id: "u116",
-          email: "rachel.howell@reqres.in",
-          fullname: "Rachel Howell",
-          imgUrl: "https://reqres.in/img/faces/12-image.jpg"
+          "_id": "u116",
+          "email": "rachel.howell@reqres.in",
+          "fullname": "Rachel Howell",
+          "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
         }
       ],
-      groups: [
+      "groups": [
         {
-          id: "g101",
-          title: "Group 1",
-          titleEdit: false,
-          archivedAt: 1589983468418,
-          tasks: [
+          "id": "g101",
+          "title": "Incoming Bugs",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
             {
-              id: "c101",
-              title: "Replace logo"
-            },
-            {
-              id: "c102",
-              title: "Add Samples"
-            }
-          ],
-          style: {}
-        },
-        {
-          id: "g102",
-          title: "Group 2",
-          titleEdit: false,
-          tasks: [
-            {
-              id: "c103",
-              title: "Do that",
-              archivedAt: 1589983468418,
-            },
-            {
-              id: "c104",
-              title: "Help me",
-              status: "in-progress",
-              description: "description",
-              comments: [
+              "id": "c104",
+              "title": "Lightbox loading issue on Safari\n\n",
+              "status": "in-progress",
+              "description": "description",
+              "comments": [
                 {
-                  id: "ZdPnm",
-                  txt: "also @yaronb please CR this",
-                  createdAt: 1590999817436.0,
-                  byMember: {
-                    _id: "u101",
-                    fullname: "Tal Tarablus",
-                    imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                  "id": "ZdPnm",
+                  "txt": "also @yaronb please CR this",
+                  "createdAt": 1590999817436,
+                  "byMember": {
+                    "_id": "u101",
+                    "fullname": "Tal Tarablus",
+                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
-              checklists: [
+              "checklists": [
                 {
-                  id: "YEhmF",
-                  title: "Checklist",
-                  todos: [
+                  "id": "YEhmF",
+                  "title": "Checklist",
+                  "todos": [
                     {
-                      id: "212jX",
-                      title: "To Do 1",
-                      isDone: false
+                      "id": "212jX",
+                      "title": "To Do 1",
+                      "isDone": false
                     }
                   ]
                 }
               ],
-              memberIds: [{
-                _id: "u111",
-                email: "michael.lawson@reqres.in",
-                fullname: "Michael Lawson",
-                imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+              "memberIds": [
+
+              ],
+              "labelIds": [
+                "#61bd4f",
+                "#c83131"
+              ],
+              "createdAt": 1590999730348,
+              "dueDate": 16156215211,
+              "byMember": {
+                "_id": "u101",
+                "username": "Tal",
+                "fullname": "Tal Tarablus",
+                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
-              {
-                _id: "u112",
-                email: "lindsay.ferguson@reqres.in",
-                fullname: "Lindsay Ferguson",
-                imgUrl: "https://reqres.in/img/faces/8-image.jpg"
-              },],
-              labelIds: ["#61bd4f", "#c83131"],
-              createdAt: 1590999730348,
-              dueDate: 16156215211,
-              byMember: {
-                _id: "u101",
-                username: "Tal",
-                fullname: "Tal Tarablus",
-                imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              "style": {
+                "bgColor": "#26de81"
               },
-              style: {
-                bgColor: "#26de81"
-              }
+              "isEdited": false
+            },
+            {
+              "id": "c101",
+              "title": "Notifications Not Sending #4\n\n",
+              "isEdited": false,
+              "labelIds": [
+                "#bd4f9d"
+              ]
+            },
+            {
+              "id": "akHSu",
+              "title": "Multiple select broken\n",
+              "isEdited": false,
+              "labelIds": [
+                "#bd4f9d"
+              ]
+            },
+            {
+              "id": "btQxN",
+              "title": "Drag and drop issues in Chrome\n",
+              "isEdited": false,
+              "labelIds": [
+                "#4f6dbd"
+              ]
+            },
+            {
+              "id": "qQqFV",
+              "title": "Download icon redering issue\n\n",
+              "isEdited": false,
+              "labelIds": [
+                "#b6bd4f",
+                "#c83131"
+              ]
+            },
+            {
+              "id": "qCi6Y",
+              "title": "Tab to comment goes to wrong field\n\n\n",
+              "isEdited": false,
+              "labelIds": [
+                "#bd4f9d",
+                "#4f6dbd"
+              ]
+            },
+            {
+              "id": "C2m55",
+              "title": "Video load issues\n\n",
+              "isEdited": false,
+              "labelIds": [
+                "#c83131"
+              ]
             }
           ],
-          style: {}
-        }
-      ],
-      activities: [
+          "style": {
+
+          }
+        },
         {
-          id: "a101",
-          txt: "Changed Color",
-          createdAt: 154514,
-          byMember: {
-            _id: "u101",
-            fullname: "dani dodo",
-            imgUrl: "http://some-img"
-          },
-          task: {
-            id: "c101",
-            title: "create filter"
+          "id": "g102",
+          "title": "In progress",
+          "titleEdit": false,
+          "tasks": [
+            {
+              "id": "c102",
+              "title": "Localization\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u101",
+                  "fullname": "Tal Tarablus",
+                  "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                },
+                {
+                  "_id": "u111",
+                  "email": "michael.lawson@reqres.in",
+                  "fullname": "Michael Lawson",
+                  "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#c83131"
+              ]
+            },
+            {
+              "id": "c103",
+              "title": "\"Like\" button in comments\n",
+              "archivedAt": 1589983468418,
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u101",
+                  "fullname": "Tal Tarablus",
+                  "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                },
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#c83131"
+              ]
+            },
+            {
+              "id": "OPAhg",
+              "title": "Operation: All The Bugs\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u115",
+                  "email": "george.edwards@reqres.in",
+                  "fullname": "George Edwards",
+                  "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#61bd4f",
+                "#b6bd4f"
+              ]
+            },
+            {
+              "id": "izFiX",
+              "title": "Make JSON pretty\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u113",
+                  "email": "tobias.funke@reqres.in",
+                  "fullname": "Tobias Funke",
+                  "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#b6bd4f"
+              ]
+            }
+          ],
+          "style": {
+
+          }
+        },
+        {
+          "id": "SfUMf",
+          "title": "QA",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "kI8sm",
+              "title": "Embed all the things\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#61bd4f"
+              ]
+            },
+            {
+              "id": "hcK2J",
+              "title": "Pop-over max with issue on mobile\n\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                },
+                {
+                  "_id": "u113",
+                  "email": "tobias.funke@reqres.in",
+                  "fullname": "Tobias Funke",
+                  "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#c83131",
+                "#b6bd4f"
+              ]
+            },
+            {
+              "id": "4GW34",
+              "title": "animated gif support\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u115",
+                  "email": "george.edwards@reqres.in",
+                  "fullname": "George Edwards",
+                  "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#b6bd4f",
+                "#4f6dbd"
+              ]
+            }
+          ],
+          "style": {
+
+          }
+        },
+        {
+          "id": "gp9U8",
+          "title": "Live",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "4fbRX",
+              "title": "Emoji support\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u116",
+                  "email": "rachel.howell@reqres.in",
+                  "fullname": "Rachel Howell",
+                  "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#4f6dbd"
+              ]
+            },
+            {
+              "id": "56aws",
+              "title": "Matirial design for Android\n\n\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                },
+                {
+                  "_id": "u115",
+                  "email": "george.edwards@reqres.in",
+                  "fullname": "George Edwards",
+                  "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#4f6dbd",
+                "#c83131"
+              ]
+            },
+            {
+              "id": "jFKzd",
+              "title": "New icons for web\n\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#4f6dbd",
+                "#b6bd4f"
+              ]
+            },
+            {
+              "id": "fJDOT",
+              "title": "Pasting from clipboard\n\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u115",
+                  "email": "george.edwards@reqres.in",
+                  "fullname": "George Edwards",
+                  "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#bd4f9d"
+              ]
+            }
+          ],
+          "style": {
+
+          }
+        },
+        {
+          "id": "JhjzW",
+          "title": "Ready for launch",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "ODjp5",
+              "title": "Slow log-in issue\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u114",
+                  "email": "byron.fields@reqres.in",
+                  "fullname": "Byron Fields",
+                  "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
+                },
+                {
+                  "_id": "u115",
+                  "email": "george.edwards@reqres.in",
+                  "fullname": "George Edwards",
+                  "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+                },
+                {
+                  "_id": "u116",
+                  "email": "rachel.howell@reqres.in",
+                  "fullname": "Rachel Howell",
+                  "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#c83131",
+                "#bd4f9d"
+              ]
+            },
+            {
+              "id": "ZZa2h",
+              "title": "Improved API documentation\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u114",
+                  "email": "byron.fields@reqres.in",
+                  "fullname": "Byron Fields",
+                  "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#61bd4f"
+              ]
+            },
+            {
+              "id": "uRuCT",
+              "title": "HTML 5 suppurt\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u113",
+                  "email": "tobias.funke@reqres.in",
+                  "fullname": "Tobias Funke",
+                  "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+                },
+                {
+                  "_id": "u114",
+                  "email": "byron.fields@reqres.in",
+                  "fullname": "Byron Fields",
+                  "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#61bd4f"
+              ]
+            },
+            {
+              "id": "pGIxo",
+              "title": "ISO app redesighn\n",
+              "isEdited": false,
+              "memberIds": [
+                {
+                  "_id": "u101",
+                  "fullname": "Tal Tarablus",
+                  "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                },
+                {
+                  "_id": "u111",
+                  "email": "michael.lawson@reqres.in",
+                  "fullname": "Michael Lawson",
+                  "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
+                },
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                },
+                {
+                  "_id": "u113",
+                  "email": "tobias.funke@reqres.in",
+                  "fullname": "Tobias Funke",
+                  "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#c83131",
+                "#bd4f9d",
+                "#4f6dbd",
+                "#b6bd4f"
+              ]
+            }
+          ],
+          "style": {
+
           }
         }
       ],
+      "activities": [
+        {
+          "id": "a101",
+          "txt": "Changed Color",
+          "createdAt": 154514,
+          "byMember": {
+            "_id": "u101",
+            "fullname": "dani dodo",
+            "imgUrl": "http://some-img"
+          },
+          "task": {
+            "id": "c101",
+            "title": "create filter"
+          }
+        }
+      ]
+    },
+    {
+      "title": "jhgghjhjhjh",
+      "archivedAt": "",
+      "createdAt": "2022-07-23T17:06:00.431Z",
+      "isStarred": true,
+      "createdBy": {
+        "_id": "u101",
+        "fullname": "Abi Abambi",
+        "imgUrl": "http://some-img"
+      },
+      "style": {
+        "bgi": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzNDc5NDh8MHwxfHNlYXJjaHw0fHxtb3VudGFpbnN8ZW58MHx8fHwxNjU4NTcwODAw&ixlib=rb-1.2.1&q=80"
+      },
+      "labels": [
+        {
+          "id": "l10",
+          "title": "Done",
+          "color": "#61bd4f"
+        },
+        {
+          "id": "l102",
+          "title": "Progress",
+          "color": "#c83131"
+        },
+        {
+          "id": "l103",
+          "title": "ASAP",
+          "color": "#bd4f9d"
+        },
+        {
+          "id": "l104",
+          "title": "Waiting",
+          "color": "#b6bd4f"
+        },
+        {
+          "id": "l105",
+          "title": "On Hold",
+          "color": "#4f6dbd"
+        }
+      ],
+      "members": [
+        {
+          "_id": "u101",
+          "fullname": "Tal Tarablus",
+          "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
+        {
+          "_id": "u111",
+          "email": "michael.lawson@reqres.in",
+          "fullname": "Michael Lawson",
+          "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
+        },
+        {
+          "_id": "u112",
+          "email": "lindsay.ferguson@reqres.in",
+          "fullname": "Lindsay Ferguson",
+          "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+        },
+        {
+          "_id": "u113",
+          "email": "tobias.funke@reqres.in",
+          "fullname": "Tobias Funke",
+          "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+        },
+        {
+          "_id": "u114",
+          "email": "byron.fields@reqres.in",
+          "fullname": "Byron Fields",
+          "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
+        },
+        {
+          "_id": "u115",
+          "email": "george.edwards@reqres.in",
+          "fullname": "George Edwards",
+          "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+        },
+        {
+          "_id": "u116",
+          "email": "rachel.howell@reqres.in",
+          "fullname": "Rachel Howell",
+          "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
+        }
+      ],
+      "groups": [
+        {
+          "id": "g101",
+          "title": "Group 1",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "c101",
+              "title": "Replace logo"
+            },
+            {
+              "id": "c102",
+              "title": "Add Samples"
+            }
+          ],
+          "style": {
+
+          }
+        },
+        {
+          "id": "g102",
+          "title": "Group 2",
+          "titleEdit": false,
+          "tasks": [
+            {
+              "id": "c103",
+              "title": "Do that",
+              "archivedAt": 1589983468418
+            },
+            {
+              "id": "c104",
+              "title": "Help me",
+              "status": "in-progress",
+              "description": "description",
+              "comments": [
+                {
+                  "id": "ZdPnm",
+                  "txt": "also @yaronb please CR this",
+                  "createdAt": 1590999817436,
+                  "byMember": {
+                    "_id": "u101",
+                    "fullname": "Tal Tarablus",
+                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                  }
+                }
+              ],
+              "checklists": [
+                {
+                  "id": "YEhmF",
+                  "title": "Checklist",
+                  "todos": [
+                    {
+                      "id": "212jX",
+                      "title": "To Do 1",
+                      "isDone": false
+                    }
+                  ]
+                }
+              ],
+              "memberIds": [
+                {
+                  "_id": "u111",
+                  "email": "michael.lawson@reqres.in",
+                  "fullname": "Michael Lawson",
+                  "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
+                },
+                {
+                  "_id": "u112",
+                  "email": "lindsay.ferguson@reqres.in",
+                  "fullname": "Lindsay Ferguson",
+                  "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+                }
+              ],
+              "labelIds": [
+                "#61bd4f",
+                "#c83131"
+              ],
+              "createdAt": 1590999730348,
+              "dueDate": 16156215211,
+              "byMember": {
+                "_id": "u101",
+                "username": "Tal",
+                "fullname": "Tal Tarablus",
+                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              },
+              "style": {
+                "bgColor": "#26de81"
+              }
+            }
+          ],
+          "style": {
+
+          }
+        }
+      ],
+      "activities": [
+        {
+          "id": "a101",
+          "txt": "Changed Color",
+          "createdAt": 154514,
+          "byMember": {
+            "_id": "u101",
+            "fullname": "dani dodo",
+            "imgUrl": "http://some-img"
+          },
+          "task": {
+            "id": "c101",
+            "title": "create filter"
+          }
+        }
+      ],
+      "_id": "BHkk6"
+    },
+    {
+      "title": "new",
+      "archivedAt": "",
+      "createdAt": "2022-07-23T17:10:17.712Z",
+      "isStarred": true,
+      "createdBy": {
+        "_id": "u101",
+        "fullname": "Tal Tarablus",
+        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+      },
+      "style": {
+        "bgi": "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzNDc5NDh8MHwxfHNlYXJjaHw5fHxtb3VudGFpbnN8ZW58MHx8fHwxNjU4NTcwODAw&ixlib=rb-1.2.1&q=80"
+      },
+      "labels": [
+        {
+          "id": "l10",
+          "title": "Done",
+          "color": "#61bd4f"
+        },
+        {
+          "id": "l102",
+          "title": "Progress",
+          "color": "#c83131"
+        },
+        {
+          "id": "l103",
+          "title": "ASAP",
+          "color": "#bd4f9d"
+        },
+        {
+          "id": "l104",
+          "title": "Waiting",
+          "color": "#b6bd4f"
+        },
+        {
+          "id": "l105",
+          "title": "On Hold",
+          "color": "#4f6dbd"
+        }
+      ],
+      "members": [
+        {
+          "_id": "u101",
+          "fullname": "Tal Tarablus",
+          "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
+        {
+          "_id": "u111",
+          "email": "michael.lawson@reqres.in",
+          "fullname": "Michael Lawson",
+          "imgUrl": "https://reqres.in/img/faces/7-image.jpg"
+        },
+        {
+          "_id": "u112",
+          "email": "lindsay.ferguson@reqres.in",
+          "fullname": "Lindsay Ferguson",
+          "imgUrl": "https://reqres.in/img/faces/8-image.jpg"
+        },
+        {
+          "_id": "u113",
+          "email": "tobias.funke@reqres.in",
+          "fullname": "Tobias Funke",
+          "imgUrl": "https://reqres.in/img/faces/9-image.jpg"
+        },
+        {
+          "_id": "u114",
+          "email": "byron.fields@reqres.in",
+          "fullname": "Byron Fields",
+          "imgUrl": "https://reqres.in/img/faces/10-image.jpg"
+        },
+        {
+          "_id": "u115",
+          "email": "george.edwards@reqres.in",
+          "fullname": "George Edwards",
+          "imgUrl": "https://reqres.in/img/faces/11-image.jpg"
+        },
+        {
+          "_id": "u116",
+          "email": "rachel.howell@reqres.in",
+          "fullname": "Rachel Howell",
+          "imgUrl": "https://reqres.in/img/faces/12-image.jpg"
+        }
+      ],
+      "groups": [
+        {
+          "id": "lWTZ2",
+          "title": "asfasf",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+
+          ],
+          "style": {
+
+          }
+        },
+        {
+          "id": "1kCq7",
+          "title": "asdsa",
+          "titleEdit": false,
+          "archivedAt": 1589983468418,
+          "tasks": [
+            {
+              "id": "lnzUj",
+              "title": "asfsafasf\ndwads\n",
+              "isEdited": false
+            }
+          ],
+          "style": {
+
+          }
+        }
+      ],
+      "activities": [
+
+      ],
+      "_id": "oMhHn"
     }
   ]
   localStorage.setItem(KEY, JSON.stringify(boards))

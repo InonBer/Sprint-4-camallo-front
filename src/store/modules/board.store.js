@@ -47,7 +47,7 @@ export const boardStore = {
         },
         setCurrBoard(state, { board }) {
             state.currBoard = board
-            console.log('currBoard SAve', state.currBoard);
+            console.log(state.currBoard);
         },
         saveTaskMove(state, { group }) {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
