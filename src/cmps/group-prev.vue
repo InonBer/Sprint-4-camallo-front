@@ -21,7 +21,7 @@
           cols="30" rows="10"></textarea>
       </div>
       <div class="create-btn-container">
-        <button class="add-crd-btn">Add card</button>
+        <button class="add-crd-btn" @click.stop.prevent="onAddTask">Add card</button>
         <div @click.stop.prevent="isTaskCreating = false" class="x-icon-container"> <span class="x-icon"></span></div>
       </div>
     </div>
@@ -99,14 +99,19 @@ export default {
       this.$emit('onDetails', ids)
     },
     onAddTask() {
+      if (this.$refs.taskTitleCreate.value.length < 1) {
+        this.$refs.taskTitleCreate.focus()
+        return
+      }
       let copy = JSON.parse(JSON.stringify(this.group))
       let task = boardService.getEmptyTask()
       let title = JSON.parse(JSON.stringify(this.$refs.taskTitleCreate.value))
       task.title = title
+      this.$refs.taskTitleCreate.value = ''
       task.isEdited = false
       copy.tasks.push(task)
       this.$store.dispatch('addTask', { group: copy, id: this.group.id })
-      this.isTaskCreating = false
+      // this.isTaskCreating = false
 
     },
     onBoardChange() {

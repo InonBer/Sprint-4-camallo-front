@@ -196,7 +196,6 @@
              this.$store.dispatch({ type: 'saveBoard', board: copy })
          },
          addLabel(color) {
-             console.log('task', this.task)
              if (!this.task.labelIds) this.task.labelIds = []
              if (this.task.labelIds.includes(color)) return
              this.task.labelIds.push(color)

@@ -26,6 +26,7 @@
         font-weight: 600;
         line-height: 20px;
         text-decoration: none;
+        width: 100%;
     }
 
     // padding-top: 10px;
@@ -272,5 +273,37 @@
 
     .sidebar a {
         font-size: 18px;
+    }
+}
+
+.sidebar-btn-container {
+    display: flex;
+    height: 32px;
+    justify-content: flex-start;
+    margin-left: 4px;
+    margin-top: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    margin-bottom: 8px;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+    border-radius: 3px;
+    color: #091e42;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #091e4214;
+    }
+
+    .bgc-sidebar-img {
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        background-size: cover;
+
     }
 }

@@ -11,7 +11,8 @@
 
 
                 <div class="sidebar-btn-container">
-                    <a class="board-menu-navigation-item-link" @click="onChangeBackground"> Change background</a>
+                    <div class="bgc-sidebar-img" :style="boardBGI"></div>
+                    <div class="board-menu-navigation-item-link" @click="onChangeBackground">Change background</div>
 
                 </div>
                 <hr class="board-menu-header-divider">
@@ -146,7 +147,13 @@ export default {
     computed: {
         currBoard() {
             return this.$store.getters.currBoard
-        }
+        },
+        boardBGI() {
+            if (this.currBoard.style.bgi) {
+                return { backgroundImage: `url('  ${this.currBoard.style.bgi}  ')` }
+            }
+            else return { backgroundColor: 'rgb(' + this.currBoard.style.bgc + ')' }
+        },
 
     },
     unmounted() { },
