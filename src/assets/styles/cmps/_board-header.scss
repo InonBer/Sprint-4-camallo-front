@@ -8,7 +8,7 @@
 
     .board-header {
         padding: 8px 4px 4px 12px;
-        padding-left: rem(29px);
+        padding-left: 0.8125rem;
         display: flex;
         flex-wrap: wrap;
 
@@ -24,7 +24,7 @@
         .board-header-title {
             font-size: rem(18px);
             font-weight: 700;
-            padding: 0 12px;
+            padding-inline-end: 12px;
             line-height: 32px;
         }
 
@@ -43,7 +43,6 @@
             flex-direction: row-reverse;
     }
     .userImg {
-        // margin-bottom: -7px;
         margin-inline-end: -3.5px;
     }
 }
