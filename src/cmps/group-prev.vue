@@ -12,8 +12,8 @@
       <task-list @enterClicked="onAddTask" @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange"
         @onBoardChange="onBoardChange" @onDetails="onDetails" :tasks="group.tasks" :groupId="group.id" />
     </div>
-    <button v-if="!isTaskCreating" @click="onTaskAdding" class="add-btn"><span class="icon-plus"></span> Add a
-      card</button>
+    <div v-if="!isTaskCreating" @click="onTaskAdding" class="add-btn"><span class="icon-plus"></span> Add a
+      card</div>
     <div v-if="isTaskCreating" class="text-area-create-container">
       <div class="text-area-cont">
         <textarea @keydown.enter.stop.prevent="onAddTask" @click.prevent.stop="$refs.taskTitleCreate.focus()"

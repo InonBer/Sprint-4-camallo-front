@@ -8,21 +8,31 @@
  
 }
 
-.board-app::-webkit-scrollbar {
+.group-list-container::-webkit-scrollbar {
     width: 10px;
     height: 10px;
     // position: absolute;
     // margin-bottom: 10px;
+   
   }
 
-.board-app{
+    
+.group-list-container{
+  // padding-bottom: 72px;
+  min-height: 88.5vh;
+  &.smooth-dnd-container{
+    // min-height: 89.5vh;
 
+  }
   ::-webkit-scrollbar-track {
+    position: absolute;
+    top: 0;
         background: #0000003d;
   }
   
   /* Handle */
   &::-webkit-scrollbar-thumb {
+    
     background: rgba(136, 136, 136, 0.574);
     height: 195px;
 
