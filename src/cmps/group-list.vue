@@ -45,6 +45,11 @@ export default {
     emits: ['onBoardChange', 'onDetails'],
     methods: {
         onDrop(dropRes) {
+            let activity = {
+                id: 'wasd',
+                txt: "Added a Group",
+                byMember: this.currUser
+            }
             let cols = JSON.parse(JSON.stringify(this.groups))
             cols = applyDrag(cols, dropRes)
             let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
@@ -107,6 +112,9 @@ export default {
     computed: {
         currBoard() {
             return this.$store.getters.currBoard
+        },
+        currUser() {
+            return this.$store.getters.currUser
         }
     },
     unmounted() { },

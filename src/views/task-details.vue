@@ -212,6 +212,13 @@ export default {
         saveDescription() {
             this.task.description = JSON.parse(JSON.stringify(this.$refs.taskDesc.value))
             this.isDescEdited = false
+            let activity = {
+                id: 'wasd',
+                txt: "Changed description",
+                byMember: this.currUser,
+                task: this.task
+            }
+            this.board.activities.push(activity)
             this.saveBoard()
         },
         addMemberToTask(member) {
@@ -267,6 +274,9 @@ export default {
     computed: {
         currBoard() {
             return this.$store.getters.currBoard
+        },
+        currUser() {
+            return this.$store.getters.currUser
         }
     },
     unmounted() { },
