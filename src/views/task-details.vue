@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
     </div>
-    <section v-if="board" class="task-details">
+    <section v-click-outside="()=>{this.$router.push('/board/' + currBoard._id)}" v-if="board" class="task-details">
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -30,7 +30,7 @@
                             <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                         </div>
                     </template>
-                    <div class="details-label-to-add-container" v-if="labelModel">
+                    <div v-click-outside="()=>{labelModel = !labelModel}" class="details-label-to-add-container" v-if="labelModel">
                         <h2 class="details-label-header">Labels</h2>
                         <hr>
                         <h2 class="nd-label-header" style="">labels</h2>
@@ -73,7 +73,7 @@
                     <div class="details-activity-title">
                         <span class="icon-activity"></span>
                         <h3 class="activity-title">Activity</h3>
-                        <button class="description-toggle-btn">Show Details</button>
+                        <button class="description-toggle-btn">Show details</button>
                     </div>
                 </div>
                 <div class="text-container-details">
@@ -109,7 +109,7 @@
                 <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
-                <section v-if="memebersModal" class="member-modal">
+                <section v-click-outside="openMembersModal" v-if="memebersModal" class="member-modal">
                     <div class="member-modal-header">
                         <header>Members</header>
                     </div>
@@ -133,7 +133,10 @@
                         <span class="a-m-header-close-btn icon-close"></span>
                         <div class="a-m-header">
                             <div class="a-m-content">
-                                <div class="uploader">Computer</div>
+
+                                <label for="files" class="uploader">Computer</label>
+                                <input id="files" style="visibility:hidden;position: absolute;" type="file">
+
                                 <hr>
                                 <div>
                                     <label for="addLink">Attach a link</label>
@@ -173,7 +176,9 @@ export default {
             group: null,
             memebersModal: false,
             isDescEdited: false,
-            placeholder: 'Add a more detailed description...'
+            placeholder: 'Add a more detailed description...',
+            attachmentModal: false
+
         }
     },
     async created() {
@@ -255,7 +260,16 @@ export default {
         closeAll() {
             this.labelModel = false
             this.memebersModal = false
+            this.attachmentModal = false
         },
+        openAttachmentModal() {
+            if (this.attachmentModal) {
+                this.attachmentModal = false
+            } else {
+                this.closeAll()
+                this.attachmentModal = true
+            }
+        }
     },
     computed: {
         currBoard() {
