@@ -11,12 +11,10 @@
         </div>
         <div class="details-window-main">
 
-
             <div class="details-mem">
                 <div class="details-mem-img-cont">
                     <h2 class="details-member-header">Members</h2>
                     <div class="img-cont-mm">
-
                         <img class="userImg" v-for="member in task.memberIds" :key="member._id" :title="member.fullname"
                             :src="member.imgUrl" alt="">
                     </div>
@@ -52,14 +50,18 @@
                     <span class="icon-description"></span>
                     <h3 class="description-title">Description</h3>
                 </div>
-                <p @click="isDescEdited = !isDescEdited" class="task-description"
-                    v-if="task.description && isDescEdited">{{
+                <p @click="isDescEdited = !isDescEdited" class="task-description-placeholder details-clr-reg-hvr "
+                    v-if="task.description && !isDescEdited">{{
                             task.description
                     }}</p>
-                <textarea @keydown.enter.prevent="saveDescription" v-if="!isDescEdited"
-                    class="task-description-textarea details-clr-reg-hvr" name="description" id=""
-                    v-model="task.description" placeholder="Add a more detailed description..." cols="30"
-                    rows="10"></textarea>
+                <p v-if="!task.description && !isDescEdited" @click="isDescEdited = !isDescEdited"
+                    class="task-description-placeholder details-clr-reg-hvr">Add a more detailed
+                    description...</p>
+                <textarea ref="taskDesc" :value="task.description" v-if="isDescEdited" class="task-text-area" name=""
+                    id="" cols="50" :placeholder="placeholder" rows="15"></textarea>
+                <button @click.stop.prevent="saveDescription" v-if="isDescEdited" class="desc-save-btn">Save</button>
+                <button @click.stop.prevent="cancelDescChange" v-if="isDescEdited"
+                    class="desc-cancel-btn">Cancel</button>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
             <section>
@@ -153,6 +155,7 @@
 
 </template>
  <script>
+<<<<<<< HEAD
  import { handleError } from 'vue';
  import { boardService } from '../services/board.service';
  import checklist from '../cmps/checklist.vue';
@@ -272,3 +275,167 @@
      }
  };
  </script>
+=======
+import { handleError } from 'vue';
+import { boardService } from '../services/board.service';
+import checklist from '../cmps/checklist.vue';
+
+export default {
+    props: {},
+    name: 'taskDetails',
+    components: {
+        checklist
+    },
+    data() {
+        return {
+            labelModel: false,
+            task: null,
+            board: null,
+            group: null,
+            memebersModal: false,
+            isDescEdited: false,
+            placeholder: 'Add a more detailed description...'
+        }
+    },
+    async created() {
+        const { boardId, groupId, taskId } = this.$route.params
+        try {
+            this.board = await boardService.getById(boardId)
+            const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
+            this.group = this.board.groups[groupIdx]
+            const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
+            this.task = this.group.tasks[taskIdx]
+
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    methods: {
+        onCheck(checklist) {
+            const idx = this.task.checklists.findIndex(currCheck => {
+                return currCheck.id === checklist.id
+            })
+            this.task.checklists[idx] = checklist
+            this.saveBoard()
+        },
+        onDeleteChecklist(checklistId) {
+            const idx = this.task.checklists.findIndex(currCheck => {
+                return currCheck.id === checklistId
+            })
+            this.task.checklists.splice(idx, 1)
+            this.saveBoard()
+        },
+        saveDescription() {
+            this.task.description = JSON.parse(JSON.stringify(this.$refs.taskDesc.value))
+            this.isDescEdited = false
+            this.saveBoard()
+        },
+        addMemberToTask(member) {
+            this.task.memberIds = this.task.memberIds || []
+            const isMember = this.task.memberIds.find((currMem) => currMem._id === member._id)
+            if (isMember) {
+                const idx = this.task.memberIds.findIndex((curr) => {
+                    return curr._id === member._id
+                })
+                this.task.memberIds.splice(idx, 1)
+            } else {
+                this.task.memberIds.push(member)
+            }
+            this.saveBoard()
+        },
+        saveBoard() {
+            const copy = JSON.parse(JSON.stringify(this.board))
+            this.$store.dispatch({ type: 'saveBoard', board: copy })
+        },
+        addLabel(color) {
+            console.log('task', this.task)
+            if (!this.task.labelIds) this.task.labelIds = []
+            if (this.task.labelIds.includes(color)) return
+            this.task.labelIds.push(color)
+            this.saveBoard()
+        },
+        openMembersModal() {
+            if (this.memebersModal) {
+                this.memebersModal = false
+            } else {
+                this.closeAll()
+                this.memebersModal = true
+            }
+        },
+        removeLabel(idx) {
+            this.task.labelIds.splice(idx, 1)
+            this.saveBoard()
+        },
+        closeAll() {
+            this.labelModel = false
+            this.memebersModal = false
+        },
+    },
+    computed: {
+        currBoard() {
+            return this.$store.getters.currBoard
+        }
+    },
+    unmounted() { },
+    watch: {
+        '$route.params.id': {
+            handler(id) {
+                console.log(id);
+            }
+        }
+    }
+};
+</script>
+
+<style>
+.task-description-placeholder {
+    width: 512px;
+    height: 56px;
+    padding-left: 11.100000000000001px;
+    padding-top: 5.600000000000003px;
+    margin-left: 25px;
+    border-radius: 3px;
+}
+
+.desc-save-btn {
+    width: 52.39px;
+    height: 32px;
+    background-color: #0079bf;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 24.9px;
+}
+
+.desc-cancel-btn {
+    width: 64.91px;
+    height: 32px;
+    background-color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    color: #172b4d;
+    border: none;
+
+}
+
+.task-text-area {
+    width: 512px;
+    height: 108px;
+}
+
+.task-text-area:focus {
+    box-shadow: inset 0 0 0 2px #0079bf;
+}
+
+.desc-cancel-btn:hover {
+    background-color: #091e4214;
+}
+</style>
+>>>>>>> 4e812cbf9df4ec430f274af7f017b32ba6698a09

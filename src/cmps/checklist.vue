@@ -3,19 +3,20 @@
     <div class="checklist-header">
       <span class="icon-checklist"></span>
       <span class="checklist-title">{{ checklist.title }}</span>
-      <button @click="deleteChecklist" class="checklist-btn">Delete</button>
+      <button @click="deleteChecklist" class="checklist-btn btn-dlt">Delete</button>
       <el-progress class="checklist-prg-bar" :percentage="progress" :status="progress === 100 ? 'success' : ''" />
       <div class="checklist-checkbox-container">
         <label :key="todo.id" v-for="todo in checklist.todos">
           <input @click="onCheck(todo)" type="checkbox" class="checklist-chkbx" :key="todo.id" :checked="todo.isDone">
-          <span :class="todo.isDone ? 'done' : ''">
+          <span class="todo-txt" :class="todo.isDone ? 'done' : ''">
             {{ todo.title }}
           </span>
         </label>
-        <br>
-
       </div>
     </div>
+    <section class="add-todo-container">
+      <button class="checklist-btn add-todo-btn">Add an item</button>
+    </section>
   </section>
 </template>
  <script>

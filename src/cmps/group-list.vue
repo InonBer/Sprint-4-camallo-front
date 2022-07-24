@@ -1,5 +1,5 @@
 <template>
-    <section class="group-list-container board-app">
+    <section class="group-list-container ">
         <!-- <div class="card-task" v-if="groups" v-for="group in groups"> -->
         <Container class="card-task" orientation="horizontal" v-if="groups" group-name="cols" @drop="onDrop($event)">
             <Draggable @mousedown.prevent v-if="groups" v-for="group in groups" :key="group.id">

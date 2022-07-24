@@ -18,27 +18,48 @@
         font-weight: 600;
         font-size:16px;
 
-        .checklist-btn {
+    }
+
+    .checklist-btn {
+        cursor: pointer;
+        border-radius: 3px;
+        line-height: 20px;
+        padding: 6px 12px;
+        color: #172b4d;
+        background-color: rgba(9, 30, 66, 0.04);
+
+        &:hover {
+            background-color: rgba(9, 30, 66, 0.0784313725);
+        }
+
+        &.btn-dlt {
             position: absolute;
             right: -10px;
             top: -1.7px;
-            cursor: pointer;
-            border-radius: 3px;
-            line-height: 20px;
-            padding: 6px 12px;
-            color: #172b4d;
-            background-color: rgba(9, 30, 66, 0.04);
-
-            &:hover {
-                background-color: rgba(9, 30, 66, 0.0784313725);
-            }
-
         }
+
     }
+
 
     .checklist-checkbox-container {
         display: flex;
         flex-direction: column;
+
+        .checklist-chkbx {
+            margin-inline-start: 5.4px;
+            margin-inline-end: 17.8px;
+            transform: scale(1.34);
+        }
+
+        .todo-txt {
+            font-weight: 400;
+            position: relative;
+            bottom: 2.5px;
+        }
+
+        label {
+            margin-bottom: 10.5px;
+        }
 
         .done {
             text-decoration: line-through;
@@ -46,15 +67,47 @@
     }
 
     .checklist-prg-bar {
+        display: flex;
+        flex-direction: row-reverse;
         margin-top: 6.7px;
         margin-bottom: 9.5px;
+        margin-inline-start: -1.6px;
+        font-weight: 400;
+        width: 101.5%;
+
+    }
+    .add-todo-container{
+        margin-top:-4px;
+        .add-todo-btn{
+            margin-inline-start:36.7px;
+        }
+        .add-todo-textarea{
+            margin-inline-start:36.7px;
+        }
     }
 
-    .checklist-chkbx {
-        margin-bottom: 16.5px;
-    }
+}
+
+.el-progress-bar {
+    font-size: 11px !important;
+    margin-inline-start: -15.5px;
+}
+
+.el-progress-bar__outer {
+    padding-inline-end: 1px;
+    height: 8.5px !important;
+    background-color: rgba(9, 30, 66, 0.08);
 }
 
 .el-progress-bar__inner {
     background-color: #5ba4cf;
+}
+
+.el-progress__text {
+    span {
+        font-size: 11px !important;
+        position: relative;
+        bottom: 2px;
+        left: -1.2px;
+    }
 }
