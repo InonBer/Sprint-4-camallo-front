@@ -33,7 +33,7 @@
             width: 1em;
             height: 1em;
             margin-inline-start: 0.35em;
-            margin-top: 0.5em;
+            margin-top: 0.6em;
         }
     }
 
@@ -48,6 +48,7 @@
         margin: auto 0;
         user-select: none;
         margin-inline-end: 0.3em;
+        padding-inline-start: 10.5px;
         cursor: pointer;
 
         &:hover {

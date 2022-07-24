@@ -2,7 +2,7 @@
   <section v-if="checklist" class="checklist-container">
     <div class="checklist-header">
       <span class="icon-checklist"></span>
-      <span @click="test">{{ checklist.title }}</span>
+      <span class="checklist-title">{{ checklist.title }}</span>
       <button @click="deleteChecklist" class="checklist-btn">Delete</button>
       <el-progress class="checklist-prg-bar" :percentage="progress" :status="progress === 100 ? 'success' : ''" />
       <div class="checklist-checkbox-container">
