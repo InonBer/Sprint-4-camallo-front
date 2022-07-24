@@ -78,8 +78,8 @@ async function saveGroup(board, group) {
   return save(board)
 
 }
-function getEmptyTodo(title){
-  const todo =  {
+function getEmptyTodo(title) {
+  const todo = {
     id: utilService.makeId(),
     title,
     isDone: false
@@ -126,6 +126,7 @@ async function remove(id) {
   // return axios.delete(BASE_URL + id).then((res) => res.data)
   return storageService.remove(KEY, id)
 }
+
 
 async function save(board) {
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
