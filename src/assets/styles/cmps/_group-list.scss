@@ -3,6 +3,9 @@
     flex-direction: row;
     gap: 8px;
     background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);
+overflow-x: auto;
+
+
 
     .card-task {
         display: block;
@@ -31,3 +34,28 @@
         }
     }
 }
+
+// ::-webkit-scrollbar-track   {
+//     background: #0000003d;
+// }
+
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+// background: rgba(136, 136, 136, 0.574);
+// height: 195px;
+
+// }
+
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+// background:#888;
+// }
+// ::-webkit-scrollbar-thumb {
+// // outline: 1px solid slategrey;
+// }
+
+// ::-webkit-scrollbar-thumb{
+// border-radius: 10px;
+    
+
+// }

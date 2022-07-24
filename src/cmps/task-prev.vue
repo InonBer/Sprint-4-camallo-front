@@ -32,11 +32,10 @@
             </div>
 
         </div>
-        <div class="task-members-container" v-if="currTask.memberIds">
+        <div class="task-members-container" :class="pos" v-if="currTask.memberIds">
             <img v-for="member in task.memberIds" class="task-member-img" :key="member._id" :title="member.fullname"
                 :src="member.imgUrl" alt="">
         </div>
-        <h2 @click.stop.prevent="removeTask" class="task-pen-icon">X</h2>
     </section>
 
 </template>
@@ -89,6 +88,11 @@ export default {
         },
         removeTask() {
             console.log('wasda');
+        },
+        pos() {
+            if (this.task.checklist || this.task.comments || this.task.description) {
+                return "absolute"
+            } else return "relative"
         }
     },
     unmounted() { },
@@ -96,7 +100,6 @@ export default {
 </script>
  <style>
  .task-members-container {
-     position: relative;
      bottom: 0;
      /* height: 100%; */
      display: flex;

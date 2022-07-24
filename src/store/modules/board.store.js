@@ -46,6 +46,7 @@ export const boardStore = {
             }
         },
         setCurrBoard(state, { board }) {
+            console.log(board);
             state.currBoard = board
         },
         saveTaskMove(state, { group }) {

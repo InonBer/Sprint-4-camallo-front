@@ -76,8 +76,8 @@ export default {
     },
     onTaskMode(tasks) {
 
-      const copy = JSON.parse(JSON.stringify(tasks))
-      this.$emit('onTaskMode', copy, this.group.id)
+      // const copy = JSON.parse(JSON.stringify(tasks))
+      this.$emit('onTaskMode', tasks, this.group.id)
       // this.items.tasks = JSON.parse(JSON.stringify(tasks))
       // let groupCopy = JSON.parse(JSON.stringify(this.group))
       // groupCopy = tasks

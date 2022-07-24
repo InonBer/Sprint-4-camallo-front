@@ -1,15 +1,15 @@
 <template>
-    <section class="group-list-container">
+    <section class="group-list-container board-app">
         <!-- <div class="card-task" v-if="groups" v-for="group in groups"> -->
         <Container class="card-task" orientation="horizontal" v-if="groups" group-name="cols" @drop="onDrop($event)">
             <Draggable @mousedown.prevent v-if="groups" v-for="group in groups" :key="group.id">
                 <group-prev @saveGroup="saveGroup" @onTaskMode="onTaskMode" @onBoardChange="onBoardChange"
                     @onDetails="onDetails" :group="group" :key="group.id" />
             </Draggable>
+            <button @click="onGroupAdd" class="opacity-button grp-add-btn">
+                <span class="icon-plus"></span>Add another list</button>
         </Container>
         <!-- </div> -->
-        <button @click="onGroupAdd" class="opacity-button grp-add-btn">
-            <span class="icon-plus"></span>Add another list</button>
     </section>
 </template>
  <script>
@@ -50,9 +50,9 @@ export default {
             let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
             boardCopy.groups = cols
             this.$store.dispatch('saveBoard', { board: boardCopy })
-            // this.$store.dispatch({ type: "saveGroups", groups: this.cols })
         },
         getChildPayload(idx) {
+
             let cols = JSON.parse(JSON.stringify(this.groups))
             return cols[idx]
         },
@@ -63,6 +63,7 @@ export default {
             }
             this.dataToTranfer.push(obj)
             if (this.dataToTranfer.length === this.groups.length) {
+                console.log(this.dataToTranfer.length === this.groups.length);
                 let items = JSON.parse(JSON.stringify(this.groups))
                 let groups = this.dataToTranfer.map(item => {
                     const group = items.find((data) =>
@@ -71,6 +72,7 @@ export default {
                     group.tasks = item.data
                     return group
                 })
+
                 this.$emit('onTaskMode', groups)
                 this.dataToTranfer = []
             }

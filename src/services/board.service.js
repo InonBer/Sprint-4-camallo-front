@@ -214,29 +214,29 @@ function getEmptyBoard() {
     style: {},
     labels: [
       {
-        id: "l10",
-        title: "Done",
-        color: "#61bd4f"
+        "id": "l10",
+        "title": "Done",
+        "color": "#61bd4f"
       },
       {
-        id: "l102",
-        title: "Progress",
-        color: "#c83131"
+        "id": "l102",
+        "title": "Progress",
+        "color": "#f2d600"
       },
       {
-        id: "l103",
-        title: "ASAP",
-        color: "#bd4f9d"
+        "id": "l103",
+        "title": "ASAP",
+        "color": "#ff9f1a"
       },
       {
-        id: "l104",
-        title: "Waiting",
-        color: "#b6bd4f"
+        "id": "l104",
+        "title": "Waiting",
+        "color": "#0079bf"
       },
       {
-        id: "l105",
-        title: "On Hold",
-        color: "#4f6dbd"
+        "id": "l105",
+        "title": "On Hold",
+        "color": "#c377e0"
       }
     ],
     members: [
@@ -1271,22 +1271,22 @@ function _createBoards() {
         {
           "id": "l102",
           "title": "Progress",
-          "color": "#c83131"
+          "color": "#f2d600"
         },
         {
           "id": "l103",
           "title": "ASAP",
-          "color": "#bd4f9d"
+          "color": "#ff9f1a"
         },
         {
           "id": "l104",
           "title": "Waiting",
-          "color": "#b6bd4f"
+          "color": "#0079bf"
         },
         {
           "id": "l105",
           "title": "On Hold",
-          "color": "#4f6dbd"
+          "color": "#c377e0"
         }
       ],
       "members": [

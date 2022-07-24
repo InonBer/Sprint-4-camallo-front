@@ -1,7 +1,7 @@
 <template>
     <!-- <div v-for="task in tasks"> -->
     <Container class="tasks-container" orientation="vertical" v-if="tasks" :get-child-payload="getChildPayload"
-        group-name="col-items" @drop="onDrop($event)">
+        group-name="col-items" @drop="onTaskDrop($event)">
         <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
             :groupId="groupId">
             <task-prev @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask"
@@ -37,7 +37,7 @@ export default {
     created() {
     },
     methods: {
-        onDrop(dropRes) {
+        onTaskDrop(dropRes) {
             let items = JSON.parse(JSON.stringify(this.tasks))
             items = applyDrag(items, dropRes)
             this.$emit('onTaskMode', items)

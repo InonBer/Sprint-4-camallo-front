@@ -65,6 +65,8 @@ export default {
  }
  
  .prev-cont header {
+     background: #00000045;
+     height: 100%;
      padding-left: 10px;
      padding-top: 10px;
      color: #ffffff;

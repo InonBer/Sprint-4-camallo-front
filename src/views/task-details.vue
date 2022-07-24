@@ -6,7 +6,7 @@
             <span class="icon-card-detail"></span>
             {{ task.title }}
             <div class="task-details-ingroup">in list
-                <span class="group-title">{{ group.title }}</span>
+                <span class="group-title" style="text-decoration: underline"> {{ group.title }}</span>
             </div>
         </div>
         <div class="details-window-main">
