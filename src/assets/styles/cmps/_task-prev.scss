@@ -3,6 +3,10 @@
     @include trelloIconM("\e91c");
     font-size: 24px;
     line-height: 32px;
+    &:hover{
+        color: #172b4d;
+
+    }
   }
 
 
@@ -155,7 +159,7 @@
 
 .add-btn:hover {
     cursor: pointer;
-    background-color: rgba(42, 36, 36, 0.431)
+    background-color: #091e4214;
 }
 
 .task-prev-container:hover {
