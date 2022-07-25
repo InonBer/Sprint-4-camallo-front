@@ -67,6 +67,9 @@
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
             <section>
+                <h1>attachment</h1>
+            </section>
+            <section>
                 <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
                     @onDeleteChecklist="onDeleteChecklist" />
             </section>
@@ -96,9 +99,12 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
+            
+
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                         @onAddChklist=onAddChklist />
+
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
