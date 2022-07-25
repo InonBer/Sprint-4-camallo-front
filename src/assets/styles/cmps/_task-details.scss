@@ -461,11 +461,11 @@
     }
 
     .details-clr-reg-hvr {
-        background-color: rgba(9, 30, 66, 0.04);
-        cursor: pointer;
+        // background-color: rgba(9, 30, 66, 0.04);
 
         &:hover {
-            background-color: rgba(9, 30, 66, 0.0784313725);
+            cursor: pointer;
+            // background-color: rgba(9, 30, 66, 0.0784313725);
         }
     }
 
