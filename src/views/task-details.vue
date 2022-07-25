@@ -58,7 +58,7 @@
                 <p v-if="!task.description && !isDescEdited" @click="isDescEdited = !isDescEdited"
                     class="task-description-placeholder details-clr-reg-hvr">Add a more detailed
                     description...</p>
-                <textarea ref="taskDesc" :value="task.description" v-if="isDescEdited" class="task-text-area" name=""
+                <textarea ref="taskDesc" :value="task.description" v-focus v-if="isDescEdited" class="task-text-area" name=""
                     id="" cols="50" :placeholder="placeholder" rows="15"></textarea>
                 <button @click.stop.prevent="saveDescription" v-if="isDescEdited" class="desc-save-btn">Save</button>
                 <button @click.stop.prevent="cancelDescChange" v-if="isDescEdited"
@@ -314,6 +314,10 @@ export default {
     cursor: pointer;
     border-radius: 3px;
     margin-left: 24.9px;
+}
+
+.desc-save-btn:hover{
+    background-color: #026aa7;
 }
 
 .desc-cancel-btn {

@@ -15,7 +15,16 @@
       </div>
     </div>
     <section class="add-todo-container">
-      <button v-if="!addTodoMode" class="checklist-btn add-todo-btn">Add an item</button>
+      <button @click="addTodoMode = true" v-if="!addTodoMode" class="checklist-btn add-todo-btn">Add an item</button>
+      <div class="add-todo-txt-container" v-else>
+        <!-- v-click-outside="() => addTodoMode = false" v-else -->
+        <textarea v-focus v-model="todoTitle" class="todo-text-area" cols="50" 
+        @keydown.enter.stop.prevent="onTodoAdd"
+        @keydown.esc.stop.prevent = "addTodoMode= false"
+        placeholder="Add an item" rows="15"></textarea>
+        <button @click.stop.prevent="onTodoAdd" class="desc-save-btn">Add</button>
+        <button @click.stop.prevent="addTodoMode = false" class="desc-cancel-btn">Cancel</button>
+      </div>
     </section>
   </section>
 </template>
@@ -29,8 +38,9 @@
    components: {},
    data() {
      return {
-      addTodoMode:false,
-      
+       addTodoMode: false,
+      todo:null,
+      todoTitle:''
      };
    },
    created() {
@@ -38,7 +48,7 @@
    },
    methods: {
      onCheck(todo) {
-       let copy = JSON.parse(JSON.stringify(this.checklist))
+       let copy = {...this.checklist}
        const idx = copy.todos.findIndex(currTodo => {
          return currTodo.id === todo.id
        })
@@ -46,9 +56,11 @@
        this.$emit('onCheck', copy)
      },
      onTodoAdd() {
+      let title =  this.todoTitle
        let emptyTodo = boardService.getEmptyTodo(title)
-       let checkListCopy = JSON.parse(JSON.stringify(this.checklist))
-       checkListCopy.push(emptyTodo)
+       let checkListCopy = {...this.checklist}
+       checkListCopy.todos.push(emptyTodo)
+       this.todoTitle = ''
        this.$emit('onCheck', checkListCopy)
      },
      deleteChecklist() {
