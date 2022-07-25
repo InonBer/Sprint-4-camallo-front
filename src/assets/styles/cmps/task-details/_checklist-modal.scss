@@ -1,0 +1,16 @@
+.chklist-modal{
+    position: absolute;
+    background-color: $clr6;
+    width:304px;
+    z-index:1;
+    header{
+    height: 40px;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #5e6c84;
+    line-height: 40px;
+    width:90%;
+    margin:0 auto;
+    
+    }
+}

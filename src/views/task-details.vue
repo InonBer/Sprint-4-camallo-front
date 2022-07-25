@@ -12,7 +12,7 @@
         <div class="details-window-main">
 
             <div class="details-mem">
-                <div class="details-mem-img-cont">
+                <div v-if="task.memberIds?.length" class="details-mem-img-cont">
                     <h2 class="details-member-header">Members</h2>
                     <div class="img-cont-mm">
                         <img class="userImg" v-for="member in task.memberIds" :key="member._id" :title="member.fullname"
@@ -58,10 +58,11 @@
                 <p v-if="!task.description && !isDescEdited" @click="isDescEdited = !isDescEdited"
                     class="task-description-placeholder details-clr-reg-hvr">Add a more detailed
                     description...</p>
-                <textarea ref="taskDesc" :value="task.description" v-if="isDescEdited" class="task-text-area" name=""
-                    id="" cols="50" :placeholder="placeholder" rows="15"></textarea>
+                <textarea ref="taskDesc" :value="task.description" @keydown.enter.stop.prevent="saveDescription"
+                    @keydown.esc.stop.prevent="isDescEdited = false" v-focus v-if="isDescEdited" class="task-text-area"
+                    cols="50" :placeholder="placeholder" rows="15"></textarea>
                 <button @click.stop.prevent="saveDescription" v-if="isDescEdited" class="desc-save-btn">Save</button>
-                <button @click.stop.prevent="cancelDescChange" v-if="isDescEdited"
+                <button @click.stop.prevent="isDescEdited = false" v-if="isDescEdited"
                     class="desc-cancel-btn">Cancel</button>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
@@ -95,7 +96,9 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-                <button><span class="icon-checklist icn"></span> Checklist</button>
+                <button><span class="icon-checklist icn"></span> Checklist
+                <addChklistModal/>
+                </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -110,6 +113,10 @@
                 <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
+                <br>
+                <hr>
+                <h4 class="details-actions">Actions</h4>
+                <button @click.stop.prevent="onTaskDelete"><span class="icon-archive icn"></span> Archive</button>
                 <section v-click-outside="openMembersModal" v-if="memebersModal" class="member-modal">
                     <div class="member-modal-header">
                         <header>Members</header>
@@ -161,13 +168,15 @@
  <script>
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
-import checklist from '../cmps/checklist.vue';
+import checklist from '../cmps/task-checklist/checklist.vue';
+import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 
 export default {
     props: {},
     name: 'taskDetails',
     components: {
-        checklist
+        checklist,
+        addChklistModal
     },
     data() {
         return {
@@ -178,12 +187,14 @@ export default {
             memebersModal: false,
             isDescEdited: false,
             placeholder: 'Add a more detailed description...',
-            attachmentModal: false
+            attachmentModal: false,
+            groupId: null
 
         }
     },
     async created() {
         const { boardId, groupId, taskId } = this.$route.params
+        this.groupId = groupId
         try {
             this.board = await boardService.getById(boardId)
             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
@@ -225,6 +236,17 @@ export default {
             }
             this.board.activities.push(activity)
             this.saveBoard()
+        },
+        onTaskDelete() {
+            console.log('deleting');
+            let boardCopy = JSON.parse(JSON.stringify(this.board))
+            const groupIdx = boardCopy.groups.findIndex(group => group.id === this.groupId)
+            const taskIdx = boardCopy.groups[groupIdx].tasks.findIndex(currTask => currTask.id === this.task.id)
+            // const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
+            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1)
+
+            this.$store.dispatch({ type: 'saveBoard', board: boardCopy })
+            this.$router.push('/board/' + boardCopy._id)
         },
         addMemberToTask(member) {
             this.task.memberIds = this.task.memberIds || []
@@ -318,6 +340,10 @@ export default {
     cursor: pointer;
     border-radius: 3px;
     margin-left: 24.9px;
+}
+
+.desc-save-btn:hover {
+    background-color: #026aa7;
 }
 
 .desc-cancel-btn {

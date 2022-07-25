@@ -192,7 +192,16 @@
     }
 
 
-
+    .icon-archive{
+       @include trelloIconM("\e907");
+ 
+    }
+    .details-actions{
+        color: #5e6c84;
+        font-size: 12px;
+        font-weight: 600;
+        padding-left: 4px;
+    }
 
     .window-modal-content {
         clear: both;
@@ -497,7 +506,6 @@
         width: 95%;
         // display: flex;
         // justify-content: space-between;
-
         .a-m-content {
             padding-top: 6px;
             display: flex;
@@ -517,8 +525,6 @@
             }
 
         }
-
-
         .icon-close {
             @include trelloIconM("\e91c")
         }
