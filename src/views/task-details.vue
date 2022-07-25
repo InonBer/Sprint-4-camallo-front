@@ -30,8 +30,8 @@
                             <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                         </div>
                     </template>
-                    <div v-click-outside="() => { labelModel = !labelModel }" class="details-label-to-add-container"
-                        v-if="labelModel">
+                    <div v-click-outside="() => { labelModel = !labelModel }" @click.stop=""
+                        class="details-label-to-add-container" v-if="labelModel">
                         <h2 class="details-label-header">Labels</h2>
                         <hr>
                         <h2 class="nd-label-header" style="">labels</h2>
@@ -96,8 +96,14 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
+<<<<<<< HEAD
                 <button><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal />
+=======
+                <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
+                    <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
+                        @onAddChklist=onAddChklist />
+>>>>>>> 5b3533917acf2dceb6a1b557b555b11eb6fe059c
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -182,7 +188,11 @@ export default {
             placeholder: 'Add a more detailed description...',
             attachmentModal: false,
             groupId: null,
+<<<<<<< HEAD
             imgUrls: [],
+=======
+            checklistModal: false
+>>>>>>> 5b3533917acf2dceb6a1b557b555b11eb6fe059c
 
         }
     },
@@ -262,10 +272,16 @@ export default {
             this.$store.dispatch({ type: 'saveBoard', board: copy })
         },
         addLabel(color) {
-            console.log('task', this.task)
             if (!this.task.labelIds) this.task.labelIds = []
             if (this.task.labelIds.includes(color)) return
             this.task.labelIds.push(color)
+            this.saveBoard()
+        },
+        onAddChklist(title) {
+            if (!this.task.checklists) this.task.checklists = []
+            let checklist = boardService.getEmptyChklist(title)
+            this.task.checklists.push(checklist)
+            console.log(this.task.checklists)
             this.saveBoard()
         },
         openMembersModal() {

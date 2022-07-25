@@ -7,7 +7,7 @@
       <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <div class="conss">
         <button @click="onCreate" class="header-create-button">Create</button>
-        <div v-click-outside="()=>{isCreating = false}" v-if="isCreating" class="header-creating-container">
+        <div v-click-outside="() => { isCreating = false }" v-if="isCreating" class="header-creating-container">
           <header class="header-header">Create</header>
           <div @click="isChoosingBoard = true ; isCreating = false" class="header-create-button">
 
@@ -21,7 +21,7 @@
               anything.</p>
           </div>
         </div>
-        <div class="create-screen-container" v-click-outside="()=>{isChoosingBoard = false}" v-if="isChoosingBoard">
+        <div class="create-screen-container" v-click-outside="() => { isChoosingBoard = false }" v-if="isChoosingBoard">
           <button @click="closeAllCreate" class="super-exit-buttin">X</button>
           <header class="create-screen-header">Create board</header>
           <hr>
@@ -99,6 +99,9 @@ export default {
 
   },
   methods: {
+    test(ev) {
+      console.log(ev);
+    },
     closeAllCreate() {
       this.isCreating = false
       this.isChoosingBoard = false

@@ -6,9 +6,10 @@
                 <span></span>
             </div>
         </div>
-        <div @click.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited" class="task-prev">{{
-                currTask.title
-        }}</div>
+        <div @contextmenu.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited"
+            class="task-prev">{{
+                    currTask.title
+            }}</div>
         <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event), enterForTask($event)"
             v-if="currTask.isEdited" action="">
             <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->

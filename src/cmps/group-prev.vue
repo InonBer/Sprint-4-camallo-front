@@ -10,8 +10,8 @@
       </span>
       <span @click.stop="openGroupMenu" class="icon-menu">
       </span>
-      <group-menu-modal v-if="isGroupMenuOpen" v-click-outside="() => isGroupMenuOpen = false"
-        @closeMenuModal="isGroupMenuOpen = false" />
+      <group-menu-modal @removeGroup="removeGroup" v-if="isGroupMenuOpen"
+        v-click-outside="() => isGroupMenuOpen = false" @closeMenuModal="isGroupMenuOpen = false" />
 
     </header>
     <div class="group-card-scroll">
@@ -66,6 +66,12 @@ export default {
   },
   emits: ['onDetails'],
   methods: {
+    removeGroup() {
+      let board = JSON.parse(JSON.stringify(this.currBoard))
+      const idx = board.groups.findIndex(group => group.id === this.group.id)
+      board.groups.splice(idx, 1)
+      this.$store.dispatch('saveBoard', { board })
+    },
     openGroupMenu() {
       this.isGroupMenuOpen = true
     },
@@ -129,7 +135,11 @@ export default {
     },
 
   },
-  computed: {},
+  computed: {
+    currBoard() {
+      return this.$store.getters.currBoard
+    }
+  },
   unmounted() {
     clearInterval(this.interval)
   },
