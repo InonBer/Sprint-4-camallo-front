@@ -28,9 +28,11 @@
             }}
             </div>
 
-            <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>{{ checkListDone
-            }}/{{ currTask.checklists.length }}
+            <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>
+                <span>{{ checkListDone
+                }}/{{ currTask.checklists.length }}</span>
             </div>
+
 
         </div>
         <div class="task-members-container" :class="pos" v-if="currTask.memberIds">
