@@ -138,12 +138,14 @@
     min-height: 20px;
     padding: 5px 14px;
     position: relative;
-    cursor: pointer;
     user-select: none;
     // margin-bottom: 1px;
 
     // margin: 0 auto;
+    cursor: pointer;
+
     span {
+
         position: relative;
         top: 5.2px;
         margin-left: 2px;
@@ -151,16 +153,22 @@
 
     .icon-menu {
         @include trelloIconM("\e952");
-        position: relative;
-        top: 3px;
-        left: 6px;
-        // line-height: 2px;
+        position: absolute;
+        color: #6b778c;
+        left: 233px;
+        font-size: 14px;
+        top: 5px;
+        width: 32px;
+        display: flex;
+        height: 32px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+
 
         &:hover {
             background-color: #091e4214;
-            border-radius: 3px;
-            float: left;
-            // padding: 6px;
+            // border-radius: 3px;
         }
     }
 
@@ -190,10 +198,10 @@
     top: 3.1px;
     left: 2.4px;
 
-    .icon-plus{
+    .icon-plus {
         font-size: 16px;
-    color: #6b778c;
-    margin-top:4.75px;
+        color: #6b778c;
+        margin-top: 4.75px;
     }
 
 }
