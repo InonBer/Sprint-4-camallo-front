@@ -8,7 +8,7 @@
             </Draggable>
             <button v-if="!groupCreating" @click="groupCreating = true" class="opacity-button grp-add-btn">
                 <span class="icon-plus"></span>Add another list</button>
-            <div v-if="groupCreating" class="add-list-txt-cont">
+            <div v-if="groupCreating" v-click-outside="() => { groupCreating = false }" class="add-list-txt-cont">
                 <div class="add-list-item">
                     <input @keydown.enter.prevent="onGroupAdd" v-model="groupTitle" placeholder="Enter list title..."
                         type="text">

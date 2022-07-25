@@ -131,7 +131,7 @@
     // position: absolute;
     // right: 0;
     // top: 0;
-
+    // height: 40px;
     display: flex;
     justify-content: space-between;
     font-weight: 500;
@@ -172,6 +172,16 @@
         }
     }
 
+    .group-menu-modal {
+        background-color: #fff;
+        width: 400px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        left: 170px;
+        // top: 50px;
+        z-index: 255;
+    }
 }
 
 
