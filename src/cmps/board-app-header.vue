@@ -60,7 +60,7 @@
 
       <!-- <input type="text" placeholder=" Search"> -->
 
-      <el-input v-model="searchtxt" size="small" placeholder="Search" :prefix-icon="Search" />
+      <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
       <button class="header-create-button">Bell</button>
       <button class="header-create-button">icon</button>
     </div>

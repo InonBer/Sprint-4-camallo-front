@@ -28,8 +28,13 @@
         letter-spacing: 0.3px;
         margin-inline-start: 0.7em;
         // margin-top: 0.7em;
-        padding: 6.6px 0.8em;
+        // padding: 6.6px 0.8em;
         border-radius: 3px;
+
+        &:hover {
+            cursor: pointer;
+            background: rgba(9, 30, 66, 0.04);
+        }
     }
 
     .header-content .header-button {
@@ -79,15 +84,18 @@
         }
     }
 
-    .header-create-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        cursor: pointer;
+
+
+    .el-input--prefix,
+    .el-input__wrapper {
+        height: 28;
     }
 
     .header-end {
         justify-self: flex-end;
         display: flex;
         align-items: center;
+        margin-inline-end: 10px;
     }
 
     .el-input__wrapper {
@@ -158,10 +166,7 @@
 
     }
 
-    .header-create-button:hover {
-        cursor: pointer;
-        background: rgba(9, 30, 66, 0.04);
-    }
+
 
     .title {
         font-size: 14px;

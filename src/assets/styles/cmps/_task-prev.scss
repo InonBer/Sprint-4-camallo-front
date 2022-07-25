@@ -3,11 +3,12 @@
     @include trelloIconM("\e91c");
     font-size: 24px;
     line-height: 32px;
-    &:hover{
+
+    &:hover {
         color: #172b4d;
 
     }
-  }
+}
 
 
 .task-prev-container {
@@ -27,7 +28,7 @@
     line-height: 20px;
     user-select: none;
     flex-direction: column;
-    cursor:pointer;
+    cursor: pointer;
 
     .task-pen-icon {
         position: absolute;
@@ -44,20 +45,23 @@
     .task-members-container {
         gap: 4px;
         align-self: flex-end;
-        
+
     }
 
     div {
         // padding: 6px 5px 2px;
         color: #172b4d;
     }
-.task-prev-checklist{
-    letter-spacing: 2.4px;
-    font-size: 12px;
-    span{
-        font-size:16px
+
+    .task-prev-checklist {
+        letter-spacing: 2.4px;
+        font-size: 12px;
+
+        span {
+            font-size: 16px
+        }
     }
-}
+
     .task-prev-container:hover {
         background-color: #091e4214;
     }
@@ -128,13 +132,15 @@
     // right: 0;
     // top: 0;
 
-
+    display: flex;
+    justify-content: space-between;
     font-weight: 500;
     min-height: 20px;
     padding: 5px 14px;
     position: relative;
     cursor: pointer;
     user-select: none;
+    // margin-bottom: 1px;
 
     // margin: 0 auto;
     span {
@@ -142,7 +148,24 @@
         top: 5.2px;
         margin-left: 2px;
     }
+
+    .icon-menu {
+        @include trelloIconM("\e952");
+        position: relative;
+        top: 3px;
+        left: 6px;
+        // line-height: 2px;
+
+        &:hover {
+            background-color: #091e4214;
+            border-radius: 3px;
+            float: left;
+            // padding: 6px;
+        }
+    }
+
 }
+
 
 .task-pen-icon {
     opacity: 0;
@@ -154,7 +177,7 @@
     margin-top: 1px;
     height: 28px;
     margin-bottom: 3px;
-        width: 80%;
+    width: 80%;
     display: flex;
     align-items: center;
     margin-left: 16px;
@@ -163,6 +186,12 @@
     font-size: 14px;
     font-weight: 400;
     color: #5e6c84;
+<<<<<<< HEAD
+
+    .icon-plus {
+        font-size: 16px;
+        color: #6b778c;
+=======
     position: relative;
     top: 3.1px;
     left: 2.4px;
@@ -171,6 +200,7 @@
         font-size: 16px;
     color: #6b778c;
     margin-top:4.75px;
+>>>>>>> c45689327a4b3613ab7206c8f7ff6c8a80ca2a93
     }
 
 }
@@ -197,9 +227,10 @@
 }
 
 
-.absolute{
+.absolute {
     position: absolute;
 }
-.relative{
+
+.relative {
     position: relative;
 }
