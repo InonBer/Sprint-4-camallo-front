@@ -3,7 +3,7 @@
     flex-direction: row;
     gap: 8px;
     background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);
-overflow-x: auto;
+    overflow-x: auto;
 
 
 
@@ -18,7 +18,7 @@ overflow-x: auto;
 
     .grp-add-btn {
         color: white;
-        margin-left: 8px;
+        // margin-left: 8px;
         padding-left: 16.4px;
         font-size: 14px;
         min-width: rem(272px);
@@ -56,14 +56,14 @@ overflow-x: auto;
 
 // ::-webkit-scrollbar-thumb{
 // border-radius: 10px;
-    
+
 
 // }
-.add-list-btn-cont{
+.add-list-btn-cont {
     display: flex;
     align-items: center;
 
-  
+
 }
 
 .add-list-txt-cont {
@@ -95,13 +95,15 @@ overflow-x: auto;
     border-radius: 3px;
     margin-left: 0;
 }
-.cancel-list-btn{
+
+.cancel-list-btn {
     display: flex;
     justify-content: flex-end;
     width: 32px;
     height: 32px;
     background-color: inherit;
-        span{
+
+    span {
         line-height: 20px;
     }
 }
