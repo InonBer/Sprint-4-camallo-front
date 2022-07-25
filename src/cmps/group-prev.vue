@@ -7,7 +7,10 @@
     <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
         group.title
     }}</span>
-      <span class="icon-menu"></span>
+      <span @click.prevent.stop="openGroupMenu" class="icon-menu">
+      </span>
+      <group-menu-modal v-if="isGroupMenuOpen" />
+
     </header>
     <div class="group-card-scroll">
       <task-list @enterClicked="onAddTask" @onTaskMove="onTaskMove" @saveTask="saveTask" @taskAdded="onBoardChange"
@@ -33,6 +36,7 @@
  <script>
 import taskList from './task-list.vue';
 import { boardService } from '../services/board.service';
+import GroupMenuModal from './group-menu-modal.vue';
 export default {
   emits: ['onBoardChange', 'onTaskMove'],
   props: {
@@ -43,14 +47,15 @@ export default {
   },
   name: 'GroupPrev',
   components: {
-    taskList
+    taskList,
+    GroupMenuModal
   },
   data() {
     return {
       isEdited: null,
       groupTitle: null,
       isTaskCreating: false,
-
+      isGroupMenuOpen: false,
     };
   },
   created() {
@@ -59,6 +64,9 @@ export default {
   },
   emits: ['onDetails'],
   methods: {
+    openGroupMenu() {
+      this.isGroupMenuOpen = true
+    },
     onTaskAdding() {
       this.isTaskCreating = true
       // this.$refs.taskTitleCreate.focus()

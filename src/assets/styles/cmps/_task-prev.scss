@@ -172,6 +172,16 @@
         }
     }
 
+    .group-menu-modal {
+        background-color: #fff;
+        width: 400px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        left: 170px;
+        // top: 50px;
+        z-index: 255;
+    }
 }
 
 
