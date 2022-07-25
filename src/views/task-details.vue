@@ -99,8 +99,7 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-                <button><span class="icon-checklist icn"></span> Checklist</button>
-                <addChklistModal />
+            
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
