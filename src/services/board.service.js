@@ -616,6 +616,14 @@ function _createBoards() {
                 "#61bd4f",
                 "#EB5A46"
               ],
+              "attachments": [
+                {
+                  "title": "attachment",
+                  "id": "LdDkr",
+                  "imgUrl": "https://res.cloudinary.com/mister-toy-camay/image/upload/v1658778589/clock_lvomcz.png",
+                }
+              ],
+
               "createdAt": 1590999730348,
               "dueDate": 16156215211,
               "byMember": {

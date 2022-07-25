@@ -97,7 +97,7 @@
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
                 <button><span class="icon-checklist icn"></span> Checklist
-                <addChklistModal/>
+                    <addChklistModal />
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -137,23 +137,14 @@
                 </section>
                 <section v-if="attachmentModal" class="attachment-modal">
                     <div class="attachment-modal">
-                        <span class="a-m-header-title">Attach from…</span>
-                        <span class="a-m-header-close-btn icon-close"></span>
-                        <div class="a-m-header">
-                            <div class="a-m-content">
-
-                                <label for="files" class="uploader">Computer</label>
-                                <input @input="onUploadImg" id="files" style="visibility:hidden;position: absolute;"
-                                    v-on:change="onChangeFileUpload()" type="file">
-                                <hr>
-                                <div>
-                                    <label for="addLink">Attach a link</label>
-                                    <input id="addLink" class="attachment-add-link-input js-attachment-url js-autofocus"
-                                        type="text" placeholder="Paste any link here…" />
-                                </div>
-                            </div>
-
+                        <header class="a-m-header">
+                            Attach from…
+                            <span @click.prevent="closeMenuModal" class="a-m-header-close-btn icon-close"></span>
+                        </header>
+                        <div class="a-m-content">
+                            <imgUpload @save="saveImg" />
                         </div>
+
                     </div>
                 </section>
             </div>
@@ -170,13 +161,15 @@ import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
+import imgUpload from '../cmps/img-upload.vue';
 
 export default {
     props: {},
     name: 'taskDetails',
     components: {
         checklist,
-        addChklistModal
+        addChklistModal,
+        imgUpload
     },
     data() {
         return {
@@ -188,7 +181,8 @@ export default {
             isDescEdited: false,
             placeholder: 'Add a more detailed description...',
             attachmentModal: false,
-            groupId: null
+            groupId: null,
+            imgUrls: [],
 
         }
     },
@@ -207,9 +201,11 @@ export default {
         }
     },
     methods: {
-        onUploadImg(file) {
-            console.log('file', file)
 
+        saveImg(url) {
+            console.log('url', url)
+
+            this.imgUrls.push(url)
         },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {

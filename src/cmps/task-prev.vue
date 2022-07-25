@@ -26,6 +26,10 @@
                     task.comments.length
             }}
             </div>
+            <div v-if="currTask.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>{{
+                    task.attachments.length
+            }}
+            </div>
 
             <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>{{ checkListDone
             }}/{{ currTask.checklists.length }}
