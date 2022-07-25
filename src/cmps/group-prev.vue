@@ -5,7 +5,7 @@
         type="text" :placeholder="group.title" v-model="groupTitle">
     </form>
     <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
-        group.title
+        group.id
     }}</span>
     </header>
     <div class="group-card-scroll">

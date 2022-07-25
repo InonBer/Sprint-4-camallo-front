@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
     </div>
-    <section v-click-outside="()=>{this.$router.push('/board/' + currBoard._id)}" v-if="board" class="task-details">
+    <section v-click-outside="() => { this.$router.push('/board/' + currBoard._id) }" v-if="board" class="task-details">
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -30,7 +30,8 @@
                             <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                         </div>
                     </template>
-                    <div v-click-outside="()=>{labelModel = !labelModel}" class="details-label-to-add-container" v-if="labelModel">
+                    <div v-click-outside="() => { labelModel = !labelModel }" class="details-label-to-add-container"
+                        v-if="labelModel">
                         <h2 class="details-label-header">Labels</h2>
                         <hr>
                         <h2 class="nd-label-header" style="">labels</h2>
@@ -282,7 +283,7 @@ export default {
     unmounted() { },
     watch: {
         '$route.params.id': {
-            handler(id) {
+            handler({ id }) {
                 console.log(id);
             }
         }

@@ -54,8 +54,8 @@ export const boardStore = {
             }
         },
         setCurrBoard(state, { board }) {
-            console.log(board);
             state.currBoard = board
+            console.log('STATE', state.currBoard);
         },
         saveTaskMove(state, { group }) {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
@@ -123,7 +123,7 @@ export const boardStore = {
                 const board = await boardService.saveGroup(boardCopy, group)
                 // commit('saveGroup', { board: boardCopy, group, id })
                 commit({ type: 'saveBoard', board: board })
-                commit({ type: 'setCurrBoard', board: board })
+                commit('setCurrBoard', { board: board })
             } catch (error) {
                 console.log(error);
             }
