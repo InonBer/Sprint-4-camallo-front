@@ -192,11 +192,12 @@
     }
 
 
-    .icon-archive{
-       @include trelloIconM("\e907");
- 
+    .icon-archive {
+        @include trelloIconM("\e907");
+
     }
-    .details-actions{
+
+    .details-actions {
         color: #5e6c84;
         font-size: 12px;
         font-weight: 600;
@@ -470,61 +471,99 @@
     }
 
     .details-clr-reg-hvr {
-        background-color: rgba(9, 30, 66, 0.04);
-        cursor: pointer;
+        // background-color: rgba(9, 30, 66, 0.04);
 
         &:hover {
-            background-color: rgba(9, 30, 66, 0.0784313725);
+            cursor: pointer;
+            // background-color: rgba(9, 30, 66, 0.0784313725);
         }
     }
 
 }
 
 .attachment-modal {
+    cursor: default;
+
     background-color: white;
     // z-index: 50;
     position: fixed;
     width: 304px;
     display: flex;
     flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
     // justify-content: center;
     align-items: center;
 
-    height: 200px;
+    // height: 200px;
     left: 585px;
     top: 325px;
     border-radius: 3px;
     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
 
-    .a-m-header-title {
-        padding-top: 6px;
-        height: 41px;
-        border-bottom: rgba(128, 128, 128, 0.219) solid 0.5px;
-    }
-
     .a-m-header {
-        width: 95%;
+        // width: 95%;
         // display: flex;
         // justify-content: space-between;
+        width: 90%;
+        border-bottom: 1px solid #091e4221;
+        box-sizing: border-box;
+        color: #5e6c84;
+        line-height: 40px;
+        margin: 0 12px;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+
+        height: 40px;
+        margin-bottom: 8px;
+        text-align: center;
+
         .a-m-content {
-            padding-top: 6px;
+            // padding-top: 6px;
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: center;
+            // align-items: flex-start;
+            // padding-left: 6px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: flex-start;
-            padding-left: 6px;
+            width: 100%;
+            // .uploader {
+            //     width: 100%;
+            //     height: 32px;
 
-            .uploader {
+            //     &:hover {
+            //         cursor: pointer;
+            //         background-color: #f5f6f7;
+            //     }
+            // }
+            div {
+                display: flex;
+                align-items: center;
+                border-radius: 3px;
                 width: 100%;
                 height: 32px;
+                // margin-inline-start: 12px;
+                padding-left: 12px;
 
                 &:hover {
                     cursor: pointer;
-                    background-color: #f5f6f7;
+                    background-color: #091e420a;
                 }
             }
 
+            p {
+                color: #5e6c84;
+            }
         }
+
         .icon-close {
             @include trelloIconM("\e91c")
         }

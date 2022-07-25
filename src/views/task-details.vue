@@ -30,8 +30,8 @@
                             <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                         </div>
                     </template>
-                    <div v-click-outside="() => { labelModel = !labelModel }" class="details-label-to-add-container"
-                        v-if="labelModel">
+                    <div v-click-outside="() => { labelModel = !labelModel }" @click.stop=""
+                        class="details-label-to-add-container" v-if="labelModel">
                         <h2 class="details-label-header">Labels</h2>
                         <hr>
                         <h2 class="nd-label-header" style="">labels</h2>
@@ -67,6 +67,9 @@
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
             <section>
+                <h1>attachment</h1>
+            </section>
+            <section>
                 <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
                     @onDeleteChecklist="onDeleteChecklist" />
             </section>
@@ -96,8 +99,12 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-                <button><span class="icon-checklist icn"></span> Checklist
-                <addChklistModal/>
+            
+
+                <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
+                    <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
+                        @onAddChklist=onAddChklist />
+
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -137,23 +144,14 @@
                 </section>
                 <section v-if="attachmentModal" class="attachment-modal">
                     <div class="attachment-modal">
-                        <span class="a-m-header-title">Attach from…</span>
-                        <span class="a-m-header-close-btn icon-close"></span>
-                        <div class="a-m-header">
-                            <div class="a-m-content">
-
-                                <label for="files" class="uploader">Computer</label>
-                                <input @input="onUploadImg" id="files" style="visibility:hidden;position: absolute;"
-                                    v-on:change="onChangeFileUpload()" type="file">
-                                <hr>
-                                <div>
-                                    <label for="addLink">Attach a link</label>
-                                    <input id="addLink" class="attachment-add-link-input js-attachment-url js-autofocus"
-                                        type="text" placeholder="Paste any link here…" />
-                                </div>
-                            </div>
-
+                        <header class="a-m-header">
+                            Attach from…
+                            <span @click.prevent="closeMenuModal" class="a-m-header-close-btn icon-close"></span>
+                        </header>
+                        <div class="a-m-content">
+                            <imgUpload @save="saveImg" />
                         </div>
+
                     </div>
                 </section>
             </div>
@@ -170,13 +168,15 @@ import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
+import imgUpload from '../cmps/img-upload.vue';
 
 export default {
     props: {},
     name: 'taskDetails',
     components: {
         checklist,
-        addChklistModal
+        addChklistModal,
+        imgUpload
     },
     data() {
         return {
@@ -188,7 +188,9 @@ export default {
             isDescEdited: false,
             placeholder: 'Add a more detailed description...',
             attachmentModal: false,
-            groupId: null
+            groupId: null,
+            imgUrls: [],
+            checklistModal: false
 
         }
     },
@@ -207,9 +209,11 @@ export default {
         }
     },
     methods: {
-        onUploadImg(file) {
-            console.log('file', file)
 
+        saveImg(url) {
+            console.log('url', url)
+
+            this.imgUrls.push(url)
         },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {
@@ -266,10 +270,16 @@ export default {
             this.$store.dispatch({ type: 'saveBoard', board: copy })
         },
         addLabel(color) {
-            console.log('task', this.task)
             if (!this.task.labelIds) this.task.labelIds = []
             if (this.task.labelIds.includes(color)) return
             this.task.labelIds.push(color)
+            this.saveBoard()
+        },
+        onAddChklist(title) {
+            if (!this.task.checklists) this.task.checklists = []
+            let checklist = boardService.getEmptyChklist(title)
+            this.task.checklists.push(checklist)
+            console.log(this.task.checklists)
             this.saveBoard()
         },
         openMembersModal() {

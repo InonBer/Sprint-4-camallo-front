@@ -115,6 +115,10 @@
         @include trelloIconM("\e91e")
     }
 
+    .icon-attachment {
+        @include trelloIconM("\e908")
+    }
+
     .icon-description {
         @include trelloIconM("\e922")
     }
