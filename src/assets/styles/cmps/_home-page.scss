@@ -12,6 +12,7 @@
 
         .home-description {
             flex-basis: 70%;
+            color: rgb(9, 30, 66);
 
             div {
                 font-family: "Charlie Text", sans-serif;
@@ -46,7 +47,7 @@
 
     .home-start-link {
         display: flex;
-        align-self: center;
+        // align-self: center;
         width: 20%;
         justify-content: center;
         background-color: rgb(0, 101, 255);
