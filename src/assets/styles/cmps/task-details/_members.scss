@@ -3,6 +3,16 @@
     flex-direction: column;
     margin-inline-start: 23.2px;
     margin-inline-end: 34.7px;
+    position: relative;
+    top: 3px;
+}
+.img-cont-mm{
+    margin-inline-start:0.8px;
+    position: relative;
+    top: 3.5px;
+    .userImg{
+        margin-inline-end: 2.2px;
+    }
 }
 
 .details-member-header {
@@ -30,7 +40,6 @@
     z-index: 100;
     border-radius: 3px;
     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
-    /* right: 30px; */
     top: 87px;
     right: -5px;
     padding-bottom: 8px;

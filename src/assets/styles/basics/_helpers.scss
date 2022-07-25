@@ -90,6 +90,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    padding-top:7.5px;
     .icon-star {
         @include trelloIconM("\e966");
         font-size: 17px;
@@ -102,6 +103,7 @@
     &:hover {
         color: #f2d600;
         .icon-star{
+            @include trelloIconM("\e966");
             font-size: 19px;
         }
     }

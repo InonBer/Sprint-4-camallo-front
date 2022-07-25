@@ -15,7 +15,7 @@
       </div>
     </div>
     <section class="add-todo-container">
-      <button class="checklist-btn add-todo-btn">Add an item</button>
+      <button v-if="!addTodoMode" class="checklist-btn add-todo-btn">Add an item</button>
     </section>
   </section>
 </template>
@@ -29,6 +29,8 @@
    components: {},
    data() {
      return {
+      addTodoMode:false,
+      
      };
    },
    created() {

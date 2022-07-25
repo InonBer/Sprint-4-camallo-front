@@ -1,10 +1,10 @@
 <template>
     <!-- <div v-for="task in tasks"> -->
     <Container class="tasks-container" orientation="vertical" v-if="tasks" :get-child-payload="getChildPayload"
-        group-name="col-items" @drop="onTaskDrop($event)">
+        group-name="col-items" @drop="onDrop($event), test($event)">
         <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
             :groupId="groupId">
-            <task-prev @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask"
+            <task-prev @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask" :key="task.id"
                 @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" />
         </Draggable>
     </Container>
@@ -17,7 +17,7 @@ import { Container, Draggable } from 'vue3-smooth-dnd'
 import { applyDrag } from '../services/dnd-service';
 import { boardService } from '../services/board.service';
 export default {
-    emits: ['onDetails', 'taskAdded', 'onBoardChange', 'onTaskMode'],
+    emits: ['onDetails', 'taskAdded', 'onBoardChange', 'onTaskMove'],
     props: {
         tasks: {
             type: Array
@@ -35,12 +35,16 @@ export default {
         };
     },
     created() {
+
     },
     methods: {
-        onTaskDrop(dropRes) {
+        onDrop(dropRes) {
             let items = JSON.parse(JSON.stringify(this.tasks))
+            console.log(this.currBoard);
             items = applyDrag(items, dropRes)
-            this.$emit('onTaskMode', items)
+            this.$emit('onTaskMove', items)
+        },
+        test(dropRes) {
         },
         saveTask(task) {
             this.$emit('saveTask', task)
@@ -66,7 +70,11 @@ export default {
         }
 
     },
-    computed: {},
+    computed: {
+        currBoard() {
+            return this.$store.getters.currBoard
+        }
+    },
     unmounted() { },
 
 
@@ -83,6 +91,10 @@ export default {
  .tilted {
      background-color: black;
      transform: rotate(90deg);
+ }
+
+ .tasks-container{
+    gap:6px;
  }
  </style>
 
