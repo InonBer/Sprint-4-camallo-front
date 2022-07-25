@@ -16,12 +16,9 @@
     </div>
     <section class="add-todo-container">
       <button @click="addTodoMode = true" v-if="!addTodoMode" class="checklist-btn add-todo-btn">Add an item</button>
-      <div class="add-todo-txt-container" v-else>
-        <!-- v-click-outside="() => addTodoMode = false" v-else -->
-        <textarea v-focus v-model="todoTitle" class="todo-text-area" cols="50" 
-        @keydown.enter.stop.prevent="onTodoAdd"
-        @keydown.esc.stop.prevent = "addTodoMode= false"
-        placeholder="Add an item" rows="15"></textarea>
+      <div class="add-todo-txt-container" v-click-outside="() => addTodoMode = false" v-else>
+        <textarea v-focus v-model="todoTitle" class="todo-text-area" cols="50" @keydown.enter.stop.prevent="onTodoAdd"
+          @keydown.esc.stop.prevent="addTodoMode = false" placeholder="Add an item" rows="15"></textarea>
         <button @click.stop.prevent="onTodoAdd" class="desc-save-btn">Add</button>
         <button @click.stop.prevent="addTodoMode = false" class="desc-cancel-btn">Cancel</button>
       </div>
@@ -39,16 +36,19 @@
    data() {
      return {
        addTodoMode: false,
-      todo:null,
-      todoTitle:''
+       todo: null,
+       todoTitle: ''
      };
    },
    created() {
- 
+    
+   },
+   mounted(){
+    if(this.checklist.todos.length === 0 ) this.addTodoMode = true;
    },
    methods: {
      onCheck(todo) {
-       let copy = {...this.checklist}
+       let copy = { ...this.checklist }
        const idx = copy.todos.findIndex(currTodo => {
          return currTodo.id === todo.id
        })
@@ -56,9 +56,9 @@
        this.$emit('onCheck', copy)
      },
      onTodoAdd() {
-      let title =  this.todoTitle
+       let title = this.todoTitle
        let emptyTodo = boardService.getEmptyTodo(title)
-       let checkListCopy = {...this.checklist}
+       let checkListCopy = { ...this.checklist }
        checkListCopy.todos.push(emptyTodo)
        this.todoTitle = ''
        this.$emit('onCheck', checkListCopy)
@@ -69,6 +69,7 @@
    },
    computed: {
      progress() {
+      if(this.checklist.todos.length === 0 ) return 0
        const todosDone = this.checklist.todos.filter(todo => todo.isDone)
        return parseInt(todosDone.length / this.checklist.todos.length * 100)
  

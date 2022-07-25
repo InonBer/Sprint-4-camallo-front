@@ -28,6 +28,7 @@ export const boardService = {
   getEmptyBoard,
   getEmptyGroup,
   getEmptyTask,
+  getEmptyChklist,
   getTaskById,
   getBoardById,
   getBgcImgs,
@@ -167,6 +168,14 @@ function getEmptyGroup() {
     style: {}
   }
   return group
+}
+
+function getEmptyChklist(title){
+  return {
+    id: utilService.makeId(),
+    title: title,
+    todos: []
+  }
 }
 
 function getBoardById(boardId) {
