@@ -113,6 +113,10 @@
                 <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
                 <button><span class="icon-card-cover icn"></span> Cover</button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
+                <br>
+                <hr>
+                <h4 class="details-actions">Actions</h4>
+                <button @click.stop.prevent="onTaskDelete"><span class="icon-archive icn"></span> Archive</button>
                 <section v-click-outside="openMembersModal" v-if="memebersModal" class="member-modal">
                     <div class="member-modal-header">
                         <header>Members</header>
@@ -139,8 +143,8 @@
                             <div class="a-m-content">
 
                                 <label for="files" class="uploader">Computer</label>
-                                <input id="files" style="visibility:hidden;position: absolute;" type="file">
-
+                                <input @input="onUploadImg" id="files" style="visibility:hidden;position: absolute;"
+                                    v-on:change="onChangeFileUpload()" type="file">
                                 <hr>
                                 <div>
                                     <label for="addLink">Attach a link</label>
@@ -183,12 +187,14 @@ export default {
             memebersModal: false,
             isDescEdited: false,
             placeholder: 'Add a more detailed description...',
-            attachmentModal: false
+            attachmentModal: false,
+            groupId: null
 
         }
     },
     async created() {
         const { boardId, groupId, taskId } = this.$route.params
+        this.groupId = groupId
         try {
             this.board = await boardService.getById(boardId)
             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
@@ -201,6 +207,10 @@ export default {
         }
     },
     methods: {
+        onUploadImg(file) {
+            console.log('file', file)
+
+        },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {
                 return currCheck.id === checklist.id
@@ -226,6 +236,17 @@ export default {
             }
             this.board.activities.push(activity)
             this.saveBoard()
+        },
+        onTaskDelete() {
+            console.log('deleting');
+            let boardCopy = JSON.parse(JSON.stringify(this.board))
+            const groupIdx = boardCopy.groups.findIndex(group => group.id === this.groupId)
+            const taskIdx = boardCopy.groups[groupIdx].tasks.findIndex(currTask => currTask.id === this.task.id)
+            // const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
+            boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1)
+
+            this.$store.dispatch({ type: 'saveBoard', board: boardCopy })
+            this.$router.push('/board/' + boardCopy._id)
         },
         addMemberToTask(member) {
             this.task.memberIds = this.task.memberIds || []

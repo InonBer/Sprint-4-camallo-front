@@ -1,7 +1,10 @@
 <template>
     <div class="group-menu-modal">
-        <div>Remove group</div>
-        <div>Edit group</div>
+        <header>List actions <span @click.prevent="closeMenuModal" class="header-close-btn"></span></header>
+        <div class="list-actions">
+            <div>Remove group</div>
+            <div>Edit group</div>
+        </div>
 
     </div>
 </template>
@@ -13,7 +16,11 @@ export default {
         return {};
     },
     created() { },
-    methods: {},
+    methods: {
+        closeMenuModal() {
+            this.$emit('closeMenuModal')
+        }
+    },
     computed: {},
     unmounted() { },
 };
