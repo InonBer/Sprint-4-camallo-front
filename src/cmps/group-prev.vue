@@ -7,6 +7,7 @@
     <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
         groupTitle
     }}</span>
+      <span class="icon-menu"></span>
     </header>
     <div class="group-card-scroll">
       <task-list @enterClicked="onAddTask" @onTaskMode="onTaskMode" @saveTask="saveTask" @taskAdded="onBoardChange"
