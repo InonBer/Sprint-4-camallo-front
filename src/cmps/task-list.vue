@@ -92,9 +92,9 @@ export default {
      background-color: black;
      transform: rotate(90deg);
  }
-
- .tasks-container{
-    gap:6px;
+ 
+ .tasks-container {
+     gap: 6px;
  }
  </style>
 

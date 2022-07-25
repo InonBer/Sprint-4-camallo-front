@@ -6,8 +6,19 @@
                 <group-prev @saveGroup="saveGroup" @onTaskMove="onTaskMove" @onBoardChange="onBoardChange"
                     @onDetails="onDetails" :group="group" :key="group.id" />
             </Draggable>
-            <button @click="onGroupAdd" class="opacity-button grp-add-btn">
+            <button v-if="!groupCreating" @click="groupCreating = true" class="opacity-button grp-add-btn">
                 <span class="icon-plus"></span>Add another list</button>
+            <div v-if="groupCreating" class="add-list-txt-cont">
+                <div class="add-list-item">
+                    <input @keydown.enter.prevent="onGroupAdd" v-model="groupTitle" placeholder="Enter list title..."
+                        type="text">
+                    <div class="add-list-btn-cont">
+                        <button @click.prevent="onGroupAdd" class="add-list-btn">Add List</button>
+                        <button @click.stop.prevent="groupCreating = false" class="cancel-list-btn"><span
+                                class="x-icon"></span></button>
+                    </div>
+                </div>
+            </div>
         </Container>
         <!-- </div> -->
     </section>
@@ -33,7 +44,9 @@ export default {
     data() {
         return {
             itemsToSend: null,
-            dataToTranfer: []
+            dataToTranfer: [],
+            groupCreating: false,
+            groupTitle: ''
 
         };
     },
@@ -58,26 +71,21 @@ export default {
             return cols[idx]
         },
         onTaskMove(data, id) {
+
             // debugger
             const obj = {
                 data,
                 id,
             }
             this.dataToTranfer.push(obj)
-            console.log('this.group', this.groups)
-
             if (this.dataToTranfer.length === this.groups.length) {
-                let items = JSON.parse(JSON.stringify(this.groups))
-                let groups = this.dataToTranfer.map(item => {
-                    const group = items.find((data) =>
-                        data.id === item.id
-                    )
-                    group.tasks = item.data
-
+                let groupsCopy = JSON.parse(JSON.stringify(this.groups))
+                groupsCopy = groupsCopy.map(group => {
+                    const data = this.dataToTranfer.find(data => data.id === group.id)
+                    group.tasks = data.data
                     return group
                 })
-                // console.log(groups);
-                this.$emit('onTaskMove', groups)
+                this.$emit('onTaskMove', groupsCopy)
                 this.dataToTranfer = []
             }
 
@@ -95,6 +103,9 @@ export default {
         },
         onGroupAdd() {
             const group = boardService.getEmptyGroup()
+            group.title = JSON.parse(JSON.stringify(this.groupTitle))
+            group.titleEdit = false
+            this.groupTitle = ''
             let groups = JSON.parse(JSON.stringify(this.groups))
             groups.push(group)
             this.$store.dispatch('addGroup', { groups })
