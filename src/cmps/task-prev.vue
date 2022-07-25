@@ -93,7 +93,8 @@ export default {
             if (this.task.checklist || this.task.comments || this.task.description) {
                 return "absolute"
             } else return "relative"
-        }
+        },
+
     },
     unmounted() { },
 };

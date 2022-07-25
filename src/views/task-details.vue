@@ -332,6 +332,7 @@ export default {
 .task-text-area {
     width: 512px;
     height: 108px;
+    border-radius: 3px;
 }
 
 .task-text-area:focus {

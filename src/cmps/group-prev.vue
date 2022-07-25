@@ -5,7 +5,7 @@
         type="text" :placeholder="group.title" v-model="groupTitle">
     </form>
     <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
-        group.id
+        group.title
     }}</span>
       <span class="icon-menu"></span>
     </header>
@@ -16,7 +16,7 @@
     <div v-if="!isTaskCreating" @click="onTaskAdding" class="add-btn"><span class="icon-plus"></span> Add a
       card</div>
     <div v-if="isTaskCreating" class="text-area-create-container">
-      <div class="text-area-cont">
+      <div v-click-outside="() => { isTaskCreating = false }" class="text-area-cont">
         <textarea @keydown.enter.stop.prevent="onAddTask" @click.prevent.stop="$refs.taskTitleCreate.focus()"
           ref="taskTitleCreate" class="task-create-text" name="" id="" placeholder="Enter a title for this card..."
           cols="30" rows="10"></textarea>
