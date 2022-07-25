@@ -4,12 +4,14 @@
       <input ref="groupTitle" @click.stop.prevent="focusOnTitle" style="margin-left:10px" class="card-header"
         type="text" :placeholder="group.title" v-model="groupTitle">
     </form>
-    <header @click="isEdited = !isEdited" v-if="!isEdited" class="card-header"><span>{{
-        group.title
-    }}</span>
-      <span @click.prevent.stop="openGroupMenu" class="icon-menu">
+    <header class="card-header">
+      <span @click="isEdited = !isEdited" v-if="!isEdited">
+        {{ group.title }}
       </span>
-      <group-menu-modal v-if="isGroupMenuOpen" />
+      <span @click.stop="openGroupMenu" class="icon-menu">
+      </span>
+      <group-menu-modal v-if="isGroupMenuOpen" v-click-outside="() => isGroupMenuOpen = false"
+        @closeMenuModal="isGroupMenuOpen = false" />
 
     </header>
     <div class="group-card-scroll">

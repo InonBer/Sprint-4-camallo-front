@@ -136,8 +136,8 @@
                             <div class="a-m-content">
 
                                 <label for="files" class="uploader">Computer</label>
-                                <input id="files" style="visibility:hidden;position: absolute;" type="file">
-
+                                <input @input="onUploadImg" id="files" style="visibility:hidden;position: absolute;"
+                                    v-on:change="onChangeFileUpload()" type="file">
                                 <hr>
                                 <div>
                                     <label for="addLink">Attach a link</label>
@@ -196,6 +196,10 @@ export default {
         }
     },
     methods: {
+        onUploadImg(file) {
+            console.log('file', file)
+
+        },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {
                 return currCheck.id === checklist.id
