@@ -12,9 +12,6 @@
 @import "basics/links";
 @import "basics/forms";
 
-
-
-
 // Components
 @import "cmps/home-header";
 @import "cmps/board-app-header";
@@ -28,3 +25,4 @@
 @import "cmps/task-details";
 @import "cmps/app-vue";
 @import "cmps/board-sidebar";
+@import "cmps/task-details/checklist-modal";

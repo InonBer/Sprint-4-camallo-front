@@ -13,7 +13,7 @@ export const boardStore = {
         currUser: {
             id: "I101",
             fullname: "Inon Bereshit",
-            imgUrl: "	https://trello-members.s3.amazonaws.com/62d03408f2…cf6a3ee86/53b4fffdf23f7ae5407de6d7dc77bffb/50.png"
+            imgUrl: "https://trello-members.s3.amazonaws.com/62d03408f2…cf6a3ee86/53b4fffdf23f7ae5407de6d7dc77bffb/50.png"
         }
     },
     getters: {
