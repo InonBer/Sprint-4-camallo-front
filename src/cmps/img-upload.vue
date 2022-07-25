@@ -1,21 +1,24 @@
 <template>
     <section class="img-upload">
-        <label v-if="!isLoading" @drop.prevent="handleFile" @dragover.prevent="isDragover = true"
-            @dragleave="isDragover = false" :class="{ drag: isDragover }">
+        <label v-if="!isLoading">
             <!-- <Upload-icon :class="{ drag: isDragover }" /> -->
             <div>
                 <label for="files" class="uploader">Computer</label>
                 <input @input="onUploadImg" id="files" style="visibility:hidden;position: absolute;"
                     @change="handleFile" type="file">
+
                 <!-- <label for="addLink">Attach a link</label>
                 <input id="addLink" class="attachment-add-link-input" v-focus type="text"
                     placeholder="Paste any link here…" /> -->
             </div>
-
-            <hr>
-            <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
-            <input type="file" @change="handleFile" hidden>
         </label>
+        <hr>
+        <label @click.stop.prevent @drop.prevent="handleFile" @dragover.prevent="isDragover = true"
+            @dragleave="isDragover = false" :class="{ drag: isDragover }">
+            <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
+            <input type="file" @drop.prevent="handleFile" hidden>
+        </label>
+
     </section>
 </template>
 

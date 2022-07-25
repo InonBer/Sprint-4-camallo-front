@@ -97,9 +97,11 @@ export default {
             console.log('wasda');
         },
         pos() {
-            if (this.task.checklist || this.task.comments || this.task.description) {
+            if (this.task.checklists || this.task.comments || this.task.description) {
+                if (this.task.memberIds.length > 3) return "relative"
                 return "absolute"
-            } else return "relative"
+            }
+            else return "relative"
         },
 
     },

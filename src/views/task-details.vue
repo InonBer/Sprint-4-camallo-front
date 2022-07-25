@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
     </div>
-    <section v-click-outside="() => { this.$router.push('/board/' + currBoard._id) }" v-if="board" class="task-details">
+    <section v-click-outside.stop.prevent="onClickOutside" v-if="board" class="task-details">
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -99,7 +99,7 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-            
+
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
@@ -209,10 +209,19 @@ export default {
         }
     },
     methods: {
+        onClickOutside() {
 
+            if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel) {
+                this.checklistModal = false
+                this.attachmentModal = false
+                this.isDescEdited = false
+                this.memebersModal = false
+                this.labelModel = false
+            } else this.$router.push('/board/' + this.currBoard._id)
+        },
         saveImg(url) {
+            console.log(url);
             console.log('url', url)
-
             this.imgUrls.push(url)
         },
         onCheck(checklist) {
