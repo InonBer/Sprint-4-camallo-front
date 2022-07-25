@@ -29,7 +29,7 @@
   </section>
 </template>
  <script>
- import { boardService } from '../services/board.service';
+ import { boardService } from '../../services/board.service';
  export default {
    props: {
      checklist: Object

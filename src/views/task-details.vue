@@ -12,7 +12,7 @@
         <div class="details-window-main">
 
             <div class="details-mem">
-                <div class="details-mem-img-cont">
+                <div v-if="task.memberIds?.length" class="details-mem-img-cont">
                     <h2 class="details-member-header">Members</h2>
                     <div class="img-cont-mm">
                         <img class="userImg" v-for="member in task.memberIds" :key="member._id" :title="member.fullname"
@@ -58,10 +58,11 @@
                 <p v-if="!task.description && !isDescEdited" @click="isDescEdited = !isDescEdited"
                     class="task-description-placeholder details-clr-reg-hvr">Add a more detailed
                     description...</p>
-                <textarea ref="taskDesc" :value="task.description" v-focus v-if="isDescEdited" class="task-text-area" name=""
-                    id="" cols="50" :placeholder="placeholder" rows="15"></textarea>
+                <textarea ref="taskDesc" :value="task.description" @keydown.enter.stop.prevent="saveDescription"
+                    @keydown.esc.stop.prevent="isDescEdited = false" v-focus v-if="isDescEdited" class="task-text-area"
+                    cols="50" :placeholder="placeholder" rows="15"></textarea>
                 <button @click.stop.prevent="saveDescription" v-if="isDescEdited" class="desc-save-btn">Save</button>
-                <button @click.stop.prevent="cancelDescChange" v-if="isDescEdited"
+                <button @click.stop.prevent="isDescEdited = false" v-if="isDescEdited"
                     class="desc-cancel-btn">Cancel</button>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
@@ -95,7 +96,9 @@
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-                <button><span class="icon-checklist icn"></span> Checklist</button>
+                <button><span class="icon-checklist icn"></span> Checklist
+                <addChklistModal/>
+                </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -161,13 +164,15 @@
  <script>
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
-import checklist from '../cmps/checklist.vue';
+import checklist from '../cmps/task-checklist/checklist.vue';
+import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 
 export default {
     props: {},
     name: 'taskDetails',
     components: {
-        checklist
+        checklist,
+        addChklistModal
     },
     data() {
         return {
@@ -316,7 +321,7 @@ export default {
     margin-left: 24.9px;
 }
 
-.desc-save-btn:hover{
+.desc-save-btn:hover {
     background-color: #026aa7;
 }
 
