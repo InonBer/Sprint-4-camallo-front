@@ -120,8 +120,9 @@ export const boardStore = {
         async addTask({ commit, state }, { group, id }) {
             try {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
+                // let activity = boardService.getActivityByType('addingTask', id)
+                // boardCopy.activities.unshift(activity)
                 const board = await boardService.saveGroup(boardCopy, group)
-                // commit('saveGroup', { board: boardCopy, group, id })
                 commit({ type: 'saveBoard', board: board })
                 commit('setCurrBoard', { board: board })
             } catch (error) {

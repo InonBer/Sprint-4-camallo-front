@@ -17,7 +17,8 @@
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
-        <div class="task-prev-details" v-if="currTask.description || currTask.comments || currTask.checklists">
+        <div class="task-prev-details"
+            v-if="currTask.description || currTask.comments || currTask.checklists || currTask.attachments">
 
             <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
 

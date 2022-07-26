@@ -39,18 +39,19 @@ export default {
     },
     methods: {
         handleFile(ev) {
-            console.log(ev);
             var file
             if (ev.type === "change") file = ev.target.files[0]
             else if (ev.type === "drop") file = ev.dataTransfer.files[0]
             this.onUploadFile(file)
         },
         async onUploadFile(file) {
+
             this.isLoading = true
             const res = await uploadImg(file)
+            console.log('res', res)
             this.isLoading = false
             this.isDragover = false
-            this.$emit('save', res.url)
+            this.$emit('onImgUpload', res)
         }
     },
 }

@@ -36,7 +36,7 @@ export const boardService = {
   saveGroup,
   addGroup,
   getEmptyTodo,
-
+  getEmptyAttachment,
 
 }
 
@@ -73,9 +73,22 @@ async function addGroup(board, groups) {
   return save(boardCopy)
 }
 
+// function getActivityByType(type){
+//   switch (type) {
+//     case 'task':
+
+//       return {
+
+//       }
+
+//     case 'task':
+//       return 
+//     default:
+
+// }
+// }
+
 async function saveGroup(board, group) {
-  console.log(board);
-  console.log(group);
   const idx = board.groups.findIndex((currGroup) => {
     return currGroup.id == group.id
   })
@@ -170,7 +183,7 @@ function getEmptyGroup() {
   return group
 }
 
-function getEmptyChklist(title){
+function getEmptyChklist(title) {
   return {
     id: utilService.makeId(),
     title: title,
@@ -207,6 +220,16 @@ function getEmptyTask() {
     isEdited: true
   }
   return task
+}
+
+function getEmptyAttachment() {
+  return {
+    title: '',
+    id: utilService.makeId(),
+    imgUrl: '',
+    createdAt: '',
+    uploadedBy: {},
+  }
 }
 
 function getEmptyBoard() {

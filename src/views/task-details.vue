@@ -66,9 +66,29 @@
                     class="desc-cancel-btn">Cancel</button>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
-            <section>
-                <h1>attachment</h1>
+
+
+
+            <section v-if="task.attachments" class="attachment-container">
+                <header>
+                    <span class="icon-attachment"></span>
+                    <h3 class="description-title">Attachments</h3>
+                </header>
+                <div class="attachment-content-container">
+                    <div class="attachment-content">
+                        <img :src="task.attachments[0].imgUrl" alt="" srcset="">
+                        <div>
+                            <span> {{ task.attachments[0].title }}</span>
+                            <span>Added {{ task.attachments[0].createdAt }} - <span>Delete</span></span>
+
+                        </div>
+                    </div>
+
+                </div>
             </section>
+
+
+
             <section>
                 <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
                     @onDeleteChecklist="onDeleteChecklist" />
@@ -103,10 +123,11 @@
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
-                        @onAddChklist=onAddChklist
+                        @onAddChklist=onAddChklist 
                         @closeChklistModal="checklistModal = false" />
                 </button>
-                <button><span class="icon-date icn">
+                <button>
+                    <span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -116,10 +137,15 @@
                                 d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"
                                 fill="currentColor"></path>
                         </svg>
-                    </span> Dates</button>
-                <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
+                    </span> Dates
+                </button>
+                <button @click="openAttachmentModal">
+                    <span class="icon-attachment icn">
+                    </span>
+                    Attachment
+                </button>
                 <button><span class="icon-card-cover icn"></span> Cover
-                <coverModal /></button>
+                <coverModal v-if="coverModal"/></button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>
@@ -150,7 +176,7 @@
                             <span @click.prevent="closeMenuModal" class="a-m-header-close-btn icon-close"></span>
                         </header>
                         <div class="a-m-content">
-                            <imgUpload @save="saveImg" />
+                            <imgUpload @onImgUpload="saveImg" />
                         </div>
 
                     </div>
@@ -192,9 +218,8 @@ export default {
             placeholder: 'Add a more detailed description...',
             attachmentModal: false,
             groupId: null,
-            imgUrls: [],
             checklistModal: false,
-            coverModal:true,
+            coverModal:false,
 
         }
     },
@@ -224,10 +249,17 @@ export default {
                 this.coverModal = false
             } else this.$router.push('/board/' + this.currBoard._id)
         },
-        saveImg(url) {
-            console.log(url);
-            console.log('url', url)
-            this.imgUrls.push(url)
+        saveImg(imgData) {
+            this.task.attachments = this.task.attachments || []
+            let attach = boardService.getEmptyAttachment()
+            attach.title = imgData.original_filename
+            attach.imgUrl = imgData.url
+            attach.createdAt = imgData.created_at
+            attach.uploadedBy = this.currUser
+            this.task.attachments.push(attach)
+            console.log(this.task);
+            this.saveBoard()
+
         },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {
