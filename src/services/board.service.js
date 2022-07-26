@@ -36,7 +36,7 @@ export const boardService = {
   saveGroup,
   addGroup,
   getEmptyTodo,
-
+  getEmptyAttachment,
 
 }
 
@@ -170,7 +170,7 @@ function getEmptyGroup() {
   return group
 }
 
-function getEmptyChklist(title){
+function getEmptyChklist(title) {
   return {
     id: utilService.makeId(),
     title: title,
@@ -207,6 +207,16 @@ function getEmptyTask() {
     isEdited: true
   }
   return task
+}
+
+function getEmptyAttachment() {
+  return {
+    title: '',
+    id: utilService.makeId(),
+    imgUrl: '',
+    createdAt: '',
+    uploadedBy: {},
+  }
 }
 
 function getEmptyBoard() {
