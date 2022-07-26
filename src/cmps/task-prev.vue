@@ -23,18 +23,19 @@
 
             <div v-if="currTask.description" class="task-prev-description"><span class="icon-description"></span></div>
 
-            <div v-if="currTask.comments" class="task-prev-comments"><span class="icon-comment"></span>{{
-                    task.comments.length
-            }}
+            <div v-if="currTask.comments" class="task-prev-comments"><span class="icon-comment"></span>
+                <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
             <div v-if="currTask.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>{{
                     task.attachments.length
             }}
             </div>
 
-            <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>{{ checkListDone
-            }}/{{ currTask.checklists.length }}
+            <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>
+                <span class="task-prev-checklist-txt">{{ checkListDone
+                }}/{{ checkListTotal }}</span>
             </div>
+
 
         </div>
         <div class="task-members-container" :class="pos" v-if="currTask.memberIds">
@@ -81,8 +82,16 @@ export default {
     },
     computed: {
         checkListDone() {
-            return this.currTask.checklists.reduce((acc, task) => {
-                if (task.isDone) acc++
+            return this.currTask.checklists.reduce((acc, checklist) => {
+                checklist.todos.forEach(todo => {
+                    if (todo.isDone) acc++
+                });
+                return acc;
+            }, 0)
+        },
+        checkListTotal() {
+            return this.currTask.checklists.reduce((acc, checklist) => {
+                acc += checklist.todos.length
                 return acc;
             }, 0)
         },
@@ -95,9 +104,11 @@ export default {
             console.log('wasda');
         },
         pos() {
-            if (this.task.checklist || this.task.comments || this.task.description) {
+            if (this.task.checklists || this.task.comments || this.task.description) {
+                if (this.task.memberIds.length > 3) return "relative"
                 return "absolute"
-            } else return "relative"
+            }
+            else return "relative"
         },
 
     },

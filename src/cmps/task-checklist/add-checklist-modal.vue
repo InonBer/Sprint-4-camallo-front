@@ -5,7 +5,7 @@
                 <span>
                     Add checklist
                 </span>
-                <span class="close-btn"></span>
+                <span @click="closeChklistModal" class="close-btn"></span>
             </header>
             <div class="checklist-modal-main">
                 <p>Title</p>
@@ -25,10 +25,14 @@ export default {
         }
     },
     created() { },
-    emits: ['onAddChklist'],
+    emits: ['onAddChklist','closeChklistModal'],
     methods: {
         onAddChklist() {
             this.$emit('onAddChklist', this.title)
+            this.$emit('closeChklistModal')
+        },
+        closeChklistModal(){
+            this.$emit('closeChklistModal')
         }
     },
     computed: {},

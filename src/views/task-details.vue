@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
     </div>
-    <section v-click-outside="() => { this.$router.push('/board/' + currBoard._id) }" v-if="board" class="task-details">
+    <section v-click-outside.stop.prevent="onClickOutside" v-if="board" class="task-details">
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -106,7 +106,13 @@
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
+<<<<<<< HEAD
                         @onAddChklist=onAddChklist />
+=======
+                        @onAddChklist=onAddChklist
+                        @closeChklistModal="checklistModal = false" />
+
+>>>>>>> 0dd5dad6820c28d4f1482c565f3aadb6b0c03d2b
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -211,10 +217,19 @@ export default {
         }
     },
     methods: {
+        onClickOutside() {
 
+            if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel) {
+                this.checklistModal = false
+                this.attachmentModal = false
+                this.isDescEdited = false
+                this.memebersModal = false
+                this.labelModel = false
+            } else this.$router.push('/board/' + this.currBoard._id)
+        },
         saveImg(url) {
+            console.log(url);
             console.log('url', url)
-
             this.imgUrls.push(url)
         },
         onCheck(checklist) {
