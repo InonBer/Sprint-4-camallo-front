@@ -56,9 +56,10 @@
                     <div class="board-backgrounds-photos-footer"></div>
                     <div class="unsplash-disclaimer">
                         By using images from Unsplash, you agree to their
-                        <a href="http://unsplash.com/license" target="_blank" rel="noopener noreferrer"></a>
+                        <a href="http://unsplash.com/license" target="_blank" rel="noopener noreferrer">license</a>
                         and
-                        <a href="http://unsplash.com/terms" target="_blank" rel="noopener noreferrer"></a>
+                        <a href="http://unsplash.com/terms" target="_blank" rel="noopener noreferrer">Terms of
+                            Service</a>
                     </div>
                 </div>
             </section>
