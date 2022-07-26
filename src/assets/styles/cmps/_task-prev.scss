@@ -58,8 +58,22 @@
         font-size: 12px;
 
         span {
-            font-size: 16px
+            font-size: 16px;
         }
+
+        .task-prev-checklist-txt {
+            font-size: 12px;
+            padding: 0 4px 0 2px;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+    }
+
+    .task-prev-comments-txt {
+        font-size: 12px;
+        padding: 0 4px 0 2px;
+        vertical-align: top;
+        white-space: nowrap;
     }
 
     .task-prev-container:hover {
