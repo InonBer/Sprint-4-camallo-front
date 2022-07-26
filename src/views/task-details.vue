@@ -103,7 +103,8 @@
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
-                        @onAddChklist=onAddChklist />
+                        @onAddChklist=onAddChklist
+                        @closeChklistModal="checklistModal = false" />
 
                 </button>
                 <button><span class="icon-date icn">
