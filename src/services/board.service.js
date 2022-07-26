@@ -51,19 +51,17 @@ function getColorsToDisplay() {
 }
 
 async function query() {
-  // return await httpService.get(ENDPOINT, filterBy)
+  return await httpService.get(ENDPOINT)
   // return axios.get(BASE_URL, { params: { filterBy } }).then((res) => res.data)
-  const boards = JSON.parse(localStorage.getItem(KEY))
+  // const boards = JSON.parse(localStorage.getItem(KEY))
 
-  if (boards) {
-    return Promise.resolve(boards)
-  } else {
-    // const boardToSend = _createBoard()
-    const boardToSend = _createBoards()
-
-
-    return Promise.resolve(boardToSend)
-  }
+  // if (boards) {
+  //   return Promise.resolve(boards)
+  // } else {
+  // const boardToSend = _createBoard()
+  //   const boardToSend = _createBoards()
+  //   return Promise.resolve(boardToSend)
+  // }
   // return storageService.query(KEY)
 }
 
@@ -127,15 +125,7 @@ async function addTask(board, groupId, task) {
 }
 
 async function getById(id) {
-
-  const boards = JSON.parse(localStorage.getItem(KEY))
-  const idx = boards.findIndex((board) => {
-    return id === board._id
-  })
-  return Promise.resolve(boards[idx])
-  // return await httpService.get(`${ENDPOINT}/${id}`)
-  // return axios.get(BASE_URL + id).then((res) => res.data)
-  // return storageService.getById(KEY, id)
+  return await httpService.get(`board/${id}`)
 }
 
 async function remove(id) {
@@ -147,28 +137,13 @@ async function remove(id) {
 
 async function save(board) {
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
+  console.log(board);
+  const boardCopy = JSON.parse(JSON.stringify(board))
   if (board._id) {
-    const boards = JSON.parse(localStorage.getItem(KEY))
-    const idx = boards.findIndex((currBoard) => {
-      return currBoard._id === board._id
-    })
-    boards[idx] = board
-    localStorage.setItem(KEY, JSON.stringify(boards))
-    return Promise.resolve(board)
+    return httpService.put('board/' + board._id, boardCopy)
   } else {
-    board._id = utilService.makeId()
-    const boards = JSON.parse(localStorage.getItem(KEY))
-    boards.push(board)
-    localStorage.setItem(KEY, JSON.stringify(boards))
-    return Promise.resolve(board)
-    // return storageService.post(KEY, board)
+    return httpService.post('board/', boardCopy)
   }
-
-
-  // return board._id
-  //    await httpService.put(`${ENDPOINT}/${board._id}`, board)
-  //    await httpService.post(ENDPOINT, board)
-  return board._id ? storageService.put(KEY, board) : storageService.post(KEY, board)
 }
 
 function getEmptyGroup() {
@@ -191,12 +166,18 @@ function getEmptyChklist(title) {
   }
 }
 
-function getBoardById(boardId) {
-  const boards = JSON.parse(localStorage.getItem(KEY))
-  const idx = boards.findIndex((board) => {
-    return board._id === boardId
-  })
-  return Promise.resolve(boards[idx])
+async function getBoardById(boardId) {
+  try {
+    const boards = await query()
+    const idx = boards.findIndex((board) => {
+      return board._id === boardId
+    })
+    return Promise.resolve(boards[idx])
+
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function getTaskById(boardId, groupId, taskId) {
