@@ -10,7 +10,6 @@
             </div>
         </div>
         <div class="details-window-main">
-
             <div class="details-mem">
                 <div v-if="task.memberIds?.length" class="details-mem-img-cont">
                     <h2 class="details-member-header">Members</h2>
@@ -19,7 +18,6 @@
                             :src="member.imgUrl" alt="">
                     </div>
                 </div>
-
                 <div class="details-labels-container">
                     <template v-if="task.labelIds?.length">
                         <span class="details-labels-title">Labels</span>
@@ -66,29 +64,22 @@
                     class="desc-cancel-btn">Cancel</button>
                 <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
             </div>
-
-
-
-            <section v-if="task.attachments" class="attachment-container">
+            <section v-if="task.attachments && task.attachments.length" class="attachment-container">
                 <header>
                     <span class="icon-attachment"></span>
                     <h3 class="description-title">Attachments</h3>
                 </header>
-                <div class="attachment-content-container">
+                <div class="attachment-content-container" v-for="attachment in task.attachments">
                     <div class="attachment-content">
-                        <img :src="task.attachments[0].imgUrl" alt="" srcset="">
+                        <img :src="attachment.imgUrl">
                         <div>
-                            <span> {{ task.attachments[0].title }}</span>
-                            <span>Added {{ task.attachments[0].createdAt }} - <span>Delete</span></span>
-
+                            <span class="attach-title"> {{ attachment.title }}</span>
+                            <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
+                                    @click="onRemoveAttach(attachment.id)">Delete</span></span>
                         </div>
                     </div>
-
                 </div>
             </section>
-
-
-
             <section>
                 <checklist v-for="checklist in task.checklists" :checklist="checklist" @onCheck="onCheck"
                     @onDeleteChecklist="onDeleteChecklist" />
@@ -112,19 +103,15 @@
                 </div>
             </div>
         </div>
-
         <div class="side-bar-details">
             <div class="details-btn-container">
                 <h3 class="sidebar-heading">Add to card</h3>
                 <button @click.stop.prevent="openMembersModal"><span class="icon-member icn"></span>
                     Members</button>
                 <button @click="labelModel = !labelModel"><span class="icon-label icn"></span> Labels</button>
-
-
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
-                        @onAddChklist=onAddChklist 
-                        @closeChklistModal="checklistModal = false" />
+                        @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                 </button>
                 <button>
                     <span class="icon-date icn">
@@ -145,7 +132,8 @@
                     Attachment
                 </button>
                 <button><span class="icon-card-cover icn"></span> Cover
-                <coverModal v-if="coverModal"/></button>
+                    <coverModal v-if="coverModal" />
+                </button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>
@@ -188,7 +176,6 @@
             <span class="card-details-exit-btn"></span>
         </button>
     </section>
-
 </template>
  <script>
 import { handleError } from 'vue';
@@ -219,7 +206,7 @@ export default {
             attachmentModal: false,
             groupId: null,
             checklistModal: false,
-            coverModal:false,
+            coverModal: false,
 
         }
     },
@@ -238,6 +225,13 @@ export default {
         }
     },
     methods: {
+        onRemoveAttach(id) {
+            console.log('id', id)
+            const idx = this.task.attachments.findIndex(currAttach => currAttach.id === id)
+            this.task.attachments.splice(idx, 1)
+            this.saveBoard()
+
+        },
         onClickOutside() {
 
             if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel || this.coverModal) {
@@ -250,6 +244,7 @@ export default {
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
+            console.log('imgData.created_at', imgData.created_at)
             this.task.attachments = this.task.attachments || []
             let attach = boardService.getEmptyAttachment()
             attach.title = imgData.original_filename
