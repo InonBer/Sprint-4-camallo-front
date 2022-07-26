@@ -1,5 +1,6 @@
 <template>
     <section class="task-prev-container">
+        <div v-if="task.cover" :style="{backgroundColor:task.cover.color}" class="task-prev-cover"></div>
         <div v-if="task.labelIds" class="task-label-container">
 
             <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
