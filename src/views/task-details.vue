@@ -123,8 +123,7 @@
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
-                        @onAddChklist=onAddChklist 
-                        @closeChklistModal="checklistModal = false" />
+                        @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                 </button>
                 <button>
                     <span class="icon-date icn">
@@ -145,7 +144,8 @@
                     Attachment
                 </button>
                 <button><span class="icon-card-cover icn"></span> Cover
-                <coverModal v-if="coverModal"/></button>
+                    <coverModal v-if="coverModal" />
+                </button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>
@@ -219,7 +219,7 @@ export default {
             attachmentModal: false,
             groupId: null,
             checklistModal: false,
-            coverModal:false,
+            coverModal: false,
 
         }
     },

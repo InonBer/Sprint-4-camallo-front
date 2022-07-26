@@ -1,6 +1,6 @@
 <template>
     <section class="task-prev-container">
-        <div v-if="currTask.labelIds" class="task-label-container">
+        <div v-if="task.labelIds" class="task-label-container">
 
             <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
                 <span></span>
@@ -8,7 +8,7 @@
         </div>
         <div @contextmenu.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited"
             class="task-prev">{{
-                    currTask.title
+                    task.title
             }}</div>
         <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event), enterForTask($event)"
             v-if="currTask.isEdited" action="">
@@ -17,29 +17,28 @@
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
-        <div class="task-prev-details"
-            v-if="currTask.description || currTask.comments || currTask.checklists || currTask.attachments">
+        <div class="task-prev-details" v-if="task.description || task.comments || task.checklists || task.attachments">
 
             <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
 
-            <div v-if="currTask.description" class="task-prev-description"><span class="icon-description"></span></div>
+            <div v-if="task.description" class="task-prev-description"><span class="icon-description"></span></div>
 
-            <div v-if="currTask.comments" class="task-prev-comments"><span class="icon-comment"></span>
+            <div v-if="task.comments" class="task-prev-comments"><span class="icon-comment"></span>
                 <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
-            <div v-if="currTask.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>{{
+            <div v-if="task.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>{{
                     task.attachments.length
             }}
             </div>
 
-            <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>
+            <div class="task-prev-checklist" v-if="task.checklists"><span class="icon-list"></span>
                 <span class="task-prev-checklist-txt">{{ checkListDone
                 }}/{{ checkListTotal }}</span>
             </div>
 
 
         </div>
-        <div class="task-members-container" :class="pos" v-if="currTask.memberIds">
+        <div class="task-members-container" :class="pos" v-if="task.memberIds">
             <img v-for="member in task.memberIds" class="task-member-img" :key="member._id" :title="member.fullname"
                 :src="member.imgUrl" alt="">
         </div>
@@ -69,8 +68,10 @@ export default {
     },
     methods: {
         onTitleChange(ev) {
+            let copy = JSON.parse(JSON.stringify(this.task))
+            copy.title = this.currTask.title
             this.currTask.isEdited = !this.currTask.isEdited;
-            this.$emit('saveTask', this.currTask)
+            this.$emit('saveTask', copy)
 
         },
         focusOnTitle() {

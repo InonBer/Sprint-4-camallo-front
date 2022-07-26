@@ -128,7 +128,7 @@ export default {
       this.isChoosingBoard = false
       this.boardTitle = ''
       this.backGroundPrev = ''
-      this.$store.dispatch('saveBoard', { board })
+      this.$store.dispatch('addNewBoard', { board })
 
     },
     onCreate() {
