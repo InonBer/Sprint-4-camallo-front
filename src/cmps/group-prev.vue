@@ -1,14 +1,16 @@
 <template>
   <section class="group-card-container">
-    <form @submit="onTitleChange" v-if="isEdited">
-      <input ref="groupTitle" @click.stop.prevent="focusOnTitle" style="margin-left:10px" class="card-header"
-        type="text" :placeholder="group.title" v-model="groupTitle">
-    </form>
     <header class="card-header">
+      <form @submit="onTitleChange" v-click-outside="onTitleChange" v-if="isEdited">
+        <!-- <input ref="groupTitle" @click.stop.prevent="focusOnTitle" type="text" :placeholder="group.title"
+          v-model="groupTitle"> -->
+        <textarea ref="groupTitle" @keydown.enter.stop="onTitleChange" v-focus name="" id="" v-model="groupTitle"
+          cols="30" @click.stop.prevent="focusOnTitle" :placeholder="group.title" rows="1"></textarea>
+      </form>
       <span @click="isEdited = !isEdited" v-if="!isEdited">
         {{ group.title }}
       </span>
-      <span @click.stop="openGroupMenu" class="icon-menu">
+      <span @click.stop="isGroupMenuOpen = !isGroupMenuOpen" class="icon-menu">
       </span>
       <group-menu-modal @removeGroup="removeGroup" v-if="isGroupMenuOpen"
         v-click-outside="() => isGroupMenuOpen = false" @closeMenuModal="isGroupMenuOpen = false" />
@@ -40,7 +42,7 @@ import taskList from './task-list.vue';
 import { boardService } from '../services/board.service';
 import GroupMenuModal from './group-menu-modal.vue';
 export default {
-  emits: ['onBoardChange', 'onTaskMove'],
+  emits: ['onBoardChange', 'onTaskMove', 'saveGroup'],
   props: {
     group: {
       type: Object
@@ -71,9 +73,6 @@ export default {
       const idx = board.groups.findIndex(group => group.id === this.group.id)
       board.groups.splice(idx, 1)
       this.$store.dispatch('saveBoard', { board, action: "groupRemove" })
-    },
-    openGroupMenu() {
-      this.isGroupMenuOpen = true
     },
     onTaskAdding() {
       this.isTaskCreating = true

@@ -132,11 +132,12 @@
                     </span>
                     Attachment
                 </button>
-                <button @click="coverModal = !coverModal"><span class="icon-card-cover icn"></span> Cover
-                    <cover-modal :task="task" v-click-outside="() => coverModal = false" v-if="coverModal"
-                        @closeCoverModal="coverModal = false" @setTaskCover="setTaskCover"
-                        @removeCover="removeTaskCover" />
+                <button v-if="!task.cover" @click="coverModal = !coverModal"><span class="icon-card-cover icn"></span>
+                    Cover
                 </button>
+                <cover-modal :task="task" v-click-outside="() => coverModal = false" v-if="coverModal"
+                    @closeCoverModal="coverModal = false" @setTaskCover="setTaskCover" @removeCover="removeTaskCover" />
+
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>

@@ -30,6 +30,19 @@
     flex-direction: column;
     cursor: pointer;
 
+    .task-prev-cover {
+        width: 106.4%;
+        height: 32px;
+        position: relative;
+        right: 7.7px;
+        bottom: 6px;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
     .task-pen-icon {
         position: absolute;
         right: 10px;
@@ -142,125 +155,6 @@
     }
 }
 
-.card-header {
-
-    display: flex;
-    justify-content: space-between;
-    font-weight: 500;
-    min-height: 32px;
-    padding: 5px 14px;
-    position: relative;
-    user-select: none;
-    // margin-bottom: 1px;
-
-    // margin: 0 auto;
-    cursor: pointer;
-
-    span {
-        width: 100%;
-        position: relative;
-        top: 5.2px;
-        margin-left: 2px;
-    }
-
-    .icon-menu {
-        @include trelloIconM("\e952");
-        position: absolute;
-        color: #6b778c;
-        left: 233px;
-        font-size: 14px;
-        top: 5px;
-        width: 32px;
-        display: flex;
-        height: 32px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 3px;
-
-
-        &:hover {
-            background-color: #091e4214;
-            // border-radius: 3px;
-        }
-    }
-
-    .group-menu-modal {
-        cursor: default;
-        background-color: #fff;
-        width: 304px;
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        left: 240px;
-        top: 45px;
-        z-index: 30;
-        border-radius: 3px;
-        box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
-        // padding: 6px 12px;
-
-        header {
-            border-bottom: 1px solid #091e4221;
-            box-sizing: border-box;
-            color: #5e6c84;
-            display: block;
-            line-height: 40px;
-            margin: 0 12px;
-            overflow: hidden;
-            padding: 0 32px;
-            position: relative;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            z-index: 1;
-
-            height: 40px;
-            margin-bottom: 8px;
-            text-align: center;
-
-            .header-close-btn {
-                @include trelloIconM("\e91c");
-                color: #6b778c;
-                position: absolute;
-                right: 0;
-                top: 0;
-                z-index: 2;
-            }
-        }
-
-        .list-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-
-
-
-            div {
-                display: flex;
-                align-items: center;
-                border-radius: 3px;
-                width: 100%;
-                height: 32px;
-                // margin-inline-start: 12px;
-                padding-left: 12px;
-
-                &:hover {
-                    cursor: pointer;
-                    background-color: #091e420a;
-                }
-            }
-
-            margin-bottom: 10px;
-        }
-
-        * {
-            color: #172b4d;
-        }
-    }
-}
 
 
 .task-pen-icon {

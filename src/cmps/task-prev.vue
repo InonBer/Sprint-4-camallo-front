@@ -1,5 +1,6 @@
 <template>
     <section class="task-prev-container">
+        <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
         <div v-if="task.labelIds" class="task-label-container">
 
             <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
@@ -13,7 +14,8 @@
         <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event), enterForTask($event)"
             v-if="currTask.isEdited" action="">
             <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->
-            <textarea ref="taskTitle" @click.stop.prevent="focusOnTitle" type="text" v-model="currTask.title"
+            <textarea ref="taskTitle" @click.stop.prevent="focusOnTitle"
+                v-click-outside="() => { currTask.isEdited = false }" type="text" v-model="currTask.title"
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
@@ -111,10 +113,22 @@ export default {
             }
             else return "relative"
         },
-
+        taskPrevCover() {
+            if (this.task.cover.img) {
+                return {
+                    backgroundColor: this.task.cover.color,
+                    backgroundImage: `url(${this.task.cover.img})`,
+                    'min-height':'150px'
+                }
+            } else {
+                return {
+                    backgroundColor: this.task.cover.color
+                }
+            }
+        },
     },
     unmounted() { },
-};
+}
 </script>
  <style>
  .task-members-container {
