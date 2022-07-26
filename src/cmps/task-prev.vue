@@ -1,5 +1,6 @@
 <template>
     <section class="task-prev-container">
+        <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
         <div v-if="task.labelIds" class="task-label-container">
 
             <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
@@ -112,10 +113,22 @@ export default {
             }
             else return "relative"
         },
-
+        taskPrevCover() {
+            if (this.task.cover.img) {
+                return {
+                    backgroundColor: this.task.cover.color,
+                    backgroundImage: `url(${this.task.cover.img})`,
+                    'min-height':'150px'
+                }
+            } else {
+                return {
+                    backgroundColor: this.task.cover.color
+                }
+            }
+        },
     },
     unmounted() { },
-};
+}
 </script>
  <style>
  .task-members-container {

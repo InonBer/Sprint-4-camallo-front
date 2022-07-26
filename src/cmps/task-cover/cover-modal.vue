@@ -11,14 +11,14 @@
                 <button v-if="task.cover" @click="removeCover" class="cover-rmv-btn">Remove cover</button>
                 <p>Colors</p>
                 <div class="colors-container">
-                    <button v-for="color in colors" :style="{ backgroundColor: color }" 
+                    <button v-for="color in colors" :key="color" :style="{ backgroundColor: color }" 
                     @click="setCoverClr(color)">
                     </button>
                 </div>
                 <p>Photos</p>
-                <input name='imgSearch' type="text" @input.prevent="searchImgs" v-model="photosFilterBy" placeholder="Photos" />
+                <input name='imgSearch' type="text" @focus="$event.target.select()" @input.prevent="searchImgs" v-model="photosFilterBy" placeholder="Photos" />
                 <div v-if="photos" class="imgs-container">
-                    <div v-for="photo in photos" :style="{ backgroundImage: `url(${photo})` }"
+                    <div v-for="photo in photos" key="photo" :style="{ backgroundImage: `url(${photo})` }"
                     @click="setCoverImg(photo)">
                     </div>
                 </div>
@@ -29,6 +29,7 @@
  <script>
 import { utilService } from '../../services/util.service';
 import { unsplashService } from '../../services/unsplash.service';
+import { FastAverageColor } from 'fast-average-color';
 
 export default {
     name: 'cover-modal',
@@ -62,7 +63,16 @@ export default {
                 img:url,
                 color:'#7BC86C'
             }
+            const fac = new FastAverageColor();
+            fac.getColorAsync(url)
+            .then(color => {
+            cover.color = color.rgba;
             this.$emit('setTaskCover',cover)
+            // console.log('Average color', color);
+        })
+        .catch(e => {
+            console.log(e);
+        })
         },
         removeCover(){
             this.$emit('removeCover')

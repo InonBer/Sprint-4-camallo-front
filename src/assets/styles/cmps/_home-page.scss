@@ -9,6 +9,7 @@
         max-width: 1191.5px;
         margin: 0 auto;
         display: flex;
+        justify-content: space-between;
 
         .home-description {
             flex-basis: 68%;
@@ -16,7 +17,7 @@
 
             >div {
                 font-family: "Charlie Text", sans-serif;
-                width: 80%;
+                width: 90%;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
