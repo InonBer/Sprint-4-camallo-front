@@ -143,17 +143,11 @@
 }
 
 .card-header {
-    // bottom: 0;
-    // cursor: pointer;
-    // left: 0;
-    // position: absolute;
-    // right: 0;
-    // top: 0;
-    // height: 40px;
+
     display: flex;
     justify-content: space-between;
     font-weight: 500;
-    min-height: 20px;
+    min-height: 32px;
     padding: 5px 14px;
     position: relative;
     user-select: none;
