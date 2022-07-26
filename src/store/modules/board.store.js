@@ -82,8 +82,10 @@ export const boardStore = {
                 console.error(err)
             }
         },
-        async saveBoard({ commit }, { board }) {
+        async saveBoard({ commit, state }, { board, action, task }) {
             try {
+                let activity = boardService.getActivityByType(action, state.currUser, task)
+                board.activities.push(activity)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
                 const boardToSave = await boardService.save(board)

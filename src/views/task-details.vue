@@ -134,9 +134,8 @@
                 </button>
                 <button @click="coverModal = !coverModal"><span class="icon-card-cover icn"></span> Cover
                     <cover-modal :task="task" v-click-outside="() => coverModal = false" v-if="coverModal"
-                        @closeCoverModal="coverModal = false"
-                         @setTaskCover="setTaskCover" 
-                         @removeCover="removeTaskCover"/>
+                        @closeCoverModal="coverModal = false" @setTaskCover="setTaskCover"
+                        @removeCover="removeTaskCover" />
                 </button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
@@ -278,14 +277,7 @@ export default {
         saveDescription() {
             this.task.description = JSON.parse(JSON.stringify(this.$refs.taskDesc.value))
             this.isDescEdited = false
-            let activity = {
-                id: 'wasd',
-                txt: "Changed description",
-                byMember: this.currUser,
-                task: this.task
-            }
-            this.board.activities.push(activity)
-            this.saveBoard()
+            this.saveBoard("description")
         },
         onTaskDelete() {
             console.log('deleting');
@@ -295,7 +287,7 @@ export default {
             // const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1)
 
-            this.$store.dispatch({ type: 'saveBoard', board: boardCopy })
+            this.$store.dispatch({ type: 'saveBoard', board: boardCopy, action: "taskRemove" })
             this.$router.push('/board/' + boardCopy._id)
         },
         addMemberToTask(member) {
@@ -306,14 +298,20 @@ export default {
                     return curr._id === member._id
                 })
                 this.task.memberIds.splice(idx, 1)
+                this.saveBoard("memberRemove")
             } else {
                 this.task.memberIds.push(member)
+                this.saveBoard("memberAdd")
             }
-            this.saveBoard()
         },
-        saveBoard() {
+        saveBoard(action) {
+            let miniTask = {
+                title: this.task.title,
+                id: this.task.id
+
+            }
             const copy = JSON.parse(JSON.stringify(this.board))
-            this.$store.dispatch({ type: 'saveBoard', board: copy })
+            this.$store.dispatch({ type: 'saveBoard', board: copy, action, task: miniTask })
         },
         addLabel(color) {
             if (!this.task.labelIds) this.task.labelIds = []
@@ -354,17 +352,17 @@ export default {
             }
         },
         setTaskCover(cover) {
-            
-            if (this.task.cover?.img === null && this.task.cover.color == cover.color){
+
+            if (this.task.cover?.img === null && this.task.cover.color == cover.color) {
                 this.removeTaskCover()
             } else {
                 this.task.cover = cover
             }
-            this.saveBoard()
+            this.saveBoard("coverAdd")
         },
         removeTaskCover() {
             delete this.task.cover
-            this.saveBoard()
+            this.saveBoard("coverRemove")
         }
     },
     computed: {
