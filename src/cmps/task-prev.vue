@@ -13,7 +13,8 @@
         <form @click.stop.prevent @keyup.enter.stop.prevent="onTitleChange($event), enterForTask($event)"
             v-if="currTask.isEdited" action="">
             <!-- <input type="text" v-model="task.title" placeholder="Task name"> -->
-            <textarea ref="taskTitle" @click.stop.prevent="focusOnTitle" type="text" v-model="currTask.title"
+            <textarea ref="taskTitle" @click.stop.prevent="focusOnTitle"
+                v-click-outside="() => { currTask.isEdited = false }" type="text" v-model="currTask.title"
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>

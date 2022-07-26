@@ -1,55 +1,196 @@
 .group-card-container {
-    min-height: 60px;
-    width: 272px;
-    background-color: #ebecf0;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    justify-content: space-between;
-    padding-bottom: 8px;
-    // box-shadow: #00000080 0px 1px 4px 2px;
-    box-shadow: rgb(0 0 0 / 20%) 0px 1px 4px 2px;
-    // max-height: 87vh;
-    max-height: 85vh;
-}
+  min-height: 60px;
+  width: 272px;
+  background-color: #ebecf0;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  // box-shadow: #00000080 0px 1px 4px 2px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 1px 4px 2px;
+  // max-height: 87vh;
+  max-height: 85vh;
 
-.group-card-scroll{
-    overflow-y: auto;
-    // padding-bottom:;
- 
-    &::-webkit-scrollbar{
-        width: 6px;
-        // padding-left: 10px;
-        // margin-left:10px
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    min-height: 32px;
+    padding: 5px 14px;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+
+    textarea {
+      border: none;
+      margin: 0;
+      width: 228px;
+      height: 28px;
+      position: absolute;
+      left: 7px;
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: inset 0 0 0 2px #0079bf;
+      padding-left: 10px;
+      resize: none;
+      color: #172b4d;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      font-size: 14px;
     }
 
-    &::-webkit-scrollbar-track {
-        background: #ffffff00;
-    
-      }
-      
-      /* Handle */
-      &::-webkit-scrollbar-thumb {
-        background: rgb(136, 136, 136);
-        height: 195px;
-    
-      }
-      
-      /* Handle on hover */
-      &::-webkit-scrollbar-thumb:hover {
-        background:#888;
-        
-      }
-      &::-webkit-scrollbar-thumb {
-        outline: 1px solid slategrey;
+    textarea:focus {
+      outline: none;
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: inset 0 0 0 2px #0079bf;
+    }
 
+    span {
+      width: 100%;
+      position: relative;
+      top: 5.2px;
+      margin-left: 2px;
+    }
+
+    .icon-menu {
+      @include trelloIconM("\e952");
+      position: absolute;
+      color: #6b778c;
+      left: 233px;
+      font-size: 14px;
+      top: 5px;
+      width: 32px;
+      display: flex;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #091e4214;
+        // border-radius: 3px;
       }
-    
-      &::-webkit-scrollbar-thumb{
-        border-radius: 10px;
-            
-    
+    }
+
+    .group-menu-modal {
+      cursor: default;
+      background-color: #fff;
+      width: 304px;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      left: 240px;
+      top: 45px;
+      z-index: 30;
+      border-radius: 3px;
+      box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+      // padding: 6px 12px;
+
+      header {
+        border-bottom: 1px solid #091e4221;
+        box-sizing: border-box;
+        color: #5e6c84;
+        display: block;
+        line-height: 40px;
+        margin: 0 12px;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+
+        height: 40px;
+        margin-bottom: 8px;
+        text-align: center;
+
+        .header-close-btn {
+          @include trelloIconM("\e91c");
+          color: #6b778c;
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 2;
+        }
       }
+
+      .list-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+
+
+        div {
+          display: flex;
+          align-items: center;
+          border-radius: 3px;
+          width: 100%;
+          height: 32px;
+          // margin-inline-start: 12px;
+          padding-left: 12px;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #091e420a;
+          }
+        }
+
+        margin-bottom: 10px;
+      }
+
+      * {
+        color: #172b4d;
+      }
+    }
+  }
 }
 
+
+.group-card-scroll {
+  overflow-y: auto;
+  // padding-bottom:;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    // padding-left: 10px;
+    // margin-left:10px
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #ffffff00;
+
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    height: 195px;
+
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #888;
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    outline: 1px solid slategrey;
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+
+
+  }
+}
