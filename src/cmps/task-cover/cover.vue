@@ -26,7 +26,6 @@
  computed: {
   coverBackground(){
     if(this.taskCover.img){
-      console.log('entered')
       return {
         backgroundColor:this.taskCover.color,
         backgroundImage:`url(${this.taskCover.img})`,

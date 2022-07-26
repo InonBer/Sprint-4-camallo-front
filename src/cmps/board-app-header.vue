@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header">
+  <header class="app-header" :style="{ backgroundColor: BGC }">
     <div class="header-content">
       <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/app-icon.png" alt="" srcset=""> Camallo
       </h2>
@@ -70,6 +70,7 @@
 <script>
 import { Search } from '@element-plus/icons-vue'
 import { boardService } from '../services/board.service';
+import { FastAverageColor } from 'fast-average-color';
 
 export default {
   props: {
@@ -85,7 +86,8 @@ export default {
       emptyBoard: null,
       searchtxt: '',
       isChoosingBoard: false,
-      backGroundPrev: ''
+      backGroundPrev: '',
+      BGC:'#1e6584'
     };
   },
   async created() {
@@ -96,7 +98,9 @@ export default {
       console.log(e);
     }
     this.emptyBoard = boardService.getEmptyBoard()
-
+    // setTimeout(()=>{
+    //   this.headerColor()
+    // },500)
   },
   methods: {
     test(ev) {
@@ -139,6 +143,15 @@ export default {
       this.emptyBoard.style.bgi = 'img'
       this.emptyBoard.style.bgi = img
       console.log(this.emptyBoard);
+    },
+    headerColor() {
+      const board = this.$store.getters.currBoard
+      board.style.bgi
+      const fac = new FastAverageColor();
+      fac.getColorAsync(board.style.bgi)
+        .then(color => {
+          this.BGC = color.rgba;
+        })
     }
   },
   computed: {
@@ -152,7 +165,7 @@ export default {
     },
     boards() {
       return this.$store.getters.getBoards
-    }
+    },
   },
   unmounted() { },
 }
