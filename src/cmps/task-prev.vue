@@ -27,9 +27,9 @@
             <div v-if="currTask.comments" class="task-prev-comments"><span class="icon-comment"></span>
                 <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
-            <div v-if="currTask.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>{{
-                    task.attachments.length
-            }}
+            <div v-if="currTask.attachments" class="task-prev-attachments">
+                <span class="icon-attachment"></span>
+                <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
             <div class="task-prev-checklist" v-if="currTask.checklists"><span class="icon-list"></span>

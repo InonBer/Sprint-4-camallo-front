@@ -493,6 +493,9 @@
                 }
 
                 .icon-attachment {
+                    width: 20px;
+                    height: 20px;
+
                     @include trelloIconM("\e908");
                 }
 
