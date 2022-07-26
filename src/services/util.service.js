@@ -2,7 +2,8 @@
 export const utilService = {
     delay,
     getRandomInt,
-    makeId
+    makeId,
+    debounce
 }
 
 function delay(ms = 1500) {

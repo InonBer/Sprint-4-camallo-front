@@ -144,8 +144,6 @@ export default {
             boardCopy.style.bgi = null
             boardCopy.style.bgc = color
             this.$store.dispatch('saveBoard', { board: boardCopy })
-
-
         }
     },
     computed: {

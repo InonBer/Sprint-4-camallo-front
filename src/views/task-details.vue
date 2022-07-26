@@ -2,6 +2,7 @@
     <div class="window-overlay">
     </div>
     <section v-click-outside.stop.prevent="onClickOutside" v-if="board" class="task-details">
+        <cover v-if="task.cover" :taskCover="task.cover" @toggleCoverModal="coverModal = !coverModal" />
         <div class="task-details-header">
             <span class="icon-card-detail"></span>
             {{ task.title }}
@@ -123,8 +124,7 @@
 
                 <button @click="checklistModal = !checklistModal"><span class="icon-checklist icn"></span> Checklist
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
-                        @onAddChklist=onAddChklist 
-                        @closeChklistModal="checklistModal = false" />
+                        @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                 </button>
                 <button>
                     <span class="icon-date icn">
@@ -144,8 +144,12 @@
                     </span>
                     Attachment
                 </button>
-                <button><span class="icon-card-cover icn"></span> Cover
-                <coverModal v-if="coverModal"/></button>
+                <button @click="coverModal = !coverModal"><span class="icon-card-cover icn"></span> Cover
+                    <cover-modal :task="task" v-click-outside="() => coverModal = false" v-if="coverModal"
+                        @closeCoverModal="coverModal = false"
+                         @setTaskCover="setTaskCover" 
+                         @removeCover="removeTaskCover"/>
+                </button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>
@@ -157,7 +161,6 @@
                     </div>
                     <div class="member-modal-input">
                         <input placeholder="Search embers" type="text">
-
                     </div>
                     <h4>Board Members</h4>
                     <div class="board-members-details">
@@ -197,6 +200,7 @@ import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 import coverModal from '../cmps/task-cover/cover-modal.vue';
 import imgUpload from '../cmps/img-upload.vue';
+import cover from '../cmps/task-cover/cover.vue';
 
 export default {
     props: {},
@@ -205,7 +209,8 @@ export default {
         checklist,
         addChklistModal,
         coverModal,
-        imgUpload
+        imgUpload,
+        cover
     },
     data() {
         return {
@@ -219,7 +224,7 @@ export default {
             attachmentModal: false,
             groupId: null,
             checklistModal: false,
-            coverModal:false,
+            coverModal: false,
 
         }
     },
@@ -352,6 +357,19 @@ export default {
                 this.closeAll()
                 this.attachmentModal = true
             }
+        },
+        setTaskCover(cover) {
+            
+            if (this.task.cover?.img === null && this.task.cover.color == cover.color){
+                this.removeTaskCover()
+            } else {
+                this.task.cover = cover
+            }
+            this.saveBoard()
+        },
+        removeTaskCover() {
+            delete this.task.cover
+            this.saveBoard()
         }
     },
     computed: {

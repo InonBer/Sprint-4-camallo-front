@@ -11,14 +11,13 @@
         display: flex;
 
         .home-description {
-            flex-basis: 70%;
+            flex-basis: 68%;
             color: rgb(9, 30, 66);
 
             >div {
                 font-family: "Charlie Text", sans-serif;
                 width: 80%;
                 height: 100%;
-                margin: 0 auto;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
