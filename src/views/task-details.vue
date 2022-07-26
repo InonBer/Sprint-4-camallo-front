@@ -105,7 +105,6 @@
                     <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                         @onAddChklist=onAddChklist
                         @closeChklistModal="checklistModal = false" />
-
                 </button>
                 <button><span class="icon-date icn">
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -119,7 +118,8 @@
                         </svg>
                     </span> Dates</button>
                 <button @click="openAttachmentModal"><span class="icon-attachment icn"></span> Attachment</button>
-                <button><span class="icon-card-cover icn"></span> Cover</button>
+                <button><span class="icon-card-cover icn"></span> Cover
+                <coverModal /></button>
                 <button><span class="icon-custom-field icn"></span> Custom Fields</button>
                 <br>
                 <hr>
@@ -169,6 +169,7 @@ import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
+import coverModal from '../cmps/task-cover/cover-modal.vue';
 import imgUpload from '../cmps/img-upload.vue';
 
 export default {
@@ -177,6 +178,7 @@ export default {
     components: {
         checklist,
         addChklistModal,
+        coverModal,
         imgUpload
     },
     data() {
@@ -191,7 +193,8 @@ export default {
             attachmentModal: false,
             groupId: null,
             imgUrls: [],
-            checklistModal: false
+            checklistModal: false,
+            coverModal:true,
 
         }
     },
@@ -212,12 +215,13 @@ export default {
     methods: {
         onClickOutside() {
 
-            if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel) {
+            if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel || this.coverModal) {
                 this.checklistModal = false
                 this.attachmentModal = false
                 this.isDescEdited = false
                 this.memebersModal = false
                 this.labelModel = false
+                this.coverModal = false
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(url) {
