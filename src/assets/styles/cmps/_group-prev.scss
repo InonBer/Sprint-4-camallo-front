@@ -10,17 +10,20 @@
     padding-bottom: 8px;
     // box-shadow: #00000080 0px 1px 4px 2px;
     box-shadow: rgb(0 0 0 / 20%) 0px 1px 4px 2px;
-    max-height: 87vh;
+    // max-height: 87vh;
+    max-height: 85vh;
 }
 
 .group-card-scroll{
     overflow-y: auto;
     // padding-bottom:;
+ 
     &::-webkit-scrollbar{
         width: 6px;
         // padding-left: 10px;
         // margin-left:10px
     }
+
     &::-webkit-scrollbar-track {
         background: #ffffff00;
     

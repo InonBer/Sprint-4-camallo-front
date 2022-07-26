@@ -126,7 +126,7 @@ export default {
       this.$refs.taskTitleCreate.value = ''
       task.isEdited = false
       copy.tasks.push(task)
-      this.$store.dispatch('addTask', { group: copy, id: this.group.id })
+      this.$store.dispatch('addTask', { group: copy, id: task.id })
       // this.isTaskCreating = false
 
     },
@@ -149,7 +149,7 @@ export default {
 </script>
  <style>
  .group-card-scroll {
-   display: flex;
+   /* display: flex; */
    flex-direction: column;
    gap: 8px;
  }

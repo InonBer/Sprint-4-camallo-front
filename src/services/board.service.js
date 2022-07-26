@@ -73,9 +73,22 @@ async function addGroup(board, groups) {
   return save(boardCopy)
 }
 
+// function getActivityByType(type){
+//   switch (type) {
+//     case 'task':
+
+//       return {
+
+//       }
+
+//     case 'task':
+//       return 
+//     default:
+
+// }
+// }
+
 async function saveGroup(board, group) {
-  console.log(board);
-  console.log(group);
   const idx = board.groups.findIndex((currGroup) => {
     return currGroup.id == group.id
   })

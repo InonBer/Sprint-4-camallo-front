@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="sec-basis">
     <user-msg />
     <router-view />
   </section>
@@ -34,4 +34,9 @@ export default {
 }
 </script>
 <style>
+.sec-basis {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 </style>
