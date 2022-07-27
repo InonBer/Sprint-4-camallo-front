@@ -2,7 +2,7 @@
 
 .app-header {
     background-color: #1e6584;
-    height: rem(44px);
+    min-height: rem(44px);
     display: flex;
     justify-content: space-between;
     position: relative;
