@@ -66,10 +66,12 @@ export default {
         };
     },
     created() {
+        console.log(this.task);
         this.currTask = JSON.parse(JSON.stringify(this.task))
     },
     methods: {
         onTitleChange(ev) {
+
             let copy = JSON.parse(JSON.stringify(this.task))
             copy.title = this.currTask.title
             this.currTask.isEdited = !this.currTask.isEdited;
