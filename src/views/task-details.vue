@@ -67,7 +67,6 @@
                         class="desc-save-btn">Save</button>
                     <button @click.stop.prevent="isDescEdited = false" v-if="isDescEdited"
                         class="desc-cancel-btn">Cancel</button>
-                    <!-- <p v-if="!task.description" class="window-modal-warn">You have unsaved edits on this field. </p> -->
                 </div>
                 <section v-if="task.attachments && task.attachments.length" class="attachment-container">
                     <header>
@@ -78,9 +77,10 @@
                         <div class="attachment-content">
                             <img :src="attachment.imgUrl">
                             <div>
-                                <span class="attach-title"> {{ attachment.title }}</span>
+                                <span class="attach-title">{{ attachment.title }}</span>
                                 <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
+                                <span class="icon-card-cover"><span class="make-cover-BTN">Make cover</span></span>
                             </div>
                         </div>
                     </div>
@@ -176,13 +176,10 @@
                             <div class="a-m-content">
                                 <imgUpload @onImgUpload="saveImg" />
                             </div>
-
                         </div>
                     </section>
                 </div>
             </div>
-            <!-- <button @click="$router.go(-1)">X</button> -->
-
         </section>
     </div>
 </template>
@@ -218,7 +215,6 @@ export default {
             groupId: null,
             checklistModal: false,
             coverModal: false,
-
         }
     },
     async created() {
@@ -240,7 +236,6 @@ export default {
             const idx = this.task.attachments.findIndex(currAttach => currAttach.id === id)
             this.task.attachments.splice(idx, 1)
             this.saveBoard()
-
         },
         onCommentAdd() {
             this.task.comments = this.task.comments || []
@@ -254,7 +249,6 @@ export default {
             this.saveBoard('commentAdd')
         },
         onClickOutside() {
-
             if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel || this.coverModal) {
                 this.checklistModal = false
                 this.attachmentModal = false
@@ -265,7 +259,6 @@ export default {
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
-            console.log('imgData.created_at', imgData.created_at)
             this.task.attachments = this.task.attachments || []
             let attach = boardService.getEmptyAttachment()
             attach.title = imgData.original_filename
@@ -273,9 +266,7 @@ export default {
             attach.createdAt = imgData.created_at
             attach.uploadedBy = this.currUser
             this.task.attachments.push(attach)
-            console.log(this.task);
             this.saveBoard()
-
         },
         onCheck(checklist) {
             const idx = this.task.checklists.findIndex(currCheck => {

@@ -7,7 +7,6 @@
                     @change="handleFile" type="file">
             </div>
         </label>
-        <!-- <hr> -->
         <label @click.stop.prevent @drop.prevent="handleFile" @dragover.prevent="isDragover = true"
             @dragleave="isDragover = false" :class="{ drag: isDragover }">
             <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
@@ -19,12 +18,10 @@
 
 <script>
 import { uploadImg } from '../services/img-upload.service';
-// import UploadIcon from '../assets/svgs/upload-icon.vue';
 
 export default {
     name: 'img-upload',
     components: {
-        // UploadIcon
     },
     data() {
         return {
@@ -43,7 +40,6 @@ export default {
 
             this.isLoading = true
             const res = await uploadImg(file)
-            console.log('res', res)
             this.isLoading = false
             this.isDragover = false
             this.$emit('onImgUpload', res)
