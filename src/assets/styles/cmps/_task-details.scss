@@ -2,7 +2,7 @@
 @import './task-details/checklist';
 
 .window-overlay {
-    padding-top: 11rem; 
+    padding-top: 11rem;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -189,6 +189,20 @@
                         .delete-btn {
                             cursor: pointer;
                             text-decoration: underline;
+                        }
+
+
+                        .icon-card-cover {
+                            display: flex;
+                            flex-direction: row;
+                            @include trelloIconM("\e914");
+                            width: fit-content
+                        }
+
+                        .make-cover-BTN {
+                            text-decoration: underline;
+                            cursor: pointer;
+                            // width: 250px;
                         }
                     }
 
@@ -569,8 +583,7 @@
     cursor: default;
     z-index: 100;
     background-color: white;
-    // z-index: 50;
-    position: fixed;
+    position: absolute;
     width: 304px;
     display: flex;
     flex-direction: column;
@@ -578,19 +591,12 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    // justify-content: center;
     align-items: center;
-
-    // height: 200px;
-    left: 585px;
-    top: 325px;
+    top: 130px;
     border-radius: 3px;
     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
 
     .a-m-header {
-        // width: 95%;
-        // display: flex;
-        // justify-content: space-between;
         width: 90%;
         border-bottom: 1px solid #091e4221;
         box-sizing: border-box;
@@ -607,50 +613,33 @@
         height: 40px;
         margin-bottom: 8px;
         text-align: center;
+    }
 
-        .a-m-content {
-            // padding-top: 6px;
-            // display: flex;
-            // flex-direction: column;
-            // justify-content: center;
-            // align-items: flex-start;
-            // padding-left: 6px;
+    .a-m-content {
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        .attachment-modal {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            border-radius: 3px;
             width: 100%;
-            // padding-left: 20px;
-            // .uploader {
-            //     width: 100%;
-            //     height: 32px;
+            height: 32px;
+            // margin-inline-start: 12px;
+            padding-left: 12px;
 
-            //     &:hover {
-            //         cursor: pointer;
-            //         background-color: #f5f6f7;
-            //     }
-            // }
-            div {
-                display: flex;
-                align-items: center;
-                border-radius: 3px;
-                width: 100%;
-                height: 32px;
-                // margin-inline-start: 12px;
-                padding-left: 12px;
-
-                &:hover {
-                    cursor: pointer;
-                    background-color: #091e420a;
-                }
-
-            }
-
-
-            p {
-                color: #5e6c84;
+            &:hover {
+                cursor: pointer;
+                background-color: #091e420a;
             }
 
         }
+
+
+
 
 
         .icon-close {
@@ -662,12 +651,19 @@
     .img-upload {
         padding-inline-start: 20px;
         padding-inline-end: 20px;
-        // width: 100%;
+
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
 
         .uploader {
-            display: block;
+            display: flex;
+            align-self: center;
             cursor: pointer;
             height: 32px;
+
 
             &:hover {
                 background-color: #091e420a;
@@ -678,7 +674,10 @@
             box-sizing: border-box;
         }
 
-        // margin-bottom: 10px;
+
+        p {
+            color: #5e6c84;
+        }
     }
 
 }
