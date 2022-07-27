@@ -41,7 +41,7 @@ export default {
     onTaskMove(groups) {
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
-      socketService.emit('on-UserDrag', boardCopy)
+      // socketService.emit('on-UserDrag', boardCopy)
       this.$store.dispatch('saveBoard', { board: boardCopy })
     },
     onSocketBoards(board) {
