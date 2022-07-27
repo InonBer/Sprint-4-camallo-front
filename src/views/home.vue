@@ -13,7 +13,7 @@
             Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way
             your team works is unique accomplish it all with Camallo.
           </p>
-          <router-link class="home-start-link" to="/board/62dfd79a81e4be35d7adc8bd">See Demo</router-link>
+          <router-link class="home-start-link" to="/board-page">See Demo</router-link>
         </div>
       </article>
       <div class="image-container">
