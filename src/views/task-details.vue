@@ -55,7 +55,7 @@
                             task.description
                     }}</p>
                 <p v-if="!task.description && !isDescEdited" @click="isDescEdited = !isDescEdited"
-                    class="task-description-placeholder details-clr-reg-hvr">Add a more detailed
+                    class="task-description-placeholder details-clr-reg-hvr without-text">Add a more detailed
                     description...</p>
                 <textarea ref="taskDesc" :value="task.description" @keydown.enter.stop.prevent="saveDescription"
                     @keydown.esc.stop.prevent="isDescEdited = false" v-focus v-if="isDescEdited" class="task-text-area"
