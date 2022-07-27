@@ -96,6 +96,7 @@ export const boardStore = {
                 board.activities.push(activity)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
+                socketService.emit('on-UserDrag', board)
                 const boardToSave = await boardService.save(board)
             } catch (err) {
                 console.error(err)

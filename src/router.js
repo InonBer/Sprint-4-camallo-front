@@ -3,7 +3,8 @@ import boardPage from './views/board-page.vue'
 import home from './views/home.vue'
 import boardApp from './views/board-app.vue'
 import taskDetails from './views/task-details.vue'
-
+import login from './views/login.vue'
+import signup from './views/signup.vue'
 const routes = [
   {
     path: '/',
@@ -15,6 +16,17 @@ const routes = [
     name: 'boardPage',
     component: boardPage
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: signup
+  },
+
   {
     path: '/board/:boardId?/',
     name: 'boardApp',
