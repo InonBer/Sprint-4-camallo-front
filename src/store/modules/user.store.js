@@ -13,9 +13,17 @@ export const userStore = {
     getters: {
     },
     mutations: {
-
+        setCurrUser(state, { user }) {
+            state.currUser = user
+        }
     },
     actions: {
+        setCurrUser({ commit }, { user }) {
+            commit('setCurrUser', { user })
+        },
+        loginUser({ commit }, { user }) {
+            commit('setCurrUser', { user })
+        }
 
     },
 
