@@ -71,8 +71,6 @@ export default {
             return cols[idx]
         },
         onTaskMove(data, id) {
-
-            // debugger
             const obj = {
                 data,
                 id,
@@ -88,7 +86,6 @@ export default {
                 this.$emit('onTaskMove', groupsCopy)
                 this.dataToTranfer = []
             }
-
         },
         saveGroup(group) {
             console.log('here');

@@ -40,11 +40,8 @@ export default {
     methods: {
         onDrop(dropRes) {
             let items = JSON.parse(JSON.stringify(this.tasks))
-            console.log(this.currBoard);
             items = applyDrag(items, dropRes)
             this.$emit('onTaskMove', items)
-        },
-        test(dropRes) {
         },
         saveTask(task) {
             this.$emit('saveTask', task)

@@ -39,7 +39,6 @@ export default {
   emits: ['onBoardChange'],
   methods: {
     onTaskMove(groups) {
-      console.log(groups);
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
       socketService.emit('on-UserDrag', boardCopy)
