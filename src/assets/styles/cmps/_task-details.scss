@@ -2,7 +2,7 @@
 @import './task-details/checklist';
 
 .window-overlay {
-    padding-top: 11rem; 
+    padding-top: 6rem;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -23,11 +23,12 @@
     // height: 100%;
     background-color: #f4f5f7;
     border-radius: 2px;
-    margin: 48px 0 80px;
+    // margin: 48px 0 80px;
     width: 768px;
-    min-height: 974px;
+    min-height: 100vh;
     padding: 0 8px 8px 16px;
     z-index: 21;
+    top: 0;
 
     .task-details-header {
         margin: 15.2px 34.7px 0.7px 39.3px;
