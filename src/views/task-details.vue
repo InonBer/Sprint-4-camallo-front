@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
 
-        <section v-click-outside.stop.prevent="onClickOutside" v-if="board&&task" class="task-details">
+        <section v-click-outside.stop.prevent="onClickOutside" v-if="board && task" class="task-details">
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
@@ -301,7 +301,6 @@ export default {
             let boardCopy = JSON.parse(JSON.stringify(this.board))
             const groupIdx = boardCopy.groups.findIndex(group => group.id === this.groupId)
             const taskIdx = boardCopy.groups[groupIdx].tasks.findIndex(currTask => currTask.id === this.task.id)
-            // const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
             boardCopy.groups[groupIdx].tasks.splice(taskIdx, 1)
 
             this.$store.dispatch({ type: 'saveBoard', board: boardCopy, action: "taskRemove" })

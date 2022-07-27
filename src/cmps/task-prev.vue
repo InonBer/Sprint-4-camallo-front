@@ -33,7 +33,7 @@
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
-            <div class="task-prev-checklist" v-if="task.checklists"><span class="icon-list"></span>
+            <div class="task-prev-checklist" v-if="task.checklists?.length"><span class="icon-list"></span>
                 <span class="task-prev-checklist-txt">{{ checkListDone
                 }}/{{ checkListTotal }}</span>
             </div>
@@ -66,6 +66,7 @@ export default {
     },
     created() {
         this.currTask = JSON.parse(JSON.stringify(this.task))
+
     },
     methods: {
         onTitleChange(ev) {
@@ -83,13 +84,13 @@ export default {
             if (this.isEdited) return
             this.$emit('enterClicked')
         },
-        toggleLabelsExtended(){
-            this.$store.dispatch({type:'toggleLabelsExtended'})
+        toggleLabelsExtended() {
+            this.$store.dispatch({ type: 'toggleLabelsExtended' })
         }
     },
     computed: {
         checkListDone() {
-            return this.currTask.checklists?.reduce((acc, checklist) => {
+            return this.task.checklists.reduce((acc, checklist) => {
                 checklist.todos.forEach(todo => {
                     if (todo.isDone) acc++
                 });
@@ -97,18 +98,14 @@ export default {
             }, 0)
         },
         checkListTotal() {
-            return this.currTask.checklists.reduce((acc, checklist) => {
+            return this.task.checklists?.reduce((acc, checklist) => {
                 acc += checklist.todos.length
                 return acc;
             }, 0)
         },
         bgc() {
-            console.log(this.currTask.labelIds[0]);
             return "#61bd4f"
             return this.task.labelIds[0]
-        },
-        removeTask() {
-            console.log('wasda');
         },
         pos() {
             if (this.task.checklists || this.task.comments || this.task.description || this.task.attachments) {
@@ -130,7 +127,7 @@ export default {
                 }
             }
         },
-        labelsExtended(){
+        labelsExtended() {
             const user = this.$store.getters.currUser
             return user.labelsExtended
         }
