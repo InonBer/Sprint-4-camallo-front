@@ -566,7 +566,7 @@
 
 .attachment-modal {
     cursor: default;
-
+    z-index: 100;
     background-color: white;
     // z-index: 50;
     position: fixed;
