@@ -37,8 +37,8 @@
                             <hr>
 
                             <div class="details-labels-adding-container">
-                                <div class="label-modal-label" v-for="label in board.labels"
-                                    @click="addLabel(label.color)" :style="{ background: label.color }">
+                                <div class="label-modal-label" v-for="label in board.labels" @click="addLabel(label)"
+                                    :style="{ background: label.color }">
                                     <span> {{ label.title }}</span>
                                 </div>
                             </div>
@@ -229,7 +229,6 @@ export default {
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
             this.task = this.group.tasks[taskIdx]
-
         } catch (e) {
             console.log(e);
         }
@@ -329,10 +328,10 @@ export default {
             const copy = JSON.parse(JSON.stringify(this.board))
             this.$store.dispatch({ type: 'saveBoard', board: copy, action, task: miniTask })
         },
-        addLabel(color) {
+        addLabel(label) {
             if (!this.task.labelIds) this.task.labelIds = []
-            if (this.task.labelIds.includes(color)) return
-            this.task.labelIds.push(color)
+            if (this.task.labelIds.includes(label)) return
+            this.task.labelIds.push(label)
             this.saveBoard()
         },
         onAddChklist(title) {

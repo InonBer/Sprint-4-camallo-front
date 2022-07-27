@@ -13,7 +13,6 @@
   // max-height: 87vh;
   max-height: 85vh;
 
-
   .card-header {
     display: flex;
     justify-content: space-between;
@@ -39,6 +38,8 @@
       color: #172b4d;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-size: 14px;
+
+      margin-top: 5px;
     }
 
     textarea:focus {

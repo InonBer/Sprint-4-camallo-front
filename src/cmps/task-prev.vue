@@ -1,10 +1,11 @@
 <template>
     <section class="task-prev-container">
         <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
-        <div v-if="task.labelIds" class="task-label-container">
+        <div v-if="task.labelIds" class="task-label-container" @click.stop="toggleLabelsExtended">
 
-            <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
-                <span></span>
+            <div v-for="label in task.labelIds" :key="label" class="task-label" :class="labelsExtended ? 'ext' : ''"
+                :style="{ background: label.color }">
+                <span v-if="labelsExtended">{{ label.title }}</span>
             </div>
         </div>
         <div @contextmenu.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited"
@@ -52,7 +53,7 @@ export default {
     props: {
         task: {
             type: Object
-        }
+        },
     },
     name: 'TaskPrev',
     components: {},
@@ -61,14 +62,16 @@ export default {
             titleName: '',
             isEdited: true,
             currTask: null,
-
+            labelsExtended: false
         };
     },
     created() {
+        console.log(this.task);
         this.currTask = JSON.parse(JSON.stringify(this.task))
     },
     methods: {
         onTitleChange(ev) {
+
             let copy = JSON.parse(JSON.stringify(this.task))
             copy.title = this.currTask.title
             this.currTask.isEdited = !this.currTask.isEdited;
@@ -81,7 +84,7 @@ export default {
         enterForTask() {
             if (this.isEdited) return
             this.$emit('enterClicked')
-        }
+        },
     },
     computed: {
         checkListDone() {
@@ -118,7 +121,7 @@ export default {
                 return {
                     backgroundColor: this.task.cover.color,
                     backgroundImage: `url(${this.task.cover.img})`,
-                    'min-height': '150px'
+                    'min-height': '144.5px'
                 }
             } else {
                 return {

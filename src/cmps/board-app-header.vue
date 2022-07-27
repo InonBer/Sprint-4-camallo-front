@@ -30,10 +30,8 @@
           </div>
           <div class="create-screen-imgs-container">
             <img @click="setBgi(img)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img" alt="">
-
           </div>
           <div>
-
             <form class="board-create-form" action="">
               <label name="Board Title*" style="text-align:start"> Board Title <span>*</span>
                 <input v-model="boardTitle" type="text">
@@ -42,7 +40,6 @@
               </label>
               <button @click.stop.prevent="onBoardCreate" class="create-screen-button">Create</button>
             </form>
-
           </div>
         </div>
       </div>
@@ -87,7 +84,7 @@ export default {
       searchtxt: '',
       isChoosingBoard: false,
       backGroundPrev: '',
-      BGC:'#1e6584'
+      BGC: '#1e6584'
     };
   },
   async created() {

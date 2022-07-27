@@ -29,7 +29,7 @@ export const boardStore = {
         },
         currUser(state) {
             return state.currUser
-        }
+        },
     },
     mutations: {
         setBoards(state, { boards }) {
