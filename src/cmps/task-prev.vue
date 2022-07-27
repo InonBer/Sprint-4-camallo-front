@@ -20,7 +20,8 @@
                 :placeholder="currTask.title" dir="auto" placeholder="Enter a title for this card…"
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
-        <div class="task-prev-details" v-if="task.description || task.comments || task.checklists || task.attachments">
+        <div class="task-prev-details"
+            v-if="task.description || task.comments?.length || task.checklists?.length || task.attachments?.length">
 
             <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
 
@@ -40,7 +41,7 @@
 
 
         </div>
-        <div class="task-members-container" :class="pos" v-if="task.memberIds">
+        <div class="task-members-container" :class="pos" :style="posPad" v-if="task.memberIds">
             <img v-for="member in task.memberIds" class="task-member-img" :key="member._id" :title="member.fullname"
                 :src="member.imgUrl" alt="">
         </div>
@@ -108,11 +109,16 @@ export default {
             return this.task.labelIds[0]
         },
         pos() {
+            if (!this.task.checklists?.length && !this.task.comments?.length && !this.task.description && !this.task.attachments?.length) return "relative"
             if (this.task.checklists || this.task.comments || this.task.description || this.task.attachments) {
                 if (this.task.memberIds.length > 3) return "relative"
                 return "absolute"
             }
             else return "relative"
+        },
+        posPad() {
+            if (!this.task.checklists && !this.task.comments && !this.task.description && !this.task.attachments) return { marginTop: "5px" }
+
         },
         taskPrevCover() {
             if (this.task.cover.img) {

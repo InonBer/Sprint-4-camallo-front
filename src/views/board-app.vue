@@ -79,7 +79,9 @@ export default {
     '$route.params': {
       async handler({ boardId }) {
         try {
-          this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
+          if (!this.$store.getters.currBoard || this.$store.getters.currBoard._id !== boardId) {
+            this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
+          }
         } catch (err) {
           console.error(err)
         }

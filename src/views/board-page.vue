@@ -33,9 +33,10 @@
             </span>
             Boards</h2>
             <div class="board-prev-page-loop">
-                <div @click="$router.push(`/board/${board._id}`)" v-for="board in boards" :key="board.id"
+                <div @click="$router.push(`/board/${board._id}`)" v-for="board in boards" :key="board._id"
                     :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
                     <header>{{ board.title }}</header>
+                    <button class="boards-star-btn" @click.stop="toggleStar(board._id)"><span class="boards-star" :class="board.isStarred ? 'starred' : ''"></span></button>
                 </div>
             </div>
             </article>
@@ -45,9 +46,10 @@
             </span>
             Starred</h3>
             <div class="board-prev-page-loop">
-                <div @click="$router.push(`/board/${board._id}`)" v-for="board in starredBoards" :key="board.id"
+                <div @click="$router.push(`/board/${board._id}`)" v-for="board in starredBoards" :key="board._id"
                     :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
                     <header>{{ board.title }}</header>
+                    <button class="boards-star-btn" @click.stop="toggleStar(board._id)"><span class="boards-star starred"></span></button>
                 </div>
             </div>
             </article>
@@ -67,7 +69,14 @@ export default {
         return {};
     },
     created() { },
-    methods: {},
+    methods: {
+        toggleStar(id){
+            const idx = this.boards.findIndex(currBoard=>currBoard._id === id)
+            const board =  JSON.parse(JSON.stringify(this.boards[idx]))
+            board.isStarred = !board.isStarred
+            this.$store.dispatch('updateBoard',{board})
+        }
+    },
     computed: {
         boards() {
             return this.$store.getters.getBoards

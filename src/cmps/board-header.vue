@@ -49,9 +49,9 @@
          },
  
          starBoard() {
-            const board = {...this.board}
-             board.isStarred = !this.board.isStarred
-             this.$store.dispatch({ type: 'saveBoard', board})
+       const boardCopy =  JSON.parse(JSON.stringify(this.board))
+             boardCopy.isStarred = !this.board.isStarred
+             this.$store.dispatch('saveBoard', {board:boardCopy})
          },
  
      },

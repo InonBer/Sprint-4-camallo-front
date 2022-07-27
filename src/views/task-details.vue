@@ -80,7 +80,7 @@
                                 <span class="attach-title">{{ attachment.title }}</span>
                                 <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
-                                <span class="icon-card-cover"><span class="make-cover-BTN">Make cover</span></span>
+                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span class="make-cover-BTN">Make cover</span></span></span>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                         <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                             @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                     </button>
-                    <button>
+                    <!-- <button>
                         <span class="icon-date icn">
                             <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +131,7 @@
                                     fill="currentColor"></path>
                             </svg>
                         </span> Dates
-                    </button>
+                    </button> -->
                     <button @click="openAttachmentModal">
                         <span class="icon-attachment icn">
                         </span>
@@ -145,7 +145,7 @@
                         @closeCoverModal="coverModal = false" @setTaskCover="setTaskCover"
                         @removeCover="removeTaskCover" />
 
-                    <button><span class="icon-custom-field icn"></span> Custom Fields</button>
+                    <!-- <button><span class="icon-custom-field icn"></span> Custom Fields</button> -->
                     <br>
                     <hr>
                     <h4 class="details-actions">Actions</h4>
@@ -186,11 +186,13 @@
  <script>
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
+import { FastAverageColor } from 'fast-average-color';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 import coverModal from '../cmps/task-cover/cover-modal.vue';
 import imgUpload from '../cmps/img-upload.vue';
 import cover from '../cmps/task-cover/cover.vue';
+
 
 export default {
     props: {},
@@ -248,7 +250,7 @@ export default {
             this.$refs.detailsComment.value = ''
             this.saveBoard('commentAdd')
         },
-        onClickOutside() {
+        onClickOutside(ev) {
             if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel || this.coverModal) {
                 this.checklistModal = false
                 this.attachmentModal = false
@@ -369,7 +371,22 @@ export default {
         removeTaskCover() {
             delete this.task.cover
             this.saveBoard("coverRemove")
-        }
+        },
+         setCoverImg(url) {
+            const cover = {
+                img: url,
+                color: ''
+            }
+            const fac = new FastAverageColor();
+            fac.getColorAsync(url)
+                .then(color => {
+                    cover.color = color.rgba;
+                    this.setTaskCover(cover)
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+        },
     },
     computed: {
         currBoard() {
