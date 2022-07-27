@@ -31,8 +31,8 @@
             flex-direction: row;
             flex-wrap: wrap;
             gap: 16.3px;
-            &>*:hover {
-                filter: saturate(85%) brightness(85%);
+            &>:hover {
+                filter: saturate(100%) brightness(100%);
             }
         }
     }
@@ -45,9 +45,19 @@
     height: 96px;
     width: 194px;
     border-radius: 3px;
+    button{
+        position:relative;
+        background-color: transparent;
+    }
     .boards-star {
+        position:absolute;
+        left: 159px;
+        bottom: 27px;
+        z-index: 200;
+        color:transparent;
+
         @include trelloIconM("\e966");
-        font-size: 17px;
+        font-size: 14px;
         &.starred {
             @include trelloIconM("\e967");
             color: #f2d600;
@@ -56,7 +66,7 @@
             color: #f2d600;
             .boards-star{
                 @include trelloIconM("\e966");
-                font-size: 19px;
+                font-size: 15px;
             }
         }
     }
