@@ -1,10 +1,10 @@
 <template>
     <section class="task-prev-container">
         <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
-        <div v-if="task.labelIds" class="task-label-container">
+        <div v-if="task.labelIds" class="task-label-container" @click.stop="toggleLabelsExtended">
 
-            <div v-for="label in task.labelIds" :key="label" class="task-label" :style="{ background: label }">
-                <span></span>
+            <div v-for="label in task.labelIds" :key="label" class="task-label" :class="labelsExtended? 'ext':''" :style="{ background: label.color }">
+                <span v-if="labelsExtended">{{label.title}}</span>
             </div>
         </div>
         <div @contextmenu.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited"
@@ -28,7 +28,7 @@
             <div v-if="task.comments" class="task-prev-comments"><span class="icon-comment"></span>
                 <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
-            <div v-if="task.attachments.length" class="task-prev-attachments"><span class="icon-attachment"></span>
+            <div v-if="task.attachments?.length" class="task-prev-attachments"><span class="icon-attachment"></span>
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
@@ -52,7 +52,7 @@ export default {
     props: {
         task: {
             type: Object
-        }
+        },
     },
     name: 'TaskPrev',
     components: {},
@@ -61,7 +61,7 @@ export default {
             titleName: '',
             isEdited: true,
             currTask: null,
-
+            labelsExtended:false
         };
     },
     created() {
@@ -81,7 +81,7 @@ export default {
         enterForTask() {
             if (this.isEdited) return
             this.$emit('enterClicked')
-        }
+        },
     },
     computed: {
         checkListDone() {
@@ -118,7 +118,7 @@ export default {
                 return {
                     backgroundColor: this.task.cover.color,
                     backgroundImage: `url(${this.task.cover.img})`,
-                    'min-height':'150px'
+                    'min-height':'144.5px'
                 }
             } else {
                 return {

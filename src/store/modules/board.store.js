@@ -29,7 +29,7 @@ export const boardStore = {
         },
         currUser(state) {
             return state.currUser
-        }
+        },
     },
     mutations: {
         setBoards(state, { boards }) {
@@ -152,10 +152,7 @@ export const boardStore = {
             } catch (err) {
                 console.log(err);
             }
-        }
-
-
-
+        },
         // async setFilter({ commit }, { filterBy }) {
         //     try {
         //         const boards = await boardService.query(filterBy)
