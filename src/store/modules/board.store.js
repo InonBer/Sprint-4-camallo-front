@@ -152,6 +152,14 @@ export const boardStore = {
             } catch (err) {
                 console.log(err);
             }
+        },
+        onBoardSocketRecived({ commit, state }, { board }) {
+            if (state.currBoard._id === board._id) {
+                commit("setCurrBoard", { board })
+            }
+            // commit("saveBoard", { board })
+
+
         }
 
 

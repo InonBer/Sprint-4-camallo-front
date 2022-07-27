@@ -28,7 +28,7 @@
             <div v-if="task.comments" class="task-prev-comments"><span class="icon-comment"></span>
                 <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
-            <div v-if="task.attachments.length" class="task-prev-attachments"><span class="icon-attachment"></span>
+            <div v-if="task.attachments?.length" class="task-prev-attachments"><span class="icon-attachment"></span>
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
@@ -118,7 +118,7 @@ export default {
                 return {
                     backgroundColor: this.task.cover.color,
                     backgroundImage: `url(${this.task.cover.img})`,
-                    'min-height':'150px'
+                    'min-height': '150px'
                 }
             } else {
                 return {
