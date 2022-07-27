@@ -20,9 +20,6 @@ export const boardStore = {
         getBoards(state) {
             return state.boards
         },
-        // getBoardBGI(state) {
-        //     return state.currBoard.style.bgi
-        // },
         currBoard(state) {
             return state.currBoard
         },
@@ -52,9 +49,7 @@ export const boardStore = {
             }
         },
         setCurrBoard(state, { board }) {
-            console.log('SET BEFORE', board);
             state.currBoard = board
-            console.log('SET AFTER', state.currBoard);
         },
         saveTaskMove(state, { group }) {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
@@ -90,14 +85,13 @@ export const boardStore = {
             }
         },
         async saveBoard({ commit, state }, { board, action, task }) {
-            console.log('SAVE BOARD STORE', board);
             try {
                 let activity = boardService.getActivityByType(action, state.currUser, task)
                 board.activities.push(activity)
-                const boardToSave = await boardService.save(board)
                 socketService.emit('on-UserDrag', board)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
+                const boardToSave = await boardService.save(board)
 
             } catch (err) {
                 console.error(err)
@@ -168,6 +162,7 @@ export const boardStore = {
             }
         },
         onBoardSocketRecived({ commit, state }, { board }) {
+            console.log('Recived a socket');
             if (state.currBoard._id === board._id) {
                 commit("setCurrBoard", { board })
             }
