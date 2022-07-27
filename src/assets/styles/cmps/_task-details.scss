@@ -90,7 +90,7 @@
                 display: flex;
                 flex-direction: row;
                 gap: 4px;
-                flex-wrap:wrap;
+                flex-wrap: wrap;
 
 
                 .task-label-label {
@@ -106,7 +106,7 @@
                     padding: 0 12px;
                     width: auto;
                     cursor: pointer;
-                    color:white;
+                    color: white;
                     white-space: nowrap;
                 }
             }
@@ -267,14 +267,14 @@
         width: 304px;
         z-index: 1;
         border-radius: 3px;
-        padding-bottom:14px;
+        padding-bottom: 14px;
         cursor: default;
-    
+
         .modal-layout {
             max-width: 92%;
             margin: 0 auto;
         }
-    
+
         header {
             height: 40px;
             line-height: 40px;
@@ -283,11 +283,11 @@
             margin: 0 auto;
             margin-bottom: 11.5px;
             border-bottom: 1px solid #091e4221;
-    
+
             span {
                 font-size: 14px;
             }
-    
+
             .close-btn {
                 @include trelloIconM("\e91c");
                 color: #6b778c;
@@ -295,13 +295,14 @@
                 position: absolute;
                 right: 11px;
                 top: -1.3px;
-    
+
                 &:hover {
                     color: #172b4d;
                 }
             }
-    
-        }   
+
+        }
+
         .labels-modal-main {
             p {
                 font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -309,40 +310,44 @@
                 font-weight: 600;
                 margin: 0;
                 margin-bottom: 7.6px;
-            }  
+            }
         }
+
         .details-labels-adding-container {
             display: flex;
             flex-direction: column;
             gap: 4px;
             width: 100%;
-            .label-add-container{
+
+            .label-add-container {
                 display: flex;
-                button.edit-label-btn{
+
+                button.edit-label-btn {
                     border-radius: 3px;
                     padding: 6px;
                     color: #42526e;
-                    font-size:16px;
-                    margin:0;
+                    font-size: 16px;
+                    margin: 0;
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         background-color: #091e4214;
                         color: #091e42;
                     }
-                    .edit-label-icon{
+
+                    .edit-label-icon {
                         @include trelloIconM("\e928")
                     }
                 }
             }
-           
- 
 
             .label-modal-label {
                 width: 242px;
                 min-height: 32px;
                 border-radius: 3px;
                 padding: 3.6px 12px;
-                margin-inline-end:4.5px;
+                margin-inline-end: 4.5px;
+
                 span {
                     line-height: 25px;
                     font-weight: bold;
