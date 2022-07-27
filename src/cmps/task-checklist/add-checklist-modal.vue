@@ -9,7 +9,7 @@
             </header>
             <div class="checklist-modal-main">
                 <p>Title</p>
-                <input v-focus @keydown.enter="onAddChklist" v-model=title type="text" name="checklist-title" />
+                <input @focus="$event.target.select()"  @keydown.enter="onAddChklist" v-model=title type="text" name="checklist-title" />
                 <button @click="onAddChklist" class="blue-btn">Add</button>
             </div>
         </div>
