@@ -119,7 +119,7 @@
                         <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                             @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                     </button>
-                    <button>
+                    <!-- <button>
                         <span class="icon-date icn">
                             <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +131,7 @@
                                     fill="currentColor"></path>
                             </svg>
                         </span> Dates
-                    </button>
+                    </button> -->
                     <button @click="openAttachmentModal">
                         <span class="icon-attachment icn">
                         </span>
@@ -145,7 +145,7 @@
                         @closeCoverModal="coverModal = false" @setTaskCover="setTaskCover"
                         @removeCover="removeTaskCover" />
 
-                    <button><span class="icon-custom-field icn"></span> Custom Fields</button>
+                    <!-- <button><span class="icon-custom-field icn"></span> Custom Fields</button> -->
                     <br>
                     <hr>
                     <h4 class="details-actions">Actions</h4>
@@ -250,7 +250,7 @@ export default {
             this.$refs.detailsComment.value = ''
             this.saveBoard('commentAdd')
         },
-        onClickOutside() {
+        onClickOutside(ev) {
             if (this.checklistModal || this.attachmentModal || this.isDescEdited || this.memebersModal || this.labelModel || this.coverModal) {
                 this.checklistModal = false
                 this.attachmentModal = false
