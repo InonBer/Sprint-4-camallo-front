@@ -36,6 +36,7 @@
                 <div @click="$router.push(`/board/${board._id}`)" v-for="board in boards" :key="board.id"
                     :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
                     <header>{{ board.title }}</header>
+                    <span class="boards-star"></span>
                 </div>
             </div>
             </article>
