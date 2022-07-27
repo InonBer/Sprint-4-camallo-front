@@ -96,8 +96,8 @@ export default {
 
         },
         isActive(color) {
-            return (!this.task.cover.img &&
-                this.task.cover.color === color)
+            return (!this.task.cover?.img &&
+                this.task.cover?.color === color)
         }
     },
     computed: {

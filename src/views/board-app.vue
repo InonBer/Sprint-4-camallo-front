@@ -12,6 +12,7 @@ import { boardService } from '../services/board.service';
 import groupList from "../cmps/group-list.vue"
 import boardHeader from '../cmps/board-header.vue'
 import boardAppHeader from '../cmps/board-app-header.vue';
+import { socketService } from '../services/socket.service';
 
 export default {
   emits: ['onTaskMove'],
@@ -27,7 +28,7 @@ export default {
     }
   },
   created() {
-    console.log('created');
+    socketService.on('on-dragRecived', this.onSocketBoards)
     // const { id } = this.$route.params
     // try {
     //   this.board = await boardService.getById(id)
@@ -38,10 +39,13 @@ export default {
   emits: ['onBoardChange'],
   methods: {
     onTaskMove(groups) {
-      console.log(groups);
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
+      socketService.emit('on-UserDrag', boardCopy)
       this.$store.dispatch('saveBoard', { board: boardCopy })
+    },
+    onSocketBoards(board) {
+      this.$store.dispatch('onBoardSocketRecived', { board })
     },
     onDetails(ids) {
       ids.boardId = this.currBoard._id
@@ -75,8 +79,6 @@ export default {
     '$route.params': {
       async handler({ boardId }) {
         try {
-          // this.board = await boardService.getById(boardId)
-          // console.log(board);
           this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
         } catch (err) {
           console.error(err)

@@ -27,6 +27,9 @@ export default {
     computed: {
         boards() {
             return this.$store.getters.getBoards
+        },
+        starredBoards() {
+            return this.boards.filter(board => board.isStarred)
         }
     },
     unmounted() { },

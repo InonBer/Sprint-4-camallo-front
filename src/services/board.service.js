@@ -148,13 +148,11 @@ async function save(board) {
 }
 
 function getActivityByType(type, user, onItem = null) {
-  console.log(type);
-
   let activity = {
     id: utilService.makeId(),
     txt: '',
     byMember: user,
-    createdAt: new Date(),
+    createdAt: Date.now(),
     task: onItem
   }
   console.log(activity.byMember);
@@ -197,6 +195,9 @@ function getActivityByType(type, user, onItem = null) {
       return activity
     case "coverRemove":
       activity.txt = 'Removed a cover'
+      return activity
+    case "commentAdd":
+      activity.txt = 'Added a comment'
       return activity
 
   }

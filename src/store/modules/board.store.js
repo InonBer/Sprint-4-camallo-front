@@ -153,6 +153,11 @@ export const boardStore = {
                 console.log(err);
             }
         },
+        onBoardSocketRecived({ commit, state }, { board }) {
+            if (state.currBoard._id === board._id) {
+                commit("setCurrBoard", { board })
+            }
+        }
         // async setFilter({ commit }, { filterBy }) {
         //     try {
         //         const boards = await boardService.query(filterBy)

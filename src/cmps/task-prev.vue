@@ -3,8 +3,9 @@
         <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
         <div v-if="task.labelIds" class="task-label-container" @click.stop="toggleLabelsExtended">
 
-            <div v-for="label in task.labelIds" :key="label" class="task-label" :class="labelsExtended? 'ext':''" :style="{ background: label.color }">
-                <span v-if="labelsExtended">{{label.title}}</span>
+            <div v-for="label in task.labelIds" :key="label" class="task-label" :class="labelsExtended ? 'ext' : ''"
+                :style="{ background: label.color }">
+                <span v-if="labelsExtended">{{ label.title }}</span>
             </div>
         </div>
         <div @contextmenu.stop.prevent="currTask.isEdited = !currTask.isEdited" v-if="!currTask.isEdited"
@@ -61,7 +62,7 @@ export default {
             titleName: '',
             isEdited: true,
             currTask: null,
-            labelsExtended:false
+            labelsExtended: false
         };
     },
     created() {
@@ -118,7 +119,7 @@ export default {
                 return {
                     backgroundColor: this.task.cover.color,
                     backgroundImage: `url(${this.task.cover.img})`,
-                    'min-height':'144.5px'
+                    'min-height': '144.5px'
                 }
             } else {
                 return {

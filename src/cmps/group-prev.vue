@@ -91,12 +91,7 @@ export default {
       this.$store.dispatch('addTask', { group, id: group.id })
     },
     onTaskMove(tasks) {
-      // const copy = JSON.parse(JSON.stringify(tasks))
       this.$emit('onTaskMove', tasks, this.group.id)
-      // this.items.tasks = JSON.parse(JSON.stringify(tasks))
-      // let groupCopy = JSON.parse(JSON.stringify(this.group))
-      // groupCopy = tasks
-      // this.$emit('onTaskMove', groupCopy)
     },
 
     onTitleChange() {
