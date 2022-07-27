@@ -23,8 +23,8 @@
                     </div>
                     <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
                         <div class="sb-act">
-                            <img class="act-memImg" :src="activity.byMember.imgUrl" alt="">
-                            <div>{{ activity.byMember.fullname }} <span>{{ activity.txt }}</span></div>
+                            <img class="act-memImg" :src="activity?.byMember.imgUrl" alt="">
+                            <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span></div>
                         </div>
                     </div>
                 </div>
@@ -107,6 +107,7 @@ export default {
     },
     created() {
         this.bounce = debounce(this.getPhotos)
+        console.log(this.currBoard);
     },
     methods: {
         onCloseNav() {

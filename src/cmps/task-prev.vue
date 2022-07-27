@@ -28,7 +28,7 @@
             <div v-if="task.comments" class="task-prev-comments"><span class="icon-comment"></span>
                 <span class="task-prev-comments-txt">{{ task.comments.length }}</span>
             </div>
-            <div v-if="task.attachments" class="task-prev-attachments"><span class="icon-attachment"></span>
+            <div v-if="task.attachments.length" class="task-prev-attachments"><span class="icon-attachment"></span>
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
@@ -107,7 +107,7 @@ export default {
             console.log('wasda');
         },
         pos() {
-            if (this.task.checklists || this.task.comments || this.task.description) {
+            if (this.task.checklists || this.task.comments || this.task.description || this.task.attachments) {
                 if (this.task.memberIds.length > 3) return "relative"
                 return "absolute"
             }

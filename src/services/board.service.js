@@ -37,6 +37,7 @@ export const boardService = {
   addGroup,
   getEmptyTodo,
   getEmptyAttachment,
+  getActivityByType,
 
 }
 
@@ -144,6 +145,63 @@ async function save(board) {
   } else {
     return httpService.post('board/', boardCopy)
   }
+}
+
+function getActivityByType(type, user, onItem = null) {
+  console.log(type);
+
+  let activity = {
+    id: utilService.makeId(),
+    txt: '',
+    byMember: user,
+    createdAt: new Date(),
+    task: onItem
+  }
+  console.log(activity.byMember);
+  switch (type) {
+    case "description":
+      activity.txt = 'Modified the description'
+      return activity
+    case "taskAdd":
+      activity.txt = 'Added a task'
+      return activity
+    case "taskRemove":
+      activity.txt = 'Removed a task'
+      return activity
+    case "groupRemove":
+      activity.txt = 'Removed a group'
+      return activity
+    case "memberAdd":
+      activity.txt = 'Added a member'
+      return activity
+    case "memberRemove":
+      activity.txt = 'Removed a member'
+      return activity
+    case "attachmentAdd":
+      activity.txt = 'Added a attachment'
+      return activity
+    case "attachmentRemove":
+      activity.txt = 'Removed a attachment'
+      return activity
+    case "groupAdd":
+      activity.txt = 'Added a group'
+      return activity
+    case "bgChange":
+      activity.txt = 'Changed the background'
+      return activity
+    case undefined:
+      activity.txt = 'Had some modifications done'
+      return activity
+    case "coverAdd":
+      activity.txt = 'Added a cover'
+      return activity
+    case "coverRemove":
+      activity.txt = 'Removed a cover'
+      return activity
+
+  }
+
+
 }
 
 function getEmptyGroup() {

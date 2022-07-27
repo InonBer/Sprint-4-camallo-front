@@ -106,10 +106,9 @@ export default {
             group.title = JSON.parse(JSON.stringify(this.groupTitle))
             group.titleEdit = false
             this.groupTitle = ''
-            let groups = JSON.parse(JSON.stringify(this.groups))
-            groups.push(group)
-            this.$store.dispatch('addGroup', { groups })
-
+            let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
+            boardCopy.groups.push(group)
+            this.$store.dispatch('saveBoard', { board: boardCopy, action: "groupAdd" })
         },
         onDetails(ids) {
             this.$emit('onDetails', ids)

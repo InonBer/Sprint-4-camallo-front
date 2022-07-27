@@ -72,7 +72,7 @@ export default {
       let board = JSON.parse(JSON.stringify(this.currBoard))
       const idx = board.groups.findIndex(group => group.id === this.group.id)
       board.groups.splice(idx, 1)
-      this.$store.dispatch('saveBoard', { board })
+      this.$store.dispatch('saveBoard', { board, action: "groupRemove" })
     },
     onTaskAdding() {
       this.isTaskCreating = true
