@@ -70,7 +70,6 @@ export default {
                 .then(color => {
                     cover.color = color.rgba;
                     this.$emit('setTaskCover', cover)
-                    // console.log('Average color', color);
                 })
                 .catch(e => {
                     console.log(e);
