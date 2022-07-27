@@ -88,7 +88,7 @@ export default {
     },
     computed: {
         checkListDone() {
-            return this.currTask.checklists.reduce((acc, checklist) => {
+            return this.currTask.checklists?.reduce((acc, checklist) => {
                 checklist.todos.forEach(todo => {
                     if (todo.isDone) acc++
                 });
