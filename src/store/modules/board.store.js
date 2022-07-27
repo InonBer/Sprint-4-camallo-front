@@ -24,7 +24,6 @@ export const boardStore = {
         //     return state.currBoard.style.bgi
         // },
         currBoard(state) {
-            console.log(state.currBoard);
             return state.currBoard
         },
         currUser(state) {
@@ -53,16 +52,16 @@ export const boardStore = {
             }
         },
         setCurrBoard(state, { board }) {
+            console.log('SET BEFORE', board);
             state.currBoard = board
-            console.log('state.currBoard', state.currBoard)
-
+            console.log('SET AFTER', state.currBoard);
         },
         saveTaskMove(state, { group }) {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
             state.currBoard.groups.splice(idx, 1, group)
         },
-        toggleLabelsExtended(state){
-            if(!state.currUser.labelsExtended){
+        toggleLabelsExtended(state) {
+            if (!state.currUser.labelsExtended) {
                 state.currUser.labelsExtended = true
             } else {
                 state.currUser.labelsExtended = false
@@ -91,18 +90,24 @@ export const boardStore = {
             }
         },
         async saveBoard({ commit, state }, { board, action, task }) {
+            console.log('SAVE BOARD STORE', board);
             try {
                 let activity = boardService.getActivityByType(action, state.currUser, task)
                 board.activities.push(activity)
+                const boardToSave = await boardService.save(board)
+                socketService.emit('on-UserDrag', board)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
-                socketService.emit('on-UserDrag', board)
-                const boardToSave = await boardService.save(board)
+
             } catch (err) {
                 console.error(err)
             }
         },
-        async setCurrBoard({ commit }, { id }) {
+        async setCurrBoard({ state, commit }, { id }) {
+            // const idx = state.boards.findIndex(currBoard => currBoard._id === id) 
+            // const board =  JSON.parse(JSON.stringify(state.boards[idx]))
+            // commit('setCurrBoard', { board })
+
             try {
                 const board = await boardService.getBoardById(id)
                 commit('setCurrBoard', { board })
@@ -167,7 +172,7 @@ export const boardStore = {
                 commit("setCurrBoard", { board })
             }
         },
-        toggleLabelsExtended({commit}){
+        toggleLabelsExtended({ commit }) {
             commit('toggleLabelsExtended')
         }
         // async setFilter({ commit }, { filterBy }) {
