@@ -62,11 +62,9 @@ export default {
             titleName: '',
             isEdited: true,
             currTask: null,
-            labelsExtended: false
         };
     },
     created() {
-        console.log(this.task);
         this.currTask = JSON.parse(JSON.stringify(this.task))
     },
     methods: {
@@ -85,6 +83,9 @@ export default {
             if (this.isEdited) return
             this.$emit('enterClicked')
         },
+        toggleLabelsExtended(){
+            this.$store.dispatch({type:'toggleLabelsExtended'})
+        }
     },
     computed: {
         checkListDone() {
@@ -129,6 +130,10 @@ export default {
                 }
             }
         },
+        labelsExtended(){
+            const user = this.$store.getters.currUser
+            return user.labelsExtended
+        }
     },
     unmounted() { },
 }

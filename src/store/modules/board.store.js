@@ -61,6 +61,14 @@ export const boardStore = {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
             state.currBoard.groups.splice(idx, 1, group)
         },
+        toggleLabelsExtended(state){
+            if(!state.currUser.labelsExtended){
+                state.currUser.labelsExtended = true
+            } else {
+                state.currUser.labelsExtended = false
+            }
+
+        }
         //   setFilter(state, { filterBy }) {
         //     state.filterBy = { ...filterBy }
         //   }
@@ -157,6 +165,9 @@ export const boardStore = {
             if (state.currBoard._id === board._id) {
                 commit("setCurrBoard", { board })
             }
+        },
+        toggleLabelsExtended({commit}){
+            commit('toggleLabelsExtended')
         }
         // async setFilter({ commit }, { filterBy }) {
         //     try {

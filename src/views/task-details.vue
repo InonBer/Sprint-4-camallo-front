@@ -1,7 +1,7 @@
 <template>
     <div class="window-overlay">
 
-        <section v-click-outside.stop.prevent="onClickOutside" v-if="board" class="task-details">
+        <section v-click-outside.stop.prevent="onClickOutside" v-if="board&&task" class="task-details">
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
