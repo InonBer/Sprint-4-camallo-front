@@ -138,7 +138,6 @@ async function remove(id) {
 
 async function save(board) {
   // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
-  console.log(board);
   const boardCopy = JSON.parse(JSON.stringify(board))
   if (board._id) {
     return httpService.put('board/' + board._id, boardCopy)

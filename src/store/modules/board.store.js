@@ -117,8 +117,8 @@ export const boardStore = {
         },
         async updateBoard({ commit }, { board }) {
             try {
-                const updatedBoard = await boardService.update(board)
-                commit('saveBoard', { board: updatedBoard })
+                const updatedBoard = await boardService.save(board)
+                commit('saveBoard', { board })
             }
             catch (err) {
                 console.log(err);
