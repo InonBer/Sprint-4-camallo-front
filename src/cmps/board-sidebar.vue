@@ -24,7 +24,11 @@
                     <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
                         <div class="sb-act">
                             <avatar :username="activity.byMember.fullname" />
-                            <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span></div>
+                            <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span>
+                            <br/><span>{{activityDate(activity.createdAt)}}</span>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -80,6 +84,7 @@
  <script>
 import { unsplashService } from '../services/unsplash.service'
 import { debounce } from '../services/util.service';
+import moment from 'moment';
 import avatar from './avatar.vue'
 export default {
     name: 'board-sidebar',
@@ -149,6 +154,11 @@ export default {
             boardCopy.style.bgi = null
             boardCopy.style.bgc = color
             this.$store.dispatch('saveBoard', { board: boardCopy })
+        },
+        activityDate(createdAt){
+            const test = moment(createdAt).fromNow()
+            console.log(test)
+            return test
         }
     },
     computed: {
@@ -194,7 +204,7 @@ export default {
  
  .sb-act div {
      justify-self: center;
-     align-self: center;
+     align-self: start;
      font-size: 14px;
      font-weight: 700;
  }
