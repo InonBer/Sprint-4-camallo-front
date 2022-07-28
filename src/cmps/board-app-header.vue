@@ -51,7 +51,9 @@
       <!-- <input type="text" placeholder=" Search"> -->
 
       <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
-      <avatar :username="currUser.fullname" />
+      <div style="width:32px; height:32px">
+        <avatar :username="currUser.fullname" />
+      </div>
     </div>
   </header>
 
