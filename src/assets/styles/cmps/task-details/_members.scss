@@ -43,6 +43,28 @@
     top: 87px;
     right: -5px;
     padding-bottom: 8px;
+    .member-modal-ext-btn{
+        position: absolute;
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        width: 40px;
+        background-color: white;
+        height: 40px;
+        top: 0;
+        right: 0;
+        padding-right: 5px;
+        cursor: pointer;
+        span{
+            color: #6b778c;
+            font-size: 16px;
+            font-weight: 400;
+            @include trelloIconM("\e91c");
+        }
+        span:hover{
+            color: #172b4d;
+        }
+    }
 }
 
 .board-members-details span {
