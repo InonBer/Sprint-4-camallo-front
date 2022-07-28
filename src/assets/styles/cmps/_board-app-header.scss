@@ -134,6 +134,8 @@
             cursor: pointer;
             background: rgba(9, 30, 66, 0.04);
         }
+
+
     }
 
     .header-content .header-button {
@@ -196,6 +198,16 @@
         justify-self: flex-end;
         display: flex;
         align-items: center;
+        // justify-content: space-between;
+
+        .header-create-button {
+            margin-right: 10px;
+            justify-content: center;
+            background-color: #CF513D;
+            width: 32px;
+        }
+
+        margin-right: 10px;
     }
 
     .el-input__wrapper {
