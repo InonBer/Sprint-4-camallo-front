@@ -85,13 +85,16 @@
 }
 
 .star-btn {
-    width:32px;
-    height: 32px;
+    height: 35px;
+    width: 35px;
     display:flex;
     justify-content: center;
     align-items: center;
     padding-top:7.5px;
     .icon-star {
+        position: relative;
+        bottom: 3.8px;
+        right: 0.3px;
         @include trelloIconM("\e966");
         font-size: 17px;
         &.starred {

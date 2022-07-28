@@ -20,7 +20,9 @@
         & button {
             margin-inline-end: 0.3em;
         }
-
+        .board-header-board{
+            cursor:not-allowed;
+        }
         .board-header-title {
             font-size: rem(18px);
             font-weight: 700;

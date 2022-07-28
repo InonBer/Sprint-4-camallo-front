@@ -5,10 +5,10 @@
             <button @click="starBoard" class="opacity-button star-btn">
                 <span class="icon-star" :class="board.isStarred ? 'starred' : ''"></span></button>
             <span class="btn-divider"></span>
-            <button class="opacity-button">Boards</button>
+            <button class="opacity-button board-header-board">Boards</button>
             <span class="btn-divider"></span>
-            <button class="opacity-button">Boards</button>
-            <span class="btn-divider"></span>
+            <!-- <button class="opacity-button">Boards</button>
+            <span class="btn-divider"></span> -->
         <section class="members">
             <img class="userImg" v-for="(user,idx) in board.members.slice(0,4)" :key="user._id" :src=board.members[idx].imgUrl />
         </section>

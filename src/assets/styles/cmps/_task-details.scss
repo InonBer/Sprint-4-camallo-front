@@ -552,7 +552,6 @@
                 box-shadow: none;
                 box-sizing: border-box;
                 cursor: pointer;
-                display: block;
                 height: 32px;
                 margin-top: 5px;
                 max-width: 167px;
@@ -562,6 +561,7 @@
                 transition-duration: 85ms;
                 user-select: none;
                 white-space: nowrap;
+                align-items: center;
 
                 &:hover {
                     background-color: #091e4214;
@@ -571,7 +571,7 @@
                     margin-inline-end: 0.5em;
                     font-size: 17px;
                     position: relative;
-                    top: 1.7px;
+                    top: -2.1px;
                     left: 2.8px;
                 }
 
