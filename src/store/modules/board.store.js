@@ -10,11 +10,7 @@ export const boardStore = {
         boards: null,
         filterBy: null,
         currBoard: null,
-        currUser: {
-            id: "I101",
-            fullname: "Inon Bereshit",
-            imgUrl: "https://trello-members.s3.amazonaws.com/62d03408f2…cf6a3ee86/53b4fffdf23f7ae5407de6d7dc77bffb/50.png"
-        }
+
     },
     getters: {
         getBoards(state) {
@@ -23,9 +19,7 @@ export const boardStore = {
         currBoard(state) {
             return state.currBoard
         },
-        currUser(state) {
-            return state.currUser
-        },
+
     },
     mutations: {
         setBoards(state, { boards }) {
@@ -55,11 +49,11 @@ export const boardStore = {
             const idx = state.currBoard.groups.findIndex(currGroup => group.id === currGroup.id)
             state.currBoard.groups.splice(idx, 1, group)
         },
-        toggleLabelsExtended(state) {
-            if (!state.currUser.labelsExtended) {
-                state.currUser.labelsExtended = true
+        toggleLabelsExtended(rootState) {
+            if (!rootState.userStore.currUser.labelsExtended) {
+                rootState.userStore.currUser.labelsExtended = true
             } else {
-                state.currUser.labelsExtended = false
+                rootState.userStore.currUser.labelsExtended = false
             }
 
         }
@@ -84,10 +78,11 @@ export const boardStore = {
                 console.error(err)
             }
         },
-        async saveBoard({ commit, state }, { board, action, task }) {
+        async saveBoard({ commit, state, rootState }, { board, action, task }) {
             try {
-                let activity = boardService.getActivityByType(action, state.currUser, task)
-                board.activities.push(activity)
+                console.log(rootState.userStore.currUser);
+                let activity = boardService.getActivityByType(action, rootState.userStore.currUser, task)
+                board.activities.unshift(activity)
                 socketService.emit('on-UserDrag', board)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })

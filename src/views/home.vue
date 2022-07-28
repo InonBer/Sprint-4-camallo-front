@@ -13,7 +13,8 @@
             Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way
             your team works is unique accomplish it all with Camallo.
           </p>
-          <router-link class="home-start-link" to="/board-page">See Demo</router-link>
+          <button @click="onDemoRequest" class="home-start-link">See Demo</button>
+          <!-- <router-link class="home-start-link" to="/board-page">See Demo</router-link> -->
         </div>
       </article>
       <div class="image-container">
@@ -32,6 +33,11 @@ export default {
   name: 'home',
   data() {
     return {
+      guestUser: {
+        fullname: 'Guest Guest',
+        email: 'Guest@example.com',
+        password: '1234'
+      }
     }
   },
   computed: {
@@ -40,6 +46,15 @@ export default {
     console.log(this.$route.fullPath)
   },
   methods: {
+    async onDemoRequest() {
+      try {
+        this.$store.dispatch('onGuestLogin', { guest: this.guestUser })
+        console.log(this.$store.getters.currUser);
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
   },
   components: {
     homeHeader,

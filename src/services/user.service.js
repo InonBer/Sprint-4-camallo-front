@@ -29,7 +29,7 @@ function getUsers() {
 
 function onUserUpdate(user) {
     showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
-    store.commit({type: 'setWatchedUser', user})
+    store.commit({ type: 'setWatchedUser', user })
 }
 
 async function getById(userId) {
@@ -56,15 +56,20 @@ async function update(user) {
 }
 
 async function login(userCred) {
+    console.log('userCred', userCred)
+
     // const users = await storageService.query('user')
     // const user = users.find(user => user.username === userCred.username)
     const user = await httpService.post('auth/login', userCred)
+    console.log('user', user)
+
     if (user) {
         socketService.login(user._id)
         return saveLocalUser(user)
     }
 }
 async function signup(userCred) {
+    console.log(userCred)
     // userCred.score = 10000;
     // const user = await storageService.post('user', userCred)
     const user = await httpService.post('auth/signup', userCred)

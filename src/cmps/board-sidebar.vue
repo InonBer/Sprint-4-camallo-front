@@ -21,10 +21,11 @@
                     <div class="activities-title">
                         <p><span class="icon-activity"></span> Activities</p>
                     </div>
-                    <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
+                    <div v-if="currBoard?.activities.length" v-for="activity in currBoard.activities"
+                        class="sidebar-act-cnt">
                         <div class="sb-act">
-                            <avatar :username="activity.byMember.fullname" />
-                            <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span></div>
+                            <avatar v-if="activity.byMember" :username="activity.byMember.fullname" />
+                            <div>{{ activity?.byMember?.fullname }} <span>{{ activity.txt }}</span></div>
                         </div>
                     </div>
                 </div>
@@ -79,6 +80,7 @@
 </template>
  <script>
 import { unsplashService } from '../services/unsplash.service'
+import { userService } from '../services/user.service';
 import { debounce } from '../services/util.service';
 import avatar from './avatar.vue'
 export default {

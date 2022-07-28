@@ -52,7 +52,7 @@
 
       <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
       <div style="width:32px; height:32px">
-        <avatar :username="currUser.fullname" />
+        <avatar @click="logout" :username="currUser.fullname" />
       </div>
     </div>
   </header>
@@ -62,6 +62,7 @@
 import { Search } from '@element-plus/icons-vue'
 import { boardService } from '../services/board.service';
 import { FastAverageColor } from 'fast-average-color';
+import { userService } from '../services/user.service';
 import recentModal from './recent-modal.vue'
 import avatar from './avatar.vue'
 export default {
@@ -101,6 +102,11 @@ export default {
   methods: {
     test(ev) {
       console.log(ev);
+    },
+    logout() {
+      userService.logout()
+      this.$store.dispatch('userLogout')
+      this.$router.push('/')
     },
     closeAllCreate() {
       this.isCreating = false

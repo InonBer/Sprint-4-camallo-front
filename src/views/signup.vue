@@ -6,7 +6,7 @@
 
             <h4>Sign up for your account</h4>
             <el-input class="signup-input" placeholder="Enter email" v-model="credentials.email"></el-input>
-            <el-input class="signup-input" placeholder="Fullname" v-model="credentials.fullName"></el-input>
+            <el-input class="signup-input" placeholder="Fullname" v-model="credentials.fullname"></el-input>
             <el-input class="signup-input" type="password" placeholder="Password" v-model="credentials.password">
             </el-input>
             <div class="signup-small">
@@ -17,7 +17,7 @@
                     <a>Privacy Policy.</a>
                 </small>
             </div>
-            <el-button>Continue</el-button>
+            <el-button @click="onSignup">Continue</el-button>
             <span>OR</span>
             <div class="login-btn-container flex column align-center">
                 <button class="continue-btn flex align-center justify-center">
@@ -50,7 +50,7 @@ export default {
         return {
             credentials: {
                 email: '',
-                fullName: '',
+                fullname: '',
                 password: ''
             }
         }
@@ -59,11 +59,12 @@ export default {
 
     },
     methods: {
-        onSignup() {
-            if (this.email.length > 3 && this.credentials.fullName.length > 3 && this.credentials.length > 3) return
+        async onSignup() {
+            if (this.credentials.email.length < 3 && this.credentials.fullname.length < 3 && this.credentials.password.length < 3) return
+            console.log('logging in');
             const cred = JSON.parse(JSON.stringify(this.credentials))
             try {
-                const user = userService.signup(cred)
+                const user = await userService.signup(cred)
                 this.$store.dispatch('setCurrUser', { user })
                 this.$router.push('/board-page')
             } catch (e) {
