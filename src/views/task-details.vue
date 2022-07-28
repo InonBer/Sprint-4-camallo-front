@@ -62,6 +62,10 @@
                             </div>
                         </section>
                     </div>
+                    <div v-if="task.dueDate" class="due-date-container">
+                    <p class="details-duedate-title">Due date</p>
+                        {{task.dueDate}}
+                    </div>
                 </div>
                 <div class="window-modal-content">
                     <div class="window-modal-title">

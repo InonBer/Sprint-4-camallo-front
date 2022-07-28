@@ -30,7 +30,6 @@ export default {
     },
     methods: {
         onDueDateSet() {
-
             let date = JSON.parse(JSON.stringify(this.date))
             console.log(this.date);
             this.$emit('onDueDateSet', date)
