@@ -131,7 +131,14 @@
     flex-direction: column;
 
 }
-
+.mmbr-include-v{
+    @include trelloIconM("\e916");
+    align-self: center;
+    // justify-self: flex-end;
+    position: absolute;
+    font-size: 16px;
+    right: 15px;
+}
 .inner-container-details {
     display: flex;
     flex-direction: row;

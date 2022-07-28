@@ -187,6 +187,7 @@
                                 :key="member._id" class="inner-container-details">
                                 <img :src="member.imgUrl" alt="">
                                 <span>{{ member.fullname }} </span>
+                                <span class="mmbr-include-v" v-if="task.memberIds.includes(member)"></span>
                             </div>
 
                         </div>
