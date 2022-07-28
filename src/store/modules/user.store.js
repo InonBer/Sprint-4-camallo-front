@@ -23,6 +23,14 @@ export const userStore = {
         userLogout(state) {
             state.currUser = null
         },
+        toggleLabelsExtended(state) {
+            if (!state.currUser.labelsExtended) {
+                state.currUser.labelsExtended = true
+            } else {
+                state.currUser.labelsExtended = false
+            }
+
+        }
     },
     actions: {
         setCurrUser({ commit }, { user }) {
@@ -45,6 +53,9 @@ export const userStore = {
             } catch (e) {
                 console.log(e);
             }
+        },
+        toggleLabelsExtended({ commit }) {
+            commit('toggleLabelsExtended')
         }
 
     },
