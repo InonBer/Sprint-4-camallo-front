@@ -70,6 +70,14 @@
         letter-spacing: 2.4px;
         font-size: 12px;
 
+        &.chcklist-done {
+            background-color: #61bd4f;
+            border-radius: 3px;
+            color: #fff;
+            text-overflow: ellipsis;
+            padding: 0 2px;
+        }
+
         span {
             font-size: 16px;
         }
@@ -119,6 +127,7 @@
         margin-top: -0.8000000000000014px;
         margin-bottom: 5px;
         flex-wrap: wrap;
+
         // transition: 0.3s;
         &:hover {
             filter: saturate(85%) brightness(85%);
@@ -136,12 +145,25 @@
 
     }
 
+    @keyframes example {
+        100% {
+            padding: 0 8px;
+            height: 16px;
+            line-height: 16px;
+            color: white;
+            font-size: 12px;
+        }
+    }
+
     .ext {
-        padding: 0 8px;
-        height: 16px;
-        line-height: 16px;
-        color: white;
-        font-size: 12px;
+        // padding: 0 8px;
+        // height: 16px;
+        // line-height: 16px;
+        // color: white;
+        // font-size: 12px;
+        animation-name: example;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
     }
 
     .task-prev {
