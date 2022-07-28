@@ -344,16 +344,31 @@
             }
 
             .label-modal-label {
+                position: relative;
                 width: 242px;
                 min-height: 32px;
                 border-radius: 3px;
                 padding: 3.6px 12px;
                 margin-inline-end: 4.5px;
+                transition: box-shadow,padding 0.3s;
+                &:hover{
+                    box-shadow: -8px 0;
+                    padding-left:16px;
+                }
 
                 span {
                     line-height: 25px;
                     font-weight: bold;
                     color: white
+                }
+                span.label-include-v{
+                    @include trelloIconM("\e916");
+                    align-self: center;
+                    position: absolute;
+                    font-weight: 400;
+                    font-size: 16px;
+                    right: 9px;
+                    top: 4px;
                 }
             }
 
