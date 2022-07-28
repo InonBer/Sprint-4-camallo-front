@@ -23,7 +23,7 @@
                     </div>
                     <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
                         <div class="sb-act">
-                            <img class="act-memImg" :src="activity?.byMember.imgUrl" alt="">
+                            <avatar :username="activity.byMember.fullname" />
                             <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span></div>
                         </div>
                     </div>
@@ -80,10 +80,13 @@
  <script>
 import { unsplashService } from '../services/unsplash.service'
 import { debounce } from '../services/util.service';
+import avatar from './avatar.vue'
 export default {
     name: 'board-sidebar',
 
-    components: {},
+    components: {
+        avatar
+    },
     data() {
         return {
             boardMenuTitle: 'Menu',

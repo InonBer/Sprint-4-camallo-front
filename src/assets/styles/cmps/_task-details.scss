@@ -260,10 +260,10 @@
     // }
 
     .labels-modal {
-        position: fixed;
-        right: 470px;
-        top: 100px;
-        background-color: $clr6;
+        position: absolute;
+        right: -235px;
+        top: 127px;
+      background-color: $clr6;
         width: 304px;
         z-index: 1;
         border-radius: 3px;
@@ -680,7 +680,7 @@
     font-weight: 400;
     line-height: 20px;
     align-items: center;
-    top: 130px;
+    top: 104px;
     border-radius: 3px;
     box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
 

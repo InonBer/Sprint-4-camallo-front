@@ -1,7 +1,7 @@
 <template>
     <section class="task-prev-container">
         <div v-if="task.cover" :style="taskPrevCover" class="task-prev-cover"></div>
-        <div v-if="task.labelIds" class="task-label-container" @click.stop="toggleLabelsExtended">
+        <div v-if="task.labelIds?.length" class="task-label-container" @click.stop="toggleLabelsExtended">
 
             <div v-for="label in task.labelIds" :key="label" class="task-label" :class="labelsExtended ? 'ext' : ''"
                 :style="{ background: label.color }">

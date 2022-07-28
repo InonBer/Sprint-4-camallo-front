@@ -3,8 +3,10 @@
     <div class="header-content">
       <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/app-icon.png" alt="" srcset=""> Camallo
       </h2>
-      <button class="header-button">Recent <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
-      <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
+      <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Recent <img
+          src="../assets/arrow-down.png" alt="arw-dwn" />
+        <recentModal v-if="isRecentModalOpen" :boards="boards" />
+      </button> <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
       <div class="conss">
         <button @click="onCreate" class="header-create-button">Create</button>
         <div v-click-outside="() => { isCreating = false }" v-if="isCreating" class="header-creating-container">
@@ -43,23 +45,13 @@
           </div>
         </div>
       </div>
-
-      <select @change="changeLink" v-if="boards" id="boards" name="board-list">
-        <option v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</option>
-        <!-- <option :value="boards[0]._id">{{ boards[0].title }}</option>
-        <option :value="boards[1]._id">{{ boards[1].title }}</option> -->
-
-        <!-- <option v-for="board in bards" value=""></option> -->
-      </select>
-
     </div>
     <div class="header-end">
 
       <!-- <input type="text" placeholder=" Search"> -->
 
       <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
-      <button class="header-create-button">Bell</button>
-      <button class="header-create-button">icon</button>
+      <avatar :username="currUser.fullname" />
     </div>
   </header>
 
@@ -68,13 +60,17 @@
 import { Search } from '@element-plus/icons-vue'
 import { boardService } from '../services/board.service';
 import { FastAverageColor } from 'fast-average-color';
-
+import recentModal from './recent-modal.vue'
+import avatar from './avatar.vue'
 export default {
   props: {
 
   },
   name: 'app-header',
-  components: {},
+  components: {
+    recentModal,
+    avatar
+  },
   data() {
     return {
       boardTitle: '',
@@ -84,7 +80,8 @@ export default {
       searchtxt: '',
       isChoosingBoard: false,
       backGroundPrev: '',
-      BGC: '#1e6584'
+      BGC: '#1e6584',
+      isRecentModalOpen: false,
     };
   },
   async created() {
@@ -108,17 +105,8 @@ export default {
       this.isChoosingBoard = false
       this.boardTitle = ''
       this.backGroundPrev = ''
-
-    },
-    changeLink(ev) {
-      // this.$router.push('/')
-      this.$store.dispatch('setCurrBoard', { id: ev.target.value })
-      this.$router.push(`/board/${ev.target.value}`);
-      // setTimeout(() => {
-      // }, 0)
     },
     setBgi(img) {
-
       this.backGroundPrev = img
     },
     onBoardCreate() {
@@ -130,7 +118,6 @@ export default {
       this.boardTitle = ''
       this.backGroundPrev = ''
       this.$store.dispatch('addNewBoard', { board })
-
     },
     onCreate() {
       this.boardTitle = ''
@@ -163,6 +150,9 @@ export default {
     boards() {
       return this.$store.getters.getBoards
     },
+    currUser() {
+      return this.$store.getters.currUser
+    }
   },
   unmounted() { },
 }

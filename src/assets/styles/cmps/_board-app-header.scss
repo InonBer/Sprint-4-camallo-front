@@ -19,7 +19,106 @@
     .header-content {
         display: flex;
         align-items: center;
+
+        .recent-modal {
+            width: 304px;
+            cursor: default;
+            position: absolute;
+            top: 40px;
+            background-color: white;
+            z-index: 20;
+            font-size: 14px;
+            color: #172B4D;
+            line-height: 18px;
+            font-weight: 500;
+
+            header {
+                display: flex;
+                flex-direction: column;
+
+                div {
+                    color: #172b4d;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    font-weight: 400;
+                    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+                    color: #5e6c84;
+                    height: 40px;
+                    display: block;
+                    line-height: 40px;
+                    margin: 0;
+                    overflow: hidden;
+                    // padding: 0 32px;
+                    // position: relative;
+                    // text-overflow: ellipsis;
+                    // white-space: nowrap;
+
+                }
+
+                .close-btn {
+                    position: absolute;
+                    right: 10px;
+                    top: 3px;
+                    color: #2d2e30;
+
+                    * {
+                        height: auto;
+                        width: 10px;
+                    }
+
+                }
+            }
+
+            ul {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                list-style-type: none;
+                justify-content: start;
+                text-align: left;
+                padding: 10px;
+                margin: 0;
+                width: 100%;
+                margin-bottom: 4px;
+                gap: 2px;
+
+                :first-child {
+                    margin-top: 2px;
+                }
+
+                .recent-content {
+                    width: 98%;
+                    margin-top: 2px;
+                    height: 32px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 3px;
+                    color: #172B4D;
+                    border-radius: 3px;
+
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #EBECF0;
+                    }
+                }
+
+                .li-board-img {
+                    width: 40px;
+                    height: 32px;
+                    border-radius: 3px;
+                }
+            }
+        }
+
+
+
     }
+
+
+
 
     .header-create-button {
         display: flex;
@@ -82,11 +181,9 @@
             height: 16px;
             width: 16px;
             position: relative;
-            top: 2px;
+            top: 1px;
         }
     }
-
-
 
     .el-input--prefix,
     .el-input__wrapper {
@@ -94,6 +191,8 @@
     }
 
     .header-end {
+        gap: 4px;
+        margin-right: 5px;
         justify-self: flex-end;
         display: flex;
         align-items: center;
