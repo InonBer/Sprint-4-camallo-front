@@ -80,7 +80,8 @@
                                 <span class="attach-title">{{ attachment.title }}</span>
                                 <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
-                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span class="make-cover-BTN">Make cover</span></span></span>
+                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span
+                                            class="make-cover-BTN">Make cover</span></span></span>
                             </div>
                         </div>
                     </div>
@@ -372,7 +373,7 @@ export default {
             delete this.task.cover
             this.saveBoard("coverRemove")
         },
-         setCoverImg(url) {
+        setCoverImg(url) {
             const cover = {
                 img: url,
                 color: ''

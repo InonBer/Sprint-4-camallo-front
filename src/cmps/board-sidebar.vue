@@ -23,7 +23,11 @@
                     </div>
                     <div v-for="activity in currBoard.activities" class="sidebar-act-cnt">
                         <div class="sb-act">
-                            <img class="act-memImg" :src="activity?.byMember.imgUrl" alt="">
+                            <!-- <img class="act-memImg" :src="activity?.byMember.imgUrl" alt=""> -->
+                            <b-avatar :text="activity.byMember.fullname.split(' ').map(word => word.charAt(0)).join('')"
+                                icon="person-fill" :size="32">
+                            </b-avatar>
+
                             <div>{{ activity?.byMember.fullname }} <span>{{ activity.txt }}</span></div>
                         </div>
                     </div>
@@ -146,7 +150,8 @@ export default {
             boardCopy.style.bgi = null
             boardCopy.style.bgc = color
             this.$store.dispatch('saveBoard', { board: boardCopy })
-        }
+        },
+
     },
     computed: {
         currBoard() {
@@ -157,7 +162,12 @@ export default {
                 return { backgroundImage: `url('  ${this.currBoard.style.bgi}  ')` }
             }
             else return { backgroundColor: 'rgb(' + this.currBoard.style.bgc + ')' }
-        },
+        }, username(username) {
+            console.log('username', username)
+
+            // username
+
+        }
 
     },
     unmounted() { },
@@ -177,10 +187,11 @@ export default {
  }
  
  .sb-act {
-     height: 76px;
+     height: 50px;
      display: flex;
      flex-direction: row;
      gap: 8px;
+     align-items: center;
  
  }
  

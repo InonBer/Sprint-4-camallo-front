@@ -19,6 +19,79 @@
     .header-content {
         display: flex;
         align-items: center;
+
+        .recent-modal {
+            position: absolute;
+            top: 40px;
+            background-color: white;
+            z-index: 20;
+            color: #172b4d;
+            font-size: 14px;
+            color: #172B4D;
+            line-height: 18px;
+            font-weight: 500;
+
+            header {
+
+                margin-bottom: 8px;
+                padding: 0 12px;
+                position: relative;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+
+                div {
+                    color: #172b4d;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                    font-size: 14px;
+                    line-height: 20px;
+                    font-weight: 400;
+                    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+                    color: #5e6c84;
+                    height: 40px;
+                    display: block;
+                    line-height: 40px;
+                    margin: 0;
+                    overflow: hidden;
+                    padding: 0 32px;
+                    position: relative;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    grid-column: 1 / span 3;
+                    grid-row: 1;
+                }
+
+                .close-btn {
+                    position: absolute;
+                    right: 10px;
+                    top: 3px;
+                    color: #2d2e30;
+
+                    * {
+                        height: auto;
+                        width: 10px;
+                    }
+
+                }
+            }
+
+            ul {
+                width: 304px;
+                display: flex;
+                flex-direction: column;
+                list-style-type: none;
+                justify-content: start;
+                text-align: left;
+                padding: 10px;
+                margin: 0;
+
+                :first-child {
+                    margin-top: 2px;
+                }
+
+
+            }
+        }
     }
 
     .header-create-button {
@@ -35,6 +108,8 @@
             cursor: pointer;
             background: rgba(9, 30, 66, 0.04);
         }
+
+
     }
 
     .header-content .header-button {
@@ -95,6 +170,16 @@
         justify-self: flex-end;
         display: flex;
         align-items: center;
+        // justify-content: space-between;
+
+        .header-create-button {
+            margin-right: 10px;
+            justify-content: center;
+            background-color: #CF513D;
+            width: 32px;
+        }
+
+        margin-right: 10px;
     }
 
     .el-input__wrapper {
