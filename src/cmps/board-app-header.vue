@@ -1,7 +1,8 @@
 <template>
   <header class="app-header" :style="{ backgroundColor: BGC }">
     <div class="header-content">
-      <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset=""> Camallo
+      <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset="">
+        Camallo
       </h2>
       <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Recent <img
           src="../assets/arrow-down.png" alt="arw-dwn" />
@@ -118,6 +119,7 @@ export default {
       this.backGroundPrev = img
     },
     onBoardCreate() {
+      if (this.boardTitle.length < 1) return
       let board = boardService.getEmptyBoard()
       board.title = JSON.parse(JSON.stringify(this.boardTitle))
       board.style.bgi = JSON.parse(JSON.stringify(this.backGroundPrev))
