@@ -34,11 +34,6 @@
                                 <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                             </div>
                         </template>
-                        <!-- <div v-click-outside="() => { labelModel = !labelModel }" @click.stop=""
-                            class="details-label-to-add-container" v-if="labelModel">
-                            <h2 class="details-label-header">Labels</h2>
-                            <hr>
-                             -->
                         <section @click.stop="" class="labels-modal" v-if="labelModel"
                             v-click-outside="() => { labelModel = !labelModel }">
                             <div class="modal-layout">
@@ -54,6 +49,7 @@
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
+                                                    <span class="label-include-v" v-if="task.labelIds.includes(label)"></span>
                                                 </div>
                                                 <button class="edit-label-btn"><span
                                                         class="edit-label-icon"></span></button>
@@ -354,9 +350,12 @@ export default {
         },
         addLabel(label) {
             if (!this.task.labelIds) this.task.labelIds = []
-            const taskLabels = this.task.labelIds.map(label => label.id)
-            if (taskLabels.includes(label.id)) return
-            this.task.labelIds.push(label)
+            const labelIdx = this.task.labelIds.findIndex(labelId => labelId.id === label.id)
+            if (labelIdx !== -1) {
+                this.task.labelIds.splice(labelIdx,1)
+            } else {
+                this.task.labelIds.push(label)
+            }
             this.saveBoard()
         },
         onAddChklist(title) {

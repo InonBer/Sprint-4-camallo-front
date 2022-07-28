@@ -10,13 +10,15 @@
         justify-content: space-between;
         transition: background-color 0.5s ease 0s, box-shadow 0.5s ease 0s;
         height: 60px;
-        img.header-icon-img{
+
+        img.header-icon-img {
             height: 16px;
             width: 16px;
             position: relative;
             top: 1px;
             margin-inline-end: 6px;
         }
+
         &:hover {
             box-shadow: rgb(9 30 66 / 15%) 0px 0.5rem 1rem 0px;
         }
