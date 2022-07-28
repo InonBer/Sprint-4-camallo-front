@@ -29,6 +29,7 @@
     user-select: none;
     flex-direction: column;
     cursor: pointer;
+    padding-bottom: 10px;
 
     .task-prev-cover {
         width: 106.4%;
@@ -97,10 +98,11 @@
     .task-prev {
         justify-self: flex-start;
         align-self: flex-start;
+        // padding-bottom: 10px;
     }
 
     .task-prev-details {
-        padding-bottom: 8px;
+        // padding-bottom: 8px;
         display: flex;
         flex-direction: row;
         justify-self: flex-start;
@@ -119,6 +121,7 @@
         margin-top: -0.8000000000000014px;
         margin-bottom: 5px;
         flex-wrap: wrap;
+
         // transition: 0.3s;
         &:hover {
             filter: saturate(85%) brightness(85%);

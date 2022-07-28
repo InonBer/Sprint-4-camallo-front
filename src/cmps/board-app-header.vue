@@ -18,7 +18,9 @@
                 </svg></span></button>
           </header>
           <ul>
-            <li v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</li>
+            <li v-for="board in boards" :key="board._id" :value="board._id" @click="changeLink(board._id)"> {{
+                board.title
+            }}</li>
           </ul>
         </section>
       </button>
@@ -62,13 +64,13 @@
         </div>
       </div>
 
-      <select @change="changeLink" v-if="boards" id="boards" name="board-list">
-        <option v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</option>
-        <!-- <option :value="boards[0]._id">{{ boards[0].title }}</option>
+      <!-- <select @change="changeLink" v-if="boards" id="boards" name="board-list"> -->
+      <!-- <option v-for="board in boards" :key="board._id" :value="board._id"> {{ board.title }}</option> -->
+      <!-- <option :value="boards[0]._id">{{ boards[0].title }}</option>
         <option :value="boards[1]._id">{{ boards[1].title }}</option> -->
 
-        <!-- <option v-for="board in bards" value=""></option> -->
-      </select>
+      <!-- <option v-for="board in bards" value=""></option> -->
+      <!-- </select> -->
 
     </div>
     <div class="header-end">
@@ -86,7 +88,7 @@
       <!-- <b-avatar button @click="onClick"
         src="https://scontent.fhfa2-2.fna.fbcdn.net/v/t1.18169-9/14604868_10207837850613190_7477266573465067764_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=174925&_nc_ohc=2CWWj-F6GlUAX924qVr&_nc_ht=scontent.fhfa2-2.fna&oh=00_AT_ytDVVRYGatO-w3lbPMvfXfPVYmFVjSGd5rYBWfp1alg&oe=63074F8A"
         :size="32"></b-avatar> -->
-      <b-avatar button @click="onClick" text="G" icon="person-fill" :size="32"></b-avatar>
+      <b-avatar button @click="onClick" :text="getCurrUserName" icon="person-fill" :size="32"></b-avatar>
     </div>
   </header>
 
@@ -138,10 +140,14 @@ export default {
       this.backGroundPrev = ''
 
     },
-    changeLink(ev) {
+    changeLink(id) {
       // this.$router.push('/')
-      this.$store.dispatch('setCurrBoard', { id: ev.target.value })
-      this.$router.push(`/board/${ev.target.value}`);
+      // console.log('id', id)
+
+      this.$store.dispatch('setCurrBoard', { id })
+      this.$router.push(`/board/${id}`);
+      // this.$store.dispatch('setCurrBoard', { id: ev.target.value })
+      // this.$router.push(`/board/${ev.target.value}`);
       // setTimeout(() => {
       // }, 0)
     },
@@ -191,6 +197,11 @@ export default {
     boards() {
       return this.$store.getters.getBoards
     },
+    getCurrUserName() {
+      // const user = this.$store.getters.currUser
+      // return (user.imgUrl)?user.imgUrl:user.fullname.split(' ').map(word => word.charAt(0)).join('')
+      return this.$store.getters.currUser.fullname.split(' ').map(word => word.charAt(0)).join('')
+    }
   },
   unmounted() { },
 }
