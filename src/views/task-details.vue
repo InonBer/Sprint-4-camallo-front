@@ -94,7 +94,7 @@
                             <img :src="attachment.imgUrl">
                             <div>
                                 <span class="attach-title">{{ attachment.title }}</span>
-                                <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
+                                <span>Added {{attachmentDate(attachment.createdAt)}} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
                                 <span>
                                     <span class="icon-card-cover">
@@ -210,6 +210,7 @@
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import { FastAverageColor } from 'fast-average-color';
+import moment from 'moment';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 import coverModal from '../cmps/task-cover/cover-modal.vue';
@@ -411,6 +412,9 @@ export default {
                 .catch(e => {
                     console.log(e);
                 })
+        },
+          attachmentDate(createdAt){
+            return moment(createdAt).fromNow()
         },
     },
     computed: {

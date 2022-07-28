@@ -156,9 +156,7 @@ export default {
             this.$store.dispatch('saveBoard', { board: boardCopy })
         },
         activityDate(createdAt){
-            const test = moment(createdAt).fromNow()
-            console.log(test)
-            return test
+            return moment(createdAt).fromNow()
         }
     },
     computed: {
