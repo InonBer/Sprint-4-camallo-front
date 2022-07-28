@@ -34,7 +34,7 @@
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
-            <div class="task-prev-checklist" v-if="task.checklists?.length"><span class="icon-list"></span>
+            <div class="task-prev-checklist" :class="checkListDone === checkListTotal ? 'chcklist-done':''" v-if="task.checklists?.length"><span class="icon-list"></span>
                 <span class="task-prev-checklist-txt">{{ checkListDone
                 }}/{{ checkListTotal }}</span>
             </div>

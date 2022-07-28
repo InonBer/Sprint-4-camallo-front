@@ -38,7 +38,8 @@
                             <h2 class="details-label-header">Labels</h2>
                             <hr>
                              -->
-                        <section @click.stop="" class="labels-modal" v-if="labelModel" v-click-outside="() => { labelModel = !labelModel }">
+                        <section @click.stop="" class="labels-modal" v-if="labelModel"
+                            v-click-outside="() => { labelModel = !labelModel }">
                             <div class="modal-layout">
                                 <header>
                                     <span>
@@ -47,13 +48,14 @@
                                     <span @click="labelModel = !labelModel" class="close-btn"></span>
                                 </header>
                                 <div class="labels-modal-main">
-                                     <div class="details-labels-adding-container">
+                                    <div class="details-labels-adding-container">
                                         <div v-for="label in board.labels" @click="addLabel(label)">
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
                                                 </div>
-                                                <button class="edit-label-btn"><span class="edit-label-icon"></span></button>
+                                                <button class="edit-label-btn"><span
+                                                        class="edit-label-icon"></span></button>
                                             </dive>
                                         </div>
                                     </div>
@@ -92,10 +94,16 @@
                             <img :src="attachment.imgUrl">
                             <div>
                                 <span class="attach-title">{{ attachment.title }}</span>
-                                <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
+                                <span>Added {{attachmentDate(attachment.createdAt)}} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
-                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span
-                                            class="make-cover-BTN">Make cover</span></span></span>
+                                <span>
+                                    <span class="icon-card-cover">
+                                        <span v-if="attachment.imgUrl !== task.cover?.img" class="make-cover-BTN"
+                                            @click=setCoverImg(attachment.imgUrl)>Make
+                                            cover</span>
+                                        <span v-else class="make-cover-BTN" @click="removeTaskCover">Remove cover</span>
+                                    </span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -183,10 +191,10 @@
                         </div>
                     </section>
                     <section v-if="attachmentModal" class="attachment-modal">
-                        <div class="attachment-modal">
+                        <div class="attachment-modal" v-click-outside="() => attachmentModal = false">
                             <header class="a-m-header">
                                 Attach from…
-                                <span @click.prevent="closeMenuModal" class="a-m-header-close-btn icon-close"></span>
+                                <span @click.prevent="closeMenuModal" class="icon-close"></span>
                             </header>
                             <div class="a-m-content">
                                 <imgUpload @onImgUpload="saveImg" />
@@ -202,6 +210,7 @@
 import { handleError } from 'vue';
 import { boardService } from '../services/board.service';
 import { FastAverageColor } from 'fast-average-color';
+import moment from 'moment';
 import checklist from '../cmps/task-checklist/checklist.vue';
 import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 import coverModal from '../cmps/task-cover/cover-modal.vue';
@@ -217,7 +226,9 @@ export default {
         addChklistModal,
         coverModal,
         imgUpload,
-        cover
+        cover,
+        isAttachmentCover: false
+
     },
     data() {
         return {
@@ -338,7 +349,7 @@ export default {
         },
         addLabel(label) {
             if (!this.task.labelIds) this.task.labelIds = []
-            const taskLabels = this.task.labelIds.map(label=> label.id)
+            const taskLabels = this.task.labelIds.map(label => label.id)
             if (taskLabels.includes(label.id)) return
             this.task.labelIds.push(label)
             this.saveBoard()
@@ -376,7 +387,6 @@ export default {
             }
         },
         setTaskCover(cover) {
-
             if (this.task.cover?.img === null && this.task.cover.color == cover.color) {
                 this.removeTaskCover()
             } else {
@@ -402,6 +412,9 @@ export default {
                 .catch(e => {
                     console.log(e);
                 })
+        },
+          attachmentDate(createdAt){
+            return moment(createdAt).fromNow()
         },
     },
     computed: {

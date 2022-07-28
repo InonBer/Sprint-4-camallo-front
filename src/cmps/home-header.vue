@@ -1,7 +1,7 @@
 <template>
     <header class="top-header">
         <div class="header-container">
-            <div>
+            <div><img class="header-icon-img" src="../assets/icon-test-blue.png" alt="" srcset=""/>
                 <h2 class="logo">Camallo</h2>
             </div>
 

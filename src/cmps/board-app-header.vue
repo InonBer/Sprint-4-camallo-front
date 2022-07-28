@@ -1,7 +1,7 @@
 <template>
   <header class="app-header" :style="{ backgroundColor: BGC }">
     <div class="header-content">
-      <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/app-icon.png" alt="" srcset=""> Camallo
+      <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset=""> Camallo
       </h2>
       <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Recent <img
           src="../assets/arrow-down.png" alt="arw-dwn" />
