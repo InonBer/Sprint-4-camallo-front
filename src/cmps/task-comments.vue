@@ -3,7 +3,7 @@
 </template>
  <script>
 export default {
-    name: 'details-activities',
+    name: 'task-comments',
     props: {
         task: Object
     },
