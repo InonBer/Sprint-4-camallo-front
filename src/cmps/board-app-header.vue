@@ -4,10 +4,16 @@
       <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset="">
         Camallo
       </h2>
-      <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Recent <img
-          src="../assets/arrow-down.png" alt="arw-dwn" />
-        <recentModal v-if="isRecentModalOpen" :boards="boards" />
-      </button> <button class="header-button">Starred <img src="../assets/arrow-down.png" alt="arw-dwn" /></button>
+      <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Boards
+        <img src="../assets/arrow-down.png" alt="arw-dwn" />
+        <recentModal v-if="isRecentModalOpen" :boards="boards" :title="'Boards'"
+          v-click-outside="() => { isRecentModalOpen = false }" />
+      </button>
+      <button @click="isStarredModalOpen = !isStarredModalOpen" class="header-button">Starred
+        <img src="../assets/arrow-down.png" alt="arw-dwn" />
+        <recentModal v-if="isStarredModalOpen" :boards="starredBoards" :title="'Starred boards'"
+          v-click-outside="() => { isStarredModalOpen = false }" />
+      </button>
       <div class="conss">
         <button @click="onCreate" class="header-create-button">Create</button>
         <div v-click-outside="() => { isCreating = false }" v-if="isCreating" class="header-creating-container">
@@ -86,6 +92,7 @@ export default {
       BGC: '#1e6584',
       isRecentModalOpen: false,
       searchtxt: '',
+      isStarredModalOpen: false
     };
   },
   async created() {
@@ -162,6 +169,11 @@ export default {
     },
     currUser() {
       return this.$store.getters.currUser
+    },
+    starredBoards() {
+      return this.boards.filter((board) => {
+        return board.isStarred
+      })
     }
   },
   unmounted() { },
