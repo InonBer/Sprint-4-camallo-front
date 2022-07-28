@@ -8,21 +8,43 @@ export const userStore = {
     state: {
         loggedinUser: null,
         users: [],
-        watchedUser: null
+        watchedUser: null,
+        currUser: userService.getLoggedinUser()
     },
     getters: {
+        currUser(state) {
+            return state.currUser
+        },
     },
     mutations: {
         setCurrUser(state, { user }) {
             state.currUser = user
-        }
+        },
+        userLogout(state) {
+            state.currUser = null
+        },
     },
     actions: {
         setCurrUser({ commit }, { user }) {
+            console.log(user);
             commit('setCurrUser', { user })
         },
         loginUser({ commit }, { user }) {
             commit('setCurrUser', { user })
+        },
+        userLogout({ commit }) {
+            commit('userLogout')
+        },
+        async onGuestLogin({ commit }, { guest }) {
+            try {
+                const user = await userService.login(guest)
+                console.log('loggin in!!!');
+                console.log('user!!!!!', user)
+
+                commit('setCurrUser', { user })
+            } catch (e) {
+                console.log(e);
+            }
         }
 
     },

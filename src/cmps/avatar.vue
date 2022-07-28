@@ -1,5 +1,5 @@
 <template>
-    <div class="madeup-avatar">
+    <div title="logout" class="madeup-avatar">
         {{ initials }}
     </div>
 </template>
@@ -13,10 +13,13 @@ export default {
     data() {
         return {};
     },
-    created() { },
+    created() {
+        console.log(this.username);
+    },
     methods: {},
     computed: {
         initials() {
+            if(this.username === 'Guest Guest') return 'G'
             return this.username.split(' ').map(word => word.charAt(0)).join('')
         }
     },

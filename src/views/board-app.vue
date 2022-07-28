@@ -30,6 +30,7 @@ export default {
   created() {
     socketService.on('on-dragRecived', this.onSocketBoards)
     // const { id } = this.$route.params
+    console.log(this.$store.getters.currUser);
     // try {
     //   this.board = await boardService.getById(id)
     // } catch (err) {

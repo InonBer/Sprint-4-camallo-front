@@ -159,9 +159,11 @@
 .group-card-scroll {
   overflow-y: auto;
   // padding-bottom:;
+  margin-left: 3px;
+  margin-right:3px;
 
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
     // padding-left: 10px;
     // margin-left:10px
   }
@@ -173,19 +175,19 @@
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
+    background: rgb(195, 195, 195);
     height: 195px;
 
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #888;
+    background: rgb(203, 203, 203);
 
   }
 
   &::-webkit-scrollbar-thumb {
-    outline: 1px solid slategrey;
+    // outline: 1px solid rgb(170, 177, 184);
 
   }
 

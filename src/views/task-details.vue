@@ -94,7 +94,7 @@
                             <img :src="attachment.imgUrl">
                             <div>
                                 <span class="attach-title">{{ attachment.title }}</span>
-                                <span>Added {{attachmentDate(attachment.createdAt)}} - <span class="delete-btn"
+                                <span>Added {{ attachmentDate(attachment.createdAt) }} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
                                 <span>
                                     <span class="icon-card-cover">
@@ -174,6 +174,7 @@
                     <h4 class="details-actions">Actions</h4>
                     <button @click.stop.prevent="onTaskDelete"><span class="icon-archive icn"></span> Archive</button>
                     <section v-click-outside="openMembersModal" v-if="memebersModal" class="member-modal">
+                        <div class="member-modal-ext-btn"><span @click="memebersModal = false"> </span></div>
                         <div class="member-modal-header">
                             <header>Members</header>
                         </div>
@@ -186,6 +187,7 @@
                                 :key="member._id" class="inner-container-details">
                                 <img :src="member.imgUrl" alt="">
                                 <span>{{ member.fullname }} </span>
+                                <span class="mmbr-include-v" v-if="task.memberIds.includes(member)"></span>
                             </div>
 
                         </div>
@@ -413,7 +415,7 @@ export default {
                     console.log(e);
                 })
         },
-          attachmentDate(createdAt){
+        attachmentDate(createdAt) {
             return moment(createdAt).fromNow()
         },
     },
