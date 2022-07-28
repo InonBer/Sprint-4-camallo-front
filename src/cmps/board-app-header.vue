@@ -81,11 +81,11 @@ export default {
       isCreating: false,
       imgsToDisplay: [],
       emptyBoard: null,
-      searchtxt: '',
       isChoosingBoard: false,
       backGroundPrev: '',
       BGC: '#1e6584',
       isRecentModalOpen: false,
+      searchtxt: '',
     };
   },
   async created() {
@@ -133,20 +133,20 @@ export default {
       this.boardTitle = ''
       this.isCreating = !this.isCreating
     },
-    setBoardImg(img) {
-      this.emptyBoard.style.bgi = 'img'
-      this.emptyBoard.style.bgi = img
-      console.log(this.emptyBoard);
-    },
-    headerColor() {
-      const board = this.$store.getters.currBoard
-      board.style.bgi
-      const fac = new FastAverageColor();
-      fac.getColorAsync(board.style.bgi)
-        .then(color => {
-          this.BGC = color.rgba;
-        })
-    }
+    // setBoardImg(img) {
+    //   this.emptyBoard.style.bgi = 'img'
+    //   this.emptyBoard.style.bgi = img
+    //   console.log(this.emptyBoard);
+    // },
+    // headerColor() {
+    //   const board = this.$store.getters.currBoard
+    //   board.style.bgi
+    //   const fac = new FastAverageColor();
+    //   fac.getColorAsync(board.style.bgi)
+    //     .then(color => {
+    //       this.BGC = color.rgba;
+    //     })
+    // }
   },
   computed: {
 
