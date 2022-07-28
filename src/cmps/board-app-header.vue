@@ -59,7 +59,7 @@
 
       <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
       <div style="width:32px; height:32px">
-        <avatar @click="logout" :username="currUser.fullname" />
+        <avatar v-if="currUser" @click="logout" :username="currUser.fullname" />
       </div>
     </div>
   </header>
@@ -72,6 +72,7 @@ import { FastAverageColor } from 'fast-average-color';
 import { userService } from '../services/user.service';
 import recentModal from './recent-modal.vue'
 import avatar from './avatar.vue'
+import { socketService } from '../services/socket.service';
 export default {
   props: {
 
@@ -145,15 +146,15 @@ export default {
     //   this.emptyBoard.style.bgi = img
     //   console.log(this.emptyBoard);
     // },
-    // headerColor() {
-    //   const board = this.$store.getters.currBoard
-    //   board.style.bgi
-    //   const fac = new FastAverageColor();
-    //   fac.getColorAsync(board.style.bgi)
-    //     .then(color => {
-    //       this.BGC = color.rgba;
-    //     })
-    // }
+    headerColor() {
+      const board = this.$store.getters.currBoard
+      board.style.bgi
+      const fac = new FastAverageColor();
+      fac.getColorAsync(board.style.bgi)
+        .then(color => {
+          this.BGC = color.rgba;
+        })
+    }
   },
   computed: {
 
@@ -177,6 +178,7 @@ export default {
     }
   },
   unmounted() { },
+
 }
 </script>
 <style>

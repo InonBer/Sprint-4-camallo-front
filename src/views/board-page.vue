@@ -38,6 +38,9 @@
                 <div class="board-prev-page-loop">
                     <div @click="$router.push(`/board/${board._id}`)" v-for="board in boards" :key="board._id"
                         :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
+                        <div @click.stop.prevent="removeBoard(board._id)" class="admin-remove-btn"
+                            v-if="currUser.isAdmin"><span class="remove-btn-icon"></span>
+                        </div>
                         <header>{{ board.title }}</header>
                         <button class="boards-star-btn" @click.stop="toggleStar(board._id)"><span class="boards-star"
                                 :class="board.isStarred ? 'starred' : ''"></span></button>
@@ -99,8 +102,11 @@
                     Starred
                 </h3>
                 <div class="board-prev-page-loop">
-                    <div @click="$router.push(`/board/${board._id}`)" v-for="board in starredBoards" :key="board._id"
-                        :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
+                    <div @click.stop.prevent="$router.push(`/board/${board._id}`)" v-for="board in starredBoards"
+                        :key="board._id" :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
+                        <div @click="removeBoard(board._id)" class="admin-remove-btn" v-if="currUser.isAdmin"><span
+                                class="remove-btn-icon"></span>
+                        </div>
                         <header>{{ board.title }}</header>
                         <button class="boards-star-btn" @click.stop="toggleStar(board._id)"><span
                                 class="boards-star starred"></span></button>
@@ -142,6 +148,9 @@ export default {
         this.emptyBoard = boardService.getEmptyBoard()
     },
     methods: {
+        removeBoard(id) {
+            this.$store.dispatch('removeBoard', { id })
+        },
         toggleStar(id) {
             const idx = this.boards.findIndex(currBoard => currBoard._id === id)
             const board = JSON.parse(JSON.stringify(this.boards[idx]))

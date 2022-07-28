@@ -22,7 +22,7 @@ const ENDPOINT = 'board'
 export const boardService = {
   query,
   getById,
-  remove,
+  removeBoard,
   save,
   getColorsToDisplay,
   getEmptyBoard,
@@ -129,8 +129,8 @@ async function getById(id) {
   return await httpService.get(`board/${id}`)
 }
 
-async function remove(id) {
-  // return await httpService.delete(`${ENDPOINT}/${id}`)
+async function removeBoard(id) {
+  return await httpService.delete(`${ENDPOINT}/${id}`)
   // return axios.delete(BASE_URL + id).then((res) => res.data)
   return storageService.remove(KEY, id)
 }

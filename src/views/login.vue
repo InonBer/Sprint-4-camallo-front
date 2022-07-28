@@ -5,7 +5,7 @@
         <el-card class="box-card flex column align-center">
             <h4>Sign up for your account</h4>
             <div>
-                <el-input placeholder="Enter email" v-model="credentials.email"></el-input>
+                <el-input placeholder="Enter fullname" v-model="credentials.fullname"></el-input>
                 <el-input placeholder="Enter password" v-model="credentials.password"></el-input>
             </div>
             <small>By signing up, you confirm that you've read and accepted our <a>Terms of Service</a> and <a>Privacy
@@ -50,17 +50,18 @@ export default {
     data() {
         return {
             credentials: {
-                email: null,
+                fullname: null,
                 password: null
             },
         }
     },
     methods: {
-        login() {
-            let copy = JSON.parse(JSON.stringify(credentials))
+        async login() {
+            let copy = JSON.parse(JSON.stringify(this.credentials))
             try {
                 const user = userService.login(copy)
-                this.$store.dispatch('loginUser', { user })
+                await this.$store.dispatch('loginUser', { user })
+                this.$router.push('/board-page')
             } catch (error) {
                 console.log(error);
             }

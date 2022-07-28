@@ -39,8 +39,27 @@
 }
 
 
-
+.admin-remove-btn{
+    position: absolute;
+    width: 20px;
+    height:20px;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 3px;
+    color: transparent;
+    background-color: rgba(128, 128, 128, 0);
+    .remove-btn-icon{
+        font-size: 20px;
+        @include trelloIconM("\e91c");
+    }
+}
+.admin-remove-btn:hover{
+    color: white;
+}
 .prev-cont {
+    position: relative;
     background-size: cover;
     height: 96px;
     width: 194px;

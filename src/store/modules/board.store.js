@@ -55,6 +55,14 @@ export const boardStore = {
         //   }
     },
     actions: {
+        async removeBoard({ commit }, { id }) {
+            try {
+                await boardService.removeBoard(id)
+                commit('removeBoard', { id })
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async loadBoards({ commit }) {
             const boards = await boardService.query()
             try {
@@ -63,14 +71,14 @@ export const boardStore = {
                 console.log('couldn\'t fetch boards ', err);
             }
         },
-        async removeBoard({ commit }, { id }) {
-            try {
-                await boardService.remove(id)
-                commit({ type: 'removeBoard', id })
-            } catch (err) {
-                console.error(err)
-            }
-        },
+        // async removeBoard({ commit }, { id }) {
+        //     try {
+        //         await boardService.remove(id)
+        //         commit({ type: 'removeBoard', id })
+        //     } catch (err) {
+        //         console.error(err)
+        //     }
+        // },
         async saveBoard({ commit, state, rootState }, { board, action, task }) {
             try {
                 console.log(rootState.userStore.currUser);
