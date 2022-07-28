@@ -198,6 +198,12 @@ function getActivityByType(type, user, onItem = null) {
     case "commentAdd":
       activity.txt = 'Added a comment'
       return activity
+    case "dueDateAdd":
+      activity.txt = 'Added a due date'
+      return activity
+    case "dueDateRemove":
+      activity.txt = 'Removed a due date'
+      return activity
 
   }
 

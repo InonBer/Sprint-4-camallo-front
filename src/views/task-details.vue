@@ -2,7 +2,8 @@
     <div class="window-overlay">
 
         <section v-click-outside.stop.prevent="onClickOutside" v-if="board && task" class="task-details">
-            <datesModal></datesModal>
+            <datesModal v-if="datesModalOpen" @onDueDateRemove="onDueDateRemove" @onDueDateSet="onDueDateSet"
+                @closeDateModal="closeDateModal"></datesModal>
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
@@ -49,7 +50,8 @@
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
-                                                    <span class="label-include-v" v-if="task.labelIds.includes(label)"></span>
+                                                    <span class="label-include-v"
+                                                        v-if="task.labelIds.includes(label)"></span>
                                                 </div>
                                                 <button class="edit-label-btn"><span
                                                         class="edit-label-icon"></span></button>
@@ -139,7 +141,7 @@
                         <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                             @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                     </button>
-                    <button>
+                    <button @click.stop.prevent="openDatesModal">
                         <span class="icon-date icn">
                             <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -244,6 +246,7 @@ export default {
             groupId: null,
             checklistModal: false,
             coverModal: false,
+            datesModalOpen: false
         }
     },
     async created() {
@@ -260,6 +263,25 @@ export default {
         }
     },
     methods: {
+        openDatesModal() {
+            this.datesModalOpen = true
+        },
+        onDueDateSet(date) {
+            let due = {
+                date,
+                isDone: false
+            }
+            this.task.dueDate = {}
+            this.task.dueDate = due
+            this.saveBoard('dueDateAdd')
+        },
+        onDueDateRemove() {
+            this.task.dueDate = null
+            this.saveBoard('dueDateRemove')
+        },
+        closeDateModal() {
+            this.datesModalOpen = false
+        },
         onRemoveAttach(id) {
             console.log('id', id)
             const idx = this.task.attachments.findIndex(currAttach => currAttach.id === id)
@@ -285,6 +307,7 @@ export default {
                 this.memebersModal = false
                 this.labelModel = false
                 this.coverModal = false
+                this.datesModalOpen = false
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
@@ -352,7 +375,7 @@ export default {
             if (!this.task.labelIds) this.task.labelIds = []
             const labelIdx = this.task.labelIds.findIndex(labelId => labelId.id === label.id)
             if (labelIdx !== -1) {
-                this.task.labelIds.splice(labelIdx,1)
+                this.task.labelIds.splice(labelIdx, 1)
             } else {
                 this.task.labelIds.push(label)
             }

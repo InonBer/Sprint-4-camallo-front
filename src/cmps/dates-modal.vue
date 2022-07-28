@@ -1,6 +1,6 @@
 <template>
     <div class="dates-modal-container">
-        <div class="date-picker-ext-btn"><span class="ext-btn-icon"></span></div>
+        <div @click="closeModal" class="date-picker-ext-btn"><span class="ext-btn-icon"></span></div>
         <div class="date-picker-header">Dates</div>
         <Datepicker v-model="date" inline autoApply />
 
@@ -37,6 +37,9 @@ export default {
         },
         onDueDateRemove() {
             this.$emit('onDueDateRemove')
+        },
+        closeModal() {
+            this.$emit('closeDateModal')
         }
     },
     computed: {},
