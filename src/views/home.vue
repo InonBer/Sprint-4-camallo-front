@@ -49,7 +49,8 @@ export default {
     async onDemoRequest() {
       try {
         this.$store.dispatch('onGuestLogin', { guest: this.guestUser })
-        console.log(this.$store.getters.currUser);
+        // console.log(this.$store.getters.currUser);
+        this.$router.push('/board-page')
       } catch (e) {
         console.log(e);
       }
