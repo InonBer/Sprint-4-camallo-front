@@ -28,24 +28,38 @@
                             <div v-if="task.labelIds" class="task-label-container">
                                 <div @click="removeLabel(idx)" v-for="(label, idx) in task.labelIds" :key="label"
                                     class="task-label-label" :style="{ background: label.color }">
+                                    {{ label.title }}
                                 </div>
                                 <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                             </div>
                         </template>
-                        <div v-click-outside="() => { labelModel = !labelModel }" @click.stop=""
+                        <!-- <div v-click-outside="() => { labelModel = !labelModel }" @click.stop=""
                             class="details-label-to-add-container" v-if="labelModel">
                             <h2 class="details-label-header">Labels</h2>
                             <hr>
-                            <h2 class="nd-label-header" style="">labels</h2>
-                            <hr>
-
-                            <div class="details-labels-adding-container">
-                                <div class="label-modal-label" v-for="label in board.labels" @click="addLabel(label)"
-                                    :style="{ background: label.color }">
-                                    <span> {{ label.title }}</span>
+                             -->
+                        <section @click.stop="" class="labels-modal" v-if="labelModel" v-click-outside="() => { labelModel = !labelModel }">
+                            <div class="modal-layout">
+                                <header>
+                                    <span>
+                                        Labels
+                                    </span>
+                                    <span @click="labelModel = !labelModel" class="close-btn"></span>
+                                </header>
+                                <div class="labels-modal-main">
+                                     <div class="details-labels-adding-container">
+                                        <div v-for="label in board.labels" @click="addLabel(label)">
+                                            <dive class="label-add-container">
+                                                <div class="label-modal-label" :style="{ background: label.color }">
+                                                    <span> {{ label.title }}</span>
+                                                </div>
+                                                <button class="edit-label-btn"><span class="edit-label-icon"></span></button>
+                                            </dive>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
                 <div class="window-modal-content">
@@ -80,7 +94,8 @@
                                 <span class="attach-title">{{ attachment.title }}</span>
                                 <span>Added {{ attachment.createdAt }} - <span class="delete-btn"
                                         @click="onRemoveAttach(attachment.id)">Delete</span></span>
-                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span class="make-cover-BTN">Make cover</span></span></span>
+                                <span @click=setCoverImg(attachment.imgUrl)><span class="icon-card-cover"><span
+                                            class="make-cover-BTN">Make cover</span></span></span>
                             </div>
                         </div>
                     </div>
@@ -323,7 +338,8 @@ export default {
         },
         addLabel(label) {
             if (!this.task.labelIds) this.task.labelIds = []
-            if (this.task.labelIds.includes(label)) return
+            const taskLabels = this.task.labelIds.map(label=> label.id)
+            if (taskLabels.includes(label.id)) return
             this.task.labelIds.push(label)
             this.saveBoard()
         },
@@ -372,7 +388,7 @@ export default {
             delete this.task.cover
             this.saveBoard("coverRemove")
         },
-         setCoverImg(url) {
+        setCoverImg(url) {
             const cover = {
                 img: url,
                 color: ''
