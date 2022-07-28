@@ -19,6 +19,7 @@ export default {
     methods: {},
     computed: {
         initials() {
+            if(this.username === 'Guest Guest') return 'G'
             return this.username.split(' ').map(word => word.charAt(0)).join('')
         }
     },
