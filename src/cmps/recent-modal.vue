@@ -1,7 +1,7 @@
 <template>
     <section class="recent-modal">
         <header>
-            <div>Recent boards</div>
+            <div>{{ title }}</div>
             <button aria-label="Close popover" class="close-btn" data-test-id="popover-close"><span role="presentation"
                     aria-hidden="true" class="css-hakgx8"
                     style="--icon-primary-color:currentColor; --icon-secondary-color:var(--ds-surface, #FFFFFF);"><svg
@@ -16,7 +16,10 @@
                 @click="changeLink(board._id)">
                 <img v-if="!board.style.bgc" :src="board.style.bgi" class="li-board-img">
                 <div v-else :style="{ backgroundColor: `rgb( ${board.style.bgc})` }" class="li-board-img"></div>
-                {{ board.title }}
+                <div class="content-to-show">
+                    <span>{{ board.title }}</span>
+                    <span class="board-created-name">{{ board.createdBy.fullname }}’s Workspace</span>
+                </div>
             </li>
         </ul>
     </section>
@@ -25,7 +28,8 @@
 export default {
     name: 'recent-modal',
     props: {
-        boards: Array
+        boards: Array,
+        title: String
     },
     components: {},
     data() {
