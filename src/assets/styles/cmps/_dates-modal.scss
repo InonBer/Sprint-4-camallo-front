@@ -1,0 +1,92 @@
+.dates-modal-container{
+    width:304px ;
+    height:500px ;
+    background-color: #fff;
+position: absolute;
+z-index: 100;
+right:0;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 10px;
+// gap: 10px;
+.dp__menu{
+border:none;
+margin-bottom: 10px;
+box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+border-radius: 3px;
+
+}
+.date-picker-ext-btn{
+position: absolute;
+right: 0;
+top: 0;
+color: #6b778c;
+font-size: 16px;
+font-weight: 400;
+
+width: 32px;
+height: 32px;
+display: flex;
+cursor: pointer;
+justify-content: center;
+align-items: center;
+}
+.date-picker-ext-btn:hover{
+    color: #172b4d;
+   
+}
+.ext-btn-icon{
+    @include trelloIconM('\e91c')
+}
+.date-picker-body{
+    width: 280px;
+    color: #5e6c84;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+.dates-save-btn{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: #0079bf;
+    box-shadow: none;
+    border: none;
+    color: #ffffff;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+    cursor: pointer;
+}
+.dates-save-btn:hover{
+    background-color: #055a8c;
+}
+.dates-remove-btn:hover{
+    background-color: rgba(9, 30, 66, 0.08);
+}
+.dates-remove-btn{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+    width: 280px;
+    height:32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    background-color: rgba(9, 30, 66, 0.04);
+}
+.date-picker-header{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 41px;
+    text-align: center;
+    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+}
+}

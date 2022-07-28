@@ -2,6 +2,7 @@
     <div class="window-overlay">
 
         <section v-click-outside.stop.prevent="onClickOutside" v-if="board && task" class="task-details">
+            <datesModal></datesModal>
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
@@ -142,7 +143,7 @@
                         <addChklistModal v-click-outside="() => checklistModal = false" v-if="checklistModal"
                             @onAddChklist=onAddChklist @closeChklistModal="checklistModal = false" />
                     </button>
-                    <!-- <button>
+                    <button>
                         <span class="icon-date icn">
                             <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +155,8 @@
                                     fill="currentColor"></path>
                             </svg>
                         </span> Dates
-                    </button> -->
+                    </button>
+
                     <button @click="openAttachmentModal">
                         <span class="icon-attachment icn">
                         </span>
@@ -218,6 +220,7 @@ import addChklistModal from '../cmps/task-checklist/add-checklist-modal.vue';
 import coverModal from '../cmps/task-cover/cover-modal.vue';
 import imgUpload from '../cmps/img-upload.vue';
 import cover from '../cmps/task-cover/cover.vue';
+import datesModal from '../cmps/dates-modal.vue';
 
 
 export default {
@@ -229,7 +232,7 @@ export default {
         coverModal,
         imgUpload,
         cover,
-        isAttachmentCover: false
+        datesModal,
 
     },
     data() {
