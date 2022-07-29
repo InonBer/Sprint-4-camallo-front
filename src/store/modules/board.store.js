@@ -81,7 +81,6 @@ export const boardStore = {
         // },
         async saveBoard({ commit, state, rootState }, { board, action, task }) {
             try {
-                console.log(rootState.userStore.currUser);
                 let activity = boardService.getActivityByType(action, rootState.userStore.currUser, task)
                 board.activities.unshift(activity)
                 socketService.emit('on-UserDrag', board)

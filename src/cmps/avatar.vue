@@ -14,12 +14,11 @@ export default {
         return {};
     },
     created() {
-        console.log(this.username);
     },
     methods: {},
     computed: {
         initials() {
-            if(this.username === 'Guest Guest') return 'G'
+            if (this.username === 'Guest Guest') return 'G'
             return this.username.split(' ').map(word => word.charAt(0)).join('')
         }
     },

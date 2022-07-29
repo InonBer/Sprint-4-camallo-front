@@ -1,5 +1,8 @@
 <template>
   <board-app-header />
+  <div style="opacity: 0;" ref="userMouse" class="user-mouse-cursor">
+    <!-- <img src="../assets/cursor.png" alt=""> -->
+  </div>
   <div v-if="currBoard" class="board-app bgc-img" :style="boardBGI">
     <board-header :board="currBoard" />
     <group-list @onTaskMove="onTaskMove" @groupAdded="groupAdded" @onBoardChange="onBoardChange" @onDetails="onDetails"
@@ -25,24 +28,61 @@ export default {
   data() {
     return {
       board: null,
+      userClicked: false
     }
   },
   created() {
     socketService.on('on-dragRecived', this.onSocketBoards)
-    // const { id } = this.$route.params
-    console.log(this.$store.getters.currUser);
-    // try {
-    //   this.board = await boardService.getById(id)
-    // } catch (err) {
-    //   console.error(err)
-    // }
+    socketService.on('recive-user-click', this.socketMouseDown)
+    socketService.on('recive-user-mouse-move', this.socketMouseMove)
+    socketService.on('recive-user-mouse-up', this.socketMouseUp)
+    window.addEventListener('mousedown', this.onMouseDown)
+    window.addEventListener('mousemove', this.onMouseMoving)
+    window.addEventListener('mouseup', this.onMouseUp)
   },
   emits: ['onBoardChange'],
   methods: {
+    onMouseDown({ clientX, clientY }) {
+      const pos = {
+        clientX,
+        clientY,
+      }
+      this.userClicked = true
+      socketService.emit('on-user-mouse-down', pos)
+    },
+    socketMouseUp(clientX) {
+      this.$refs.userMouse.style.opacity = 0
+      this.$refs.userMouse.innerHTML = null
+    },
+    onMouseUp({ clientX, clientY }) {
+      this.userClicked = false
+      socketService.emit('on-user-mouse-up', clientX)
+    },
+    onMouseMoving({ clientX, clientY }) {
+      if (!this.userClicked) return
+      const pos = {
+        clientX,
+        clientY,
+      }
+      socketService.emit('on-user-mouse-move', pos)
+    },
+    socketMouseDown({ clientX, clientY }) {
+      let node = document.elementFromPoint(clientX, clientY).parentElement
+      if (node.classList[0] !== "smooth-dnd-draggable-wrapper") return
+      const clone = node.cloneNode(true)
+      this.$refs.userMouse.innerHTML = clone.innerHTML
+      this.$refs.userMouse.style.opacity = 0.7
+      this.$refs.userMouse.style.width = 260 + 'px';
+      this.$refs.userMouse.style.left = clientX - 120 + 'px';
+      this.$refs.userMouse.style.top = clientY - 38 + 'px';
+    },
+    socketMouseMove({ clientX, clientY }) {
+      this.$refs.userMouse.style.left = clientX - 120 + 'px';
+      this.$refs.userMouse.style.top = clientY - 38 + 'px';
+    },
     onTaskMove(groups) {
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
       boardCopy.groups = JSON.parse(JSON.stringify(groups))
-      // socketService.emit('on-UserDrag', boardCopy)
       this.$store.dispatch('saveBoard', { board: boardCopy })
     },
     onSocketBoards(board) {
@@ -81,6 +121,7 @@ export default {
       async handler({ boardId }) {
         try {
           if (!this.$store.getters.currBoard || this.$store.getters.currBoard._id !== boardId) {
+            socketService.emit('board-set-channel', boardId)
             this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
           }
         } catch (err) {
@@ -97,4 +138,17 @@ export default {
 };
 </script>
  <style>
+ .user-mouse-cursor {
+   position: fixed;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   left: -50px;
+   width: auto;
+   height: auto;
+   z-index: 1000;
+   /* background-color: black; */
+   /* background-image: url('../assets/cursor.png'); */
+ 
+ }
  </style>
