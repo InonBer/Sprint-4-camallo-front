@@ -173,13 +173,14 @@
             }
 
             .due-wrapper {
-                margin-inline-start:2px;
+                margin-inline-start: 2px;
                 padding: 6px 12px;
                 background-color: rgba(9, 30, 66, 0.04);
                 border-radius: 3px;
-                display:inline-block;
-                cursor:pointer;
-                &:hover{
+                display: inline-block;
+                cursor: pointer;
+
+                &:hover {
                     background-color: rgba(9, 30, 66, 0.08);
                 }
             }
@@ -412,6 +413,18 @@
             .label-modal-label:hover {
                 cursor: pointer;
 
+            }
+
+            .add-label-btn {
+                color: #172b4d;
+                background-color: #091e420a;
+                ;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: #091e4214;
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -830,4 +843,95 @@
         }
     }
 
+}
+
+.label-action-btn {
+    display: flex;
+    width: 100%;
+
+    .save-label-btn {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        justify-content: start;
+        border-radius: 3px;
+        background-color: #0079bf;
+        color: white;
+        padding-left: 24px;
+        padding-right: 24px;
+
+        &:hover {
+            background-color: #026aa7;
+            cursor: pointer;
+        }
+    }
+
+    .delete-label-btn {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        margin-left: 115px;
+        border-radius: 3px;
+        background-color: #b04632;
+        padding-left: 24px;
+        padding-right: 24px;
+        color: white;
+
+        &:hover {
+            background-color: #933b27;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.labels-colors-opt {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    .label-color {
+        height: 32px;
+        width: 48px;
+        border-radius: 3px;
+        margin: 0 7.9px 8px 0;
+        margin-bottom: 10px;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+
+        }
+    }
+}
+
+input[name=txtLabel] {
+    width: 100%;
+    margin-bottom: 12px;
+    color: #172b4d;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 12px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background-color: #fafbfc;
+    border-bottom-color: rgb(23, 43, 77);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: inset 0 0 0 2px #dfe1e6;
+    transition: background-color 0.085s;
+
+    &:hover {
+        background-color: #ebecf0;
+        box-shadow: inset 0 0 0 2px #dfe1e6;
+    }
+
+    &:focus {
+        background-color: #fff;
+        box-shadow: inset 0 0 0 2px #0079bf;
+    }
 }

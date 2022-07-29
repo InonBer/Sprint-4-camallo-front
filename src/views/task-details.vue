@@ -55,26 +55,34 @@
                                                     <span class="label-include-v" v-if="task.labelIds?.includes(label)">
                                                     </span>
                                                 </div>
-                                                <button @click.prevent.stop="isChangeLabel = true; labelIdx = idx"
+                                                <button
+                                                    @click.prevent.stop="isChangeLabel = true; currLabelIdx = idx; currLabelName = label.title"
                                                     class="edit-label-btn">
                                                     <span class="edit-label-icon"></span>
                                                 </button>
                                             </dive>
                                         </div>
+                                        <button @click="createNewLabel" class="add-label-btn">Create a new
+                                            label</button>
                                     </div>
                                 </div>
                                 <div v-if="isChangeLabel" class="labels-modal-main">
                                     <span>Name</span>
                                     <div>
-                                        <input type="text" :value="board.labels[labelIdx].title">
+                                        <input type="text" v-focus name="txtLabel" style="width:100%"
+                                            v-model="currLabelName">
                                     </div>
                                     <span>Select a color</span>
                                     <div class="labels-colors-warper">
                                         <div class="labels-colors-opt">
                                             <span class="label-color" v-for="color in labelColors"
-                                                @click="changeLabelColor(color, idx)"
-                                                :style="{ backgroundColor: color }"></span>
+                                                @click="currLabelColor = color" :style="{ backgroundColor: color }">
+                                            </span>
                                         </div>
+                                    </div>
+                                    <div class="label-action-btn">
+                                        <span class="save-label-btn" @click="saveLabel">Save</span>
+                                        <span class="delete-label-btn" @click="deleteLabel">Delete</span>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +295,9 @@ export default {
             coverModal: false,
             datesModalOpen: false,
             isChangeLabel: false,
-            labelIdx: null,
+            currLabelIdx: null,
+            currLabelName: '',
+            currLabelColor: null,
             labelColors: [
                 '#61bd4f',
                 '#f2d600',
@@ -318,7 +328,24 @@ export default {
         }
     },
     methods: {
-        changeLabelColor(color) {
+        createNewLabel() {
+            const currLabel = boardService.getEmptyLabel()
+            this.board.labels.push(currLabel)
+            this.currLabelIdx = this.board.labels.length - 1
+            this.currLabelColor = currLabel.color
+            this.currLabelName = currLabel.title
+            this.isChangeLabel = true
+
+        },
+        deleteLabel() {
+            this.board.labels.splice(this.currLabelIdx, 1)
+            this.saveBoard()
+        },
+        saveLabel() {
+            const currLabel = this.board.labels[this.currLabelIdx]
+            currLabel.color = this.currLabelColor
+            currLabel.title = this.currLabelName
+            this.saveBoard()
         },
         openDatesModal() {
             this.datesModalOpen = true
@@ -409,7 +436,7 @@ export default {
                 this.coverModal = false
                 this.datesModalOpen = false
                 this.isChangeLabel = false
-                this.labelIdx = null
+                this.currLabelIdx = null
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
@@ -566,27 +593,6 @@ export default {
 </script>
 
 <style>
-.labels-colors-opt {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.label-color {
-    height: 32px;
-    width: 48px;
-    border-radius: 3px;
-    margin: 0 7.9px 8px 0;
-}
-
-.label-color:hover {
-    opacity: 0.8;
-    cursor: pointer;
-
-}
-
 .task-description-placeholder {
     width: 512px;
     height: 56px;
