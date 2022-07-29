@@ -65,7 +65,7 @@
                     <div v-if="task.dueDate" class="due-date-container">
                         <p class="details-duedate-title">Due date</p>
                         <input @click="toggleDueDateDone" type="checkbox" :checked="task.dueDate.isDone" />
-                        <div class="due-wrapper">
+                        <div @click="datesModalOpen = !datesModalOpen" class="due-wrapper">
                             {{ task.dueDate.dateStr }}<span v-if="task.dueDate.status" class="due-status"
                                 :style="{ backgroundColor: task.dueDate.clr }">{{
                                         task.dueDate.status
