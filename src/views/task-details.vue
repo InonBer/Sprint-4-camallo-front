@@ -51,7 +51,7 @@
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
                                                     <span class="label-include-v"
-                                                        v-if="task.labelIds.includes(label)"></span>
+                                                        v-if="task.labelIds?.includes(label)"></span>
                                                 </div>
                                                 <button class="edit-label-btn"><span
                                                         class="edit-label-icon"></span></button>
@@ -62,7 +62,7 @@
                             </div>
                         </section>
                     </div>
-                    <div v-if="task.dueDate && dueDateComp" class="due-date-container">
+                    <div v-if="task.dueDate" class="due-date-container">
                         <p class="details-duedate-title">Due date</p>
                         <input @click="toggleDueDateDone" type="checkbox" :checked="task.dueDate.isDone" />
                         <div class="due-wrapper">
@@ -202,7 +202,7 @@
                                 :key="member._id" class="inner-container-details">
                                 <img :src="member.imgUrl" alt="">
                                 <span>{{ member.fullname }} </span>
-                                <span class="mmbr-include-v" v-if="task.memberIds.includes(member)"></span>
+                                <span class="mmbr-include-v" v-if="task.memberIds?.includes(member)"></span>
                             </div>
 
                         </div>
@@ -275,6 +275,7 @@ export default {
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
             this.task = this.group.tasks[taskIdx]
+            if (this.task.dueDate) this.dueDateUpdate()
         } catch (e) {
             console.log(e);
         }
@@ -293,7 +294,7 @@ export default {
             }
             this.task.dueDate = {}
             this.task.dueDate = due
-            this.saveBoard('dueDateAdd')
+            this.dueDateUpdate()
         },
         onDueDateRemove() {
             this.task.dueDate = null
@@ -304,7 +305,43 @@ export default {
         },
         toggleDueDateDone() {
             this.task.dueDate.isDone = !this.task.dueDate.isDone
-            this.saveBoard('dueDateAdd')
+            this.dueDateUpdate()
+            console.log(this.task.dueDate)
+        },
+        dueDateUpdate() {
+            const due = this.task.dueDate.date
+            const dueDateObj = this.task.dueDate
+
+            const dueDay = new Date(due).getDate()
+            const dueMonth = new Date(due).getMonth()
+            const currDay = new Date().getDate()
+            const currMonth = new Date().getMonth()
+
+            if (dueMonth === currMonth && dueDay === currDay || dueDay === currDay + 1 || dueDay === currDay - 1) {
+                dueDateObj.dateStr = moment(due).calendar(null, {
+                    sameDay: `[today] h:mm A`,
+                    nextDay: '[tomorrow] h:mm A',
+                    lastDay: '[yesterday] h:mm A',
+                })
+            } else {
+                let str = moment(due).format("MMM D") + ' at '
+                str += moment(due).format("h:mm A")
+                dueDateObj.dateStr = str
+            }
+
+            if (new Date(due).getTime() < Date.now()) {
+                dueDateObj.status = 'overdue'
+                dueDateObj.clr = '#EB5A46'
+            } else if (dueDay === currDay) {
+                dueDateObj.status = 'due soon'
+                dueDateObj.clr = '#F2D600'
+            }
+            if (this.task.dueDate.isDone) {
+                dueDateObj.status = 'complete'
+                dueDateObj.clr = '#61BD4F'
+            }
+            this.task.dueDate = dueDateObj
+            this.saveBoard()
         },
         onRemoveAttach(id) {
             console.log('id', id)
@@ -474,43 +511,6 @@ export default {
         },
         currUser() {
             return this.$store.getters.currUser
-        },
-        dueDateComp() {
-            const due = this.task.dueDate.date
-            const dueDateObj = this.task.dueDate
-
-            const dueDay = new Date(due).getDate()
-            const dueMonth = new Date(due).getMonth()
-            const currDay = new Date().getDate()
-            const currMonth = new Date().getMonth()
-
-            if (dueMonth === currMonth && dueDay === currDay || dueDay === currDay + 1 || dueDay === currDay - 1) {
-                dueDateObj.dateStr = moment(due).calendar(null, {
-                    sameDay: `[today] h:mm A`,
-                    nextDay: '[tomorrow] h:mm A',
-                    lastDay: '[yesterday] h:mm A',
-                })
-            } else {
-                let str = moment(due).format("MMM D") + ' at '
-                str += moment(due).format("h:mm A")
-                dueDateObj.dateStr = str
-            }
-
-            if (new Date(due).getTime() < Date.now()) {
-                dueDateObj.status = 'overdue'
-                dueDateObj.clr = '#EB5A46'
-            } else if (dueDay === currDay) {
-                dueDateObj.status = 'due soon'
-                dueDateObj.clr = '#F2D600'
-            }
-            if (this.task.dueDate.isDone) {
-                dueDateObj.status = 'complete'
-                dueDateObj.clr = '#61BD4F'
-            }
-
-            this.task.dueDate = dueDateObj
-            this.saveBoard('dueDateAdd')
-            return true
         },
     },
     unmounted() { },

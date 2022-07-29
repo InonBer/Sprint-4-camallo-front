@@ -135,7 +135,7 @@ export default {
         },
         labelsExtended() {
             const user = this.$store.getters.currUser
-            return user.labelsExtended
+            return user?.labelsExtended
         }
     },
     unmounted() { },
