@@ -74,7 +74,7 @@
             display: flex;
             align-items: flex-end;
             flex-direction: row;
-            flex-wrap:wrap;
+            flex-wrap: wrap;
             color: #172b4d;
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
             font-size: 14px;
@@ -115,7 +115,7 @@
         }
 
         .details-labels-container {
-            min-width:fit-content;
+            min-width: fit-content;
             display: flex;
             flex-direction: column;
             justify-content: start;
@@ -353,9 +353,10 @@
                 border-radius: 3px;
                 padding: 3.6px 12px;
                 margin-inline-end: 4.5px;
-                transition:padding 0.2s;
-                &:hover{
-                    padding-left:16px;
+                transition: padding 0.2s;
+
+                &:hover {
+                    padding-left: 16px;
                 }
 
                 span {
@@ -363,7 +364,8 @@
                     font-weight: bold;
                     color: white
                 }
-                span.label-include-v{
+
+                span.label-include-v {
                     @include trelloIconM("\e916");
                     align-self: center;
                     position: absolute;
@@ -401,7 +403,7 @@
 
         .text-container-details {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             gap: 8px;
 
             .chat-input-container {
@@ -416,6 +418,7 @@
             }
 
             .details-textarea {
+                margin-inline-end: -25px;
                 background: #fff !important;
                 box-shadow: none;
                 box-sizing: initial;
@@ -423,7 +426,7 @@
                 border-radius: 3px;
                 height: 20px;
                 resize: none;
-                width: 484.7px;
+                width: 100%;
                 line-height: 20px;
                 min-height: 19.8px;
                 transition: box-shadow 85ms ease;
