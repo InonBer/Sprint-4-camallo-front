@@ -306,7 +306,8 @@ export default {
         const { boardId, groupId, taskId } = this.$route.params
         this.groupId = groupId
         try {
-            this.board = await boardService.getById(boardId)
+            // this.board = await boardService.getById(boardId)
+            this.board = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)

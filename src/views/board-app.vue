@@ -27,7 +27,9 @@ export default {
   data() {
     return {
       board: null,
-      userClicked: false
+      userClicked: false,
+      SocketLeft: 0,
+      SocketTop: 0,
     }
   },
   created() {
@@ -36,7 +38,6 @@ export default {
     socketService.on('recive-user-mouse-move', this.socketMouseMove)
     socketService.on('recive-user-mouse-up', this.socketMouseUp)
     window.addEventListener('mousedown', this.onMouseDown)
-    window.addEventListener('mousemove', this.onMouseMoving)
     window.addEventListener('mouseup', this.onMouseUp)
 
   },
@@ -49,14 +50,17 @@ export default {
         clientY,
       }
       this.userClicked = true
+      window.addEventListener('mousemove', this.onMouseMoving)
       socketService.emit('on-user-mouse-down', pos)
     },
     socketMouseUp(clientX) {
-      this.$refs.userMouse.style.opacity = 0
+      if (!this.$refs.userMouse?.innerHTML) return
       this.$refs.userMouse.innerHTML = null
+      // this.$refs.userMouse.style.opacity = 0
     },
     onMouseUp({ clientX, clientY }) {
       this.userClicked = false
+      window.removeEventListener('mousemove', this.onMouseMoving)
       socketService.emit('on-user-mouse-up', clientX)
     },
     onMouseMoving({ clientX, clientY }) {
@@ -68,6 +72,7 @@ export default {
       socketService.emit('on-user-mouse-move', pos)
     },
     socketMouseDown({ clientX, clientY }) {
+      if (!this.$refs.userMouse) return
       let node = document.elementFromPoint(clientX, clientY).parentElement
       if (node.classList[0] !== "smooth-dnd-draggable-wrapper") return
       const clone = node.cloneNode(true)
@@ -78,8 +83,9 @@ export default {
       this.$refs.userMouse.style.top = clientY - 38 + 'px';
     },
     socketMouseMove({ clientX, clientY }) {
-      this.$refs.userMouse.style.left = clientX - 120 + 'px';
-      this.$refs.userMouse.style.top = clientY - 38 + 'px';
+      if (!this.$refs.userMouse) return
+      this.$refs.userMouse.style.left = (clientX - 120) + 'px';
+      this.$refs.userMouse.style.top = (clientY - 38) + 'px';
     },
     onTaskMove(groups) {
       let boardCopy = JSON.parse(JSON.stringify(this.currBoard))
@@ -120,11 +126,12 @@ export default {
   watch: {
     '$route.params': {
       async handler({ boardId }) {
+        console.log('setting correct channel');
+        socketService.emit('board-set-channel', boardId)
         try {
           if (!this.$store.getters.currBoard || this.$store.getters.currBoard._id !== boardId) {
             this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
           }
-          socketService.emit('board-set-channel', boardId)
           console.log('created');
         } catch (err) {
           console.error(err)
