@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header" :style="{ backgroundColor: BGC }">
+  <header class="app-header" :style="{ backgroundColor: BGC, color: txtClr }">
     <div class="header-content">
       <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset="">
         Camallo
@@ -110,9 +110,6 @@ export default {
     // },500)
   },
   methods: {
-    test(ev) {
-      console.log(ev);
-    },
     logout() {
       userService.logout()
       this.$store.dispatch('userLogout')
@@ -142,23 +139,35 @@ export default {
       this.boardTitle = ''
       this.isCreating = !this.isCreating
     },
-    // setBoardImg(img) {
-    //   this.emptyBoard.style.bgi = 'img'
-    //   this.emptyBoard.style.bgi = img
-    //   console.log(this.emptyBoard);
-    // },
-    headerColor() {
-      const board = this.$store.getters.currBoard
-      board.style.bgi
-      const fac = new FastAverageColor();
-      fac.getColorAsync(board.style.bgi)
-        .then(color => {
-          this.BGC = color.rgba;
-        })
+    isDarkColor(c) {
+      c = c.substring(1) // strip #
+      const rgb = parseInt(c, 16) // convert rrggbb to decimal
+      const r = (rgb >> 16) & 0xff // extract red
+      const g = (rgb >> 8) & 0xff // extract green
+      const b = (rgb >> 0) & 0xff // extract blue
+      var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
+
+      return luma < 100
+    },
+    LightenDarkenColor(col, amt) {
+      col = parseInt(col, 16);
+      return (((col & 0x0000FF) + amt) | ((((col >> 8) & 0x00FF) + amt) << 8) | (((col >> 16) + amt) << 16)).toString(16);
+    },
+    componentToHex(c) {
+      var hex = c.toString(16);
+      return hex.length == 1 ? "0" + hex : hex;
+    },
+    rgbToHex(clr) {
+      const rgb = clr.split(',')
+
+      const r = rgb[0].trim()
+      const g = rgb[1].trim()
+      const b = rgb[2].trim()
+      return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
     }
+
   },
   computed: {
-
     BGImage() {
       if (this.backGroundPrev === '') return this.imgsToDisplay[0]
       else return this.backGroundPrev
@@ -176,9 +185,41 @@ export default {
       return this.boards.filter((board) => {
         return board.isStarred
       })
+    },
+    board() {
+      return this.$store.getters.currBoard
+    },
+    txtClr() {
+      const color = this.isDarkColor(this.BGC) ? 'white' : '#172b4d'
+      return color
     }
   },
   unmounted() { },
+  watch: {
+    'board.style': {
+      async handler() {
+        try {
+          if (!this.board) {
+            this.BGC = '#1e6584'
+          } else {
+            if (!this.board.style.bgi) {
+              this.BGC = `rgb(${this.board.style.bgc})`
+            } else {
+              const fac = new FastAverageColor();
+              fac.getColorAsync(this.board.style.bgi)
+                .then(color => {
+                  this.BGC = color.rgba;
+                })
+            }
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      },
+      immediate: true,
+      deep: true
+    }
+  }
 
 }
 </script>
