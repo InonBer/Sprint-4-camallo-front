@@ -1,7 +1,6 @@
 .details-mem-img-cont {
     display: flex;
     flex-direction: column;
-    margin-inline-start: 23.2px;
     margin-inline-end: 34.7px;
     position: relative;
     top: 3px;
@@ -26,6 +25,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom:1px;
 }
 
 .member-modal {

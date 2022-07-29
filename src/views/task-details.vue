@@ -2,8 +2,8 @@
     <div class="window-overlay">
 
         <section v-click-outside.stop.prevent="onClickOutside" v-if="board && task" class="task-details">
-            <datesModal v-if="datesModalOpen" @onDueDateRemove="onDueDateRemove" @onDueDateSet="onDueDateSet"
-                @closeDateModal="closeDateModal"></datesModal>
+            <datesModal v-click-outside="closeDateModal" v-if="datesModalOpen" @onDueDateRemove="onDueDateRemove"
+                @onDueDateSet="onDueDateSet" @closeDateModal="closeDateModal"></datesModal>
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
@@ -62,9 +62,15 @@
                             </div>
                         </section>
                     </div>
-                    <div v-if="task.dueDate" class="due-date-container">
+                    <div v-if="task.dueDate && dueDateComp" class="due-date-container">
                         <p class="details-duedate-title">Due date</p>
-                        {{ task.dueDate }}
+                        <input @click="toggleDueDateDone" type="checkbox" :checked="task.dueDate.isDone" />
+                        <div class="due-wrapper">
+                            {{ task.dueDate.dateStr }}<span v-if="task.dueDate.status" class="due-status"
+                                :style="{ backgroundColor: task.dueDate.clr }">{{
+                                        task.dueDate.status
+                                }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="window-modal-content">
@@ -229,6 +235,7 @@ import imgUpload from '../cmps/img-upload.vue';
 import cover from '../cmps/task-cover/cover.vue';
 import datesModal from '../cmps/dates-modal.vue';
 import taskComments from '../cmps/task-comments.vue';
+import { useMouseInElement } from '@vueuse/core';
 
 
 export default {
@@ -279,7 +286,10 @@ export default {
         onDueDateSet(date) {
             let due = {
                 date,
-                isDone: false
+                isDone: false,
+                dateStr: '',
+                status: '',
+                clr: ''
             }
             this.task.dueDate = {}
             this.task.dueDate = due
@@ -291,6 +301,10 @@ export default {
         },
         closeDateModal() {
             this.datesModalOpen = false
+        },
+        toggleDueDateDone() {
+            this.task.dueDate.isDone = !this.task.dueDate.isDone
+            this.saveBoard('dueDateAdd')
         },
         onRemoveAttach(id) {
             console.log('id', id)
@@ -460,7 +474,44 @@ export default {
         },
         currUser() {
             return this.$store.getters.currUser
-        }
+        },
+        dueDateComp() {
+            const due = this.task.dueDate.date
+            const dueDateObj = this.task.dueDate
+
+            const dueDay = new Date(due).getDate()
+            const dueMonth = new Date(due).getMonth()
+            const currDay = new Date().getDate()
+            const currMonth = new Date().getMonth()
+
+            if (dueMonth === currMonth && dueDay === currDay || dueDay === currDay + 1 || dueDay === currDay - 1) {
+                dueDateObj.dateStr = moment(due).calendar(null, {
+                    sameDay: `[today] h:mm A`,
+                    nextDay: '[tomorrow] h:mm A',
+                    lastDay: '[yesterday] h:mm A',
+                })
+            } else {
+                let str = moment(due).format("MMM D") + ' at '
+                str += moment(due).format("h:mm A")
+                dueDateObj.dateStr = str
+            }
+
+            if (new Date(due).getTime() < Date.now()) {
+                dueDateObj.status = 'overdue'
+                dueDateObj.clr = '#EB5A46'
+            } else if (dueDay === currDay) {
+                dueDateObj.status = 'due soon'
+                dueDateObj.clr = '#F2D600'
+            }
+            if (this.task.dueDate.isDone) {
+                dueDateObj.status = 'complete'
+                dueDateObj.clr = '#61BD4F'
+            }
+
+            this.task.dueDate = dueDateObj
+            this.saveBoard('dueDateAdd')
+            return true
+        },
     },
     unmounted() { },
     watch: {
