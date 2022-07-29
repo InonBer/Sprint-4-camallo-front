@@ -196,7 +196,7 @@
                                 :key="member._id" class="inner-container-details">
                                 <img :src="member.imgUrl" alt="">
                                 <span>{{ member.fullname }} </span>
-                                <span class="mmbr-include-v" v-if="task.memberIds.includes(member)"></span>
+                                <span class="mmbr-include-v" v-if="task.memberIds?.includes(member)"></span>
                             </div>
 
                         </div>
@@ -263,7 +263,8 @@ export default {
         const { boardId, groupId, taskId } = this.$route.params
         this.groupId = groupId
         try {
-            this.board = await boardService.getById(boardId)
+            // this.board = await boardService.getById(boardId)
+            this.board = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
             const groupIdx = this.board.groups.findIndex(group => group.id === groupId)
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
