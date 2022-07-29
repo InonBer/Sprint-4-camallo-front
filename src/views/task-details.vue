@@ -52,8 +52,8 @@
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
-                                                    <span class="label-include-v"
-                                                        v-if="task.labelIds?.includes(label)"></span>
+                                                    <span class="label-include-v" v-if="task.labelIds?.includes(label)">
+                                                    </span>
                                                 </div>
                                                 <button @click.prevent.stop="isChangeLabel = true; labelIdx = idx"
                                                     class="edit-label-btn">
