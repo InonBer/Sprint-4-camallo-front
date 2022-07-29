@@ -158,7 +158,6 @@ function getActivityByType(type, user, onItem = null) {
     createdAt: Date.now(),
     task: onItem
   }
-  console.log(activity.byMember);
   switch (type) {
     case "description":
       activity.txt = 'Modified the description'

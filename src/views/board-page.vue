@@ -39,7 +39,7 @@
                     <div @click="$router.push(`/board/${board._id}`)" v-for="board in boards" :key="board._id"
                         :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
                         <div @click.stop.prevent="removeBoard(board._id)" class="admin-remove-btn"
-                            v-if="currUser.isAdmin"><span class="remove-btn-icon"></span>
+                            v-if="currUser?.isAdmin"><span class="remove-btn-icon"></span>
                         </div>
                         <header>{{ board.title }}</header>
                         <button class="boards-star-btn" @click.stop="toggleStar(board._id)"><span class="boards-star"
@@ -104,7 +104,7 @@
                 <div class="board-prev-page-loop">
                     <div @click.stop.prevent="$router.push(`/board/${board._id}`)" v-for="board in starredBoards"
                         :key="board._id" :style="{ backgroundImage: 'url(' + board.style.bgi + ')' }" class="prev-cont">
-                        <div @click="removeBoard(board._id)" class="admin-remove-btn" v-if="currUser.isAdmin"><span
+                        <div @click="removeBoard(board._id)" class="admin-remove-btn" v-if="currUser?.isAdmin"><span
                                 class="remove-btn-icon"></span>
                         </div>
                         <header>{{ board.title }}</header>

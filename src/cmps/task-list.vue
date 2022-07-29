@@ -1,11 +1,12 @@
 <template>
     <!-- <div v-for="task in tasks"> -->
+
     <Container class="tasks-container" orientation="vertical" v-if="tasks" :get-child-payload="getChildPayload"
         group-name="col-items" @drop="onDrop($event)">
         <Draggable @mousedown.prevent class="task-preview" v-if="tasks" v-for="task in tasks" :key="task.id"
             :groupId="groupId">
-            <task-prev @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask" :key="task.id"
-                @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" />
+            <task-prev ref="taskprev" @enterClicked="enterClicked" @onBoardChange="onBoardChange" @saveTask="saveTask"
+                :key="task.id" @emptyTitle="emptyTitle" @click="onDetails(task.id)" :task="task" />
         </Draggable>
     </Container>
     <!-- </div> -->
@@ -38,6 +39,7 @@ export default {
 
     },
     methods: {
+
         onDrop(dropRes) {
             let items = JSON.parse(JSON.stringify(this.tasks))
             items = applyDrag(items, dropRes)
