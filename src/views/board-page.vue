@@ -75,7 +75,7 @@
                                 <img @load="show" src="../assets/prevImg.png" alt="">
                             </div>
                             <div class="create-screen-imgs-container">
-                                <img @click="setBgi(img)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img"
+                                <img @click="setBgi(img.full)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img.thumb"
                                     alt="">
                             </div>
                             <div>

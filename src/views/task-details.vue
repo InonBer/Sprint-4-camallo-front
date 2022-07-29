@@ -63,8 +63,8 @@
                         </section>
                     </div>
                     <div v-if="task.dueDate" class="due-date-container">
-                    <p class="details-duedate-title">Due date</p>
-                        {{task.dueDate}}
+                        <p class="details-duedate-title">Due date</p>
+                        {{ task.dueDate }}
                     </div>
                 </div>
                 <div class="window-modal-content">
@@ -131,6 +131,11 @@
                             <textarea ref="detailsComment" @keydown.enter.stop="onCommentAdd" class="details-textarea"
                                 name="activity" id="activity" cols="85" rows="2"
                                 placeholder="Write a comment..."></textarea>
+                        </div>
+                        <div class="comment-prev" style="position:relative">
+                            <div v-if="task.comments" v-for="comment in task.comments">
+                                <taskComments :comment="comment" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,6 +228,7 @@ import coverModal from '../cmps/task-cover/cover-modal.vue';
 import imgUpload from '../cmps/img-upload.vue';
 import cover from '../cmps/task-cover/cover.vue';
 import datesModal from '../cmps/dates-modal.vue';
+import taskComments from '../cmps/task-comments.vue';
 
 
 export default {
@@ -235,7 +241,7 @@ export default {
         imgUpload,
         cover,
         datesModal,
-
+        taskComments
     },
     data() {
         return {
@@ -521,5 +527,9 @@ export default {
 
 .desc-cancel-btn:hover {
     background-color: #091e4214;
+}
+
+.comment-prev {
+    margin-top: 15px;
 }
 </style>
