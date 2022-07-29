@@ -285,7 +285,7 @@ function getEmptyBoard() {
     title: '',
     archivedAt: '',
     createdAt: new Date(),
-    isStarred: true,
+    isStarred: false,
     createdBy: {
       _id: "u101",
       fullname: "Tal Tarablus",
