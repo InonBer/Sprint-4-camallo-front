@@ -35,27 +35,45 @@
                                 <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                             </div>
                         </template>
-                        <section @click.stop="" class="labels-modal" v-if="labelModel"
-                            v-click-outside="() => { labelModel = !labelModel }">
+                        <section @click.stop="" class="labels-modal" v-if="labelModel" v-click-outside="() => {
+                            labelModel = !labelModel
+                            isChangeLabel = false
+                        }">
                             <div class="modal-layout">
                                 <header>
-                                    <span>
-                                        Labels
-                                    </span>
-                                    <span @click="labelModel = !labelModel" class="close-btn"></span>
+                                    <span v-if="!isChangeLabel"> Labels </span>
+                                    <span v-else> Change labels </span>
+                                    <span @click="labelModel = !labelModel; isChangeLabel = false"
+                                        class="close-btn"></span>
                                 </header>
-                                <div class="labels-modal-main">
+                                <div v-if="!isChangeLabel" class="labels-modal-main">
                                     <div class="details-labels-adding-container">
-                                        <div v-for="label in board.labels" @click="addLabel(label)">
+                                        <div v-for="label, idx in board.labels" @click="addLabel(label)">
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
                                                     <span class="label-include-v"
                                                         v-if="task.labelIds?.includes(label)"></span>
                                                 </div>
-                                                <button class="edit-label-btn"><span
-                                                        class="edit-label-icon"></span></button>
+                                                <button @click.prevent.stop="isChangeLabel = true; labelIdx = idx"
+                                                    class="edit-label-btn">
+                                                    <span class="edit-label-icon"></span>
+                                                </button>
                                             </dive>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="isChangeLabel" class="labels-modal-main">
+                                    <span>Name</span>
+                                    <div>
+                                        <input type="text" :value="board.labels[labelIdx].title">
+                                    </div>
+                                    <span>Select a color</span>
+                                    <div class="labels-colors-warper">
+                                        <div class="labels-colors-opt">
+                                            <span class="label-color" v-for="color in labelColors"
+                                                @click="changeLabelColor(color, idx)"
+                                                :style="{ backgroundColor: color }"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -131,9 +149,11 @@
                     </div>
                     <div class="text-container-details">
                         <div class="chat-input-container">
-                            <img class="chat-user-img"
+                            <!-- <img class="chat-user-img"
                                 src="http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                alt="" />
+                                alt="" /> -->
+                            <img v-if="currUser.img" class="chat-user-img" :src="currUser.img" alt="" srcset="">
+                            <avatar v-else :username="currUser.fullname" />
                             <textarea ref="detailsComment" @keydown.enter.stop="onCommentAdd" class="details-textarea"
                                 name="activity" id="activity" cols="85" rows="2"
                                 placeholder="Write a comment..."></textarea>
@@ -236,6 +256,7 @@ import cover from '../cmps/task-cover/cover.vue';
 import datesModal from '../cmps/dates-modal.vue';
 import taskComments from '../cmps/task-comments.vue';
 import { useMouseInElement } from '@vueuse/core';
+import avatar from '../cmps/avatar.vue';
 
 
 export default {
@@ -248,7 +269,8 @@ export default {
         imgUpload,
         cover,
         datesModal,
-        taskComments
+        taskComments,
+        avatar
     },
     data() {
         return {
@@ -263,7 +285,21 @@ export default {
             groupId: null,
             checklistModal: false,
             coverModal: false,
-            datesModalOpen: false
+            datesModalOpen: false,
+            isChangeLabel: false,
+            labelIdx: null,
+            labelColors: [
+                '#61bd4f',
+                '#f2d600',
+                '#ff9f1a',
+                '#eb5a46',
+                '#c377e0',
+                '#0079bf',
+                '#00c2e0',
+                '#51e898',
+                '#ff78cb',
+                '#344563',
+            ]
         }
     },
     async created() {
@@ -281,6 +317,8 @@ export default {
         }
     },
     methods: {
+        changeLabelColor(color) {
+        },
         openDatesModal() {
             this.datesModalOpen = true
         },
@@ -369,6 +407,8 @@ export default {
                 this.labelModel = false
                 this.coverModal = false
                 this.datesModalOpen = false
+                this.isChangeLabel = false
+                this.labelIdx = null
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
@@ -525,6 +565,27 @@ export default {
 </script>
 
 <style>
+.labels-colors-opt {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-color {
+    height: 32px;
+    width: 48px;
+    border-radius: 3px;
+    margin: 0 7.9px 8px 0;
+}
+
+.label-color:hover {
+    opacity: 0.8;
+    cursor: pointer;
+
+}
+
 .task-description-placeholder {
     width: 512px;
     height: 56px;
