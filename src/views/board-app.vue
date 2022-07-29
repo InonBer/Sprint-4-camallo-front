@@ -1,7 +1,6 @@
 <template>
   <board-app-header />
   <div style="opacity: 0;" ref="userMouse" class="user-mouse-cursor">
-    <!-- <img src="../assets/cursor.png" alt=""> -->
   </div>
   <div v-if="currBoard" class="board-app bgc-img" :style="boardBGI">
     <board-header :board="currBoard" />
@@ -39,10 +38,12 @@ export default {
     window.addEventListener('mousedown', this.onMouseDown)
     window.addEventListener('mousemove', this.onMouseMoving)
     window.addEventListener('mouseup', this.onMouseUp)
+
   },
   emits: ['onBoardChange'],
   methods: {
     onMouseDown({ clientX, clientY }) {
+      if (this.$route.name !== 'boardApp') return
       const pos = {
         clientX,
         clientY,
@@ -121,9 +122,10 @@ export default {
       async handler({ boardId }) {
         try {
           if (!this.$store.getters.currBoard || this.$store.getters.currBoard._id !== boardId) {
-            socketService.emit('board-set-channel', boardId)
             this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
           }
+          socketService.emit('board-set-channel', boardId)
+          console.log('created');
         } catch (err) {
           console.error(err)
         }
@@ -144,6 +146,7 @@ export default {
    justify-content: flex-start;
    align-items: center;
    left: -50px;
+   /* opacity: 0.7; */
    width: auto;
    height: auto;
    z-index: 1000;
