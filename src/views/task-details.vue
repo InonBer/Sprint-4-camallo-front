@@ -2,8 +2,8 @@
     <div class="window-overlay">
 
         <section v-click-outside.stop.prevent="onClickOutside" v-if="board && task" class="task-details">
-            <datesModal v-if="datesModalOpen" @onDueDateRemove="onDueDateRemove" @onDueDateSet="onDueDateSet"
-                @closeDateModal="closeDateModal"></datesModal>
+            <datesModal v-click-outside="closeDateModal" v-if="datesModalOpen" @onDueDateRemove="onDueDateRemove"
+                @onDueDateSet="onDueDateSet" @closeDateModal="closeDateModal"></datesModal>
             <button class="details-exit-btn" @click="$router.push('/board/' + currBoard._id)">
                 <span class="card-details-exit-btn"></span>
             </button>
@@ -35,27 +35,45 @@
                                 <div @click="labelModel = !labelModel" class="details-label-add-btn">+</div>
                             </div>
                         </template>
-                        <section @click.stop="" class="labels-modal" v-if="labelModel"
-                            v-click-outside="() => { labelModel = !labelModel }">
+                        <section @click.stop="" class="labels-modal" v-if="labelModel" v-click-outside="() => {
+                            labelModel = !labelModel
+                            isChangeLabel = false
+                        }">
                             <div class="modal-layout">
                                 <header>
-                                    <span>
-                                        Labels
-                                    </span>
-                                    <span @click="labelModel = !labelModel" class="close-btn"></span>
+                                    <span v-if="!isChangeLabel"> Labels </span>
+                                    <span v-else> Change labels </span>
+                                    <span @click="labelModel = !labelModel; isChangeLabel = false"
+                                        class="close-btn"></span>
                                 </header>
-                                <div class="labels-modal-main">
+                                <div v-if="!isChangeLabel" class="labels-modal-main">
                                     <div class="details-labels-adding-container">
-                                        <div v-for="label in board.labels" @click="addLabel(label)">
+                                        <div v-for="label, idx in board.labels" @click="addLabel(label)">
                                             <dive class="label-add-container">
                                                 <div class="label-modal-label" :style="{ background: label.color }">
                                                     <span> {{ label.title }}</span>
                                                     <span class="label-include-v"
-                                                        v-if="task.labelIds.includes(label)"></span>
+                                                        v-if="task.labelIds?.includes(label)"></span>
                                                 </div>
-                                                <button class="edit-label-btn"><span
-                                                        class="edit-label-icon"></span></button>
+                                                <button @click.prevent.stop="isChangeLabel = true; labelIdx = idx"
+                                                    class="edit-label-btn">
+                                                    <span class="edit-label-icon"></span>
+                                                </button>
                                             </dive>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="isChangeLabel" class="labels-modal-main">
+                                    <span>Name</span>
+                                    <div>
+                                        <input type="text" :value="board.labels[labelIdx].title">
+                                    </div>
+                                    <span>Select a color</span>
+                                    <div class="labels-colors-warper">
+                                        <div class="labels-colors-opt">
+                                            <span class="label-color" v-for="color in labelColors"
+                                                @click="changeLabelColor(color, idx)"
+                                                :style="{ backgroundColor: color }"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +82,13 @@
                     </div>
                     <div v-if="task.dueDate" class="due-date-container">
                         <p class="details-duedate-title">Due date</p>
-                        {{ task.dueDate }}
+                        <input @click="toggleDueDateDone" type="checkbox" :checked="task.dueDate.isDone" />
+                        <div @click="datesModalOpen = !datesModalOpen" class="due-wrapper">
+                            {{ task.dueDate.dateStr }}<span v-if="task.dueDate.status" class="due-status"
+                                :style="{ backgroundColor: task.dueDate.clr }">{{
+                                        task.dueDate.status
+                                }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="window-modal-content">
@@ -125,9 +149,11 @@
                     </div>
                     <div class="text-container-details">
                         <div class="chat-input-container">
-                            <img class="chat-user-img"
+                            <!-- <img class="chat-user-img"
                                 src="http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                alt="" />
+                                alt="" /> -->
+                            <img v-if="currUser.img" class="chat-user-img" :src="currUser.img" alt="" srcset="">
+                            <avatar v-else :username="currUser.fullname" />
                             <textarea ref="detailsComment" @keydown.enter.stop="onCommentAdd" class="details-textarea"
                                 name="activity" id="activity" cols="85" rows="2"
                                 placeholder="Write a comment..."></textarea>
@@ -229,6 +255,8 @@ import imgUpload from '../cmps/img-upload.vue';
 import cover from '../cmps/task-cover/cover.vue';
 import datesModal from '../cmps/dates-modal.vue';
 import taskComments from '../cmps/task-comments.vue';
+import { useMouseInElement } from '@vueuse/core';
+import avatar from '../cmps/avatar.vue';
 
 
 export default {
@@ -241,7 +269,8 @@ export default {
         imgUpload,
         cover,
         datesModal,
-        taskComments
+        taskComments,
+        avatar
     },
     data() {
         return {
@@ -256,7 +285,21 @@ export default {
             groupId: null,
             checklistModal: false,
             coverModal: false,
-            datesModalOpen: false
+            datesModalOpen: false,
+            isChangeLabel: false,
+            labelIdx: null,
+            labelColors: [
+                '#61bd4f',
+                '#f2d600',
+                '#ff9f1a',
+                '#eb5a46',
+                '#c377e0',
+                '#0079bf',
+                '#00c2e0',
+                '#51e898',
+                '#ff78cb',
+                '#344563',
+            ]
         }
     },
     async created() {
@@ -269,22 +312,28 @@ export default {
             this.group = this.board.groups[groupIdx]
             const taskIdx = this.group.tasks.findIndex(task => task.id === taskId)
             this.task = this.group.tasks[taskIdx]
+            if (this.task.dueDate) this.dueDateUpdate()
         } catch (e) {
             console.log(e);
         }
     },
     methods: {
+        changeLabelColor(color) {
+        },
         openDatesModal() {
             this.datesModalOpen = true
         },
         onDueDateSet(date) {
             let due = {
                 date,
-                isDone: false
+                isDone: false,
+                dateStr: '',
+                status: '',
+                clr: ''
             }
             this.task.dueDate = {}
             this.task.dueDate = due
-            this.saveBoard('dueDateAdd')
+            this.dueDateUpdate()
         },
         onDueDateRemove() {
             this.task.dueDate = null
@@ -292,6 +341,46 @@ export default {
         },
         closeDateModal() {
             this.datesModalOpen = false
+        },
+        toggleDueDateDone() {
+            this.task.dueDate.isDone = !this.task.dueDate.isDone
+            this.dueDateUpdate()
+            console.log(this.task.dueDate)
+        },
+        dueDateUpdate() {
+            const due = this.task.dueDate.date
+            const dueDateObj = this.task.dueDate
+
+            const dueDay = new Date(due).getDate()
+            const dueMonth = new Date(due).getMonth()
+            const currDay = new Date().getDate()
+            const currMonth = new Date().getMonth()
+
+            if (dueMonth === currMonth && dueDay === currDay || dueDay === currDay + 1 || dueDay === currDay - 1) {
+                dueDateObj.dateStr = moment(due).calendar(null, {
+                    sameDay: `[today] h:mm A`,
+                    nextDay: '[tomorrow] h:mm A',
+                    lastDay: '[yesterday] h:mm A',
+                })
+            } else {
+                let str = moment(due).format("MMM D") + ' at '
+                str += moment(due).format("h:mm A")
+                dueDateObj.dateStr = str
+            }
+
+            if (new Date(due).getTime() < Date.now()) {
+                dueDateObj.status = 'overdue'
+                dueDateObj.clr = '#EB5A46'
+            } else if (dueDay === currDay) {
+                dueDateObj.status = 'due soon'
+                dueDateObj.clr = '#F2D600'
+            }
+            if (this.task.dueDate.isDone) {
+                dueDateObj.status = 'complete'
+                dueDateObj.clr = '#61BD4F'
+            }
+            this.task.dueDate = dueDateObj
+            this.saveBoard()
         },
         onRemoveAttach(id) {
             console.log('id', id)
@@ -319,6 +408,8 @@ export default {
                 this.labelModel = false
                 this.coverModal = false
                 this.datesModalOpen = false
+                this.isChangeLabel = false
+                this.labelIdx = null
             } else this.$router.push('/board/' + this.currBoard._id)
         },
         saveImg(imgData) {
@@ -461,7 +552,7 @@ export default {
         },
         currUser() {
             return this.$store.getters.currUser
-        }
+        },
     },
     unmounted() { },
     watch: {
@@ -475,6 +566,27 @@ export default {
 </script>
 
 <style>
+.labels-colors-opt {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-color {
+    height: 32px;
+    width: 48px;
+    border-radius: 3px;
+    margin: 0 7.9px 8px 0;
+}
+
+.label-color:hover {
+    opacity: 0.8;
+    cursor: pointer;
+
+}
+
 .task-description-placeholder {
     width: 512px;
     height: 56px;

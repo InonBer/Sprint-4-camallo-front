@@ -24,6 +24,23 @@
             v-if="task.description || task.comments?.length || task.checklists?.length || task.attachments?.length">
 
             <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
+            <div v-if="task.dueDate" class="task-prev-due-date" :style="{ backgroundColor: dueDate.clr }">
+
+                <div class="due-date-switch">
+                    <input @click.stop="toggleDueDateDone" name="prev-date-chkbx" type="checkbox"
+                        :checked="task.dueDate.isDone" />
+                    <svg class="due-date-svg" width="16" height="16" role="presentation" focusable="false"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V12C11 12.2652 11.1054 12.5196 11.2929 12.7071L13.7929 15.2071C14.1834 15.5976 14.8166 15.5976 15.2071 15.2071C15.5976 14.8166 15.5976 14.1834 15.2071 13.7929L13 11.5858V6Z"
+                            fill="#ffffff"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"
+                            fill="#ffffff"></path>
+                    </svg>
+                </div>
+                {{ dueDate.dateStr }}
+            </div>
 
             <div v-if="task.description" class="task-prev-description"><span class="icon-description"></span></div>
 
@@ -34,7 +51,8 @@
                 <span class="icon-attachment-txt">{{ task.attachments.length }}</span>
             </div>
 
-            <div class="task-prev-checklist" :class="checkListDone === checkListTotal ? 'chcklist-done':''" v-if="task.checklists?.length"><span class="icon-list"></span>
+            <div class="task-prev-checklist" :class="checkListDone === checkListTotal ? 'chcklist-done' : ''"
+                v-if="task.checklists?.length"><span class="icon-list"></span>
                 <span class="task-prev-checklist-txt">{{ checkListDone
                 }}/{{ checkListTotal }}</span>
             </div>
@@ -49,6 +67,8 @@
 
 </template>
  <script>
+import moment from 'moment';
+
 export default {
     emits: ['onBoardChange'],
     props: {
@@ -58,6 +78,7 @@ export default {
     },
     name: 'TaskPrev',
     components: {},
+    emits: ['saveTask'],
     data() {
         return {
             titleName: '',
@@ -67,11 +88,12 @@ export default {
     },
     created() {
         this.currTask = JSON.parse(JSON.stringify(this.task))
-
+    },
+    mounted() {
+        if (this.task.dueDate) this.dueDateUpdate(JSON.parse(JSON.stringify(this.task)))
     },
     methods: {
         onTitleChange(ev) {
-
             let copy = JSON.parse(JSON.stringify(this.task))
             copy.title = this.currTask.title
             this.currTask.isEdited = !this.currTask.isEdited;
@@ -87,7 +109,48 @@ export default {
         },
         toggleLabelsExtended() {
             this.$store.dispatch({ type: 'toggleLabelsExtended' })
-        }
+        },
+        toggleDueDateDone() {
+            let copy = JSON.parse(JSON.stringify(this.task))
+            copy.dueDate.isDone = !copy.dueDate.isDone
+            this.dueDateUpdate(copy)
+        },
+        dueDateUpdate(task) {
+            const due = task.dueDate.date
+            const dueDateObj = task.dueDate
+
+            const dueDay = new Date(due).getDate()
+            const dueMonth = new Date(due).getMonth()
+            const currDay = new Date().getDate()
+            const currMonth = new Date().getMonth()
+
+            if (dueMonth === currMonth && dueDay === currDay || dueDay === currDay + 1 || dueDay === currDay - 1) {
+                dueDateObj.dateStr = moment(due).calendar(null, {
+                    sameDay: `[today] h:mm A`,
+                    nextDay: '[tomorrow] h:mm A',
+                    lastDay: '[yesterday] h:mm A',
+                })
+            } else {
+                let str = moment(due).format("MMM D") + ' at '
+                str += moment(due).format("h:mm A")
+                dueDateObj.dateStr = str
+            }
+
+            if (new Date(due).getTime() < Date.now()) {
+                dueDateObj.status = 'overdue'
+                dueDateObj.clr = '#EB5A46'
+            } else if (dueDay === currDay) {
+                dueDateObj.status = 'due soon'
+                dueDateObj.clr = '#F2D600'
+            }
+            if (task.dueDate.isDone) {
+                dueDateObj.status = 'complete'
+                dueDateObj.clr = '#61BD4F'
+            }
+
+            task.dueDate = dueDateObj
+            this.$emit('saveTask', task)
+        },
     },
     computed: {
         checkListDone() {
@@ -103,10 +166,6 @@ export default {
                 acc += checklist.todos.length
                 return acc;
             }, 0)
-        },
-        bgc() {
-            return "#61bd4f"
-            return this.task.labelIds[0]
         },
         pos() {
             if (!this.task.checklists?.length && !this.task.comments?.length && !this.task.description && !this.task.attachments?.length) return "relative"
@@ -135,7 +194,12 @@ export default {
         },
         labelsExtended() {
             const user = this.$store.getters.currUser
-            return user.labelsExtended
+            return user?.labelsExtended
+        },
+        dueDate() {
+            const dateStr = moment(this.task.dueDate.date).format("MMM D")
+            const clr = this.task.dueDate.clr
+            return { dateStr, clr }
         }
     },
     unmounted() { },
