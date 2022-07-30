@@ -75,8 +75,8 @@
                                 <img @load="show" src="../assets/prevImg.png" alt="">
                             </div>
                             <div class="create-screen-imgs-container">
-                                <img @click="setBgi(img.full)" v-for="(img, idx) in imgsToDisplay" :key="idx" :src="img.thumb"
-                                    alt="">
+                                <img @click="setBgi(img.full)" v-for="(img, idx) in imgsToDisplay" :key="idx"
+                                    :src="img.thumb" alt="">
                             </div>
                             <div>
                                 <form class="board-create-form" action="">
@@ -173,6 +173,11 @@ export default {
         onBoardCreate() {
             let board = boardService.getEmptyBoard()
             board.title = JSON.parse(JSON.stringify(this.boardTitle))
+            if (board.title.length < 3) return
+            board.createdBy = {
+                _id: this.currUser._id,
+                fullname: this.currUser.fullname,
+            }
             board.style.bgi = JSON.parse(JSON.stringify(this.backGroundPrev))
             this.isCreating = false
             this.isChoosingBoard = false

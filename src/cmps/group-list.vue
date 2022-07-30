@@ -51,9 +51,9 @@ export default {
         };
     },
     created() {
-        if (this.groups.length == 0) {
-            this.onGroupAdd()
-        }
+        // if (this.groups.length == 0) {
+        //     this.onGroupAdd()
+        // }
     },
     emits: ['onBoardChange', 'onDetails'],
     methods: {

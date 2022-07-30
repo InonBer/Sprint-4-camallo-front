@@ -285,11 +285,7 @@ function getEmptyBoard() {
     archivedAt: '',
     createdAt: new Date(),
     isStarred: false,
-    createdBy: {
-      _id: "u101",
-      fullname: "Tal Tarablus",
-      imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-    },
+    createdBy: {},
     style: {},
     labels: [
       {
@@ -321,8 +317,8 @@ function getEmptyBoard() {
     members: [
       {
         _id: "u101",
-        fullname: "Tal Tarablus",
-        imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        fullname: "Inon Bereshit",
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/…E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%99_kbzw1a.jpg"
       },
       {
         _id: "u111",
