@@ -50,6 +50,9 @@ export default {
         clientY,
       }
       this.userClicked = true
+      let node = document.elementFromPoint(clientX, clientY).parentElement
+      if (node.classList[0] !== "smooth-dnd-draggable-wrapper") return
+
       window.addEventListener('mousemove', this.onMouseMoving)
       socketService.emit('on-user-mouse-down', pos)
     },

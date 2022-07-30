@@ -19,6 +19,7 @@ export const userStore = {
     mutations: {
         setCurrUser(state, { user }) {
             state.currUser = user
+            console.log(state.currUser);
         },
         userLogout(state) {
             state.currUser = null
@@ -37,7 +38,13 @@ export const userStore = {
             console.log(user);
             commit('setCurrUser', { user })
         },
-        loginUser({ commit }, { user }) {
+        async loginUser({ commit }, { user }) {
+            try {
+                const loggedUser = await userService.login(user)
+                commit('setCurrUser', { user: loggedUser })
+            } catch (error) {
+
+            }
             commit('setCurrUser', { user })
         },
         userLogout({ commit }) {
@@ -47,6 +54,7 @@ export const userStore = {
             try {
                 const user = await userService.login(guest)
                 commit('setCurrUser', { user })
+                return Promise.resolve()
             } catch (e) {
                 console.log(e);
             }

@@ -285,11 +285,7 @@ function getEmptyBoard() {
     archivedAt: '',
     createdAt: new Date(),
     isStarred: false,
-    createdBy: {
-      _id: "u101",
-      fullname: "Tal Tarablus",
-      imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-    },
+    createdBy: {},
     style: {},
     labels: [
       {
@@ -321,20 +317,20 @@ function getEmptyBoard() {
     members: [
       {
         _id: "u101",
-        fullname: "Tal Tarablus",
-        imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        fullname: "Inon Bereshit",
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208325/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%99_e9tam7.jpg"
       },
       {
         _id: "u111",
-        email: "michael.lawson@reqres.in",
-        fullname: "Michael Lawson",
-        imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+        email: "Maoz@maoz.com",
+        fullname: "Maoz Yosifon",
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208383/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E%D7%A2%D7%95%D7%96_ynyobr.jpg"
       },
       {
         _id: "u112",
-        email: "lindsay.ferguson@reqres.in",
-        fullname: "Lindsay Ferguson",
-        imgUrl: "https://reqres.in/img/faces/8-image.jpg"
+        email: "Shai@shai.com",
+        fullname: "Shai Avraham",
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208408/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%99_s5vaqi.jpg"
       },
       {
         _id: "u113",
