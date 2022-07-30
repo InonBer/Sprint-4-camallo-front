@@ -31,6 +31,7 @@
             color: #172B4D;
             line-height: 18px;
             font-weight: 500;
+            box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
 
             header {
                 display: flex;
@@ -134,7 +135,6 @@
 
 
 
-
     .header-create-button {
         display: flex;
         align-items: center;
@@ -144,6 +144,11 @@
         // margin-top: 0.7em;
         // padding: 6.6px 0.8em;
         border-radius: 3px;
+
+        p {
+
+            cursor: pointer;
+        }
 
         &:hover {
             cursor: pointer;
@@ -272,6 +277,7 @@
     text-align: start;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
 
     .title-icon-create svg {
         height: 16px;
