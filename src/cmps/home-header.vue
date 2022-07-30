@@ -7,7 +7,7 @@
 
             <div class="buttons-styles-ButtonGroup">
                 <div>
-                    <router-link to="/login">Log in</router-link>
+                    <router-link class="login-a" to="/login">Log in</router-link>
                 </div>
                 <div>
                     <router-link to="/signup">Get Camallo for free</router-link>
