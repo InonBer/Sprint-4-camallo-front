@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { set } from 'lodash'
 import { userService } from '../services/user.service'
 export default {
     data() {
@@ -59,9 +60,12 @@ export default {
         async login() {
             let copy = JSON.parse(JSON.stringify(this.credentials))
             try {
-                const user = userService.login(copy)
-                await this.$store.dispatch('loginUser', { user })
-                this.$router.push('/board-page')
+                // const user = userService.login(copy)
+                // console.log(user);
+                await this.$store.dispatch('loginUser', { user: this.credentials })
+                setTimeout(() => {
+                    this.$router.push('/board-page')
+                }, 1000)
             } catch (error) {
                 console.log(error);
             }

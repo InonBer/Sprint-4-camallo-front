@@ -318,19 +318,19 @@ function getEmptyBoard() {
       {
         _id: "u101",
         fullname: "Inon Bereshit",
-        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/…E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%99_kbzw1a.jpg"
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208325/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%9C%D7%99_e9tam7.jpg"
       },
       {
         _id: "u111",
         email: "Maoz@maoz.com",
         fullname: "Maoz Yosifon",
-        imgUrl: "http://res.cloudinary.com/mister-toy-camay/image/u…5%D7%A0%D7%94_%D7%9E%D7%A2%D7%95%D7%96_k5poue.jpg"
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208383/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E%D7%A2%D7%95%D7%96_ynyobr.jpg"
       },
       {
         _id: "u112",
         email: "Shai@shai.com",
         fullname: "Shai Avraham",
-        imgUrl: "http://res.cloudinary.com/mister-toy-camay/image/u…A%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%99_mtphcn.jpg"
+        imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659208408/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%99_s5vaqi.jpg"
       },
       {
         _id: "u113",
