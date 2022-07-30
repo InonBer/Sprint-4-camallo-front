@@ -21,7 +21,7 @@
                 style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 54px;"></textarea>
         </form>
         <div class="task-prev-details"
-            v-if="task.description || task.comments?.length || task.checklists?.length || task.attachments?.length">
+            v-if="task.description || task.comments?.length || task.checklists?.length || task.attachments?.length || task.dueDate">
 
             <!-- <div v-if="????isUserWatchThisTask????"><span class="icon-subscribe"></span></div> -->
             <div v-if="task.dueDate" class="task-prev-due-date" :style="{ backgroundColor: dueDate.clr }">
@@ -84,13 +84,20 @@ export default {
             titleName: '',
             isEdited: true,
             currTask: null,
+            dateInterval: null
         };
     },
     created() {
         this.currTask = JSON.parse(JSON.stringify(this.task))
     },
     mounted() {
-        if (this.task.dueDate) this.dueDateUpdate(JSON.parse(JSON.stringify(this.task)))
+        if (this.task.dueDate) {
+            console.log('Setted')
+            this.dateInterval = setInterval(() => {
+                this.dueDateUpdate(JSON.parse(JSON.stringify(this.task)))
+                console.log('test')
+            }, 1000 * 60 * 5)
+        }
     },
     methods: {
         onTitleChange(ev) {
@@ -168,15 +175,15 @@ export default {
             }, 0)
         },
         pos() {
-            if (!this.task.checklists?.length && !this.task.comments?.length && !this.task.description && !this.task.attachments?.length) return "relative"
-            if (this.task.checklists || this.task.comments || this.task.description || this.task.attachments) {
+            if (!this.task.checklists?.length && !this.task.comments?.length && !this.task.description && !this.task.attachments?.length && !this.task.dueDate) return "relative"
+            if (this.task.checklists || this.task.comments || this.task.description || this.task.attachments || this.task.dueDate) {
                 if (this.task.memberIds.length > 3) return "relative"
                 return "absolute"
             }
             else return "relative"
         },
         posPad() {
-            if (!this.task.checklists && !this.task.comments && !this.task.description && !this.task.attachments) return { marginTop: "5px" }
+            if (!this.task.checklists && !this.task.comments && !this.task.description && !this.task.attachments && !this.task.dueDate) return { marginTop: "5px" }
 
         },
         taskPrevCover() {
@@ -202,7 +209,12 @@ export default {
             return { dateStr, clr }
         }
     },
-    unmounted() { },
+    unmounted() {
+        if (this.dateInterval){
+            clearInterval(this.dateInterval)
+            console.log('ClearInterval')
+        } 
+    },
 }
 </script>
  <style>
