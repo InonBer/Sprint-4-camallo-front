@@ -335,16 +335,34 @@ export default {
             this.currLabelColor = currLabel.color
             this.currLabelName = currLabel.title
             this.isChangeLabel = true
-
         },
         deleteLabel() {
+            // const currLabelId = this.board.labels[this.currLabelIdx].id
+            // this.board.groups.forEach(group => {
+            //     group.tasks.forEach(task => {
+            //         const taskLabelIdx = task.labelIds?.findIndex(label => {
+            //             label.id === currLabelId
+            //         })
+            //         console.log('taskLabelIdx', taskLabelIdx)
+
+            //         if (taskLabelIdx) this.removeLabel(taskLabelIdx)
+            //     })
+            // })
+
+            // this.task.labelIds.filter(label=>label.id!==this.board.labels[this.currLabelIdx].id)
+
+            this.isChangeLabel = false
             this.board.labels.splice(this.currLabelIdx, 1)
             this.saveBoard()
+
         },
         saveLabel() {
+            console.log('Save label');
             const currLabel = this.board.labels[this.currLabelIdx]
             currLabel.color = this.currLabelColor
             currLabel.title = this.currLabelName
+            this.isChangeLabel = false
+
             this.saveBoard()
         },
         openDatesModal() {
