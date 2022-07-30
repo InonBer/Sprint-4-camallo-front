@@ -270,6 +270,65 @@
             }
         }
     }
+    .task-description-placeholder {
+        width: 512px;
+        height: 56px;
+        padding-left: 11.100000000000001px;
+        padding-top: 5.600000000000003px;
+        margin-left: 25px;
+        border-radius: 3px;
+    }
+    
+    .desc-save-btn {
+        width: 52.39px;
+        height: 32px;
+        background-color: #0079bf;
+        border: none;
+        box-shadow: none;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        border-radius: 3px;
+        margin-left: 24.9px;
+    }
+    
+    .desc-save-btn:hover {
+        background-color: #026aa7;
+    }
+    
+    .desc-cancel-btn {
+        width: 64.91px;
+        height: 32px;
+        background-color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        color: #172b4d;
+        border: none;
+    
+    }
+    
+    .task-text-area {
+        width: 512px;
+        height: 108px;
+        border-radius: 3px;
+    }
+    
+    .task-text-area:focus {
+        box-shadow: inset 0 0 0 2px #0079bf;
+    }
+    
+    .desc-cancel-btn:hover {
+        background-color: #091e4214;
+    }
+    
+    .comment-prev {
+        margin-top: 15px;
+    }
+    
 
     // .details-label-to-add-container {
     //     /* left: 693.188px; */
