@@ -88,8 +88,7 @@ export default {
         return currTask.id === task.id;
       })
       group.tasks[idx] = task
-      // this.$store.dispatch('addTask', { group, id: group.id })
-      this.$emit('saveGroup', group)
+      this.$store.dispatch('addTask', { group, id: group.id })
     },
     onTaskMove(tasks) {
       this.$emit('onTaskMove', tasks, this.group.id)
