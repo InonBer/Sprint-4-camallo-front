@@ -154,6 +154,7 @@ export default {
             }
 
             task.dueDate = dueDateObj
+            console.log('task', task);
             this.$emit('saveTask', task)
         },
     },

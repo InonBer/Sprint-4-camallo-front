@@ -81,8 +81,10 @@ export const boardStore = {
         // },
         async saveBoard({ commit, state, rootState }, { board, action, task }) {
             try {
-                let activity = boardService.getActivityByType(action, rootState.userStore.currUser, task)
-                board.activities.unshift(activity)
+                if (action) {
+                    let activity = boardService.getActivityByType(action, rootState.userStore.currUser, task)
+                    board.activities.unshift(activity)
+                }
                 socketService.emit('on-UserDrag', board)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
@@ -126,6 +128,7 @@ export const boardStore = {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 const idx = boardCopy.groups.findIndex(currGroup => currGroup.id === group.id)
                 boardCopy.groups[idx] = group
+                socketService.emit('on-UserDrag', boardCopy)
                 commit({ type: 'saveBoard', board: boardCopy })
                 commit('setCurrBoard', { board: boardCopy })
                 const board = await boardService.save(boardCopy)
@@ -137,6 +140,7 @@ export const boardStore = {
             try {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 boardCopy.groups = groups
+                socketService.emit('on-UserDrag', boardCopy)
                 commit({ type: 'saveBoard', board: boardCopy })
                 commit({ type: 'setCurrBoard', board: boardCopy })
                 const board = await boardService.addGroup(boardCopy, groups)
