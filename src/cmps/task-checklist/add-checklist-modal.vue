@@ -9,7 +9,7 @@
             </header>
             <div class="checklist-modal-main">
                 <p>Title</p>
-                <input @focus="$event.target.select()" @keydown.space.prevent="test($event)"
+                <input @focus="$event.target.select()" @keydown.space.prevent="addingSpace($event)"
                     @keydown.enter="onAddChklist" v-model=title type="text" name="checklist-title" />
                 <button @click="onAddChklist" class="blue-btn">Add</button>
             </div>
@@ -28,7 +28,7 @@ export default {
     created() { },
     emits: ['onAddChklist', 'closeChklistModal'],
     methods: {
-        test(ev) {
+        addingSpace(ev) {
             this.title += ' '
         },
         onAddChklist() {
