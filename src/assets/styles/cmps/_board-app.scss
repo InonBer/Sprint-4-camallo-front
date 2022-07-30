@@ -18,13 +18,20 @@
     // margin-bottom: 10px;
    
   }
- 
+ .group-card-scroll .smooth-dnd-container{
+  min-height: 2px!important;
+ }
 
     
 .group-list-container{
   // padding-bottom: 72px;
   min-height: 88.5vh;
   &.smooth-dnd-container{
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 2px;
     .smooth-dnd-container {
       display: flex;
       flex-direction: column;

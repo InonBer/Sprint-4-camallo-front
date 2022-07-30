@@ -12,10 +12,10 @@
         display: flex;
         flex-wrap: wrap;
 
-        > {
-            height: fit-content;
-            width: fit-content;
-        }
+        // &> {
+        //     height: fit-content;
+        //     width: fit-content;
+        // }
 
         & button {
             margin-inline-end: 0.3em;
