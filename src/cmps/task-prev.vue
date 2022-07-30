@@ -92,10 +92,8 @@ export default {
     },
     mounted() {
         if (this.task.dueDate) {
-            console.log('Setted')
             this.dateInterval = setInterval(() => {
                 this.dueDateUpdate(JSON.parse(JSON.stringify(this.task)))
-                console.log('test')
             }, 1000 * 60 * 5)
         }
     },
@@ -210,10 +208,9 @@ export default {
         }
     },
     unmounted() {
-        if (this.dateInterval){
+        if (this.dateInterval) {
             clearInterval(this.dateInterval)
-            console.log('ClearInterval')
-        } 
+        }
     },
 }
 </script>

@@ -88,8 +88,6 @@ export default {
             }
         },
         saveGroup(group) {
-            console.log('here');
-            console.log(group);
             let groups = JSON.parse(JSON.stringify(this.groups))
             const idx = groups.findIndex(currGroup => {
                 return currGroup.id === group.id
@@ -111,7 +109,6 @@ export default {
             this.$emit('onDetails', ids)
         },
         onBoardChange() {
-            console.log('group list');
             this.$emit('onBoardChange')
         }
     },

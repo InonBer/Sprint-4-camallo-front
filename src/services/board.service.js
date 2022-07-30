@@ -141,7 +141,6 @@ async function removeBoard(id) {
 
 
 async function save(board) {
-  // console.log(board._id ? storageService.put(KEY, board) : storageService.post(KEY, board));
   const boardCopy = JSON.parse(JSON.stringify(board))
   if (board._id) {
     return httpService.put('board/' + board._id, boardCopy)
@@ -375,54 +374,6 @@ function getEmptyLabel() {
     color: 'white'
   }
 }
-
-// async function add(board) {
-//   const addedReview = await storageService.post('board', board)
-//   // const addedReview = await httpService.post(`review`, review)
-
-//   // review.byUser = userService.getLoggedinUser()
-//   // review.aboutUser = await userService.getById(review.aboutUserId)
-//   // reviewChannel.postMessage({type: 'addReview', review: addedReview})
-
-//   return addedReview
-// }
-
-
-// function query() {
-//   // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
-//   // return httpService.get(`review${queryStr}`)
-
-//   const board = localStorage.getItem()
-//   if (board) {
-//     return board
-//   } else {
-//     const boardToSend = _createBoard()
-//     return Promise.resolve(boardToSend)
-//   }
-//   // return storageService.query('board')
-// }
-
-
-
-// const reviewChannel = new BroadcastChannel('reviewChannel')
-
-// ;(() => {
-//   // reviewChannel.addEventListener('message', (ev) => {
-//   //   console.log('msg event', ev)
-//   //   store.commit(ev.data)
-//   // })
-//   setTimeout(()=>{
-//     socketService.on(SOCKET_EVENT_REVIEW_ADDED, (review) => {
-//       console.log('GOT from socket', review)
-//       store.commit({type: 'addReview', review})
-//     })
-//     socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
-//       showSuccessMsg(`New review about me ${review.txt}`)
-//     })
-//   }, 0)
-
-// })()
-
 function _createBoards() {
   const boards = [
     {

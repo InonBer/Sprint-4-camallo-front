@@ -126,13 +126,11 @@ export default {
   watch: {
     '$route.params': {
       async handler({ boardId }) {
-        console.log('setting correct channel');
         socketService.emit('board-set-channel', boardId)
         try {
           if (!this.$store.getters.currBoard || this.$store.getters.currBoard._id !== boardId) {
             this.$store.dispatch({ type: 'setCurrBoard', id: boardId })
           }
-          console.log('created');
         } catch (err) {
           console.error(err)
         }

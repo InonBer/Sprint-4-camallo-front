@@ -117,7 +117,6 @@ export default {
     },
     created() {
         this.bounce = debounce(this.getPhotos)
-        console.log(this.currBoard);
     },
     methods: {
         onCloseNav() {
@@ -135,7 +134,6 @@ export default {
             this.bounce()
         },
         async getPhotos() {
-            console.log('this.photosFilterBy', this.photosFilterBy)
 
             try {
                 const photos = await unsplashService.query(this.photosFilterBy)
