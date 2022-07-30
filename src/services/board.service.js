@@ -322,15 +322,15 @@ function getEmptyBoard() {
       },
       {
         _id: "u111",
-        email: "michael.lawson@reqres.in",
-        fullname: "Michael Lawson",
-        imgUrl: "https://reqres.in/img/faces/7-image.jpg"
+        email: "Maoz@maoz.com",
+        fullname: "Maoz Yosifon",
+        imgUrl: "http://res.cloudinary.com/mister-toy-camay/image/u…5%D7%A0%D7%94_%D7%9E%D7%A2%D7%95%D7%96_k5poue.jpg"
       },
       {
         _id: "u112",
-        email: "lindsay.ferguson@reqres.in",
-        fullname: "Lindsay Ferguson",
-        imgUrl: "https://reqres.in/img/faces/8-image.jpg"
+        email: "Shai@shai.com",
+        fullname: "Shai Avraham",
+        imgUrl: "http://res.cloudinary.com/mister-toy-camay/image/u…A%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%99_mtphcn.jpg"
       },
       {
         _id: "u113",
