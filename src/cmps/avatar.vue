@@ -1,5 +1,5 @@
 <template>
-    <div title="logout" class="madeup-avatar">
+    <div class="madeup-avatar">
         {{ initials }}
     </div>
 </template>
