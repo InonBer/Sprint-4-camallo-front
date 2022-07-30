@@ -38,7 +38,7 @@ export const boardService = {
   getEmptyTodo,
   getEmptyAttachment,
   getActivityByType,
-
+  getEmptyLabel,
 }
 
 function getColorsToDisplay() {
@@ -366,6 +366,14 @@ function getEmptyBoard() {
     activities: [],
   }
   return board
+}
+
+function getEmptyLabel() {
+  return {
+    id: utilService.makeId,
+    title: '',
+    color: 'white'
+  }
 }
 
 // async function add(board) {
