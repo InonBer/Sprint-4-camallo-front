@@ -116,7 +116,6 @@ export const boardStore = {
         async saveTaskMove({ commit, state }, { group }) {
             try {
                 commit('saveTaskMove', { group })
-                // console.log(board)
                 // commit('setCurrBoard', { board })
             } catch (err) {
                 console.log(err);
@@ -135,7 +134,6 @@ export const boardStore = {
             }
         },
         async addGroup({ commit, state }, { groups }) {
-            console.log('doing shit');
             try {
                 let boardCopy = JSON.parse(JSON.stringify(state.currBoard))
                 boardCopy.groups = groups
@@ -150,14 +148,12 @@ export const boardStore = {
             try {
                 const boardCopy = JSON.parse(JSON.stringify(board))
                 const boardToAdd = await boardService.save(boardCopy)
-                console.log('boardToAdd', boardToAdd);
                 commit('saveBoard', { board: boardToAdd })
             } catch (err) {
                 console.log(err);
             }
         },
         onBoardSocketRecived({ commit, state }, { board }) {
-            console.log('Recived a socket');
             if (state.currBoard._id === board._id) {
                 commit("setCurrBoard", { board })
             }

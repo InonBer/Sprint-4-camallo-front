@@ -337,27 +337,12 @@ export default {
             this.isChangeLabel = true
         },
         deleteLabel() {
-            // const currLabelId = this.board.labels[this.currLabelIdx].id
-            // this.board.groups.forEach(group => {
-            //     group.tasks.forEach(task => {
-            //         const taskLabelIdx = task.labelIds?.findIndex(label => {
-            //             label.id === currLabelId
-            //         })
-            //         console.log('taskLabelIdx', taskLabelIdx)
-
-            //         if (taskLabelIdx) this.removeLabel(taskLabelIdx)
-            //     })
-            // })
-
-            // this.task.labelIds.filter(label=>label.id!==this.board.labels[this.currLabelIdx].id)
-
             this.isChangeLabel = false
             this.board.labels.splice(this.currLabelIdx, 1)
             this.saveBoard()
 
         },
         saveLabel() {
-            console.log('Save label');
             const currLabel = this.board.labels[this.currLabelIdx]
             currLabel.color = this.currLabelColor
             currLabel.title = this.currLabelName
@@ -390,7 +375,6 @@ export default {
         toggleDueDateDone() {
             this.task.dueDate.isDone = !this.task.dueDate.isDone
             this.dueDateUpdate()
-            console.log(this.task.dueDate)
         },
         dueDateUpdate() {
             const due = this.task.dueDate.date
@@ -428,7 +412,6 @@ export default {
             this.saveBoard()
         },
         onRemoveAttach(id) {
-            console.log('id', id)
             const idx = this.task.attachments.findIndex(currAttach => currAttach.id === id)
             this.task.attachments.splice(idx, 1)
             this.saveBoard()
@@ -487,7 +470,6 @@ export default {
             this.saveBoard("description")
         },
         onTaskDelete() {
-            console.log('deleting');
             let boardCopy = JSON.parse(JSON.stringify(this.board))
             const groupIdx = boardCopy.groups.findIndex(group => group.id === this.groupId)
             const taskIdx = boardCopy.groups[groupIdx].tasks.findIndex(currTask => currTask.id === this.task.id)
@@ -532,7 +514,6 @@ export default {
             if (!this.task.checklists) this.task.checklists = []
             let checklist = boardService.getEmptyChklist(title)
             this.task.checklists.push(checklist)
-            console.log(this.task.checklists)
             this.saveBoard()
         },
         openMembersModal() {
@@ -603,7 +584,6 @@ export default {
     watch: {
         '$route.params.id': {
             handler({ id }) {
-                console.log(id);
             }
         }
     }

@@ -18,7 +18,7 @@ import { Container, Draggable } from 'vue3-smooth-dnd'
 import { applyDrag } from '../services/dnd-service';
 import { boardService } from '../services/board.service';
 export default {
-    emits: ['onDetails', 'taskAdded', 'onBoardChange', 'onTaskMove','saveTask'],
+    emits: ['onDetails', 'taskAdded', 'onBoardChange', 'onTaskMove', 'saveTask'],
     props: {
         tasks: {
             type: Array
@@ -57,7 +57,6 @@ export default {
         },
         emptyTitle() {
             this.tasks.pop()
-            console.log('removing task');
             this.$emit('taskAdded')
 
         },

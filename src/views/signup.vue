@@ -61,7 +61,6 @@ export default {
     methods: {
         async onSignup() {
             if (this.credentials.email.length < 3 && this.credentials.fullname.length < 3 && this.credentials.password.length < 3) return
-            console.log('logging in');
             const cred = JSON.parse(JSON.stringify(this.credentials))
             try {
                 const user = await userService.signup(cred)

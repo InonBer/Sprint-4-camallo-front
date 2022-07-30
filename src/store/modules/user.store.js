@@ -46,9 +46,6 @@ export const userStore = {
         async onGuestLogin({ commit }, { guest }) {
             try {
                 const user = await userService.login(guest)
-                console.log('loggin in!!!');
-                console.log('user!!!!!', user)
-
                 commit('setCurrUser', { user })
             } catch (e) {
                 console.log(e);
