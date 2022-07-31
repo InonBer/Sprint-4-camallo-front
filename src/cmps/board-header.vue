@@ -10,8 +10,6 @@
             <button class="opacity-button">Boards</button>
             <span class="btn-divider"></span> -->
             <section class="members">
-                <img v-if="currUser.img" class="userImg" :src="currUser.img" alt="">
-                <avatar v-else :username="currUser.fullname" />
                 <img class="userImg" v-for="(user, idx) in board.members.slice(0, 4)" :key="user._id"
                     :src=board.members[idx].imgUrl />
             </section>

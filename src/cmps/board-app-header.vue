@@ -59,7 +59,7 @@
 
       <el-input v-model="searchtxt" placeholder="Search" :prefix-icon="Search" />
       <div style="width:32px; height:32px">
-        <img v-if="currUser?.img" class="userImg" :src="currUser?.img" alt="">
+        <img v-if="currUser.img" @click="logout" class="userImg" :src="currUser.img" alt="">
         <avatar title="logout" v-else @click="logout" :username="currUser.fullname" />
       </div>
     </div>
