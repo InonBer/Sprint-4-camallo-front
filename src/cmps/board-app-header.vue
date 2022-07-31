@@ -1,21 +1,25 @@
 <template>
   <header class="app-header" :style="{ backgroundColor: BGC, color: txtClr }">
     <div class="header-content">
-      <h2 @click="$router.push('/')" class=" header-logo"><img src="../assets/icon-test-white.png" alt="" srcset="">
+      <h2 @click="$router.push('/')" class=" header-logo">
+      <img v-if="isDark" src="../assets/icon-test-white.png" alt="" srcset="">
+      <img v-else src="../assets/icon-test-blue.png" alt="" srcset="">
         Camallo
       </h2>
-      <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button">Boards
-        <img src="../assets/arrow-down.png" alt="arw-dwn" />
+      <button @click="isRecentModalOpen = !isRecentModalOpen" class="header-button header-btn-clr">Boards
+        <img v-if="isDark" src="../assets/arrow-down.png" alt="arw-dwn" />
+        <img v-else src="../assets/arrow-down-blue.png" alt="arw-dwn" />
         <recentModal v-if="isRecentModalOpen" :boards="boards" :title="'Boards'"
           v-click-outside="() => { isRecentModalOpen = false }" />
       </button>
-      <button @click="isStarredModalOpen = !isStarredModalOpen" class="header-button">Starred
-        <img src="../assets/arrow-down.png" alt="arw-dwn" />
+      <button @click="isStarredModalOpen = !isStarredModalOpen" class="header-button header-btn-clr">Starred
+        <img v-if="isDark" src="../assets/arrow-down.png" alt="arw-dwn" />
+        <img v-else src="../assets/arrow-down-blue.png" alt="arw-dwn" />
         <recentModal v-if="isStarredModalOpen" :boards="starredBoards" :title="'Starred boards'"
           v-click-outside="() => { isStarredModalOpen = false }" />
       </button>
       <div class="conss">
-        <button @click="onCreate" class="header-create-button">Create</button>
+        <button @click="onCreate" class="header-create-button header-btn-clr">Create</button>
         <div v-click-outside="() => { isCreating = false }" v-if="isCreating" class="header-creating-container">
           <header class="header-header">Create</header>
           <div @click="isChoosingBoard = true ; isCreating = false" class="header-create-button">
@@ -74,6 +78,7 @@ import { userService } from '../services/user.service';
 import recentModal from './recent-modal.vue'
 import avatar from './avatar.vue'
 import { socketService } from '../services/socket.service';
+import { utilService } from '../services/util.service';
 export default {
   props: {
 
@@ -139,33 +144,10 @@ export default {
       this.boardTitle = ''
       this.isCreating = !this.isCreating
     },
-    isDarkColor(c) {
-      c = c.substring(1) // strip #
-      const rgb = parseInt(c, 16) // convert rrggbb to decimal
-      const r = (rgb >> 16) & 0xff // extract red
-      const g = (rgb >> 8) & 0xff // extract green
-      const b = (rgb >> 0) & 0xff // extract blue
-      var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
-
-      return luma < 100
-    },
     LightenDarkenColor(col, amt) {
       col = parseInt(col, 16);
       return (((col & 0x0000FF) + amt) | ((((col >> 8) & 0x00FF) + amt) << 8) | (((col >> 16) + amt) << 16)).toString(16);
     },
-    componentToHex(c) {
-      var hex = c.toString(16);
-      return hex.length == 1 ? "0" + hex : hex;
-    },
-    rgbToHex(clr) {
-      const rgb = clr.split(',')
-
-      const r = rgb[0].trim()
-      const g = rgb[1].trim()
-      const b = rgb[2].trim()
-      return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
-    }
-
   },
   computed: {
     BGImage() {
@@ -189,8 +171,11 @@ export default {
     board() {
       return this.$store.getters.currBoard
     },
+    isDark(){
+      return utilService.isDarkColor(this.BGC)
+    },
     txtClr() {
-      const color = this.isDarkColor(this.BGC) ? 'white' : '#172b4d'
+      const color =this.isDark ? '#ffffff' : '#172b4d'
       return color
     }
   },
