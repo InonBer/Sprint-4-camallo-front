@@ -85,6 +85,14 @@ export const boardStore = {
                     let activity = boardService.getActivityByType(action, rootState.userStore.currUser, task)
                     board.activities.unshift(activity)
                 }
+                // const member = {
+                //     fullname: "Shahar Zohar",
+                //     imgUrl: "https://res.cloudinary.com/mister-toy-camay/image/upload/v1659249914/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%A9%D7%97%D7%A8_aos24q.jpg",
+                //     _id: "s984s",
+                //     email: "shahar.zohar@gmail.com",
+                // }
+                // board.members.push(member)
+                // board.members.pop()
                 socketService.emit('on-UserDrag', board)
                 commit({ type: 'saveBoard', board })
                 commit({ type: 'setCurrBoard', board })
