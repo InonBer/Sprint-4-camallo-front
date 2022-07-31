@@ -128,9 +128,9 @@
                 }
             }
         }
-
-
-
+        .header-btn-clr{
+            color:inherit;
+        }
     }
 
 
@@ -185,7 +185,7 @@
     .header-logo {
         height: 27px;
         padding-top: 3px;
-        color: white;
+        color: inherit;
         // margin: auto 0;
         user-select: none;
         margin-inline-end: 0.3em;
@@ -344,5 +344,13 @@
     input:focus {
         background-color: #ffffff;
     }
+    
+}
+.el-input__prefix-inner{
+    color:#172b4d;
+}
 
+
+#el-id-1486-1::placeholder{
+    color:#172B4D;
 }
