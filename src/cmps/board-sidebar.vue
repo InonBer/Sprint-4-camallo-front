@@ -20,8 +20,11 @@
                 <div class="sidebar-activities">
                     <div class="activities-title">
                         <p><span class="icon-activity"></span> Activities</p>
+                        <div @click.stop.prevent="onActivityShow = !onActivityShow" class="activity-show-btn"><span>{{
+                                isActivityShowing
+                        }}</span></div>
                     </div>
-                    <div v-if="currBoard?.activities.length" v-for="activity in currBoard.activities"
+                    <div v-if="currBoard?.activities.length && onActivityShow" v-for="activity in currBoard.activities"
                         class="sidebar-act-cnt">
                         <div class="sb-act">
                             <avatar :username="activity.byMember.fullname" />
@@ -98,6 +101,7 @@ export default {
         return {
             boardMenuTitle: 'Menu',
             headerTitle: '',
+            onActivityShow: false,
             headerIndex: 0,
             photosFilterBy: '',
             photos: null,
@@ -169,6 +173,10 @@ export default {
             }
             else return { backgroundColor: 'rgb(' + this.currBoard.style.bgc + ')' }
         },
+        isActivityShowing() {
+            if (!this.onActivityShow) return "Show"
+            else return "Hide"
+        }
 
     },
     unmounted() { },
@@ -195,6 +203,11 @@ export default {
  
  }
  
+ .activities-title {
+     display: flex;
+     flex-direction: row;
+ }
+ 
  .sb-act img {
  
      align-self: center
@@ -210,5 +223,23 @@ export default {
  .sb-act span {
      font-size: 14px;
      font-weight: 400;
+ }
+ 
+ .activity-show-btn {
+     /* justify-self: flex-end; */
+     align-self: center;
+     justify-self: flex-end;
+     background-color: rgb(129 129 129 / 19%);
+     align-self: center;
+     display: flex;
+     align-items: center;
+     border-radius: 3px;
+     margin-left: 131px;
+     justify-content: center;
+     cursor: pointer;
+     width: 50px;
+     height: 30px;
+     user-select: none;
+ 
  }
  </style>
