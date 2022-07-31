@@ -26,7 +26,7 @@
       <div class="home-spreader"><hr/></div>  
       <div class="home-hero-head">
         <h2 class="home-hero-title">It’s more than work. It’s a way of working together.</h2>
-        <p class="home-hero-p">Start with a Trello board, lists, and cards. Customize and expand with more features as your teamwork grows.
+        <p class="home-hero-p">Start with a Camallo board, lists, and cards. Customize and expand with more features as your teamwork grows.
           Manage projects, organize tasks, and build team spirit—all in one place.</p>
       </div>
       <div class="home-hero-img-container">
