@@ -1,6 +1,6 @@
 <template>
     <board-app-header />
-    <div class="board-page-background"></div>
+    <!-- <div class="board-page-background"></div> -->
     <div class="board-page-container">
         <div class="main-boards-container">
             <article v-if="boards">
@@ -115,9 +115,14 @@
                 </div>
             </article>
         </div>
-
-
     </div>
+    <img class="boards-page-img-left"
+        src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.344/static/media/trello-left.7317ad1f.svg"
+        alt=""
+        style="{width:250px}" />
+    <img class="boards-page-img-right"
+        src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.344/static/media/trello-right.16b9c9bb.svg"
+        style="{width:250px}"/>
 </template>
  <script>
 import boardAppHeader from '../cmps/board-app-header.vue';

@@ -58,6 +58,18 @@
     background-position: left bottom, right top;
 }
 
+.boards-page-img-right{
+    width:510px;
+    position:fixed;
+    bottom:0;
+}
+.boards-page-img-left{
+    width:510px;
+    position:fixed;
+    top:35px;
+    right:0;
+}
+
 .admin-remove-btn {
     position: absolute;
     width: 20px;
