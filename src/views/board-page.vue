@@ -1,5 +1,6 @@
 <template>
     <board-app-header />
+    <div class="board-page-background"></div>
     <div class="board-page-container">
         <div class="main-boards-container">
             <article v-if="boards">

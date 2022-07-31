@@ -47,6 +47,16 @@
     }
 }
 
+.board-page-background{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image: url(https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.344/static/media/trello-left.7317ad1f.svg), url(https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.344/static/media/trello-right.16b9c9bb.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+    background-size: 25%, 25%;
+    background-position: left bottom, right top;
+}
 
 .admin-remove-btn {
     position: absolute;

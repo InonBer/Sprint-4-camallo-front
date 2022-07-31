@@ -12,7 +12,7 @@
             Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way
             your team works is unique accomplish it all with Camallo.
           </p>
-          <button @click="onDemoRequest" class="home-start-link">See Demo</button>
+          <button @click="onDemoRequest" class="home-start-link">Start Demo</button>
           <!-- <router-link class="home-start-link" to="/board-page">See Demo</router-link> -->
         </div>
       </article>

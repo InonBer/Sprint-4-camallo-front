@@ -32,6 +32,7 @@ export default {
         onDueDateSet() {
             let date = JSON.parse(JSON.stringify(this.date))
             this.$emit('onDueDateSet', date)
+            this.closeModal()
         },
         onDueDateRemove() {
             this.$emit('onDueDateRemove')
