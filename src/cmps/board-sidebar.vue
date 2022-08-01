@@ -103,7 +103,7 @@ export default {
             headerTitle: '',
             onActivityShow: false,
             headerIndex: 0,
-            photosFilterBy: '',
+            photosFilterBy: 'Mountains',
             photos: null,
             colors: [
                 '0, 121, 191',
@@ -121,6 +121,7 @@ export default {
     },
     created() {
         this.bounce = debounce(this.getPhotos)
+        this.searchImgs()
     },
     methods: {
         onCloseNav() {
